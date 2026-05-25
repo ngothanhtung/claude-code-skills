@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/**)",
+      "Read(//Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/agents/**)",
+      "Read(//Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/references/**)",
+      "Read(//Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/assets/**)",
+      "Read(//Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/scripts/**)",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator/assets')",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator/evals')",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator-workspace/iteration-1/eval-1-excel-course/with_skill/outputs')",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator-workspace/iteration-1/eval-1-excel-course/without_skill/outputs')",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator-workspace/iteration-1/eval-2-spa-beauty/with_skill/outputs')",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator-workspace/iteration-1/eval-2-spa-beauty/without_skill/outputs')",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator-workspace/iteration-1/eval-3-skincare/with_skill/outputs')",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator/references')",
+      "Read(//Users/tony/Library/Application Support/Claude/**)",
+      "Bash(mkdir -p '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/landing-page-generator-workspace/iteration-1/eval-3-skincare/without_skill/outputs')",
+      "Bash(python3)",
+      "Bash(echo \"test\")",
+      "Bash(python3.11 '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/eval-viewer/generate_review.py' /tmp/landing-page-generator-workspace/iteration-1 --skill-name landing-page-generator --static /tmp/landing-page-generator-eval-review.html)",
+      "Bash(python3.11 -m scripts.package_skill /tmp/landing-page-generator-skill --output /tmp)",
+      "Bash(python3.11 '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/scripts/package_skill.py' /tmp/landing-page-generator-skill --output /tmp)",
+      "Bash(python3.11 -m scripts.package_skill /tmp/landing-page-generator-skill)",
+      "Bash(ls '/Users/tony/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/7efe6f9b-e51f-4f81-adb3-86fa40394ec0/73bd60df-c401-4986-8c4c-3d02675e7ed2/skills/skill-creator/*.skill')",
+      "Bash(ls /tmp/*.skill)",
+      "Bash(npm list *)",
+      "Bash(npx mdformat *)",
+      "Bash(npx --yes markdownlint@latest SKILL.md)",
+      "Bash(npx --yes markdownlint-cli2@latest \"SKILL.md\")",
+      "Bash(npx --yes markdownlint-cli2@latest \"references/writing-style.md\")",
+      "Bash(npx --yes markdownlint-cli2@latest \"references/example-01-simple.md\")",
+      "Bash(npx --yes markdownlint-cli2@latest \"references/example-02-multi-branch.md\")",
+      "Bash(head -n 177 /Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references/examples.md)",
+      "Bash(tail -n +297 /Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references/examples.md)",
+      "Bash(cat /tmp/examples_head.txt /tmp/examples_tail.txt)"
+    ]
+  }
+}
