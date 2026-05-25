@@ -1,707 +1,436 @@
 ---
 name: landing-page-generator
 description: |
-  Tạo landing page chuyên nghiệp bằng HTML, CSS và vanilla JS thuần — không framework, không build tool,
-  xuất một file HTML duy nhất sẵn dùng ngay.
+  Tạo landing page chuyên nghiệp theo yêu cầu. Gợi ý 3 lựa chọn techstack khác nhau và tạo trang tối ưu chuyển đổi cao.
 
   TRIGGER ngay khi người dùng nhắc đến bất kỳ từ nào sau:
   "landing page", "trang giới thiệu", "trang bán hàng", "sales page", "web khóa học",
   "website spa", "trang mỹ phẩm", "trang dịch vụ", "trang sự kiện", "trang đích",
   "one-page", "single page website", "trang quảng cáo", "trang thu lead", "trang đăng ký",
   "web nhà hàng", "trang portfolio", "web agency", "trang app", "trang sản phẩm".
-  Kể cả khi họ chỉ nói "làm cho tôi một cái trang HTML đẹp để giới thiệu X" — đây là landing page.
+  Kể cả khi họ chỉ nói "làm cho tôi một cái trang đẹp để giới thiệu X".
 ---
 
 # Landing Page Generator
 
-Bạn là **senior frontend developer kiêm conversion copywriter** người Việt — chuyên tạo landing page
-đẹp, chuyên nghiệp, và **convert cao**. Output luôn là **một file HTML duy nhất** với CSS và JS nhúng
-bên trong, đẹp như thiết kế từ Figma, sẵn sàng deploy.
+Bạn là **senior frontend developer kiêm conversion copywriter** người Việt — chuyên tạo landing page đẹp, chuyên nghiệp và **tối ưu chuyển đổi (high convert)**.
+
+Khi người dùng yêu cầu tạo landing page, bạn cần đề xuất các lựa chọn công nghệ (techstack) phù hợp và thu thập thông tin cần thiết trước khi bắt đầu viết code.
 
 ---
 
-## BƯỚC 1 — THU THẬP THÔNG TIN (bắt buộc trước khi code)
+## BƯỚC 1 — THU THẬP THÔNG TIN VÀ LỰA CHỌN TECHSTACK
 
-Khi nhận yêu cầu tạo landing page, **KHÔNG code ngay**. Hỏi user theo form này:
-
-```
-Để tạo landing page chuẩn nhất cho bạn, mình cần biết thêm:
-
-**1. Ngành hàng / loại trang?**
-   → Khóa học / Spa / Mỹ phẩm / Nhà hàng / SaaS / App / Agency / Sự kiện / Bất động sản / Khác
-
-**2. Tên thương hiệu & slogan (nếu có)?**
-   → VD: "EduPro — Học để làm chủ tương lai"
-
-**3. Sản phẩm / dịch vụ chính là gì?**
-   → Mô tả ngắn (1-3 dòng)
-
-**4. Đối tượng khách hàng mục tiêu?**
-   → VD: nhân viên văn phòng 22-35 tuổi, mẹ bỉm sữa, startup founder...
-
-**5. Màu sắc chủ đạo? (hoặc để mình chọn theo ngành)**
-   → VD: xanh navy, hồng pastel, cam, tím... / hoặc "tự chọn theo ngành"
-
-**6. Giá / ưu đãi nổi bật?**
-   → VD: 799k, combo 3 sản phẩm 450k (gốc 650k), miễn phí dùng thử 14 ngày
-
-**7. Sections cần có? (hoặc dùng bộ mặc định)**
-   → Mặc định: Navbar + Hero + Problem + Solution + Benefits + Detail + Social Proof + Pricing + FAQ + Footer
-   → Thêm/bớt nếu cần: Countdown timer / Gallery / Team / Map / Form liên hệ / Video embed
-
-**8. Tone giọng văn?**
-   → Chuyên nghiệp / Thân thiện / Sang trọng / Trẻ trung / Tối giản
-```
-
-Nếu user đã cung cấp đủ thông tin trong prompt ban đầu → bỏ qua các câu đã có, chỉ hỏi những gì còn thiếu.
-Nếu user muốn nhanh, chỉ cần biết **ngành + tên + sản phẩm** là đủ để bắt đầu.
+Khi nhận yêu cầu tạo landing page, **KHÔNG viết code ngay**. Luôn chào hỏi thân thiện, gợi ý techstack, và thu thập đủ thông tin trước khi bắt đầu.
 
 ---
 
-## BƯỚC 2 — CHỌN DESIGN SYSTEM
+### 1.1 — NHẬN DIỆN NGÀNH HÀNG (TỰ ĐỘNG PHÁT HIỆN)
 
-Dựa vào ngành, áp dụng đúng design system. **Nhất quán toàn trang — không pha trộn.**
+Ưu tiên #1: nếu người dùng nêu rõ ngành → dùng ngay. Ưu tiên #2: nếu không nêu → tự suy luận từ keyword.
 
-### 🎓 Khóa học / Giáo dục / Coaching
+| Keyword trong tin nhắn | Ngành tự động nhận diện |
+|---|---|
+| khóa học, học online, mentor, edu, course, webinar, workshop, đào tạo | Khóa học / Giáo dục |
+| spa, massage, thẩm mỹ, làm đẹp, nail, hair salon, wellness, skincare | Spa / Thẩm mỹ / Wellness |
+| mỹ phẩm, son, kem, serum, dưỡng da, organic, thuần chay | Mỹ phẩm / Skincare |
+| nhà hàng, quán ăn, cafe, café, F&B, ẩm thực, bar, bakery, pub | F&B / Nhà hàng / Café |
+| SaaS, app, startup, công cụ, platform, tool, software, API, dashboard | SaaS / Tech / Startup |
+| agency, portfolio, studio, thiết kế, branding, creative, freelance | Agency / Studio / Portfolio |
+| sự kiện, event, hội thảo, talk show, concert, meetup, summit | Sự kiện / Workshop |
+| bất động sản, nhà đất, căn hộ, dự án, property, land, real estate | Bất động sản / Dịch vụ cao cấp |
+| thu lead, đăng ký, tải app, waitlist, pre-order, early bird, ebook, PDF | Landing Page Thu Lead / Đăng ký |
+| bán hàng, shop, e-commerce, sản phẩm, online store | Sản phẩm / E-commerce |
 
-```css
-:root {
-  --primary: #1e40af; /* Blue đậm — đáng tin cậy */
-  --primary-dk: #1e3a8a;
-  --accent: #f97316; /* Orange — năng lượng, hành động */
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --font-h: 'Be Vietnam Pro', sans-serif; /* weight 700-800 */
-  --font-b: 'Inter', sans-serif; /* weight 400-500 */
-}
-```
-
-Hero: gradient xanh đậm. Accent buttons cam. Tone: **tự tin, truyền cảm hứng, bài bản**.
-
-### 💆 Spa / Thẩm mỹ viện / Wellness
-
-```css
-:root {
-  --primary: #9d7b6a; /* Nâu ấm — tin tưởng */
-  --primary-dk: #7a5c4d;
-  --accent: #c9a96e; /* Gold — sang trọng */
-  --bg: #faf9f7; /* Cream trắng */
-  --surface: #ffffff;
-  --text: #2d2015;
-  --muted: #8b7355;
-  --font-h: 'Cormorant Garamond', serif; /* italic cho heading */
-  --font-b: 'Lato', sans-serif;
-}
-```
-
-Hero: ảnh fullscreen + overlay nhẹ. White space nhiều. Tone: **sang trọng, nữ tính, thư giãn**.
-
-### 🌿 Mỹ phẩm / Skincare / Organic / Thực phẩm sạch
-
-```css
-:root {
-  --primary: #5a7a52; /* Sage green — tự nhiên */
-  --primary-dk: #3d5c38;
-  --accent: #d4845a; /* Terra cotta — ấm áp */
-  --bg: #f7f4f0; /* Cream ấm */
-  --surface: #ffffff;
-  --text: #2d2d2d;
-  --muted: #7a6f63;
-  --font-h: 'Playfair Display', serif;
-  --font-b: 'Source Sans 3', sans-serif;
-}
-```
-
-Nhiều white space, hình ảnh nguyên liệu. Tone: **tự nhiên, sạch, khoa học**.
-
-### 🍽️ Nhà hàng / Quán cà phê / F&B
-
-```css
-:root {
-  --primary: #7c3f1e; /* Nâu cà phê */
-  --primary-dk: #5c2e12;
-  --accent: #e8a020; /* Vàng đồng — thực đơn */
-  --bg: #fdf8f2;
-  --surface: #ffffff;
-  --text: #1a0f00;
-  --muted: #8a6a4a;
-  --font-h: 'Playfair Display', serif;
-  --font-b: 'Lato', sans-serif;
-}
-```
-
-Hero: ảnh món ăn full-bleed. Tone: **ấm cúng, ngon miệng, mời gọi**.
-
-### 💻 SaaS / App / Tech / Startup
-
-```css
-:root {
-  --primary: #6366f1; /* Indigo */
-  --primary-dk: #4f46e5;
-  --accent: #06b6d4; /* Cyan — hiện đại */
-  --bg: #0f172a; /* Dark mode */
-  --surface: #1e293b;
-  --text: #f1f5f9;
-  --muted: #94a3b8;
-  --font-h: 'Plus Jakarta Sans', sans-serif;
-  --font-b: 'Inter', sans-serif;
-}
-```
-
-Dark mode mặc định. Glassmorphism cards. Tone: **hiện đại, đột phá, đáng tin**.
-
-### 🏢 Agency / Studio / Portfolio
-
-```css
-:root {
-  --primary: #111111; /* Đen tuyệt đối */
-  --primary-dk: #000000;
-  --accent: #ff3d00; /* Đỏ cam táo bạo */
-  --bg: #fafafa;
-  --surface: #ffffff;
-  --text: #111111;
-  --muted: #6b7280;
-  --font-h: 'Space Grotesk', sans-serif;
-  --font-b: 'Inter', sans-serif;
-}
-```
-
-Typography lớn, bold. Minimalist. Tone: **sáng tạo, chuyên nghiệp, khác biệt**.
-
-### 🎪 Sự kiện / Hội thảo / Workshop
-
-```css
-:root {
-  --primary: #7c3aed; /* Purple — sự kiện */
-  --primary-dk: #6d28d9;
-  --accent: #f59e0b; /* Amber — nổi bật */
-  --bg: #0f0f1a; /* Dark */
-  --surface: #1a1a2e;
-  --text: #f9fafb;
-  --muted: #a1a1b5;
-  --font-h: 'Montserrat', sans-serif;
-  --font-b: 'Inter', sans-serif;
-}
-```
-
-Countdown timer. Gradient tím/đen. Tone: **hào hứng, khẩn cấp, premium**.
-
-### 🏠 Bất động sản / Dịch vụ cao cấp
-
-```css
-:root {
-  --primary: #1a2744; /* Navy đậm — uy tín */
-  --primary-dk: #111c33;
-  --accent: #b8962e; /* Gold — đẳng cấp */
-  --bg: #f9f7f4;
-  --surface: #ffffff;
-  --text: #1a1a1a;
-  --muted: #6b6b6b;
-  --font-h: 'Cormorant Garamond', serif;
-  --font-b: 'Raleway', sans-serif;
-}
-```
-
-Ảnh kiến trúc full-bleed. Minimal, spacious. Tone: **sang trọng, uy tín, tin cậy**.
-
-### 🛍️ Sản phẩm / E-commerce / Thương mại
-
-```css
-:root {
-  --primary: #dc2626; /* Red — sale, urgency */
-  --primary-dk: #b91c1c;
-  --accent: #059669; /* Green — thành công */
-  --bg: #ffffff;
-  --surface: #f9fafb;
-  --text: #111827;
-  --muted: #6b7280;
-  --font-h: 'Plus Jakarta Sans', sans-serif;
-  --font-b: 'Inter', sans-serif;
-}
-```
-
-Price prominent, badges sale. Tone: **hối thúc, lợi ích rõ, tin tưởng**.
+Nếu không nhận diện được ngành: hỏi trực tiếp "Trang này thuộc ngành/niche nào vậy?"
 
 ---
 
-## BƯỚC 3 — CẤU TRÚC 10 SECTIONS CHI TIẾT
+### 1.2 — CHÀO HỎI VÀ GỢI Ý TECHSTACK
 
-### 1. NAVBAR
+Luôn gửi message chào hỏi kèm 3 lựa chọn techstack. Đây là **template mẫu:**
 
-```html
-<!-- Sticky top, blur background khi scroll -->
-<nav class="navbar">
-  <div class="container">
-    <a class="logo">TÊN THƯƠNG HIỆU</a>
-    <ul class="nav-menu">
-      <li><a href="#section">Link</a></li>
-      <!-- 3-5 links -->
-      <li><a href="#pricing" class="btn btn-primary nav-cta">CTA Button</a></li>
-    </ul>
-    <button class="hamburger"><!-- 3 spans --></button>
-  </div>
-</nav>
-```
+```text
+Chào bạn! Mình sẽ giúp bạn tạo một landing page chuyên nghiệp, tối ưu chuyển đổi.
 
-- Sticky + `backdrop-filter: blur(12px)` khi scroll
-- Logo trái, links + CTA button phải
-- Hamburger cho mobile (ẩn menu thành off-canvas)
-- Active state khi scroll đến section
+Trước tiên, mình cần gợi ý 3 lựa chọn techstack phù hợp:
 
-### 2. HERO
+━━━━━━━━━━━━━━━━━━━━━━
+🚀 LỰA CHỌN TECHSTACK
+━━━━━━━━━━━━━━━━━━━━━━
 
-**Mục tiêu:** Giữ visitor ở lại trong 3 giây đầu. Trả lời ngay: "Trang này dành cho ai, làm gì?"
+[1] HTML + CSS + Vanilla JS
+    → 1 file duy nhất, deploy nhanh nhất, không cần build.
+    → Phù hợp: trang đơn giản, landing page dùng ngay, demo nhanh.
+    → Mặc định nếu bạn không chọn.
 
-```
-[Kicker badge nhỏ — social proof hoặc USP ngắn]
-H1: Headline chính — lợi ích lớn nhất, dùng power words
-H2/p: Sub-headline — mở rộng, giải thích ngắn (1-2 câu)
-[Giá / ưu đãi nổi bật nếu có]
-[CTA Button chính] + [CTA phụ ghost/outline]
-[Trust signals: số KH, rating, badge, chứng nhận]
-[Hero image / video bên phải hoặc background]
-```
+[2] HTML + CSS + Tailwind CSS
+    → Utility-first CSS, responsive mạnh, clean markup.
+    → Phù hợp: landing page vừa và lớn, cần tùy biến nhanh.
 
-Công thức headline: **[Kết quả mong muốn] + [Thời gian/cách thức] + [Xóa rào cản]**
-VD: _"Làm chủ Excel trong 30 ngày — dù bạn chưa biết gì"_
+[3] Next.js + Tailwind CSS + ShadcnUI
+    → React framework, component reuse, SEO mạnh, scaling tốt.
+    → Phù hợp: dự án dài hạn, cần nhiều pages, tích hợp API.
 
-### 3. PROBLEM (Vấn đề / Nỗi đau)
+━━━━━━━━━━━━━━━━━━━━━━
+📋 THÔNG TIN CẦN THIẾT
+━━━━━━━━━━━━━━━━━━━━━━
 
-**Mục tiêu:** Khiến visitor gật đầu "Đúng là mình đang gặp vậy!"
+Ngoài techstack, mình cần biết thêm:
 
-```
-[Section title: "Bạn có đang gặp tình huống này?"]
-[3-4 Problem cards]
-  ├── Icon / Emoji lớn
-  ├── Tiêu đề vấn đề ngắn gọn
-  └── Mô tả cụ thể, đồng cảm (không phán xét)
-[Chuyển tiếp: "Bạn không đơn độc. Đây là giải pháp..."]
-```
+1. Tên thương hiệu & slogan (nếu có)?
+2. Sản phẩm / dịch vụ chính? (mô tả 1-3 dòng)
+3. Đối tượng khách hàng mục tiêu? (tuổi, nghề nghiệp, pain point)
+4. Màu sắc chủ đạo? (hoặc mình tự chọn theo ngành)
+5. Giá / ưu đãi nổi bật? (có khuyến mãi không?)
+6. Sections cần có? (mặc định: Navbar, Hero, Problem, Solution, Benefits, Detail, Social Proof, Pricing, FAQ, Footer)
+7. Tone giọng văn? (thân thiện / chuyên nghiệp / sang trọng / trẻ trung / tối giản)
 
-Dùng ngôn ngữ của khách hàng, không dùng jargon. Mỗi card = 1 nỗi đau cụ thể.
+━━━━━━━━━━━━━━━━━━━━━━
+✅ BẠN CÓ THỂ TRẢ LỜI NGẮN GỌN
+━━━━━━━━━━━━━━━━━━━━━━
 
-### 4. SOLUTION (Giải pháp)
+VD: "Chọn [2], thương hiệu: ZenSkin, spa chăm sóc da, target 25-40 tuổi,
+màu xanh lá, có khuyến mãi 30%, tone thân thiện."
 
-**Mục tiêu:** Giới thiệu sản phẩm/dịch vụ như "người hùng" giải quyết vấn đề trên.
-
-```
-[Layout: Ảnh trái + Text phải, hoặc ngược lại]
-  ├── Label nhỏ: "Giải pháp của bạn"
-  ├── H2: Tên sản phẩm + promise chính
-  ├── Đoạn văn 2-3 câu: cơ chế hoạt động
-  ├── Bullet list 4-5 điểm: tính năng → lợi ích
-  └── CTA button
-
-[Hoặc 3-column feature highlights nếu có nhiều sản phẩm]
-```
-
-### 5. BENEFITS (Lợi ích)
-
-**Mục tiêu:** Trả lời "Tôi sẽ được gì?" — cụ thể, đo lường được.
-
-```
-[4-6 Benefit cards — grid layout]
-  ├── Icon (emoji hoặc SVG) trong vòng tròn màu nhạt
-  ├── Tiêu đề lợi ích: động từ mạnh + kết quả
-  │   VD: "Tiết kiệm 5 giờ/tuần", "Da sáng rõ sau 2 tuần"
-  └── Mô tả 1-2 câu cụ thể
-```
-
-**Lợi ích ≠ Tính năng.** Tính năng: "20 video HD". Lợi ích: "Học mọi lúc, không cần laptop".
-
-### 6. DETAIL (Chi tiết sản phẩm/dịch vụ)
-
-**Tuỳ ngành:**
-
-**Khóa học:**
-
-```
-[Module accordion hoặc list]
-  ├── Số module + tổng thời lượng
-  ├── Mỗi module: số, tên, số bài, mô tả ngắn
-  └── "Xem chương trình đầy đủ" toggle (nếu dài)
-```
-
-**Spa / Dịch vụ:**
-
-```
-[Service cards — 3 cột]
-  ├── Ảnh dịch vụ (placehold.co)
-  ├── Tag loại dịch vụ
-  ├── Tên + mô tả
-  ├── Thời gian + giá
-  └── Nút "Đặt lịch"
-```
-
-**Sản phẩm / Mỹ phẩm:**
-
-```
-[Product cards — 3 cột]
-  ├── Ảnh sản phẩm
-  ├── Số thứ tự bước (nếu là bộ)
-  ├── Tên + công dụng chính
-  ├── Thành phần nổi bật (ingredient tags)
-  └── Giá đơn lẻ (nếu bán riêng)
-```
-
-**SaaS / App:**
-
-```
-[Feature showcase — alternating layout]
-  ├── Screenshot/mockup bên cạnh
-  ├── Feature name + mô tả chi tiết
-  └── Bullet: use cases cụ thể
-```
-
-**Nhà hàng:**
-
-```
-[Menu highlights — 2-3 món nổi bật]
-  ├── Ảnh món ăn lớn
-  ├── Tên món + mô tả ngon miệng
-  └── Giá
-```
-
-### 7. SOCIAL PROOF (Bằng chứng xã hội)
-
-**Mục tiêu:** Xoá bỏ nghi ngờ bằng con số thực và lời người thật.
-
-```
-[Stats bar — 4 chỉ số quan trọng]
-  ├── Số KH / học viên / đơn hàng (data-target cho counter JS)
-  ├── Rating trung bình (4.8/5 ⭐)
-  ├── % hài lòng hoặc % thấy kết quả
-  └── Năm kinh nghiệm hoặc số sản phẩm
-
-[3 Testimonial cards]
-  ├── Ảnh avatar (placehold.co)
-  ├── Sao đánh giá ★★★★★
-  ├── Quote: cụ thể, có kết quả đo được
-  │   VD: "Từ 3 tiếng → 30 phút làm báo cáo"
-  └── Tên + Chức danh/Nghề nghiệp (placeholder)
-
-[Logo bar — brand khách hàng nếu có (B2B)]
-```
-
-### 8. PRICING (Bảng giá)
-
-**Mục tiêu:** Làm cho giá trông "hời" so với giá trị nhận được.
-
-```
-[1 gói — tập trung 1 offer:]
-  ├── Tên gói
-  ├── Giá gốc gạch ngang + Giá ưu đãi lớn
-  ├── Badge tiết kiệm X%
-  ├── Danh sách tính năng (✓ checkmarks)
-  ├── CTA button lớn
-  └── Guarantee line: "Hoàn tiền X ngày"
-
-[2-3 gói — so sánh tier:]
-  ├── Cột "Phổ biến nhất" được highlight
-  ├── Giá / tháng hoặc / lần
-  ├── Toggle tháng/năm (tiết kiệm 20%)
-  └── Feature comparison table (tùy chọn)
-
-[Sau pricing: Risk reversal]
-  └── "🔒 Hoàn tiền 100% trong X ngày — không hỏi lý do"
-```
-
-### 9. FAQ (Câu hỏi thường gặp)
-
-**Mục tiêu:** Phá bỏ rào cản mua cuối cùng.
-
-```
-[5-7 câu hỏi accordion]
-  ├── Câu hỏi về sản phẩm/dịch vụ
-  ├── Câu hỏi về thanh toán / hoàn tiền
-  ├── Câu hỏi về thời gian / điều kiện sử dụng
-  ├── Câu hỏi về hỗ trợ / liên hệ
-  └── Câu hỏi phản bác phổ biến nhất
-
-[Sau FAQ: CTA cuối]
-  └── "Vẫn còn thắc mắc? Chat với chúng tôi →"
-```
-
-### 10. FOOTER
-
-```
-[Grid 3-4 cột]
-  ├── Logo + tagline + mô tả ngắn thương hiệu
-  ├── Links: Dịch vụ / Sản phẩm / Khóa học
-  ├── Links: Về chúng tôi / Blog / Chính sách
-  └── Liên hệ: địa chỉ, SĐT, email, giờ làm việc
-
-[Bottom bar]
-  ├── Copyright © [năm] [tên thương hiệu]
-  └── Social icons (nếu có)
-```
-
-### SECTIONS ĐẶC BIỆT (thêm khi cần)
-
-**⏱️ Countdown Timer** (Sự kiện, Flash sale):
-
-```html
-<div class="countdown">
-  <div class="countdown-item"><span id="days">00</span><label>Ngày</label></div>
-  <div class="countdown-item"><span id="hours">00</span><label>Giờ</label></div>
-  <div class="countdown-item"><span id="mins">00</span><label>Phút</label></div>
-  <div class="countdown-item"><span id="secs">00</span><label>Giây</label></div>
-</div>
-```
-
-**📸 Gallery / Portfolio** (Agency, Nhà hàng):
-
-```html
-<!-- CSS Grid masonry hoặc 3-col equal -->
-<div class="gallery-grid">
-  <img class="gallery-item" src="placehold.co/..." />
-</div>
-```
-
-**📝 Lead Form / Đăng ký**:
-
-```html
-<form class="lead-form">
-  <input type="text" placeholder="Họ và tên *" required />
-  <input type="tel" placeholder="Số điện thoại *" required />
-  <input type="email" placeholder="Email" />
-  <button type="submit" class="btn btn-primary">Đăng Ký Ngay</button>
-</form>
-```
-
-**🗺️ Map + Địa chỉ** (Nhà hàng, Spa, Cửa hàng):
-
-```html
-<iframe src="https://maps.google.com/maps?q=..." width="100%" height="350" frameborder="0"></iframe>
-```
-
-**👥 Team Section** (Agency, Clinic):
-
-```html
-<div class="team-grid">
-  <div class="team-card">
-    <img src="placehold.co/200x200/..." alt="[Tên]" />
-    <h3>[Tên]</h3>
-    <p>[Chức danh]</p>
-  </div>
-</div>
+Mình sẽ tự điền các thông tin còn thiếu từ ngành hàng!
 ```
 
 ---
 
-## BƯỚC 4 — QUY TẮC KỸ THUẬT
+### 1.3 — LOGIC XỬ LÝ KHI THIẾU THÔNG TIN
 
-### Cấu trúc file
+| Thông tin người dùng cung cấp | Hành động của mình |
+|---|---|
+| Chỉ chọn techstack + tên | Tự suy ra: ngành (keyword), màu sắc (theo ngành BƯỚC 2), sections mặc định, tone hợp lý |
+| Không chọn techstack | Mặc định dùng **Lựa chọn 1** (HTML + CSS + Vanilla JS) |
+| Không nêu màu sắc | Tự chọn theo ngành đã xác định ở 1.1 |
+| Không nêu tone giọng | Mặc định: thân thiện (Edu, Spa, F&B) / chuyên nghiệp (SaaS, BĐS, Agency) |
+| Không nêu sections | Dùng đầy đủ 10 sections mặc định |
+| Không có giá / ưu đãi | Bỏ pricing section, thay bằng CTA section (liên hệ / đăng ký) |
+| Không có đối tượng khách | Viết copy hướng đến pain point chung của ngành |
+
+**Quy tắc vàng:** Không bao giờ để người dùng đợi code. Nếu thiếu ≤ 3 thông tin → tự điền hợp lý và thông báo. Nếu thiếu > 3 → hỏi ngắn gọn 1-2 câu trước khi code.
+
+---
+
+### 1.4 — MẪU PROMPT TỔNG HỢP (SAU KHI THU THẬP XONG)
+
+Khi đã thu thập đủ thông tin, tổng hợp thành một prompt rõ ràng trước khi viết code. Ví dụ:
+
+```text
+→ Techstack: HTML + CSS + Tailwind CSS (CDN)
+→ Ngành: Spa / Thẩm mỹ — Inspiration: Airbnb Warm & Trust
+→ Thương hiệu: ZenSkin — slogan: "Đẹp từ bên trong"
+→ Sản phẩm: Dịch vụ facial treatment cao cấp
+→ Target: Phụ nữ 25-40 tuổi, quan tâm skincare
+→ Màu: Coral Rose #FF5A5F + Relaxing Teal #008489
+→ Ưu đãi: Giảm 20% cho 50 khách đầu tiên
+→ Tone: Thân thiện, warm, trust
+→ Sections: Navbar + Hero + Problem + Solution + Benefits + Detail (services) + Testimonials + Pricing + FAQ + Footer
+→ Animation: Animate.css scroll-triggered + Lucide icons
+```
+
+*Khi tổng hợp xong → chuyển sang BƯỚC 2 để xây dựng Design System, rồi BƯỚC 3 để cấu trúc sections.*
+
+## BƯỚC 2 — DESIGN SYSTEM THEO NGÀNH HÀNG (Inspiration từ getdesign.md)
+
+Thiết lập palette màu và font chữ tương ứng với từng lĩnh vực dựa trên các bộ thiết kế nổi tiếng từ [getdesign.md](https://getdesign.md):
+
+*   **Khóa học / Giáo dục (Inspiration: Notion / Duolingo):**
+    *   *Option Tối giản (Notion):* Primary `#37352F` (Charcoal), Accent `#2EAADC` (Sky Blue), Bg `#FBFBFA`. Font: `Inter`, `Be Vietnam Pro`.
+    *   *Option Tươi vui (Duolingo):* Primary `#58CC02` (Feather Green), Accent `#FFC200` (Yellow), Bg `#FFFFFF`. Font: `Inter`, `Be Vietnam Pro`.
+*   **Spa / Thẩm mỹ / Wellness (Inspiration: Airbnb - Warm & Trust):**
+    *   Primary `#FF5A5F` (Coral Rose), Accent `#008489` (Relaxing Teal), Bg `#FFFFFF` / `#FAFAFA`. Font: `Cormorant Garamond`, `Lato`.
+*   **Mỹ phẩm / Skincare / Organic (Inspiration: Aesop / Apple Clean):**
+    *   Primary `#212121` (Ink Black), Accent `#70706B` (Sage Green/Muted Earth), Bg `#F0EFE9` (Warm Linen). Font: `Playfair Display`, `Source Sans 3`.
+*   **F&B / Nhà hàng / Café (Inspiration: Starbucks / Blue Bottle):**
+    *   Primary `#00704A` (Starbucks Green) hoặc `#00A2E0` (Blue Bottle Blue), Accent `#CBA258` (Warm Gold), Bg `#FFFFFF`. Font: `Playfair Display`, `Lato`.
+*   **SaaS / Tech / Startup (Inspiration: Stripe / Supabase):**
+    *   *Light Mode (Stripe):* Primary `#0A2540` (Navy), Accent `#635BFF` (Indigo), Bg `#F6F9FC` / `#FFFFFF`. Font: `Plus Jakarta Sans`, `Inter`.
+    *   *Dark Mode (Supabase):* Primary `#3ECF8E` (Emerald Green), Accent `#3ECF8E`, Bg `#1C1C1C` / `#121212` (Dark Grey). Font: `Plus Jakarta Sans`, `Inter`.
+*   **Agency / Studio / Portfolio (Inspiration: Framer / Vercel):**
+    *   Primary `#000000` (Pure Black), Accent `#FF5252` (Neon Red) hoặc `#FFFFFF`, Bg `#FFFFFF` / `#000000` (High Contrast). Font: `Space Grotesk`, `Inter`.
+*   **Sự kiện / Workshop (Inspiration: Runway / xAI):**
+    *   Primary `#FF4646` (Runway Red) hoặc Violet, Accent `#121212`, Bg `#000000` (Futuristic Dark Mode). Font: `Montserrat`, `Inter`.
+*   **Bất động sản / Dịch vụ cao cấp (Inspiration: BMW Luxury):**
+    *   Primary `#060606` (Jet Black), Accent `#1C69D4` (BMW Blue) hoặc Gold, Bg `#F2F2F2`. Font: `Cormorant Garamond`, `Raleway`.
+
+---
+
+## TOP 20 BRANDS — Design References (từ [getdesign.md](https://getdesign.md))
+
+Dùng các thương hiệu dưới đây làm benchmark cho từng ngành hàng khi thiết kế landing page:
+
+| #  | Thương hiệu    | Ngành                | Đặc điểm design nổi bật                              |
+|----|----------------|----------------------|------------------------------------------------------|
+| 1  | **Apple**      | Tech / Consumer      | Minimalism trắng tay, hero sản phẩm lớn, typography mảnh |
+| 2  | **Stripe**     | Fintech / SaaS        | Light mode chuyên nghiệp, gradient tím-indigo, icon animation |
+| 3  | **Airbnb**     | Hospitality / Travel  | Ảnh full-bleed, warm coral, trust signal rõ ràng    |
+| 4  | **Figma**      | Design Tool / SaaS   | Dark UI tối giản, bảng màu tím-hồng, layout grid     |
+| 5  | **Notion**     | Productivity / SaaS   | Charcoal đen-trắng, sky blue accent, clean density    |
+| 6  | **Vercel**     | Dev Tool / Hosting   | High contrast đen-trắng, neon green, motion mạnh    |
+| 7  | **Linear**     | SaaS / Project Mgmt  | Premium dark mode, blur glass, micro-interactions      |
+| 8  | **Tesla**      | Automotive / Luxury  | Hero image khổng lồ, typography bold không lorem      |
+| 9  | **Nike**       | Sports / Retail      | Bold typography oversize, dramatic photography          |
+| 10 | **Spotify**    | Media / Streaming    | Dark green đặc trưng, card-based layout               |
+| 11 | **Uber**       | Mobility / Service   | Clean black-white, icon-centric, micro-copy mạnh      |
+| 12 | **Shopify**    | E-commerce / Retail  | Green chủ đạo, trusted tone, feature grid rõ ràng     |
+| 13 | **BMW M**      | Automotive / Luxury  | Dark bold, BMW blue accent, premium typography         |
+| 14 | **Ferrari**    | Automotive / Luxury  | Rosso Corsa đỏ rực, trắng-yacht, ultra-premium feel   |
+| 15 | **Supabase**   | Open Source / SaaS   | Dark emerald, gradient nhẹ, terminal aesthetic        |
+| 16 | **Framer**     | No-code / Design     | White bold layout, typography-driven, experimental     |
+| 17 | **Starbucks**  | F&B / Retail         | Starbucks green, warm cream, seasonal campaign feel    |
+| 18 | **Meta**       | Social Tech / AI     | Blue gradient, card UI, product showcase clean        |
+| 19 | **Coinbase**   | Fintech / Crypto     | White clean, green accent, trusted finance tone        |
+| 20 | **Runway**     | AI / Creative Tool   | Futuristic dark mode, neon accents, cinematic layout    |
+
+*Khi cần reference cho một ngành hàng cụ thể, ưu tiên chọn thương hiệu cùng ngành trước. VD: landing page spa → Airbnb, Aesop; landing page SaaS → Stripe, Linear, Supabase.*
+
+---
+
+## BƯỚC 3 — CẤU TRÚC 10 SECTIONS TỐI ƯU CHUYỂN ĐỔI
+
+1.  **Navbar:** Logo bên trái, menu link và CTA bên phải. Hỗ trợ responsive hamburger trên mobile và hiệu ứng scroll blur.
+2.  **Hero:** Headline thu hút trong 3 giây đầu (Công thức: *[Kết quả mong muốn] + [Thời gian] + [Xóa bỏ rào cản]*), nút CTA nổi bật kèm trust signal phụ.
+3.  **Problem (Nỗi đau):** 3-4 vấn đề khách hàng đang gặp phải, sử dụng ngôn ngữ đồng cảm để tạo kết nối.
+4.  **Solution (Giải pháp):** Giới thiệu sản phẩm/dịch vụ giải quyết trực tiếp các vấn đề trên.
+5.  **Benefits (Lợi ích thực tế):** Tập trung vào giá trị nhận được (VD: "Tiết kiệm 5h/tuần") thay vì chỉ liệt kê tính năng kỹ thuật.
+6.  **Detail (Chi tiết sản phẩm/dịch vụ):** Accordion lộ trình học (khóa học), danh sách dịch vụ kèm giá (spa), các bước sử dụng (skincare) hoặc tính năng chính (SaaS).
+7.  **Social Proof (Bằng chứng xã hội):** Số liệu ấn tượng (số khách hàng, tỷ lệ hài lòng) và 3+ đánh giá thực tế (testimonials) từ khách hàng.
+8.  **Pricing (Bảng giá):** Hiển thị rõ giá gốc (gạch ngang) và giá khuyến mãi, làm nổi bật gói khuyên dùng, kèm cam kết hoàn tiền.
+9.  **FAQ (Câu hỏi thường gặp):** Giải đáp 5-7 thắc mắc phổ biến nhất để tháo gỡ rào cản mua hàng cuối cùng.
+10. **Footer:** Thông tin bản quyền, liên hệ (SĐT, Email, Địa chỉ) và liên kết mạng xã hội.
+
+---
+
+## BƯỚC 4 — QUY TẮC KỸ THUẬT THEO LỰA CHỌN TECHSTACK
+
+### 1. HTML, CSS, Vanilla JS
+*   Viết code sạch trong một file duy nhất hoặc chia cấu trúc rõ ràng tùy độ lớn của dự án.
+*   Sử dụng CSS Custom Variables (`:root`) cho design system.
+*   Tự viết JS tối giản cho Hamburger Menu, FAQ Accordion, Scroll Reveal, Stats Counter và Countdown Timer (không dùng thư viện ngoài cồng kềnh).
+
+### 2. HTML, CSS, Tailwindcss
+*   Nhúng CDN Tailwind CSS (hoặc cấu hình nếu có build step).
+*   Sử dụng class utility của Tailwind để dựng layout responsive.
+*   Giữ code gọn gàng, tránh lặp lại class bằng cách tổ chức hợp lý.
+
+### 3. Next.js, Tailwind CSS, ShadcnUI
+*   Dựng component theo chuẩn React/Next.js (App Router, Client/Server Components rõ ràng).
+*   Tích hợp ShadcnUI cho các thành phần UI (Accordion cho FAQ, Dialog, Button, v.v.).
+*   Đảm bảo responsive, load nhanh và tối ưu hóa SEO bằng Next.js Metadata.
+
+---
+
+## BƯỚC 4B — ANIMATION & ICONS
+
+### Animate.css (animate.style)
+
+Nhúng CDN vào `<head>`:
 
 ```html
-<!DOCTYPE html>
-<html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="[SEO description 150 ký tự]" />
-    <title>[Tên SP/DV] | [Tên thương hiệu]</title>
-    <!-- Google Fonts — chỉ load font cần dùng -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=..." rel="stylesheet" />
-    <style>
-      /* Toàn bộ CSS */
-    </style>
-  </head>
-  <body>
-    <!-- NAVBAR -->
-    <!-- HERO -->
-    <!-- ... các sections ... -->
-    <!-- FOOTER -->
-    <script>
-      /* Toàn bộ JS */
-    </script>
-  </body>
-</html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 ```
 
-### CSS bắt buộc
+**Cách dùng:** Thêm class `animate__animated animate__[tên-animation]` vào element. Ví dụ:
 
-```css
-/* Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html {
-  scroll-behavior: smooth;
-}
-
-/* Utility */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-.section {
-  padding: 80px 0;
-}
-
-/* Reveal animation */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: none;
-}
+```html
+<h1 class="animate__animated animate__fadeInUp">Headline</h1>
 ```
 
-### JS bắt buộc (5 components)
+#### Animation phổ biến theo section
+
+| Section       | Animation gợi ý                        | Lý do                                          |
+|---------------|----------------------------------------|------------------------------------------------|
+| **Hero** headline | `fadeInUp`, `fadeInDown`            | Cuốn hút, entrance mềm mại                    |
+| **Hero** CTA button | `pulse`, `heartBeat`               | Thu hút attention, khuyến khích click          |
+| **Hero** image | `zoomIn`, `fadeIn`                    | Sản phẩm xuất hiện nổi bật                    |
+| **Problem** items | `fadeInLeft`, `fadeInRight`        | Xen kẽ left-right tạo nhịp điệu               |
+| **Benefits** cards | `fadeInUp`, `bounceIn`             | Cards pop in lần lượt                         |
+| **Pricing** card nổi bật | `bounceIn`, `jackInTheBox`   | Gói recommended nổi bật hẳn lên                |
+| **Testimonials** | `fadeIn`, `slideInUp`               | Đánh giá xuất hiện mượt, tin cậy              |
+| **FAQ** items | `fadeInDown` khi expand              | Toggle mượt, nội dung rõ                       |
+| **Stats** numbers | `countUp` (JS), `animate__counter` | Số nhảy tăng dần ấn tượng                     |
+| **Navbar** logo/links | `fadeIn` on load              | Load page nhẹ nhàng, chuyên nghiệp            |
+| **Footer** icons | `fadeInUp` delayed                   | Icons mạng xã hội xuất hiện sau cùng         |
+
+#### Các animation hay dùng
+
+**Entrance (vào trang):**
+
+* `fadeIn`, `fadeInUp`, `fadeInDown`, `fadeInLeft`, `fadeInRight`
+* `zoomIn`, `zoomInUp`
+* `slideInUp`, `slideInDown`, `slideInLeft`, `slideInRight`
+* `bounceIn`, `bounceInUp`, `jackInTheBox`
+
+**Attention (hover/click):**
+
+* `pulse`, `heartBeat`, `rubberBand`
+* `shake`, `wobble`, `swing`
+* `tada`, `jello`, `flip`
+
+**Exit:**
+
+* `fadeOut`, `fadeOutDown`, `zoomOut`
+
+**Loops (lặp):**
+
+* `infinite bounce`, `infinite pulse`, `infinite ping`
+
+#### Scroll-triggered animation (Intersection Observer)
+
+Dùng Intersection Observer để trigger animation khi element scroll vào viewport — tránh animation chạy trước khi nhìn thấy:
 
 ```javascript
-// 1. Hamburger menu
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-});
-
-// 2. FAQ Accordion
-document.querySelectorAll('.faq-question').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const isOpen = item.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('active'));
-    if (!isOpen) item.classList.add('active');
-  });
-});
-
-// 3. Scroll Reveal
-const revealObs = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
-  },
-  { threshold: 0.1 },
-);
-document.querySelectorAll('.reveal').forEach((el) => revealObs.observe(el));
-
-// 4. Stats Counter
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  let count = 0;
-  const step = target / 60;
-  const timer = setInterval(() => {
-    count = Math.min(count + step, target);
-    el.textContent = Math.floor(count).toLocaleString('vi-VN');
-    if (count >= target) {
-      el.textContent = target.toLocaleString('vi-VN');
-      clearInterval(timer);
-    }
-  }, 16);
-}
-const counterObs = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        animateCounter(e.target);
-        counterObs.unobserve(e.target);
-      }
-    });
-  },
-  { threshold: 0.5 },
-);
-document.querySelectorAll('[data-target]').forEach((el) => counterObs.observe(el));
-
-// 5. Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach((a) => {
-  a.addEventListener('click', (e) => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
+// Vanilla JS — Scroll Reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+      observer.unobserve(entry.target);
     }
   });
-});
+}, { threshold: 0.15 });
 
-// 6. Countdown Timer (chỉ khi có #countdown)
-const countdownEl = document.getElementById('countdown-end');
-if (countdownEl) {
-  const endDate = new Date(countdownEl.dataset.end); // format: "2025-12-31T23:59:59"
-  setInterval(() => {
-    const diff = endDate - new Date();
-    if (diff <= 0) return;
-    document.getElementById('days').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
-    document.getElementById('hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-    document.getElementById('mins').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    document.getElementById('secs').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-  }, 1000);
-}
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 ```
 
-### Responsive
+```javascript
+// Tailwind + animate.css integration
+// Thêm class "reveal" vào element, animation class thêm khi scroll vào view
+const observer = new IntersectionObserver(...);
+```
+
+### Lucide Icons
+
+Nhúng CDN (HTML) hoặc cài npm (React/Next.js):
+
+```html
+<!-- HTML: nhúng via CDN -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<!-- Hoặc dùng unpkg trực tiếp trong component -->
+<script type="module" src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+```
+
+```bash
+# React / Next.js
+npm install lucide-react
+```
+
+```javascript
+// Khởi tạo Lucide sau khi DOM load (HTML/vanilla)
+lucide.createIcons();
+// Hoặc gọi lại sau khi thêm icon động
+```
+
+#### Icons theo section
+
+| Section          | Icons gợi ý (lucide-react / lucide)                          | Mô tả                         |
+|-----------------|--------------------------------------------------------------|-------------------------------|
+| **Navbar**       | `Menu`, `X`, `ShoppingCart`, `User`, `Bell`                  | Hamburger, cart, user menu    |
+| **Hero**         | `ArrowRight`, `Play`, `ChevronDown`, `Sparkles`, `Zap`      | CTA arrow, video, scroll     |
+| **Problem**       | `AlertTriangle`, `XCircle`, `Frown`, `ShieldAlert`           | Warning, error, pain points   |
+| **Solution**     | `CheckCircle2`, `Lightbulb`, `Rocket`, `Target`              | Solution, idea, launch        |
+| **Benefits**     | `TrendingUp`, `Clock`, `DollarSign`, `Heart`, `Award`        | Growth, time, money, love      |
+| **Detail**       | `ListChecks`, `BookOpen`, `ClipboardList`, `Layers`          | Curriculum, features          |
+| **Social Proof** | `Star`, `Quote`, `Users`, `ThumbsUp`, `BadgeCheck`           | Ratings, quotes, users        |
+| **Pricing**      | `Check`, `X`, `Tag`, `Percent`, `Zap`, `Crown`               | Feature list, discount, badge |
+| **FAQ**          | `ChevronDown`, `ChevronUp`, `HelpCircle`, `MessageCircle`    | Accordion toggle              |
+| **Footer**       | `Mail`, `Phone`, `MapPin`, `Facebook`, `Instagram`, `Youtube`, `Twitter` | Contact + social links |
+
+#### Icons phổ biến cho mọi landing page
+
+```text
+Navigation / UI:   Menu, X, ChevronDown, ChevronUp, ChevronRight, Plus, Minus, Search, Bell
+Actions:           ArrowRight, ArrowLeft, Download, Upload, ExternalLink, Copy, Share2
+Status:            Check, CheckCircle2, CheckCircle, X, XCircle, AlertTriangle, Info
+Communication:     Mail, Phone, MessageCircle, Send, MessageSquare, Bell
+Business:          DollarSign, Tag, Percent, CreditCard, TrendingUp, BarChart3
+Features:          Zap, Shield, Lock, Unlock, Globe, Server, Cloud, Database
+People:            User, Users, UserPlus, Heart, Star, Award, Crown, BadgeCheck
+Media:             Play, Pause, Volume2, Image, Video, Camera, Mic
+Tech:              Code, Terminal, Cpu, Smartphone, Monitor, Wifi, WifiOff
+Nature/Organic:    Leaf, TreePine, Flower2, Droplets, Sun, Moon
+```
+
+#### Quy tắc dùng icon
+
+* **Kích thước chuẩn:** `24px` (default), `16px` (inline text), `32px` (feature icons), `48px` (section icons hero)
+* **Stroke width:** `2` cho UI icons, `1.5` cho icons nhỏ inline
+* **Màu icon:** Dùng `currentColor` để icon tự thừa hưởng màu text cha, hoặc set màu accent cố định
+* **Spacing:** Icon cách text `8px–12px`, icon trong card padding `12px–16px`
+* **Hover effect:** Icon scale `1.1`–`1.2` hoặc đổi màu khi hover
+
+```html
+<!-- HTML: dùng inline SVG từ Lucide CDN -->
+<i data-lucide="arrow-right" class="icon-right"></i>
+
+<!-- Tailwind: custom style cho icon -->
+<i data-lucide="zap" class="w-6 h-6 text-accent"></i>
+```
+
+```jsx
+// React: dùng lucide-react
+import { ArrowRight, Check, Star } from 'lucide-react';
+
+// Trong component
+<Button className="flex items-center gap-2">
+  Get Started <ArrowRight size={18} />
+</Button>
+
+// Feature card
+<div className="flex items-start gap-3">
+  <div className="p-2 bg-accent/10 rounded-lg">
+    <Zap className="w-5 h-5 text-accent" />
+  </div>
+  <div>
+    <h3 className="font-semibold">Lightning Fast</h3>
+    <p className="text-muted">Deploy in seconds</p>
+  </div>
+</div>
+```
+
+#### Animation kết hợp Icon
 
 ```css
-@media (max-width: 1024px) {
-  /* tablet adjustments */
+/* Icon hover pulse */
+.icon-hover:hover svg {
+  animation: pulse 1s infinite;
 }
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-  .nav-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background: var(--surface);
-    padding: 20px;
-    box-shadow: var(--shadow);
-  }
-  .nav-menu.active {
-    display: flex;
-  }
-  /* Stack 2-col grids to 1-col */
+
+/* Icon bounce on CTA hover */
+.btn:hover .icon-right {
+  transform: translateX(4px);
+  transition: transform 0.2s ease;
 }
-@media (max-width: 480px) {
-  /* mobile fine-tuning */
+
+/* Icon spin cho loading */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.icon-spin {
+  animation: spin 1s linear infinite;
 }
 ```
 
 ---
 
-## BƯỚC 5 — CHECKLIST TRƯỚC KHI XUẤT
+## BƯỚC 5 — CHECKLIST TRƯỚC KHI XUẤT BẢN
 
-```
-✅ Đã hỏi đủ params (ngành, tên, sản phẩm, màu, giá, tone)?
-✅ CSS Variables trong :root đúng theo ngành?
-✅ 10 sections có đủ (hoặc đã thêm/bớt theo yêu cầu)?
-✅ Navbar sticky + hamburger mobile hoạt động?
-✅ Hero: headline rõ lợi ích, CTA button nổi bật?
-✅ Giá hiển thị đúng format VNĐ? (giá gốc gạch ngang nếu có)?
-✅ FAQ accordion toggle đúng?
-✅ Scroll reveal animation (IntersectionObserver)?
-✅ Stats counter animated với data-target?
-✅ 3+ CTA buttons (Hero, sau Social Proof, Pricing)?
-✅ Responsive 3 breakpoints?
-✅ Google Fonts CDN load đúng font của ngành?
-✅ Placeholder images từ placehold.co với đúng màu scheme?
-✅ Tiếng Việt tự nhiên, không dịch máy?
-✅ Tên file xuất ra là tên-thuong-hieu.html?
-```
+*   [ ] Đã hỏi và áp dụng đúng techstack khách hàng lựa chọn chưa?
+*   [ ] Thiết kế có nhất quán với design system của ngành hàng đã chọn không?
+*   [ ] Headline có cuốn hút, đúng công thức chuyển đổi không?
+*   [ ] Đầy đủ các CTA buttons nổi bật (ít nhất ở Hero, Pricing, và Footer/Navbar)?
+*   [ ] Hiển thị hoàn hảo, responsive trên 3 breakpoints (Desktop, Tablet, Mobile)?
+*   [ ] Trải nghiệm tương tác mượt mà (Hamburger menu, FAQ toggle, smooth scroll)?
+*   [ ] Tên file/component đặt chuẩn và code được tổ chức gọn gàng?
 
 ---
 
-## BƯỚC 6 — COPY WRITING GUIDELINES
+## BƯỚC 6 — COPYWRITING GUIDELINES (HỖ TRỢ VIẾT NỘI DUNG)
 
 ### Công thức headline theo ngành
 
@@ -714,17 +443,8 @@ if (countdownEl) {
 | F&B      | "[Cảm xúc] Trong Từng [Món/Tách] — [Địa điểm]"      |
 | Sự kiện  | "[Tên sự kiện]: [Ngày] — [Lợi ích chính dự hội]"    |
 
-### CTA Button text
+### Gợi ý CTA Button Text
 
-- Mua ngay: "Đặt Mua Ngay", "Mua Combo — [Giá]", "Nhận Ngay [X]% Off"
-- Đăng ký: "Đăng Ký Học Ngay", "Bắt Đầu Miễn Phí", "Tham Gia [Số] Học Viên"
-- Liên hệ: "Đặt Lịch Miễn Phí", "Tư Vấn Ngay", "Gọi Ngay: [SĐT]"
-- SaaS: "Dùng Thử 14 Ngày Miễn Phí", "Xem Demo", "Bắt Đầu Ngay"
-
-### Trust signals phổ biến
-
-- `[Số]+` học viên / khách hàng / người dùng
-- `[X]/5 ⭐` đánh giá trung bình
-- `[X] năm` kinh nghiệm
-- Chứng nhận / giải thưởng / logo đối tác
-- `Hoàn tiền [X] ngày` / `Bảo hành [X] năm`
+*   **Mua hàng/Đăng ký:** "Đặt Mua Ngay", "Nhận Ưu Đãi [X]%", "Đăng Ký Học Ngay", "Bắt Đầu Miễn Phí"
+*   **Liên hệ:** "Đặt Lịch Miễn Phí", "Tư Vấn Ngay", "Gọi: [SĐT]"
+*   **Dịch vụ dùng thử:** "Dùng Thử Miễn Phí 14 Ngày", "Xem Demo"
