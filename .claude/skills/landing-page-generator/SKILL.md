@@ -133,73 +133,206 @@ Khi đã thu thập đủ thông tin, tổng hợp thành một prompt rõ ràng
 
 *Khi tổng hợp xong → chuyển sang BƯỚC 2 để xây dựng Design System, rồi BƯỚC 3 để cấu trúc sections.*
 
-## BƯỚC 2 — DESIGN SYSTEM THEO NGÀNH HÀNG (Inspiration từ getdesign.md)
+## BƯỚC 2 — DESIGN SYSTEM THEO NGÀNH HÀNG
 
-Thiết lập palette màu và font chữ tương ứng với từng lĩnh vực dựa trên các bộ thiết kế nổi tiếng từ [getdesign.md](https://getdesign.md):
-
-*   **Khóa học / Giáo dục (Inspiration: Notion / Duolingo):**
-    *   *Option Tối giản (Notion):* Primary `#37352F` (Charcoal), Accent `#2EAADC` (Sky Blue), Bg `#FBFBFA`. Font: `Inter`, `Be Vietnam Pro`.
-    *   *Option Tươi vui (Duolingo):* Primary `#58CC02` (Feather Green), Accent `#FFC200` (Yellow), Bg `#FFFFFF`. Font: `Inter`, `Be Vietnam Pro`.
-*   **Spa / Thẩm mỹ / Wellness (Inspiration: Airbnb - Warm & Trust):**
-    *   Primary `#FF5A5F` (Coral Rose), Accent `#008489` (Relaxing Teal), Bg `#FFFFFF` / `#FAFAFA`. Font: `Cormorant Garamond`, `Lato`.
-*   **Mỹ phẩm / Skincare / Organic (Inspiration: Aesop / Apple Clean):**
-    *   Primary `#212121` (Ink Black), Accent `#70706B` (Sage Green/Muted Earth), Bg `#F0EFE9` (Warm Linen). Font: `Playfair Display`, `Source Sans 3`.
-*   **F&B / Nhà hàng / Café (Inspiration: Starbucks / Blue Bottle):**
-    *   Primary `#00704A` (Starbucks Green) hoặc `#00A2E0` (Blue Bottle Blue), Accent `#CBA258` (Warm Gold), Bg `#FFFFFF`. Font: `Playfair Display`, `Lato`.
-*   **SaaS / Tech / Startup (Inspiration: Stripe / Supabase):**
-    *   *Light Mode (Stripe):* Primary `#0A2540` (Navy), Accent `#635BFF` (Indigo), Bg `#F6F9FC` / `#FFFFFF`. Font: `Plus Jakarta Sans`, `Inter`.
-    *   *Dark Mode (Supabase):* Primary `#3ECF8E` (Emerald Green), Accent `#3ECF8E`, Bg `#1C1C1C` / `#121212` (Dark Grey). Font: `Plus Jakarta Sans`, `Inter`.
-*   **Agency / Studio / Portfolio (Inspiration: Framer / Vercel):**
-    *   Primary `#000000` (Pure Black), Accent `#FF5252` (Neon Red) hoặc `#FFFFFF`, Bg `#FFFFFF` / `#000000` (High Contrast). Font: `Space Grotesk`, `Inter`.
-*   **Sự kiện / Workshop (Inspiration: Runway / xAI):**
-    *   Primary `#FF4646` (Runway Red) hoặc Violet, Accent `#121212`, Bg `#000000` (Futuristic Dark Mode). Font: `Montserrat`, `Inter`.
-*   **Bất động sản / Dịch vụ cao cấp (Inspiration: BMW Luxury):**
-    *   Primary `#060606` (Jet Black), Accent `#1C69D4` (BMW Blue) hoặc Gold, Bg `#F2F2F2`. Font: `Cormorant Garamond`, `Raleway`.
+Palette màu và font chữ theo từng ngành, tham chiếu từ [getdesign.md](https://getdesign.md). Mỗi ngành có thể chọn light mode hoặc dark mode.
 
 ---
 
-## TOP 20 BRANDS — Design References (từ [getdesign.md](https://getdesign.md))
+### 2.1 — QUICK REFERENCE: MÀU THEO NGÀNH
+
+| Ngành                  | Inspiration (getdesign.md) | Primary           | Accent              | Background         | Font chủ đạo               |
+|------------------------|--------------------------|-------------------|---------------------|--------------------|---------------------------|
+| **Khóa học / Giáo dục**  | Notion / PostHog         | `#5645d4` (Purple) | `#f7a501` (Yellow)   | `#ffffff` / `#eeefe9` | Plus Jakarta Sans, Inter |
+| **Spa / Thẩm mỹ**     | Airbnb                    | `#ff385c` (Coral)  | `#008489` (Teal)     | `#ffffff` / `#f7f7f7` | Cormorant Garamond, Lato |
+| **Mỹ phẩm / Skincare** | Apple / Claude           | `#cc785c` (Coral)  | `#5db8a6` (Teal)    | `#faf9f5` (Cream)   | Playfair Display, Lato |
+| **F&B / Nhà hàng / Café** | Starbucks               | `#00704a` (Green)  | `#cba258` (Gold)     | `#ffffff` / `#f7f4ed` | Playfair Display, Lato |
+| **SaaS Light**        | Stripe / Linear          | `#533afd` (Indigo) | `#ea2261` (Ruby)     | `#ffffff` / `#f6f9fc` | Plus Jakarta Sans, Inter |
+| **SaaS Dark**         | Supabase / Sentry / Raycast | `#3ecf8e` (Emerald) | `#c2ef4e` (Lime) | `#121212` / `#1f1633` | Plus Jakarta Sans, Inter |
+| **Agency / Portfolio** | Framer / Vercel          | `#171717` (Black)  | `#50e3c2` (Teal)    | `#ffffff` / `#000000` | Space Grotesk, Inter |
+| **Sự kiện / Workshop** | PlayStation / Runway     | `#0070d1` (Blue)   | `#d53b00` (Orange)  | `#000000` (Black)   | Montserrat, Inter |
+| **Automotive / Luxury**  | BMW M / Ferrari / Lamborghini | `#000000` (Black) | `#e22718` (M Red) / `#ffc000` (Gold) | `#000000` | Cormorant Garamond, Raleway |
+| **E-commerce / Retail**  | Shopify / Nike           | `#111111` (Black)  | `#1ed760` (Green) / `#d30005` (Red) | `#ffffff` / `#121212` | Inter, DM Sans |
+| **Thu Lead / Đăng ký** | Claude / PostHog         | `#cc785c` (Coral)  | `#f7a501` (Yellow)   | `#faf9f5` (Cream)   | Plus Jakarta Sans, Inter |
+
+---
+
+### 2.2 — BỘ MÀU CHI TIẾT TỪ GETDESIGN.MD
+
+Nguồn: [getdesign.md](https://getdesign.md) — 71 bộ thiết kế brand. Mỗi brand có đầy đủ hex codes cho primary, accent, surface, text, và semantic colors.
+
+#### Tech / Consumer
+
+**Apple** — [Chi tiết](https://getdesign.md/apple/design-md)
+`#0066cc` primary · `#0071e3` focus · `#ffffff` canvas · `#f5f5f7` parchment · `#1d1d1f` ink
+
+**Tesla** — [Chi tiết](https://getdesign.md/tesla/design-md)
+`#3e6ae1` blue · `#ffffff` text · `#f4f4f4` bg · `#171a20` dark surface
+
+#### Fintech / SaaS
+
+**Stripe** — [Chi tiết](https://getdesign.md/stripe/design-md)
+`#533afd` primary · `#ea2261` ruby accent · `#0d253d` ink · `#ffffff` canvas · `#f6f9fc` alt surface
+Gradient: `#4434d4` → `#665efd` · `#f96bee` · `#007cf0` → `#00dfd8`
+
+**Linear** — [Chi tiết](https://getdesign.md/linear.app/design-md)
+`#5e6ad2` primary · `#828fff` hover · `#010102` → `#191a1b` dark surface ladder · `#f7f8f8` text
+
+**Supabase** — [Chi tiết](https://getdesign.md/supabase/design-md)
+Emerald dark primary · `#3ecf8e` accent · `#121212` / `#1c1c1c` bg · Dark mode default
+
+**PostHog** — [Chi tiết](https://getdesign.md/posthog/design-md)
+`#f7a501` yellow CTA · `#eeefe9` cream canvas · `#23251d` ink · `#1d4ed8` link blue
+
+**Sentry** — [Chi tiết](https://getdesign.md/sentry/design-md)
+`#150f23` midnight violet · `#c2ef4e` electric lime · `#1f1633` dark canvas · `#ffffff` on dark
+
+**Raycast** — [Chi tiết](https://getdesign.md/raycast/design-md)
+`#ffffff` CTA pill · `#07080a` near-black canvas · `#57c1ff` accent blue · `#ff6161` accent red
+
+**Claude (Anthropic)** — [Chi tiết](https://getdesign.md/claude/design-md)
+`#cc785c` coral CTA · `#5db8a6` teal accent · `#faf9f5` cream canvas · `#141413` ink
+Semantic: `#5db872` success · `#d4a017` warning · `#c64545` error
+
+**Vercel** — [Chi tiết](https://getdesign.md/vercel/design-md)
+`#171717` ink · `#50e3c2` teal · `#ff0080` pink · `#ffffff` on ink
+Gradient: `#007cf0` → `#00dfd8` · `#7928ca` → `#ff0080`
+
+#### Hospitality / Travel / Wellness
+
+**Airbnb** — [Chi tiết](https://getdesign.md/airbnb/design-md)
+`#ff385c` rausch (primary CTA) · `#e00b41` active · `#ffffff` canvas · `#f7f7f7` soft surface · `#222222` ink
+Semantic: `#c13515` error · `#428bff` legal link
+
+**Starbucks** — [Chi tiết](https://getdesign.md/starbucks/design-md)
+Starbucks green (brand primary) · Warm cream canvas · Full-pill CTA 50px height
+
+#### E-commerce / Retail
+
+**Shopify** — [Chi tiết](https://getdesign.md/shopify/design-md)
+Dark forest-green undertone · Neon green accent · Cinematic dark surfaces
+
+**Nike** — [Chi tiết](https://getdesign.md/nike/design-md)
+`#111111` black ink · `#ffffff` white canvas · `#f5f5f5` soft cloud
+`#d30005` sale red · `#007d48` success green · `#1151ff` info blue
+
+**Spotify** — [Chi tiết](https://getdesign.md/spotify/design-md)
+`#1ed760` spotify green · `#121212` near-black bg · `#181818` surface · `#ffffff` text
+
+#### Automotive / Luxury
+
+**BMW M** — [Chi tiết](https://getdesign.md/bmw-m/design-md)
+`#000000` pure black canvas · `#ffffff` white headlines · M tricolor: `#0066b1` blue · `#1c69d4` blue · `#e22718` red
+
+**Ferrari** — [Chi tiết](https://getdesign.md/ferrari/design-md)
+Ferrari Red · Cinematic black · Chiaroscuro editorial · High-contrast light/dark
+
+**Lamborghini** — [Chi tiết](https://getdesign.md/lamborghini/design-md)
+`#ffc000` lamborghini gold CTA · `#000000` absolute black · `#ffffff` text
+`#202020` charcoal cards · `#917300` gold hover
+
+**Bugatti** — [Chi tiết](https://getdesign.md/bugatti/design-md)
+`#ffffff` single brand color (all type + CTAs) · `#000000` canvas · `#c3d9f3` ice blue links only
+
+**PlayStation** — [Chi tiết](https://getdesign.md/playstation/design-md)
+`#0070d1` PS blue CTA · `#d53b00` commerce orange · `#000000` dark canvas · `#ffffff` light canvas
+`#deff20` marathon yellow · Gradient: `#ffce21` → `#f5a623` → `#ee8e00` (PS Plus)
+
+#### Design / Productivity / No-code
+
+**Notion** — [Chi tiết](https://getdesign.md/notion/design-md)
+`#5645d4` purple brand · `#0075de` link blue · `#ff64c8` pink accent · `#ffffff` canvas · `#f6f5f4` soft surface · `#37352f` body text
+8 category accents: pink, orange, violet, teal, green, yellow + light tints
+
+**Figma** — [Chi tiết](https://getdesign.md/figma/design-md)
+`#000000` / `#ffffff` · `#ff3d8b` magenta promo
+8 color blocks: `#dceeb1` lime · `#c5b0f4` lilac · `#f4ecd6` cream · `#c8e6cd` mint · `#efd4d4` pink · `#f3c9b6` coral · `#1f1d3d` navy
+
+**Framer** — [Chi tiết](https://getdesign.md/framer/design-md)
+Bold black + bold blue · Motion-first · Light/Dark preview modes
+
+**Miro** — [Chi tiết](https://getdesign.md/miro/design-md)
+Brand blue primary · White canvas · Warm creative surfaces
+
+**Lovable** — [Chi tiết](https://getdesign.md/lovable/design-md)
+`#1c1c1c` charcoal · `#f7f4ed` cream bg · `#eceae4` borders · Warm, humanist feel
+
+#### Other Notable Brands
+
+**Vodafone** — [Chi tiết](https://getdesign.md/vodafone/design-md)
+`#e60000` vodafone red · `#ffffff` white canvas · `#25282b` ink
+
+**Meta** — [Chi tiết](https://getdesign.md/meta/design-md)
+Meta blue CTA (pill) · Binary light/dark surfaces (no intermediate)
+
+**Uber** — [Chi tiết](https://getdesign.md/uber/design-md)
+Bold black + bold white · Tight typography · Urban mobility energy
+
+**Coinbase** — [Chi tiết](https://getdesign.md/coinbase/design-md)
+Clean blue identity · Trust-focused institutional feel · White clean surfaces
+
+---
+
+### 2.3 — CÁCH TRA CỨU NHANH
+
+1. **Biết ngành → Xem bảng 2.1** để lấy nhanh primary/accent/background + inspiration brand
+2. **Cần hex chính xác → Click link [Chi tiết]** trong bảng 2.2 để xem toàn bộ token
+3. **Cần đầy đủ nhất → Chạy lệnh:**
+
+   ```bash
+   npx getdesign@latest add <brand-name>
+   # VD: npx getdesign@latest add stripe
+   # VD: npx getdesign@latest add apple
+   ```
+
+   Lệnh này tải file `DESIGN.md` đầy đủ vào thư mục hiện tại với mọi color tokens, typography, spacing, components.
+
+4. **71 brands đầy đủ:** Xem danh sách tại [https://getdesign.md](https://getdesign.md)
+
+---
+
+## TOP 20 BRANDS — Design References
 
 Dùng các thương hiệu dưới đây làm benchmark cho từng ngành hàng khi thiết kế landing page:
 
-| #  | Thương hiệu    | Ngành                | Đặc điểm design nổi bật                              |
-|----|----------------|----------------------|------------------------------------------------------|
-| 1  | **Apple**      | Tech / Consumer      | Minimalism trắng tay, hero sản phẩm lớn, typography mảnh |
-| 2  | **Stripe**     | Fintech / SaaS        | Light mode chuyên nghiệp, gradient tím-indigo, icon animation |
-| 3  | **Airbnb**     | Hospitality / Travel  | Ảnh full-bleed, warm coral, trust signal rõ ràng    |
-| 4  | **Figma**      | Design Tool / SaaS   | Dark UI tối giản, bảng màu tím-hồng, layout grid     |
-| 5  | **Notion**     | Productivity / SaaS   | Charcoal đen-trắng, sky blue accent, clean density    |
-| 6  | **Vercel**     | Dev Tool / Hosting   | High contrast đen-trắng, neon green, motion mạnh    |
-| 7  | **Linear**     | SaaS / Project Mgmt  | Premium dark mode, blur glass, micro-interactions      |
-| 8  | **Tesla**      | Automotive / Luxury  | Hero image khổng lồ, typography bold không lorem      |
-| 9  | **Nike**       | Sports / Retail      | Bold typography oversize, dramatic photography          |
-| 10 | **Spotify**    | Media / Streaming    | Dark green đặc trưng, card-based layout               |
-| 11 | **Uber**       | Mobility / Service   | Clean black-white, icon-centric, micro-copy mạnh      |
-| 12 | **Shopify**    | E-commerce / Retail  | Green chủ đạo, trusted tone, feature grid rõ ràng     |
-| 13 | **BMW M**      | Automotive / Luxury  | Dark bold, BMW blue accent, premium typography         |
-| 14 | **Ferrari**    | Automotive / Luxury  | Rosso Corsa đỏ rực, trắng-yacht, ultra-premium feel   |
-| 15 | **Supabase**   | Open Source / SaaS   | Dark emerald, gradient nhẹ, terminal aesthetic        |
-| 16 | **Framer**     | No-code / Design     | White bold layout, typography-driven, experimental     |
-| 17 | **Starbucks**  | F&B / Retail         | Starbucks green, warm cream, seasonal campaign feel    |
-| 18 | **Meta**       | Social Tech / AI     | Blue gradient, card UI, product showcase clean        |
-| 19 | **Coinbase**   | Fintech / Crypto     | White clean, green accent, trusted finance tone        |
-| 20 | **Runway**     | AI / Creative Tool   | Futuristic dark mode, neon accents, cinematic layout    |
+| # | Thương hiệu    | Ngành                  | Đặc điểm design nổi bật                              |
+|---|----------------|------------------------|------------------------------------------------------|
+| 1 | **Apple**    | Tech / Consumer        | Minimalism trắng tay, hero sản phẩm lớn, typography mảnh |
+| 2 | **Stripe**   | Fintech / SaaS          | Light mode chuyên nghiệp, gradient tím-indigo        |
+| 3 | **Airbnb**   | Hospitality / Travel   | Ảnh full-bleed, warm coral, trust signal rõ ràng     |
+| 4 | **Figma**    | Design Tool / SaaS     | Dark UI tối giản, bảng màu tím-hồng, layout grid    |
+| 5 | **Notion**   | Productivity / SaaS     | Charcoal đen-trắng, purple brand, clean density       |
+| 6 | **Vercel**   | Dev Tool / Hosting     | High contrast đen-trắng, neon green, motion mạnh    |
+| 7 | **Linear**   | SaaS / Project Mgmt    | Premium dark mode, blur glass, micro-interactions     |
+| 8 | **Tesla**    | Automotive / Luxury    | Hero image khổng lồ, typography bold, near-zero UI   |
+| 9 | **Nike**     | Sports / Retail        | Bold typography oversize, dramatic photography        |
+|10 | **Spotify**  | Media / Streaming      | Dark green đặc trưng, card-based layout              |
+|11 | **Uber**     | Mobility / Service     | Clean black-white, icon-centric, micro-copy mạnh     |
+|12 | **Shopify**  | E-commerce / Retail    | Green chủ đạo, cinematic dark surfaces              |
+|13 | **BMW M**    | Automotive / Luxury    | Dark bold, M tricolor accent, premium typography      |
+|14 | **Ferrari**  | Automotive / Luxury    | Rosso Corsa đỏ rực, chiaroscuro editorial            |
+|15 | **Supabase** | Open Source / SaaS     | Dark emerald, gradient nhẹ, terminal aesthetic         |
+|16 | **Framer**   | No-code / Design       | White bold layout, typography-driven, experimental   |
+|17 | **Starbucks**  | F&B / Retail           | Starbucks green, warm cream, retail-forward           |
+|18 | **Meta**     | Social Tech / AI       | Blue gradient, pill CTA, binary light/dark surfaces   |
+|19 | **Coinbase** | Fintech / Crypto       | White clean, blue accent, trusted finance tone       |
+|20 | **Runway**   | AI / Creative Tool     | Futuristic dark mode, neon accents, cinematic layout  |
 
-*Khi cần reference cho một ngành hàng cụ thể, ưu tiên chọn thương hiệu cùng ngành trước. VD: landing page spa → Airbnb, Aesop; landing page SaaS → Stripe, Linear, Supabase.*
+*Khi cần reference cho một ngành hàng cụ thể, ưu tiên chọn thương hiệu cùng ngành trước. VD: landing page spa → Airbnb; landing page SaaS light → Stripe; landing page SaaS dark → Linear, Supabase, Sentry; landing page luxury automotive → BMW M, Ferrari, Lamborghini.*
 
 ---
 
 ## BƯỚC 3 — CẤU TRÚC 10 SECTIONS TỐI ƯU CHUYỂN ĐỔI
 
-1.  **Navbar:** Logo bên trái, menu link và CTA bên phải. Hỗ trợ responsive hamburger trên mobile và hiệu ứng scroll blur.
-2.  **Hero:** Headline thu hút trong 3 giây đầu (Công thức: *[Kết quả mong muốn] + [Thời gian] + [Xóa bỏ rào cản]*), nút CTA nổi bật kèm trust signal phụ.
-3.  **Problem (Nỗi đau):** 3-4 vấn đề khách hàng đang gặp phải, sử dụng ngôn ngữ đồng cảm để tạo kết nối.
-4.  **Solution (Giải pháp):** Giới thiệu sản phẩm/dịch vụ giải quyết trực tiếp các vấn đề trên.
-5.  **Benefits (Lợi ích thực tế):** Tập trung vào giá trị nhận được (VD: "Tiết kiệm 5h/tuần") thay vì chỉ liệt kê tính năng kỹ thuật.
-6.  **Detail (Chi tiết sản phẩm/dịch vụ):** Accordion lộ trình học (khóa học), danh sách dịch vụ kèm giá (spa), các bước sử dụng (skincare) hoặc tính năng chính (SaaS).
-7.  **Social Proof (Bằng chứng xã hội):** Số liệu ấn tượng (số khách hàng, tỷ lệ hài lòng) và 3+ đánh giá thực tế (testimonials) từ khách hàng.
-8.  **Pricing (Bảng giá):** Hiển thị rõ giá gốc (gạch ngang) và giá khuyến mãi, làm nổi bật gói khuyên dùng, kèm cam kết hoàn tiền.
-9.  **FAQ (Câu hỏi thường gặp):** Giải đáp 5-7 thắc mắc phổ biến nhất để tháo gỡ rào cản mua hàng cuối cùng.
+1. **Navbar:** Logo bên trái, menu link và CTA bên phải. Hỗ trợ responsive hamburger trên mobile và hiệu ứng scroll blur.
+2. **Hero:** Headline thu hút trong 3 giây đầu (Công thức: *[Kết quả mong muốn] + [Thời gian] + [Xóa bỏ rào cản]*), nút CTA nổi bật kèm trust signal phụ.
+3. **Problem (Nỗi đau):** 3-4 vấn đề khách hàng đang gặp phải, sử dụng ngôn ngữ đồng cảm để tạo kết nối.
+4. **Solution (Giải pháp):** Giới thiệu sản phẩm/dịch vụ giải quyết trực tiếp các vấn đề trên.
+5. **Benefits (Lợi ích thực tế):** Tập trung vào giá trị nhận được (VD: "Tiết kiệm 5h/tuần") thay vì chỉ liệt kê tính năng kỹ thuật.
+6. **Detail (Chi tiết sản phẩm/dịch vụ):** Accordion lộ trình học (khóa học), danh sách dịch vụ kèm giá (spa), các bước sử dụng (skincare) hoặc tính năng chính (SaaS).
+7. **Social Proof (Bằng chứng xã hội):** Số liệu ấn tượng (số khách hàng, tỷ lệ hài lòng) và 3+ đánh giá thực tế (testimonials) từ khách hàng.
+8. **Pricing (Bảng giá):** Hiển thị rõ giá gốc (gạch ngang) và giá khuyến mãi, làm nổi bật gói khuyên dùng, kèm cam kết hoàn tiền.
+9. **FAQ (Câu hỏi thường gặp):** Giải đáp 5-7 thắc mắc phổ biến nhất để tháo gỡ rào cản mua hàng cuối cùng.
 10. **Footer:** Thông tin bản quyền, liên hệ (SĐT, Email, Địa chỉ) và liên kết mạng xã hội.
 
 ---
@@ -207,19 +340,22 @@ Dùng các thương hiệu dưới đây làm benchmark cho từng ngành hàng 
 ## BƯỚC 4 — QUY TẮC KỸ THUẬT THEO LỰA CHỌN TECHSTACK
 
 ### 1. HTML, CSS, Vanilla JS
-*   Viết code sạch trong một file duy nhất hoặc chia cấu trúc rõ ràng tùy độ lớn của dự án.
-*   Sử dụng CSS Custom Variables (`:root`) cho design system.
-*   Tự viết JS tối giản cho Hamburger Menu, FAQ Accordion, Scroll Reveal, Stats Counter và Countdown Timer (không dùng thư viện ngoài cồng kềnh).
+
+* Viết code sạch trong một file duy nhất hoặc chia cấu trúc rõ ràng tùy độ lớn của dự án.
+* Sử dụng CSS Custom Variables (`:root`) cho design system.
+* Tự viết JS tối giản cho Hamburger Menu, FAQ Accordion, Scroll Reveal, Stats Counter và Countdown Timer (không dùng thư viện ngoài cồng kềnh).
 
 ### 2. HTML, CSS, Tailwindcss
-*   Nhúng CDN Tailwind CSS (hoặc cấu hình nếu có build step).
-*   Sử dụng class utility của Tailwind để dựng layout responsive.
-*   Giữ code gọn gàng, tránh lặp lại class bằng cách tổ chức hợp lý.
+
+* Nhúng CDN Tailwind CSS (hoặc cấu hình nếu có build step).
+* Sử dụng class utility của Tailwind để dựng layout responsive.
+* Giữ code gọn gàng, tránh lặp lại class bằng cách tổ chức hợp lý.
 
 ### 3. Next.js, Tailwind CSS, ShadcnUI
-*   Dựng component theo chuẩn React/Next.js (App Router, Client/Server Components rõ ràng).
-*   Tích hợp ShadcnUI cho các thành phần UI (Accordion cho FAQ, Dialog, Button, v.v.).
-*   Đảm bảo responsive, load nhanh và tối ưu hóa SEO bằng Next.js Metadata.
+
+* Dựng component theo chuẩn React/Next.js (App Router, Client/Server Components rõ ràng).
+* Tích hợp ShadcnUI cho các thành phần UI (Accordion cho FAQ, Dialog, Button, v.v.).
+* Đảm bảo responsive, load nhanh và tối ưu hóa SEO bằng Next.js Metadata.
 
 ---
 
@@ -329,16 +465,16 @@ lucide.createIcons();
 
 | Section          | Icons gợi ý (lucide-react / lucide)                          | Mô tả                         |
 |-----------------|--------------------------------------------------------------|-------------------------------|
-| **Navbar**       | `Menu`, `X`, `ShoppingCart`, `User`, `Bell`                  | Hamburger, cart, user menu    |
-| **Hero**         | `ArrowRight`, `Play`, `ChevronDown`, `Sparkles`, `Zap`      | CTA arrow, video, scroll     |
-| **Problem**       | `AlertTriangle`, `XCircle`, `Frown`, `ShieldAlert`           | Warning, error, pain points   |
-| **Solution**     | `CheckCircle2`, `Lightbulb`, `Rocket`, `Target`              | Solution, idea, launch        |
-| **Benefits**     | `TrendingUp`, `Clock`, `DollarSign`, `Heart`, `Award`        | Growth, time, money, love      |
-| **Detail**       | `ListChecks`, `BookOpen`, `ClipboardList`, `Layers`          | Curriculum, features          |
+| **Navbar**     | `Menu`, `X`, `ShoppingCart`, `User`, `Bell`                  | Hamburger, cart, user menu    |
+| **Hero**       | `ArrowRight`, `Play`, `ChevronDown`, `Sparkles`, `Zap`      | CTA arrow, video, scroll     |
+| **Problem**     | `AlertTriangle`, `XCircle`, `Frown`, `ShieldAlert`           | Warning, error, pain points   |
+| **Solution**   | `CheckCircle2`, `Lightbulb`, `Rocket`, `Target`              | Solution, idea, launch        |
+| **Benefits**   | `TrendingUp`, `Clock`, `DollarSign`, `Heart`, `Award`        | Growth, time, money, love      |
+| **Detail**     | `ListChecks`, `BookOpen`, `ClipboardList`, `Layers`          | Curriculum, features          |
 | **Social Proof** | `Star`, `Quote`, `Users`, `ThumbsUp`, `BadgeCheck`           | Ratings, quotes, users        |
-| **Pricing**      | `Check`, `X`, `Tag`, `Percent`, `Zap`, `Crown`               | Feature list, discount, badge |
-| **FAQ**          | `ChevronDown`, `ChevronUp`, `HelpCircle`, `MessageCircle`    | Accordion toggle              |
-| **Footer**       | `Mail`, `Phone`, `MapPin`, `Facebook`, `Instagram`, `Youtube`, `Twitter` | Contact + social links |
+| **Pricing**    | `Check`, `X`, `Tag`, `Percent`, `Zap`, `Crown`               | Feature list, discount, badge |
+| **FAQ**        | `ChevronDown`, `ChevronUp`, `HelpCircle`, `MessageCircle`    | Accordion toggle              |
+| **Footer**     | `Mail`, `Phone`, `MapPin`, `Facebook`, `Instagram`, `Youtube`, `Twitter` | Contact + social links |
 
 #### Icons phổ biến cho mọi landing page
 
@@ -420,13 +556,13 @@ import { ArrowRight, Check, Star } from 'lucide-react';
 
 ## BƯỚC 5 — CHECKLIST TRƯỚC KHI XUẤT BẢN
 
-*   [ ] Đã hỏi và áp dụng đúng techstack khách hàng lựa chọn chưa?
-*   [ ] Thiết kế có nhất quán với design system của ngành hàng đã chọn không?
-*   [ ] Headline có cuốn hút, đúng công thức chuyển đổi không?
-*   [ ] Đầy đủ các CTA buttons nổi bật (ít nhất ở Hero, Pricing, và Footer/Navbar)?
-*   [ ] Hiển thị hoàn hảo, responsive trên 3 breakpoints (Desktop, Tablet, Mobile)?
-*   [ ] Trải nghiệm tương tác mượt mà (Hamburger menu, FAQ toggle, smooth scroll)?
-*   [ ] Tên file/component đặt chuẩn và code được tổ chức gọn gàng?
+* [ ] Đã hỏi và áp dụng đúng techstack khách hàng lựa chọn chưa?
+* [ ] Thiết kế có nhất quán với design system của ngành hàng đã chọn không?
+* [ ] Headline có cuốn hút, đúng công thức chuyển đổi không?
+* [ ] Đầy đủ các CTA buttons nổi bật (ít nhất ở Hero, Pricing, và Footer/Navbar)?
+* [ ] Hiển thị hoàn hảo, responsive trên 3 breakpoints (Desktop, Tablet, Mobile)?
+* [ ] Trải nghiệm tương tác mượt mà (Hamburger menu, FAQ toggle, smooth scroll)?
+* [ ] Tên file/component đặt chuẩn và code được tổ chức gọn gàng?
 
 ---
 
@@ -445,6 +581,6 @@ import { ArrowRight, Check, Star } from 'lucide-react';
 
 ### Gợi ý CTA Button Text
 
-*   **Mua hàng/Đăng ký:** "Đặt Mua Ngay", "Nhận Ưu Đãi [X]%", "Đăng Ký Học Ngay", "Bắt Đầu Miễn Phí"
-*   **Liên hệ:** "Đặt Lịch Miễn Phí", "Tư Vấn Ngay", "Gọi: [SĐT]"
-*   **Dịch vụ dùng thử:** "Dùng Thử Miễn Phí 14 Ngày", "Xem Demo"
+* **Mua hàng/Đăng ký:** "Đặt Mua Ngay", "Nhận Ưu Đãi [X]%", "Đăng Ký Học Ngay", "Bắt Đầu Miễn Phí"
+* **Liên hệ:** "Đặt Lịch Miễn Phí", "Tư Vấn Ngay", "Gọi: [SĐT]"
+* **Dịch vụ dùng thử:** "Dùng Thử Miễn Phí 14 Ngày", "Xem Demo"
