@@ -1,5 +1,5 @@
 ---
-name: user-story-acceptance-criteria-writer
+name: cc-user-story-acceptance-criteria-writer
 description: |
   Sinh câu chuyện người dùng (User Story) chuẩn 06 tiêu chí INVEST và tiêu chí nghiệm thu (Acceptance Criteria) dạng Given-When-Then (Gherkin) cho chuyên viên phân tích nghiệp vụ (Business Analyst) và chủ sở hữu sản phẩm (Product Owner).
   Hỗ trợ 3 chế độ: Viết mới, Tinh chỉnh (Refine) và Bổ sung tiêu chí nghiệm thu (Acceptance Criteria).

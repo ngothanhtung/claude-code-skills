@@ -1,5 +1,5 @@
 ---
-name: use-case-writer
+name: cc-use-case-writer
 description: Sinh đặc tả Use Case (Use Case) theo template 13 trường chuẩn Karl Wiegers / IIBA. Kích hoạt khi: "write a use case", "viết use case", "Use Case specification", "split into Use Cases", "review Use Case", dán BRD/PRD yêu cầu chuyển thành Use Case. Tuân thủ Cockburn's guidelines (coffee-break test, goal levels) + checklist 20 điểm. Output: English Markdown 13 trường. KHÔNG dùng cho Agile User Story, PRD/SRS, hay UML diagram.
 ---
 

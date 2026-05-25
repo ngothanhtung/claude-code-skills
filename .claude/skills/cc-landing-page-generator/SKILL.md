@@ -1,5 +1,5 @@
 ---
-name: landing-page-generator
+name: cc-landing-page-generator
 description: |
   Tạo landing page chuyên nghiệp theo yêu cầu. Gợi ý 3 lựa chọn techstack khác nhau và tạo trang tối ưu chuyển đổi cao.
 
