@@ -2,7 +2,7 @@
 
 > **Mục đích:** Danh sách kiểm tra **bổ sung**, dùng SAU khi đã hoàn thành User Story theo template.
 >
-> **Nguyên tắc:** Checklist này chỉ chứa nội dung không có trong [user-story-template.md](../templates/user-story-template.md) và [acceptance-criteria-template.md](../templates/acceptance-criteria-template.md).
+> **Nguyên tắc:** Checklist này chỉ chứa nội dung bổ sung ngoài những gì đã có trong [user-story-acceptance-criteria-template.md](../templates/user-story-acceptance-criteria-template.md) (Phần 1 worked example + Phần 2 biểu mẫu trống).
 >
 > **Quy tắc triage khi fail:** Mỗi mục fail = hành động cụ thể (sửa ngay / hỏi PO / tạo Spike).
 
@@ -59,13 +59,13 @@
 - [ ] **⚠️ Sự phụ thuộc (Dependencies)** được liệt kê rõ ràng?
   - Fail → Điền tên US phụ thuộc hoặc ghi "Không có".
 - [ ] **⚠️ DoD** có ít nhất 3 mục kỹ thuật cụ thể?
-  - Fail → Bổ sung checklist kỹ thuật (xem user-story-template.md mục DoD).
+  - Fail → Bổ sung checklist kỹ thuật (xem Phần 2 biểu mẫu trống trong user-story-acceptance-criteria-template.md).
 
 ---
 
 ## 🚨 Phần C: Acceptance Criteria — Mục bắt buộc đạt (🚨)
 
-> Đây là các mục **đã có hướng dẫn inline trong acceptance-criteria-template.md**.
+> Đây là các mục **đã có hướng dẫn inline trong Phần 1 worked example của user-story-acceptance-criteria-template.md**.
 
 - [ ] **🚨 Mỗi AC có đủ Given + When + Then.**
   - Fail → Sửa ngay: bổ sung phần còn thiếu.
@@ -127,6 +127,6 @@
 | As a = "user" / "everyone" | 🚨 | Sửa ngay: thêm vai trò + trạng thái cụ thể. |
 | Tiêu đề chứa "**VÀ**" | 🚨 | Tách thành 2 US riêng. |
 | AC dùng "v.v.", "vân vân" | 🚨 | Mô tả rõ ràng từng trường hợp cụ thể. |
-| Ước lượng effort > **5 ngày** | ⚠️ | Chia nhỏ US theo quy tắc trong user-story-template.md. |
+| Ước lượng effort > **5 ngày** | ⚠️ | Chia nhỏ US theo quy tắc phân rã trong skill.md. |
 | Metadata trạng thái AC = "Draft" khi xuất bàn giao | ⚠️ | Chuyển sang "Approved" sau khi PO xác nhận. |
 | Số AC > **8 kịch bản** cho 1 US | ⚠️ | Phân rã US; tách theo CRUD hoặc theo Persona. |

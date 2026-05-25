@@ -82,16 +82,16 @@ Tự đánh giá câu chuyện người dùng (User Story) trước khi phản h
 
 ### Bổ sung: Definition of Done (DoD)
 
-**DoD vs Tiêu chí nghiệp thu (AC) — khác nhau thế nào?**
+**DoD vs Tiêu chí nghiệm thu (AC) — khác nhau thế nào?**
 
-| | Tiêu chí nghiệp thu (AC) | Definition of Done (DoD) |
+| | Tiêu chí nghiệm thu (AC) | Definition of Done (DoD) |
 | :--- | :--- | :--- |
 | **Mục đích** | Story đạt yêu cầu nghiệp vụ? | Story sẵn sàng bàn giao? |
 | **Viết cho** | BA / PO | Dev / QA |
 | **Nội dung** | Nghiệp vụ, business outcome | Kỹ thuật, code quality, testing |
 | **Ví dụ** | "Then hệ thống hiển thị xác nhận" | "Code passed unit test" |
 
-DoD là danh sách checklist kỹ thuật mà developer tự đánh dấu khi story hoàn thành. Khác với tiêu chí nghiệp thu (cho BA/PO xác nhận nghiệp vụ), DoD (cho Dev/QA xác nhận chất lượng kỹ thuật).
+DoD là danh sách checklist kỹ thuật mà developer tự đánh dấu khi story hoàn thành. Khác với tiêu chí nghiệm thu (cho BA/PO xác nhận nghiệp vụ), DoD (cho Dev/QA xác nhận chất lượng kỹ thuật).
 
 **Ví dụ DoD cho story Kéo-thả Kanban:**
 
@@ -115,19 +115,19 @@ Trình bày theo thứ tự sau:
 
 ## Các mẫu chống lại thiết kế chuẩn (Anti-patterns) cần tránh
 
-- ❌ **Đối tượng sử dụng chung chung**: *"As a user"*  
+- ❌ **Đối tượng sử dụng chung chung**: *"As a user"*
   👉 ✅ **Chi tiết**: *"As a quản lý dự án đã được phân công quản lý dự án và xác thực địa chỉ thư điện tử (email)"*
-- ❌ **Hành động mơ hồ**: *"I want to manage profile"*  
+- ❌ **Hành động mơ hồ**: *"I want to manage profile"*
   👉 ✅ **Cụ thể**: *"I want to update my email address"*
-- ❌ **Giá trị trùng lặp mục tiêu**: *"So that I can manage profile"*  
+- ❌ **Giá trị trùng lặp mục tiêu**: *"So that I can manage profile"*
   👉 ✅ **Ý nghĩa**: *"So that I receive notifications at correct address"*
-- ❌ **Tiêu chí nghiệm thu mô tả giao diện**: *"Then button turns blue"*  
+- ❌ **Tiêu chí nghiệm thu mô tả giao diện**: *"Then button turns blue"*
   👉 ✅ **Mô tả hành vi**: *"Then system displays confirmation message"*
-- ❌ **Tiêu chí nghiệm thu chứa logic kỹ thuật**: *"Then call API /v1/users/update"*  
+- ❌ **Tiêu chí nghiệm thu chứa logic kỹ thuật**: *"Then call API /v1/users/update"*
   👉 ✅ **Mô tả nghiệp vụ**: *"Then user data is updated and persisted"*
-- ❌ **Tiêu chí nghiệm thu thiếu sót**: Chỉ có 1 kịch bản thông thường  
+- ❌ **Tiêu chí nghiệm thu thiếu sót**: Chỉ có 1 kịch bản thông thường
   👉 ✅ **Đa dạng**: Tối thiểu 3 tiêu chí nghiệm thu bao quát các nhánh (luồng thông thường, luồng biên, luồng lỗi).
-- ❌ **Câu chuyện người dùng quá lớn**: 1 câu chuyện chứa toàn bộ cụm hành động Tạo, Đọc, Cập nhật, Xóa (CRUD)  
+- ❌ **Câu chuyện người dùng quá lớn**: 1 câu chuyện chứa toàn bộ cụm hành động Tạo, Đọc, Cập nhật, Xóa (CRUD)
   👉 ✅ **Phân tách**: Tách riêng biệt thành các câu chuyện nhỏ hơn (Tạo mới, Hiển thị, Cập nhật, Xóa).
 
 ### Bảng đối chiếu nhanh
@@ -160,8 +160,8 @@ Trình bày theo thứ tự sau:
 
 ## Tài liệu tham khảo liên quan
 
-- [user-story-template.md](./templates/user-story-template.md) - Biểu mẫu trống điền thông tin câu chuyện người dùng.
-- [acceptance-criteria-template.md](./templates/acceptance-criteria-template.md) - Biểu mẫu tiêu chí nghiệm thu chuẩn Gherkin.
+- [user-story-template-example.md](./templates/user-story-template-example.md) - Ví dụ minh họa hoàn chỉnh US "Tạo dự án" với AC Happy + Edge + Negative. Phần 1 là worked example (dữ liệu minh họa đã điền), kèm hướng dẫn viết Given-When-Then chi tiết. Dùng để học cấu trúc và tham khảo.
+- [user-story-template-blank.md](./templates/user-story-template-blank.md) - Biểu mẫu trống để điền US thực tế. Có sẵn bảng mã tính năng, trường Status/Approval, và DoD tách kỹ thuật/nghiệp vụ. Dùng khi cần bàn giao cho Sprint Planning.
 - [invest-criteria.md](./references/invest-criteria.md) - Tài liệu phân tích sâu về 06 tiêu chí INVEST.
 - [examples.md](./references/examples.md) - 4 ví dụ mẫu thực tế thuộc lĩnh vực Quản lý dự án (ProjectOS).
 - [quality-checklist.md](./checklists/quality-checklist.md) - Danh mục tự kiểm tra chất lượng trước khi bàn giao.
