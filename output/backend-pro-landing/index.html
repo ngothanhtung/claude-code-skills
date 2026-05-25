@@ -1,0 +1,2573 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BackEnd Pro — Backend API với Claude Code | Softech Aptech Đà Nẵng</title>
+  <meta name="description"
+    content="Khóa học BackEnd – NestJS với Claude Code toàn diện, từ thiết kế database, xây dựng RESTful API đến deploy lên production. 8 buổi trực tuyến.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #020617;
+      --bg-2: #0a0f1e;
+      --surface: #0f172a;
+      --surface-2: #1e293b;
+      --surface-3: #334155;
+      --border: #1e3a5f;
+      --border-light: #2d4a6f;
+      --primary: #22d3ee;
+      --primary-dark: #0891b2;
+      --primary-glow: rgba(34, 211, 238, 0.15);
+      --accent: #a78bfa;
+      --accent-glow: rgba(167, 139, 250, 0.15);
+      --green: #34d399;
+      --green-glow: rgba(52, 211, 153, 0.15);
+      --orange: #fb923c;
+      --red: #f87171;
+      --yellow: #fbbf24;
+      --text: #f8fafc;
+      --text-2: #94a3b8;
+      --text-3: #64748b;
+      --font: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--surface-3);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Grid Background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Gradient Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: rgba(34, 211, 238, 0.06);
+      top: -200px;
+      right: -200px;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: rgba(167, 139, 250, 0.06);
+      bottom: -150px;
+      left: -150px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-2);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, #06b6d4 100%);
+      color: #020617;
+      box-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(34, 211, 238, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-light);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-glow);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-2);
+      padding: 10px 20px;
+    }
+
+    .btn-ghost:hover {
+      color: var(--primary);
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 0;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #020617;
+    }
+
+    .nav-logo-text {
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .nav-logo-text span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .nav-cta {
+      margin-left: 8px;
+    }
+
+    /* Mobile menu */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 600;
+      padding: 12px 24px;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-glow);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.5);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 50%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-2);
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-2);
+    }
+
+    .hero-meta-item i {
+      color: var(--primary);
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .code-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .code-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .code-dot.red {
+      background: #ef4444;
+    }
+
+    .code-dot.yellow {
+      background: #eab308;
+    }
+
+    .code-dot.green {
+      background: #22c55e;
+    }
+
+    .code-card-title {
+      margin-left: 8px;
+      font-size: 12px;
+      color: var(--text-3);
+      font-family: var(--font-mono);
+    }
+
+    .code-card-body {
+      padding: 20px;
+    }
+
+    .code-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+
+    .code-line-num {
+      color: var(--text-3);
+      min-width: 20px;
+      text-align: right;
+      user-select: none;
+    }
+
+    .code-keyword {
+      color: var(--accent);
+    }
+
+    .code-decorator {
+      color: var(--orange);
+    }
+
+    .code-string {
+      color: var(--green);
+    }
+
+    .code-comment {
+      color: var(--text-3);
+      font-style: italic;
+    }
+
+    .code-function {
+      color: var(--primary);
+    }
+
+    .code-type {
+      color: var(--yellow);
+    }
+
+    .code-param {
+      color: var(--text-2);
+    }
+
+    .code-glow {
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(167, 139, 250, 0.1));
+      border-radius: calc(var(--radius-lg) + 2px);
+      z-index: -1;
+      filter: blur(20px);
+    }
+
+    /* Tech Stack Pills */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .tech-pill {
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      border: 1px solid;
+    }
+
+    .tech-pill.pg {
+      background: rgba(51, 103, 145, 0.15);
+      border-color: rgba(51, 103, 145, 0.3);
+      color: #60a5fa;
+    }
+
+    .tech-pill.nest {
+      background: rgba(228, 51, 78, 0.12);
+      border-color: rgba(228, 51, 78, 0.25);
+      color: #e84a4a;
+    }
+
+    .tech-pill.redis {
+      background: rgba(204, 41, 54, 0.12);
+      border-color: rgba(204, 41, 54, 0.25);
+      color: #dc2626;
+    }
+
+    .tech-pill.typeorm {
+      background: rgba(67, 56, 202, 0.12);
+      border-color: rgba(67, 56, 202, 0.25);
+      color: #818cf8;
+    }
+
+    .tech-pill.jwt {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.25);
+      color: #fbbf24;
+    }
+
+    .tech-pill.docker {
+      background: rgba(36, 150, 237, 0.12);
+      border-color: rgba(36, 150, 237, 0.25);
+      color: #38bdf8;
+    }
+
+    /* Countdown */
+    .countdown-section {
+      padding: 80px 0;
+    }
+
+    .countdown-box {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    .countdown-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .countdown-sub {
+      color: var(--text-2);
+      margin-bottom: 32px;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .countdown-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      min-width: 90px;
+    }
+
+    .countdown-num {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      font-family: var(--font-mono);
+    }
+
+    .countdown-label {
+      font-size: 12px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .countdown-note {
+      font-size: 14px;
+      color: var(--text-3);
+    }
+
+    /* Problem Section */
+    .problem-section {
+      padding: 100px 0;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .problem-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: all 0.3s;
+    }
+
+    .problem-card:hover {
+      border-color: rgba(248, 113, 113, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .problem-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(248, 113, 113, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--red);
+    }
+
+    .problem-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .problem-card p {
+      font-size: 14px;
+      color: var(--text-2);
+    }
+
+    /* Solution / Topics */
+    .solution-section {
+      padding: 100px 0;
+      background: var(--bg-2);
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .topic-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .topic-num {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--primary);
+      opacity: 0.1;
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      line-height: 1;
+    }
+
+    .topic-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--primary-glow);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    .topic-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .topic-card p {
+      font-size: 14px;
+      color: var(--text-2);
+    }
+
+    /* Benefits */
+    .benefits-section {
+      padding: 100px 0;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .benefit-card {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .benefit-stat {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .benefit-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .benefit-card p {
+      font-size: 14px;
+      color: var(--text-2);
+    }
+
+    /* Curriculum */
+    .curriculum-section {
+      padding: 100px 0;
+      background: var(--bg-2);
+    }
+
+    .curriculum-timeline {
+      margin-top: 48px;
+      position: relative;
+    }
+
+    .curriculum-timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      opacity: 0.3;
+    }
+
+    .curriculum-item {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .curriculum-marker {
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .curriculum-marker.active {
+      border-color: var(--primary);
+      background: var(--primary-glow);
+    }
+
+    .marker-session {
+      font-size: 10px;
+      color: var(--text-3);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1;
+    }
+
+    .marker-num {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .curriculum-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      flex: 1;
+      transition: all 0.3s;
+    }
+
+    .curriculum-content:hover {
+      border-color: var(--border-light);
+      transform: translateX(4px);
+    }
+
+    .curriculum-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .curriculum-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .curriculum-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .tag-db {
+      background: rgba(96, 165, 250, 0.15);
+      color: #60a5fa;
+    }
+
+    .tag-api {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--green);
+    }
+
+    .tag-sec {
+      background: rgba(248, 113, 113, 0.15);
+      color: var(--red);
+    }
+
+    .tag-perf {
+      background: rgba(251, 146, 60, 0.15);
+      color: var(--orange);
+    }
+
+    .tag-devops {
+      background: rgba(167, 139, 250, 0.15);
+      color: var(--accent);
+    }
+
+    .curriculum-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .curriculum-topics span {
+      font-size: 12px;
+      padding: 3px 10px;
+      background: var(--surface-2);
+      border-radius: 100px;
+      color: var(--text-2);
+    }
+
+    /* Social Proof */
+    .social-section {
+      padding: 100px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-2);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+      color: var(--yellow);
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--text-2);
+      margin-bottom: 20px;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .avatar-1 {
+      background: rgba(34, 211, 238, 0.2);
+      color: var(--primary);
+    }
+
+    .avatar-2 {
+      background: rgba(167, 139, 250, 0.2);
+      color: var(--accent);
+    }
+
+    .avatar-3 {
+      background: rgba(52, 211, 153, 0.2);
+      color: var(--green);
+    }
+
+    .author-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .author-role {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    /* Pricing */
+    .pricing-section {
+      padding: 100px 0;
+      background: var(--bg-2);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--primary);
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.1);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #020617;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .pricing-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pricing-desc {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-bottom: 20px;
+    }
+
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .price-current {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: var(--font-mono);
+    }
+
+    .price-original {
+      font-size: 16px;
+      color: var(--text-3);
+      text-decoration: line-through;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-2);
+      margin-bottom: 10px;
+    }
+
+    .pricing-features li i {
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .pricing-features li.disabled {
+      color: var(--text-3);
+    }
+
+    .pricing-features li.disabled i {
+      color: var(--text-3);
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+    }
+
+    /* FAQ */
+    .faq-section {
+      padding: 100px 0;
+    }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 48px auto 0;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-light);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: left;
+      gap: 16px;
+    }
+
+    .faq-question i {
+      color: var(--text-3);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-question i {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 0;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, rgba(167, 139, 250, 0.08) 100%);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+      animation: rotate-slow 20s linear infinite;
+    }
+
+    @keyframes rotate-slow {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .cta-box h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .cta-box p {
+      color: var(--text-2);
+      font-size: 17px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .cta-box .btn {
+      position: relative;
+    }
+
+    .cta-trust {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .cta-trust span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    .cta-trust span i {
+      color: var(--green);
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand .nav-logo {
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-3);
+      margin-bottom: 20px;
+      max-width: 300px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col a {
+      color: var(--text-3);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-contact a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-3);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover {
+      color: var(--primary);
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger>* {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stagger.visible>*:nth-child(1) {
+      transition-delay: 0.05s;
+    }
+
+    .stagger.visible>*:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .stagger.visible>*:nth-child(3) {
+      transition-delay: 0.15s;
+    }
+
+    .stagger.visible>*:nth-child(4) {
+      transition-delay: 0.2s;
+    }
+
+    .stagger.visible>*:nth-child(5) {
+      transition-delay: 0.25s;
+    }
+
+    .stagger.visible>*:nth-child(6) {
+      transition-delay: 0.3s;
+    }
+
+    .stagger.visible>*:nth-child(7) {
+      transition-delay: 0.35s;
+    }
+
+    .stagger.visible>*:nth-child(8) {
+      transition-delay: 0.4s;
+    }
+
+    .stagger.visible>* {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-desc {
+        margin: 0 auto 32px;
+      }
+
+      .hero-cta {
+        justify-content: center;
+      }
+
+      .hero-meta {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .hero {
+        padding: 100px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .countdown-grid {
+        gap: 10px;
+      }
+
+      .countdown-item {
+        padding: 14px 16px;
+        min-width: 70px;
+      }
+
+      .countdown-num {
+        font-size: 28px;
+      }
+
+      .curriculum-timeline::before {
+        left: 24px;
+      }
+
+      .curriculum-marker {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+      }
+
+      .marker-num {
+        font-size: 16px;
+      }
+
+      .marker-session {
+        font-size: 9px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-box {
+        padding: 40px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .stat-num {
+        font-size: 28px;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+      }
+
+      .hero-cta .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-icon">SA</div>
+          <div class="nav-logo-text">Softech <span>Aptech</span></div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#chu-de">8 Chủ Đề</a></li>
+          <li><a href="#chuong-trinh">Lộ Trình</a></li>
+          <li><a href="#hoc-phi">Học Phí</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#hoc-phi" class="btn btn-primary nav-cta">
+          Đăng Ký Ngay <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <i data-lucide="menu" style="width:24px;height:24px"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#chu-de" onclick="closeMobile()">8 Chủ Đề</a>
+    <a href="#chuong-trinh" onclick="closeMobile()">Lộ Trình</a>
+    <a href="#hoc-phi" onclick="closeMobile()">Học Phí</a>
+    <a href="#faq" onclick="closeMobile()">FAQ</a>
+    <a href="#hoc-phi" class="btn btn-primary" onclick="closeMobile()">Đăng Ký Ngay</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge animate__animated animate__fadeInDown">
+            <span class="dot"></span>
+            Khai giảng 25/05/2026 — Early Bird đến 01/06/2026
+          </div>
+          <h1 class="animate__animated animate__fadeInUp">Backend Pro<br>với Claude Code</h1>
+          <p class="hero-desc animate__animated animate__fadeInUp" style="animation-delay:0.1s">
+            Thiết kế database chuẩn, xây dựng RESTful API, bảo mật, cache, queue và deploy production — tất cả với sự hỗ trợ của
+            Claude Code. Không học code thuần, hiểu kiến trúc và kiểm soát hệ thống thực chiến.
+          </p>
+          <div class="hero-cta animate__animated animate__fadeInUp" style="animation-delay:0.2s">
+            <a href="#hoc-phi" class="btn btn-primary">
+              Đăng Ký Học Ngay <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
+            </a>
+            <a href="#chuong-trinh" class="btn btn-outline">
+              Xem Lộ Trình
+            </a>
+          </div>
+          <div class="hero-meta animate__animated animate__fadeInUp" style="animation-delay:0.3s">
+            <div class="hero-meta-item">
+              <i data-lucide="video" style="width:16px;height:16px"></i>
+              8 buổi Google Meet
+            </div>
+            <div class="hero-meta-item">
+              <i data-lucide="clock" style="width:16px;height:16px"></i>
+              16 tiết · 2h/buổi
+            </div>
+            <div class="hero-meta-item">
+              <i data-lucide="users" style="width:16px;height:16px"></i>
+              Lớp tối đa 25 học viên
+            </div>
+          </div>
+          <div class="tech-stack animate__animated animate__fadeInUp" style="animation-delay:0.4s">
+            <span class="tech-pill pg">PostgreSQL</span>
+            <span class="tech-pill typeorm">TypeORM</span>
+            <span class="tech-pill nest">NestJS</span>
+            <span class="tech-pill redis">Redis</span>
+            <span class="tech-pill jwt">JWT</span>
+            <span class="tech-pill docker">Docker</span>
+          </div>
+        </div>
+        <div class="hero-visual animate__animated animate__fadeInRight" style="animation-delay:0.2s">
+          <div class="code-glow"></div>
+          <div class="code-card">
+            <div class="code-card-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-card-title">users.service.ts</span>
+            </div>
+            <div class="code-card-body">
+              <div class="code-line">
+                <span class="code-line-num">1</span>
+                <span><span class="code-decorator">@Controller</span>(<span class="code-string">'/api/v1/users'</span>)</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">2</span>
+                <span><span class="code-decorator">@UseGuards</span>(<span class="code-type">JwtAuthGuard</span>)</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">3</span>
+                <span><span class="code-keyword">export class</span> <span class="code-function">UsersController</span> {</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">4</span>
+                <span></span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">5</span>
+                <span> <span class="code-keyword" style="margin-left: 16px">@Get</span>()</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">6</span>
+                <span> <span class="code-keyword" style="margin-left: 16px">async</span> <span
+                    class="code-function">findAll</span>() {</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">7</span>
+                <span> <span class="code-keyword" style="margin-left: 32px">const</span> cached = <span
+                    class="code-keyword">await</span> <span class="code-keyword">this</span>.cache.<span
+                    class="code-function">get</span>(<span class="code-string">'users'</span>);</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">8</span>
+                <span> <span class="code-keyword" style="margin-left: 32px">if</span> (cached) <span
+                    class="code-keyword">return</span> cached;</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">9</span>
+                <span> <span class="code-keyword" style="margin-left: 32px">const</span> users = <span
+                    class="code-keyword">await</span> <span class="code-keyword">this</span>.repo.<span
+                    class="code-function">find</span>();</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">10</span>
+                <span> <span class="code-keyword" style="margin-left: 32px">await</span> <span
+                    class="code-keyword">this</span>.cache.<span class="code-function">set</span>(<span
+                    class="code-string">'users'</span>, users, { ttl: <span class="code-param">300</span> });</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">11</span>
+                <span> <span class="code-keyword" style="margin-left: 32px">return</span> users;</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">12</span>
+                <span style="margin-left: 16px"> }</span>
+              </div>
+              <div class="code-line">
+                <span class="code-line-num">13</span>
+                <span>}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown -->
+  <section class="countdown-section">
+    <div class="container">
+      <div class="countdown-box reveal">
+        <div class="countdown-title">⏰ Ưu đãi Early Bird kết thúc sau</div>
+        <div class="countdown-sub">Đăng ký sớm — tiết kiệm đến 1.000.000₫</div>
+        <div class="countdown-grid" id="countdown">
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-days">00</div>
+            <div class="countdown-label">Ngày</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-hours">00</div>
+            <div class="countdown-label">Giờ</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-mins">00</div>
+            <div class="countdown-label">Phút</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-secs">00</div>
+            <div class="countdown-label">Giây</div>
+          </div>
+        </div>
+        <p class="countdown-note">Khai giảng: 25/05/2026 · Early Bird: 01/06/2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem-section" id="problem">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">
+          <i data-lucide="alert-triangle" style="width:14px;height:14px"></i>
+          Vấn Đề Thực Tế
+        </div>
+        <h2 class="section-title">Bạn có đang gặp những<br>điều này?</h2>
+        <p class="section-desc">Hầu hết developer gặp khó khi chuyển từ frontend sang backend vì thiếu kiến thức hệ thống thực
+          chiến.</p>
+      </div>
+      <div class="problem-grid stagger">
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="database" style="width:22px;height:22px"></i></div>
+          <h3>Database "cứ đổ dữ liệu vào"</h3>
+          <p>Thiết kế không chuẩn, thiếu index, query chậm như rùa bò khi production lên — không biết tại sao.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="shield-off" style="width:22px;height:22px"></i></div>
+          <h3>Bảo mật như "cửa sổ không khoá"</h3>
+          <p>Lưu password plain text, không phân quyền, API không validate — sẵn sàng bị hack bất cứ lúc nào.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="timer-off" style="width:22px;height:22px"></i></div>
+          <h3>API chậm, người dùng chờ phát khóc</h3>
+          <p>Không cache, query N+1, mỗi request đều hit database — server chết dần khi traffic tăng.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><i data-lucide="ship" style="width:22px;height:22px"></i></div>
+          <h3>Deploy lên production là "đổ vỏ"</h3>
+          <p>Không biết viết Dockerfile, không có CI/CD, không monitor — khi có lỗi thì "không biết nó ở đâu".</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 Topics / Solution -->
+  <section class="solution-section" id="chu-de">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">
+          <i data-lucide="layers" style="width:14px;height:14px"></i>
+          Lộ Trình Backend Core
+        </div>
+        <h2 class="section-title">8 chủ đề — từ Database<br>đến Production</h2>
+        <p class="section-desc">Phương pháp học kiến trúc trước, code sau — để bạn hiểu TẠI SAO, không chỉ biết LÀM SAO.</p>
+      </div>
+      <div class="topics-grid stagger">
+        <div class="topic-card">
+          <div class="topic-num">01</div>
+          <div class="topic-icon"><i data-lucide="database" style="width:22px;height:22px"></i></div>
+          <h3>Database Design</h3>
+          <p>ERD, chuẩn hóa 1NF→3NF/BCNF, index strategy, query optimization, migration — nền tảng mọi hệ thống.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-num">02</div>
+          <div class="topic-icon" style="background:rgba(52,211,153,0.1);color:var(--green)"><i data-lucide="webhook"
+              style="width:22px;height:22px"></i></div>
+          <h3>RESTful API</h3>
+          <p>API versioning, pagination, filtering, sorting, OpenAPI documentation chuẩn Swagger.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-num">03</div>
+          <div class="topic-icon" style="background:rgba(248,113,113,0.1);color:var(--red)"><i data-lucide="shield-check"
+              style="width:22px;height:22px"></i></div>
+          <h3>Security Thực Chiến</h3>
+          <p>JWT, RBAC, mã hóa, chống SQL injection, XSS, CSRF, rate limiting — bảo vệ API từ đầu.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-num">04</div>
+          <div class="topic-icon" style="background:rgba(251,146,60,0.1);color:var(--orange)"><i data-lucide="zap"
+              style="width:22px;height:22px"></i></div>
+          <h3>Cache & Performance</h3>
+          <p>Redis strategy, cache invalidation, CDN, profiling — giảm DB load đến 80%, API nhanh gấp 10x.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-num">05</div>
+          <div class="topic-icon" style="background:rgba(167,139,250,0.1);color:var(--accent)"><i data-lucide="list-ordered"
+              style="width:22px;height:22px"></i></div>
+          <h3>Queue & Background Jobs</h3>
+          <p>BullMQ, producer→queue→worker, retry exponential backoff, job scheduling — không block request.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-num">06</div>
+          <div class="topic-icon" style="background:rgba(34,211,238,0.08);color:#38bdf8"><i data-lucide="activity"
+              style="width:22px;height:22px"></i></div>
+          <h3>Monitoring & Alerting</h3>
+          <p>Prometheus, Grafana, health checks, uptime monitoring — biết hệ thống sống hay chết.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-num">07</div>
+          <div class="topic-icon" style="background:rgba(251,191,36,0.1);color:var(--yellow)"><i data-lucide="file-text"
+              style="width:22px;height:22px"></i></div>
+          <h3>Structured Logging</h3>
+          <p>Winston, JSON logs, log aggregation, debug/info/warn/error — trace lỗi từ đầu đến cuối.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-num">08</div>
+          <div class="topic-icon" style="background:rgba(52,211,153,0.08);color:#6ee7b7"><i data-lucide="cloud-cog"
+              style="width:22px;height:22px"></i></div>
+          <h3>Deploy & Production</h3>
+          <p>Docker, CI/CD GitHub Actions, cloud (AWS/GCP/Azure), security hardening — production-ready.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="benefits-section">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">
+          <i data-lucide="trophy" style="width:14px;height:14px"></i>
+          Kết Quả Đạt Được
+        </div>
+        <h2 class="section-title">Sau khóa học, bạn sẽ</h2>
+      </div>
+      <div class="benefits-grid stagger">
+        <div class="benefit-card">
+          <div class="benefit-stat" data-count="1">0</div>
+          <h3>Hệ thống Backend hoàn chỉnh</h3>
+          <p>Từ database → API → bảo mật → cache → deploy. Bạn tự tin deploy dự án thực tế lên production.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-stat" data-count="80">0</div>
+          <h3>Giảm tải Database đến 80%</h3>
+          <p>Nắm vững chiến lược Redis cache, biết khi nào cache, khi nào không, và cách invalidation đúng.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-stat" data-count="10">0</div>
+          <h3>API nhanh gấp 10x</h3>
+          <p>Performance optimization từ query → cache → CDN. Biết dùng 0x profiler để tìm bottleneck.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-stat" data-count="5">0</div>
+          <h3>Bảo mật 5 lớp</h3>
+          <p>JWT, RBAC, mã hóa, chống SQL/XSS/CSRF, rate limiting — API an toàn từ design phase.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-stat">1</div>
+          <h3>Tài khoản Claude Code Pro</h3>
+          <p>Được tặng 1 tháng Claude Code Pro — AI coding assistant mạnh nhất để hỗ trợ học và làm project.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-stat">8+</div>
+          <h3>Video & Source code lab</h3>
+          <p>Toàn bộ recording các buổi học, source code lab, slides — để ôn tập và thực hành sau khóa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum -->
+  <section class="curriculum-section" id="chuong-trinh">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">
+          <i data-lucide="book-open" style="width:14px;height:14px"></i>
+          Chương Trình Chi Tiết
+        </div>
+        <h2 class="section-title">8 buổi — 16 tiết<br>thực chiến</h2>
+        <p class="section-desc">Mỗi buổi là một module hoàn chỉnh, có lab thực tế. Không lý thuyết suông.</p>
+      </div>
+      <div class="curriculum-timeline stagger">
+        <div class="curriculum-item">
+          <div class="curriculum-marker active">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">01</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Thiết kế Database chuẩn</h3>
+              <span class="curriculum-tag tag-db">Database</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">ERD từ yêu cầu thực tế, chuẩn hóa 1NF→3NF/BCNF, tạo bảng, ràng buộc,
+              quan hệ. Truy vấn nâng cao với Claude Code.</p>
+            <div class="curriculum-topics">
+              <span>ERD Design</span><span>Normalization</span><span>Index Strategy</span><span>View</span><span>Trigger</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-marker">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">02</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Entity & DTOs & CRUD cơ bản</h3>
+              <span class="curriculum-tag tag-api">API</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">Xây dựng hệ thống User với TypeORM, định nghĩa entity, tạo DTOs,
+              Controller + Service cơ bản, phân trang, lọc, sắp xếp.</p>
+            <div class="curriculum-topics">
+              <span>TypeORM</span><span>DTO Pattern</span><span>RESTful</span><span>Pagination</span><span>Error Handling</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-marker">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">03</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Entity nâng cao & nhiều quan hệ</h3>
+              <span class="curriculum-tag tag-api">API</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">Hệ thống Post với quan hệ Many-to-Many User↔Post, TypeORM nâng cao,
+              eager/lazy loading, transaction.</p>
+            <div class="curriculum-topics">
+              <span>Many-to-Many</span><span>Transaction</span><span>Eager/Lazy</span><span>Soft Delete</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-marker">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">04</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Xây dựng RESTful API hoàn chỉnh</h3>
+              <span class="curriculum-tag tag-api">API</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">Thiết kế và triển khai RESTful API đầy đủ, best practices: API
+              versioning, global response format, error codes chuẩn.</p>
+            <div class="curriculum-topics">
+              <span>API Versioning</span><span>Response Format</span><span>Error Codes</span><span>OpenAPI</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-marker">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">05</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Authentication & Security</h3>
+              <span class="curriculum-tag tag-sec">Security</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">JWT access + refresh token, Bcrypt hashing, RBAC với role→permission
+              matrix. Chống SQL Injection, XSS, CSRF, rate limiting.</p>
+            <div class="curriculum-topics">
+              <span>JWT</span><span>Refresh Token</span><span>RBAC</span><span>Bcrypt</span><span>Rate Limit</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-marker">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">06</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Cache & Queue & Background Jobs</h3>
+              <span class="curriculum-tag tag-perf">Performance</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">Redis caching (string, hash, sorted set), BullMQ
+              producer→queue→worker, retry exponential backoff, Socket.io real-time, CDN.</p>
+            <div class="curriculum-topics">
+              <span>Redis Cache</span><span>BullMQ</span><span>Dead Letter Queue</span><span>Socket.io</span><span>CDN</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-marker">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">07</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Logs, Monitoring & Error Handling</h3>
+              <span class="curriculum-tag tag-devops">DevOps</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">Winston logging, Prometheus + Grafana monitoring, Global error filter,
+              Circuit breaker (Opossum), retry + fallback strategy.</p>
+            <div class="curriculum-topics">
+              <span>Winston</span><span>Prometheus</span><span>Grafana</span><span>Circuit Breaker</span><span>Fallback</span>
+            </div>
+          </div>
+        </div>
+        <div class="curriculum-item">
+          <div class="curriculum-marker">
+            <span class="marker-session">Buổi</span>
+            <span class="marker-num">08</span>
+          </div>
+          <div class="curriculum-content">
+            <div class="curriculum-header">
+              <h3>Docker, CI/CD & Deploy Production</h3>
+              <span class="curriculum-tag tag-devops">DevOps</span>
+            </div>
+            <p style="font-size:14px;color:var(--text-2)">Docker multi-stage build, docker-compose dev & production, CI/CD
+              GitHub Actions staging→production, cloud deployment (AWS/GCP/Azure), security hardening.</p>
+            <div class="curriculum-topics">
+              <span>Docker</span><span>CI/CD</span><span>GitHub Actions</span><span>Cloud Deploy</span><span>Health
+                Checks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="social-section" id="social">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">
+          <i data-lucide="badge-check" style="width:14px;height:14px"></i>
+          Bằng Chứng Xã Hội
+        </div>
+        <h2 class="section-title">Softech Aptech — Đào tạo<br>từ năm 2001</h2>
+      </div>
+      <div class="stats-grid stagger">
+        <div class="stat-card">
+          <div class="stat-num" data-count="24">0</div>
+          <div class="stat-label">Năm kinh nghiệm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-count="10000">0</div>
+          <div class="stat-label">Học viên đã đào tạo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Năm liên tiếp đạt giải Sao Khuê</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">95%</div>
+          <div class="stat-label">Học viên hài lòng</div>
+        </div>
+      </div>
+      <div class="testimonials-grid stagger">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+          </div>
+          <p class="testimonial-text">"Trước khóa học mình không biết gì về backend. Sau 8 buổi, mình tự build được API cho
+            project của mình và deploy lên Railway. Kiến thức rất thực chiến, không phải tutorial suông."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar avatar-1">NT</div>
+            <div>
+              <div class="author-name">Nguyễn Trung</div>
+              <div class="author-role">Fresher Developer · Đà Nẵng</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+          </div>
+          <p class="testimonial-text">"Mình là frontend dev 2 năm, muốn chuyển sang fullstack. Khóa này giúp mình hiểu rõ
+            architecture phía sau — từ database design đến CI/CD. Giờ mình tự tin apply fullstack position."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar avatar-2">LH</div>
+            <div>
+              <div class="author-name">Lê Hương</div>
+              <div class="author-role">Frontend Dev → Fullstack · TP.HCM</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:currentColor"></i>
+          </div>
+          <p class="testimonial-text">"Buổi về Redis cache và BullMQ queue là bước ngoặt. Mình áp dụng ngay vào production, API
+            từ 800ms xuống còn 45ms. Phần deploy Docker + GitHub Actions cũng cực kỳ hữu ích."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar avatar-3">TV</div>
+            <div>
+              <div class="author-name">Trần Văn</div>
+              <div class="author-role">Backend Developer · Freelance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-section" id="hoc-phi">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">
+          <i data-lucide="tag" style="width:14px;height:14px"></i>
+          Học Phí & Ưu Đãi
+        </div>
+        <h2 class="section-title">Chọn gói phù hợp<br>với bạn</h2>
+        <p class="section-desc">Tất cả các gói đều bao gồm: 8 buổi học, video recording, source code, group Zalo hỗ trợ, và tài
+          khoản Claude Code Pro 1 tháng.</p>
+      </div>
+      <div class="pricing-grid stagger">
+        <div class="pricing-card">
+          <div class="pricing-name">Early Bird</div>
+          <div class="pricing-desc">Đăng ký sớm — ưu đãi lớn nhất</div>
+          <div class="pricing-price">
+            <span class="price-current">2.200.000₫</span>
+            <span class="price-original">3.200.000₫</span>
+          </div>
+          <ul class="pricing-features">
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> 8 buổi trực tuyến (2.0h/buổi)</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Video recording tất cả buổi</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Source code lab & slides</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Group Zalo hỗ trợ</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Claude Code Pro 1 tháng</li>
+            <li class="disabled"><i data-lucide="x" style="width:16px;height:16px"></i> Mentor 1-1</li>
+          </ul>
+          <a href="mailto:tuyensinh@softech.vn?subject=Đăng ký BackEnd Pro - Early Bird" class="btn btn-outline">Đăng Ký Early
+            Bird</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-badge">Khuyên Dùng</div>
+          <div class="pricing-name">Standard</div>
+          <div class="pricing-desc">Gói cơ bản đầy đủ tính năng</div>
+          <div class="pricing-price">
+            <span class="price-current">2.000.000₫</span>
+            <span class="price-original">2.800.000₫</span>
+          </div>
+          <ul class="pricing-features">
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> 8 buổi trực tuyến (2.0h/buổi)</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Video recording tất cả buổi</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Source code lab & slides</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Group Zalo hỗ trợ</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Claude Code Pro 1 tháng</li>
+            <li class="disabled"><i data-lucide="x" style="width:16px;height:16px"></i> Mentor 1-1</li>
+          </ul>
+          <a href="mailto:tuyensinh@softech.vn?subject=Đăng ký BackEnd Pro - Standard" class="btn btn-primary">Đăng Ký
+            Standard</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-name">Học Viên Cũ</div>
+          <div class="pricing-desc">Ưu đãi đặc biệt cho cựu học viên</div>
+          <div class="pricing-price">
+            <span class="price-current">1.500.000₫</span>
+            <span class="price-original">2.800.000₫</span>
+          </div>
+          <ul class="pricing-features">
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> 8 buổi trực tuyến (2.0h/buổi)</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Video recording tất cả buổi</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Source code lab & slides</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Group Zalo hỗ trợ</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Claude Code Pro 1 tháng</li>
+            <li class="disabled"><i data-lucide="x" style="width:16px;height:16px"></i> Mentor 1-1</li>
+          </ul>
+          <a href="mailto:tuyensinh@softech.vn?subject=Đăng ký BackEnd Pro - Học viên cũ" class="btn btn-outline">Đăng Ký Học
+            Viên Cũ</a>
+        </div>
+        <div class="pricing-card" style="border-color:rgba(167,139,250,0.3)">
+          <div class="pricing-name">Mentorship 1-1</div>
+          <div class="pricing-desc">Học riêng cùng giảng viên</div>
+          <div class="pricing-price">
+            <span class="price-current" style="color:var(--accent)">5.000.000₫</span>
+            <span class="price-original">10.000.000₫</span>
+          </div>
+          <ul class="pricing-features">
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Tất cả tính năng gói Standard</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> 8 buổi mentor 1-1 riêng</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Review code cá nhân</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Mentor project thực tế</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Hỗ trợ 1-1 qua Zalo</li>
+            <li><i data-lucide="check" style="width:16px;height:16px"></i> Certificate hoàn thành</li>
+          </ul>
+          <a href="mailto:tuyensinh@softech.vn?subject=Đăng ký BackEnd Pro - Mentorship 1-1" class="btn btn-outline"
+            style="border-color:var(--accent);color:var(--accent)">Đăng Ký Mentorship</a>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:32px" class="reveal">
+        <p style="font-size:14px;color:var(--text-3);display:flex;align-items:center;justify-content:center;gap:8px">
+          <i data-lucide="shield-check" style="width:16px;height:16px;color:var(--green)"></i>
+          Cam kết hoàn 100% nếu không hài lòng sau buổi 1 · Trả góp 0% qua thẻ tín dụng
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">
+          <i data-lucide="help-circle" style="width:14px;height:14px"></i>
+          Câu Hỏi Thường Gặp
+        </div>
+        <h2 class="section-title">Giải đáp thắc mắc</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Khóa học này dành cho ai?</span>
+            <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Khóa học dành cho sinh viên năm 3-4 / mới ra trường, developer fresher cần nền tảng backend vững, frontend
+              developer muốn chuyển fullstack, hoặc đang đi làm muốn nâng cấp kỹ năng backend. Yêu cầu: biết basic
+              JavaScript/TypeScript là đủ.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Tôi chưa biết gì về backend, có theo kịp không?</span>
+            <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Có thể! Khóa học được thiết kế từ cơ bản đến nâng cao, có Claude Code hỗ trợ viết code trong suốt buổi học. Bạn
+              chỉ cần biết JavaScript cơ bản. Ngoài ra, group Zalo hỗ trợ không giới hạn giữa các buổi để bạn hỏi bất cứ lúc
+              nào.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>8 buổi học online có đủ để nắm vững không?</span>
+            <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              8 buổi = 16 tiết = đủ cover toàn bộ backend core từ database đến production. Quan trọng là phương pháp: mỗi buổi
+              đều có lab thực tế, không phải lý thuyết suông. Bạn còn được video recording và source code để ôn tập lại sau
+              khóa.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Học phí có được trả góp không?</span>
+            <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Có. Softech Aptech hỗ trợ trả góp 0% qua thẻ tín dụng từ các ngân hàng Vietcombank, VietinBank, BIDV, TPBank và
+              nhiều ngân hàng khác. Bạn có thể chia thanh toán từ 3 đến 12 tháng mà không chịu lãi suất.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Cam kết hoàn tiền như thế nào?</span>
+            <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Nếu sau buổi học đầu tiên bạn cảm thấy không phù hợp, Softech Aptech cam kết hoàn 100% học phí. Không câu nệ,
+              không điều kiện. Bạn không mất gì khi thử.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Claude Code Pro là gì và được tặng như thế nào?</span>
+            <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Claude Code Pro là AI coding assistant của Anthropic — hỗ trợ bạn viết code, debug, refactor, và học trong suốt
+              khóa học. Tất cả học viên đăng ký đều được tặng 1 tháng Claude Code Pro. Đây là công cụ chính được dùng xuyên suốt
+              khóa học.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Tôi ở xa Đà Nẵng, có thể tham gia không?</span>
+            <i data-lucide="chevron-down" style="width:20px;height:20px"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Hoàn toàn có thể! Khóa học diễn ra online qua Google Meet, không giới hạn địa lý. Bạn chỉ cần laptop có internet
+              ổn định. Group Zalo hỗ trợ cũng hoạt động online, giảng viên phản hồi trong 4h làm việc.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Sẵn sàng trở thành<br>Backend Developer thực chiến?</h2>
+        <p>Đăng ký ngay — Early Bird giảm đến 1.000.000₫ · Cam kết hoàn 100% sau buổi 1</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="#hoc-phi" class="btn btn-primary" style="font-size:16px;padding:16px 36px">
+            Đăng Ký BackEnd Pro <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
+          </a>
+          <a href="tel:02363779779" class="btn btn-outline" style="font-size:16px;padding:16px 36px">
+            <i data-lucide="phone" style="width:18px;height:18px"></i> 0236.3.779.779
+          </a>
+        </div>
+        <div class="cta-trust">
+          <span><i data-lucide="check-circle" style="width:14px;height:14px"></i> Khai giảng 25/05/2026</span>
+          <span><i data-lucide="check-circle" style="width:14px;height:14px"></i> Lớp tối đa 25 học viên</span>
+          <span><i data-lucide="check-circle" style="width:14px;height:14px"></i> Phản hồi trong 4h</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">SA</div>
+            <div class="nav-logo-text">Softech <span>Aptech</span></div>
+          </a>
+          <p>Đơn vị đào tạo công nghệ tại Đà Nẵng từ năm 2001. 3 năm liên tiếp đạt giải thưởng Sao Khuê.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook" style="width:16px;height:16px"></i></a>
+            <a href="#" aria-label="Youtube"><i data-lucide="youtube" style="width:16px;height:16px"></i></a>
+            <a href="#" aria-label="Instagram"><i data-lucide="instagram" style="width:16px;height:16px"></i></a>
+            <a href="#" aria-label="Zalo"><span style="font-size:12px;font-weight:700">Z</span></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Khóa Học</h4>
+          <ul>
+            <li><a href="#">BackEnd Pro</a></li>
+            <li><a href="#">Frontend React</a></li>
+            <li><a href="#">DevOps & Cloud</a></li>
+            <li><a href="#">Mobile App</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Liên Hệ</h4>
+          <ul>
+            <li><a href="tel:02363779779">0236.3.779.779</a></li>
+            <li><a href="mailto:tuyensinh@softech.vn">tuyensinh@softech.vn</a></li>
+            <li><a href="#">24 Lê Thánh Tôn<br>Hải Châu, Đà Nẵng</a></li>
+            <li><a href="#">Giờ hành chính<br>8h–21h, T2–T7</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Softech Aptech Đà Nẵng. All rights reserved.</p>
+        <div class="footer-contact">
+          <a href="tel:02363779779"><i data-lucide="phone" style="width:14px;height:14px"></i> 0236.3.779.779</a>
+          <a href="mailto:tuyensinh@softech.vn"><i data-lucide="mail" style="width:14px;height:14px"></i>
+            tuyensinh@softech.vn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    navToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+    function closeMobile() {
+      mobileMenu.classList.remove('active');
+    }
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+
+      // Open clicked if was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+      // Re-init icons after DOM change
+      lucide.createIcons();
+    }
+
+    // Countdown Timer — count to June 1, 2026
+    const earlyBirdEnd = new Date('2026-06-01T23:59:59').getTime();
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = earlyBirdEnd - now;
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '00';
+        document.getElementById('cd-hours').textContent = '00';
+        document.getElementById('cd-mins').textContent = '00';
+        document.getElementById('cd-secs').textContent = '00';
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Counter animation
+    function animateCounter(el, target, suffix = '') {
+      let current = 0;
+      const increment = target / 60;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        if (target >= 1000) {
+          el.textContent = Math.floor(current).toLocaleString() + suffix;
+        } else if (target % 1 !== 0) {
+          el.textContent = current.toFixed(1) + suffix;
+        } else {
+          el.textContent = Math.floor(current) + suffix;
+        }
+      }, 16);
+    }
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Counter animation for stat numbers
+          const counters = entry.target.querySelectorAll('[data-count]');
+          counters.forEach(counter => {
+            if (!counter.dataset.animated) {
+              counter.dataset.animated = 'true';
+              const target = parseFloat(counter.dataset.count);
+              const suffix = counter.closest('.benefit-stat') ? '%' : '';
+              animateCounter(counter, target, suffix);
+            }
+          });
+
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal, .stagger').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
