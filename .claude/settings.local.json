@@ -34,10 +34,17 @@
       "Bash(head -n 177 /Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references/examples.md)",
       "Bash(tail -n +297 /Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references/examples.md)",
       "Bash(cat /tmp/examples_head.txt /tmp/examples_tail.txt)",
-      "Bash(LC_ALL=C sed -i '' \\\\ *)"
+      "Bash(LC_ALL=C sed -i '' \\\\ *)",
+      "Bash(mkdir -p /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/templates /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/checklists)",
+      "Bash(rm /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/templates/drawio-activity-template.md)",
+      "Bash(grep -n '```$' /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/references/example-01-simple.md /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/references/example-04-mermaid-simple.md /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/checklists/quality-checklist.md)",
+      "Bash(npx --yes markdownlint --config .markdownlint.json references/ checklists/ SKILL.md)",
+      "Bash(grep -n '^```$' /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/templates/mermaid-activity-template.md /Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/checklists/quality-checklist.md)"
     ],
     "additionalDirectories": [
-      "/Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references"
+      "/Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references",
+      "/Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder",
+      "/Users/tony/GitHub/claude-code-skills/.claude/skills/activity-diagram-builder/templates"
     ]
   }
 }
