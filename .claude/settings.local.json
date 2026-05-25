@@ -33,7 +33,11 @@
       "Bash(npx --yes markdownlint-cli2@latest \"references/example-02-multi-branch.md\")",
       "Bash(head -n 177 /Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references/examples.md)",
       "Bash(tail -n +297 /Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references/examples.md)",
-      "Bash(cat /tmp/examples_head.txt /tmp/examples_tail.txt)"
+      "Bash(cat /tmp/examples_head.txt /tmp/examples_tail.txt)",
+      "Bash(LC_ALL=C sed -i '' \\\\ *)"
+    ],
+    "additionalDirectories": [
+      "/Users/tony/GitHub/claude-code-skills/.claude/skills/user-story-acceptance-criteria-writer/references"
     ]
   }
 }
