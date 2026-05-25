@@ -2,7 +2,7 @@
 
 > **Purpose:** A **supplementary** checklist, used AFTER completing a User Story against the template.
 >
-> **Principle:** This checklist contains only content not already covered by [user-story-template.md](../templates/user-story-template.md) and [acceptance-criteria-template.md](../templates/acceptance-criteria-template.md).
+> **Principle:** This checklist only contains content beyond what is already in [user-story-template-blank.md](../templates/user-story-template-blank.md) and [user-story-template-example.md](../templates/user-story-template-example.md).
 >
 > **Triage rule on failure:** Each failed item = a specific action (fix immediately / ask PO / create Spike).
 
@@ -59,13 +59,13 @@
 - [ ] **⚠️ Dependencies** are listed clearly?
   - Fail → Enter the dependent US name or write "None."
 - [ ] **⚠️ DoD** has at least 3 specific technical items?
-  - Fail → Add technical checklist items (see DoD section in user-story-template.md).
+  - Fail → Add technical checklist items (see DoD section in user-story-template-blank.md).
 
 ---
 
 ## 🚨 Part C: Acceptance Criteria — Must Pass Items
 
-> These items have **inline guidance in acceptance-criteria-template.md**.
+> These items have **inline guidance in user-story-template-example.md**.
 
 - [ ] **🚨 Each AC has Given + When + Then complete.**
   - Fail → Fix immediately: add the missing clause.
@@ -127,6 +127,6 @@
 | As a = "user" / "everyone" | 🚨 | Fix immediately: add role + specific context. |
 | Title contains "**AND**" | 🚨 | Split into 2 separate USs. |
 | AC uses "etc." | 🚨 | Describe each specific case clearly. |
-| Estimated effort > **5 days** | ⚠️ | Decompose the US per rules in user-story-template.md. |
+| Estimated effort > **5 days** | ⚠️ | Decompose the US per rules in skill.md. |
 | AC status = "Draft" at handoff | ⚠️ | Change to "Approved" after PO confirms. |
 | AC count > **8 scenarios** for 1 US | ⚠️ | Decompose; split by CRUD or by Persona. |

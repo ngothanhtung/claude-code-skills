@@ -2,7 +2,7 @@
 
 > **Role:** **In-depth reference** document explaining the theory and providing practical guidance for all 6 INVEST criteria.
 >
-> **Position in the documentation set:** This document supplements [user-story-template.md](../templates/user-story-template.md) — the template provides **what to fill in**, this document provides **why** and **how to handle violations**.
+> **Position in the documentation set:** This document supplements [user-story-template-blank.md](../templates/user-story-template-blank.md) — the template provides **what to fill in**, this document provides **why** and **how to handle violations**.
 >
 > **Audience:** BA (writes US), PO (reviews US), Developer (estimates US), QA (confirms testability).
 
