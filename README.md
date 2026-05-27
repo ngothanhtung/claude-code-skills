@@ -5,7 +5,8 @@
 - **Mục đích:** Trả lời câu hỏi *"Xây cái gì? Cho ai? Tại sao?"*
 - **Định nghĩa:** PRD là tài liệu do Product Manager / Product Owner viết, mô tả sản phẩm ở góc độ kinh doanh và người dùng.
 
-### Nội dung điển hình gồm:
+### Nội dung điển hình gồm
+
 - Vấn đề cần giải quyết (problem statement)
 - Đối tượng người dùng (target users, personas)
 - Mục tiêu sản phẩm và KPIs
@@ -22,12 +23,15 @@
 
 - **Mục đích:** Chia nhỏ PRD thành các đơn vị giá trị cho người dùng, đủ nhỏ để team dev làm trong 1 sprint.
 - **Công thức viết User Story:**
+
   ```text
   "As a [vai trò], I want [hành động], so that [lợi ích]."
   ```
+
   *Ví dụ:* `"Là một học viên, tôi muốn xem mô hình 3D tế bào để tôi có thể hiểu cấu trúc bên trong dễ hơn so với hình 2D."`
 
 - **Acceptance Criteria (AC):** Là điều kiện nghiệm thu — danh sách cụ thể để biết story "xong" hay chưa. Thường viết theo Gherkin:
+
   ```gherkin
   Given [bối cảnh], When [hành động], Then [kết quả].
   ```
@@ -62,4 +66,3 @@
   - **External Interface Requirements:** API, UI, hardware, các hệ thống tích hợp
   - **Data Model / ERD**
   - **Constraints:** Công nghệ, pháp lý, business rules
-
