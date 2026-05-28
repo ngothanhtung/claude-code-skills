@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../dark-theme.css" />
   <script>
     tailwind.config = {
       theme: {
@@ -207,12 +208,12 @@
         </div>
 
         <!-- Pain Point Mapping -->
-        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">1.2 Pain Point Mapping</h3>
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">1.2 <span class="term" data-tip="Vấn đề thực tế mà người dùng gặp phải trong công việc">Pain Point</span> Mapping</h3>
         <div class="rounded-card border border-hairline overflow-hidden mb-5">
           <table class="w-full text-sm">
             <thead class="table-header">
               <tr>
-                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Pain Point</th>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel"><span class="term" data-tip="Vấn đề thực tế mà người dùng gặp phải trong công việc">Pain Point</span></th>
                 <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Mức độ</th>
                 <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Tần suất</th>
                 <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Phạm vi</th>
@@ -230,7 +231,7 @@
         </div>
 
         <!-- Baseline Metrics -->
-        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">1.3 Baseline Metrics</h3>
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">1.3 <span class="term" data-tip="Chỉ số nền tảng — giá trị hiện tại trước khi cải tiến">Baseline Metrics</span></h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
           <div class="bg-canvas rounded-card p-xl border border-hairline">
             <div class="text-stone text-xs font-semibold uppercase tracking-wider mb-2">Thời gian tra cứu thông tin khách hàng</div>
@@ -263,10 +264,10 @@
       <section id="stakeholder" class="mb-xxl fade-in">
         <div class="flex items-center gap-3 mb-5">
           <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">2</span>
-          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Stakeholder Map</h2>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;"><span class="term" data-tip="Cá nhân hoặc nhóm có quyền lợi hoặc ảnh hưởng đến dự án">Stakeholder</span> Map</h2>
         </div>
 
-        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">2.1 Stakeholder Identification</h3>
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">2.1 <span class="term" data-tip="Cá nhân hoặc nhóm có quyền lợi hoặc ảnh hưởng đến dự án">Stakeholder</span> Identification</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
           <div class="bg-canvas rounded-card p-xl border border-hairline card-hover">
             <div class="flex items-center gap-3 mb-3">
@@ -287,7 +288,7 @@
               <div class="w-10 h-10 rounded-full bg-mint-green/10 flex items-center justify-center text-mint-green-deep font-bold text-sm">SR</div>
               <div><div class="font-semibold text-ink">Sales Rep</div><div class="text-stone text-sm">Salesperson</div></div>
             </div>
-            <div class="text-steel text-sm">Quản lý khách hàng và leads được phân công, nhập dữ liệu tương tác hàng ngày.</div>
+            <div class="text-steel text-sm">Quản lý khách hàng và <span class="term" data-tip="Khách hàng tiềm năng — người đã thể hiện quan tâm nhưng chưa mua">lead</span> được phân công, nhập dữ liệu tương tác hàng ngày.</div>
           </div>
           <div class="bg-canvas rounded-card p-xl border border-hairline card-hover">
             <div class="flex items-center gap-3 mb-3">
@@ -306,7 +307,7 @@
         </div>
 
         <!-- Influence/Interest Grid -->
-        <h3 class="text-heading-5 font-semibold mb-4" style="font-size:18px;line-height:1.40;">2.2 Influence / Interest Grid</h3>
+        <h3 class="text-heading-5 font-semibold mb-4" style="font-size:18px;line-height:1.40;">2.2 <span class="term" data-tip="Ma trận đánh giá mức ảnh hưởng và quan tâm của bên liên quan">Influence / Interest Grid</span></h3>
         <div class="grid grid-cols-2 gap-px bg-hairline rounded-card overflow-hidden mb-5 max-w-2xl">
           <div class="col-span-2 bg-surface-soft px-xl py-sm text-xs font-semibold uppercase tracking-wider text-steel text-center border-b border-hairline">Influence →</div>
           <div class="bg-surface-soft px-xl py-xs text-xs font-semibold uppercase tracking-wider text-steel text-center border-r border-hairline -mb-px" style="writing-mode:vertical-lr;transform:rotate(180deg);">Interest ↓</div>
@@ -343,13 +344,13 @@
           <table class="w-full text-sm">
             <thead class="table-header">
               <tr>
-                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Stakeholder</th>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel"><span class="term" data-tip="Cá nhân hoặc nhóm có quyền lợi hoặc ảnh hưởng đến dự án">Stakeholder</span></th>
                 <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Thông tin cần từ Discovery</th>
                 <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Định dạng</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Sales Manager</td><td class="px-xl py-md text-steel">Problem Statement, ROI, Module priority, Go/No-Go</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">Slide Deck</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Sales Manager</td><td class="px-xl py-md text-steel">Problem Statement, <span class="term" data-tip="Return on Investment — Tỷ lệ lợi nhuận trên vốn đầu tư">ROI</span>, Module priority, <span class="term" data-tip="Quyết định tiến hành hoặc dừng lại">Go/No-Go</span></td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">Slide Deck</span></td></tr>
               <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Admin</td><td class="px-xl py-md text-steel">Phạm vi hệ thống, yêu cầu phân quyền, technical constraints</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">Report</span></td></tr>
               <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Sales Rep</td><td class="px-xl py-md text-steel">Tính năng cốt lõi, workflow hàng ngày, pain points</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">1-pager</span></td></tr>
               <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Marketing</td><td class="px-xl py-md text-steel">Segmentation capability, campaign integration</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">1-pager</span></td></tr>
@@ -375,7 +376,7 @@
               </li>
               <li class="flex gap-3">
                 <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#00d4a4" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span><strong class="text-ink">Tăng conversion rate 25%</strong> — giảm tỷ lệ lead bị bỏ lỡ từ 40% xuống dưới 10%</span>
+                <span><strong class="text-ink">Tăng <span class="term" data-tip="Tỷ lệ chuyển đổi — phần trăm lead trở thành khách hàng">conversion rate</span> 25%</strong> — giảm tỷ lệ <span class="term" data-tip="Khách hàng tiềm năng — người đã thể hiện quan tâm nhưng chưa mua">lead</span> bị bỏ lỡ từ 40% xuống dưới 10%</span>
               </li>
               <li class="flex gap-3">
                 <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#00d4a4" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -383,7 +384,7 @@
               </li>
               <li class="flex gap-3">
                 <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#00d4a4" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span><strong class="text-ink">Tầm nhìn thời gian thực</strong> — quản lý theo dõi pipeline và CS quality dashboard</span>
+                <span><strong class="text-ink">Tầm nhìn thời gian thực</strong> — quản lý theo dõi <span class="term" data-tip="Quy trình theo dõi khách hàng từ lead đến deal đóng">pipeline</span> và CS quality dashboard</span>
               </li>
             </ul>
           </div>
@@ -438,8 +439,8 @@
               <tbody>
                 <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Team sẵn sàng nhập liệu dữ liệu ban đầu (3-5 ngày)</td><td class="px-xl py-md text-steel">Adoption thấp nếu dữ liệu không đầy đủ</td><td class="px-xl py-md text-steel">User interview + pilot test</td></tr>
                 <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Zalo API cho phép integration đủ tính năng</td><td class="px-xl py-md text-steel">Tính năng Zalo integration bị loại khỏi v1</td><td class="px-xl py-md text-steel">Kỹ thuật khảo sát Zalo API docs</td></tr>
-                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Quy mô team 5-15 người, phù hợp MVP</td><td class="px-xl py-md text-steel">Cần scale lên nếu team &gt;50 người</td><td class="px-xl py-md text-steel">Confirm với stakeholder</td></tr>
-                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Không có yêu cầu compliance đặc biệt (GDPR, local)</td><td class="px-xl py-md text-steel">Chi phí compliance cao nếu có</td><td class="px-xl py-md text-steel">Legal review</td></tr>
+                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Quy mô team 5-15 người, phù hợp <span class="term" data-tip="Sản phẩm khả thi tối thiểu — phiên bản cơ bản nhất để kiểm chứng giả thuyết">MVP</span></td><td class="px-xl py-md text-steel">Cần scale lên nếu team &gt;50 người</td><td class="px-xl py-md text-steel">Confirm với stakeholder</td></tr>
+                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Không có yêu cầu compliance đặc biệt (GDPR, local)</td><td class="px-xl py-md text-steel">Chi phí compliance cao nếu có</td><td class="px-xl py-md text-steel">Legal review với <span class="term" data-tip="Cá nhân hoặc nhóm có quyền lợi hoặc ảnh hưởng đến dự án">Stakeholder</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -477,8 +478,8 @@
               <h4 class="text-heading-4 font-semibold text-ink" style="font-size:22px;">Option B</h4>
               <span class="badge-gray text-xs font-semibold rounded-pill px-2.5 py-1">Alternative</span>
             </div>
-            <p class="text-heading-5 font-semibold mb-2 text-ink" style="font-size:18px;">SaaS CRM (HubSpot Free / Pipedrive)</p>
-            <p class="text-steel text-sm leading-relaxed mb-4">Triển khai nhanh với giải pháp SaaS có sẵn, giới hạn tùy chỉnh nghiệp vụ VN.</p>
+            <p class="text-heading-5 font-semibold mb-2 text-ink" style="font-size:18px;"><span class="term" data-tip="Software as a Service — Phần mềm dịch vụ, thuê theo tháng hoặc năm">SaaS</span> CRM (HubSpot Free / Pipedrive)</p>
+            <p class="text-steel text-sm leading-relaxed mb-4">Triển khai nhanh với giải pháp <span class="term" data-tip="Software as a Service — Phần mềm dịch vụ, thuê theo tháng hoặc năm">SaaS</span> có sẵn, giới hạn tùy chỉnh nghiệp vụ VN.</p>
             <div class="space-y-2 text-sm mb-4">
               <div class="flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-steel">Deploy nhanh (1-2 tuần)</span></div>
               <div class="flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-steel">Chi phí ban đầu thấp</span></div>
@@ -501,8 +502,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Impact</td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Cao</span></td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Trung bình</span></td></tr>
-              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Effort</td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Cao</span></td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Thấp</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink"><span class="term" data-tip="Tác động — mức ảnh hưởng của một yếu tố đến kết quả">Impact</span></td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Cao</span></td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Trung bình</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink"><span class="term" data-tip="Công sức — thời gian và nguồn lực cần thiết để hoàn thành">Effort</span></td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Cao</span></td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Thấp</span></td></tr>
               <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Time-to-value</td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Chậm (1-2 tháng)</span></td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Nhanh (1-2 tuần)</span></td></tr>
               <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Risk</td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Thấp</span></td><td class="px-xl py-md text-center"><span class="bg-brand-error/10 text-brand-error font-medium rounded-pill px-2.5 py-0.5">Cao (lock-in)</span></td></tr>
               <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Tùy chỉnh VN workflow</td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Full</span></td><td class="px-xl py-md text-center"><span class="bg-brand-error/10 text-brand-error font-medium rounded-pill px-2.5 py-0.5">Limited</span></td></tr>
@@ -589,7 +590,7 @@
           <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Prioritization Matrix</h2>
         </div>
 
-        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">6.1 Impact / Effort Matrix</h3>
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">6.1 <span class="term" data-tip="Tác động — mức ảnh hưởng của một yếu tố đến kết quả">Impact</span> / <span class="term" data-tip="Công sức — thời gian và nguồn lực cần thiết để hoàn thành">Effort</span> Matrix</h3>
         <div class="bg-surface rounded-card p-xxl border border-hairline mb-5 overflow-x-auto">
           <div class="grid grid-cols-3 gap-px bg-hairline rounded-card overflow-hidden max-w-2xl mx-auto mb-6">
             <div class="col-span-3 bg-surface-soft px-xl py-sm text-xs font-semibold uppercase tracking-wider text-steel text-center border-b border-hairline">Effort →</div>
@@ -610,8 +611,8 @@
                 <div class="text-brand-error font-bold text-xs mb-1">① Invest</div>
                 <div class="space-y-1">
                   <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Customer Mgmt</div>
-                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Lead Mgmt</div>
-                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Pipeline</div>
+                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1"><span class="term" data-tip="Khách hàng tiềm năng — người đã thể hiện quan tâm nhưng chưa mua">Lead</span> Mgmt</div>
+                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1"><span class="term" data-tip="Quy trình theo dõi khách hàng từ lead đến deal đóng">Pipeline</span></div>
                   <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Interaction History</div>
                   <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Team Mgmt</div>
                 </div>
@@ -637,15 +638,15 @@
             </div>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto text-xs">
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-brand-error"></span>① Impact Cao, Effort Cao — Invest</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-mint-green"></span>② Impact Cao, Effort Thấp — Priority</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-brand-warn"></span>③ Impact Thấp, Effort Cao — Avoid</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-hairline border border-hairline"></span>④ Impact Thấp, Effort Thấp — Low</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-brand-error"></span>① <span class="term" data-tip="Tác động — mức ảnh hưởng của một yếu tố đến kết quả">Impact</span> Cao, <span class="term" data-tip="Công sức — thời gian và nguồn lực cần thiết để hoàn thành">Effort</span> Cao — Invest</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-mint-green"></span>② <span class="term" data-tip="Tác động — mức ảnh hưởng của một yếu tố đến kết quả">Impact</span> Cao, <span class="term" data-tip="Công sức — thời gian và nguồn lực cần thiết để hoàn thành">Effort</span> Thấp — Priority</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-brand-warn"></span>③ <span class="term" data-tip="Tác động — mức ảnh hưởng của một yếu tố đến kết quả">Impact</span> Thấp, <span class="term" data-tip="Công sức — thời gian và nguồn lực cần thiết để hoàn thành">Effort</span> Cao — Avoid</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-hairline border border-hairline"></span>④ <span class="term" data-tip="Tác động — mức ảnh hưởng của một yếu tố đến kết quả">Impact</span> Thấp, <span class="term" data-tip="Công sức — thời gian và nguồn lực cần thiết để hoàn thành">Effort</span> Thấp — Low</div>
           </div>
         </div>
 
         <!-- Go/No-Go -->
-        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">6.2 Go / No-Go Recommendation</h3>
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">6.2 <span class="term" data-tip="Quyết định tiến hành hoặc dừng lại">Go / No-Go</span> Recommendation</h3>
         <div class="bg-mint-green/5 rounded-card p-xl border-2 border-mint-green flex items-start gap-4 mb-5">
           <div class="w-12 h-12 rounded-full bg-mint-green/10 flex items-center justify-center flex-shrink-0">
             <span class="text-mint-green-deep font-bold text-lg">✓</span>
@@ -684,7 +685,7 @@
                 <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">2</span>
                 <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">Product Purpose</span>
               </div>
-              <p class="text-white/80 text-sm">Trung tâm hóa dữ liệu khách hàng, theo dõi lead/sales pipeline, giảm lead bị bỏ lỡ, hỗ trợ bàn giao nhân sự — dành cho đội ngũ Sales & CS SME tại Việt Nam.</p>
+              <p class="text-white/80 text-sm">Trung tâm hóa dữ liệu khách hàng, theo dõi <span class="term" data-tip="Khách hàng tiềm năng — người đã thể hiện quan tâm nhưng chưa mua">lead</span>/sales <span class="term" data-tip="Quy trình theo dõi khách hàng từ lead đến deal đóng">pipeline</span>, giảm <span class="term" data-tip="Khách hàng tiềm năng — người đã thể hiện quan tâm nhưng chưa mua">lead</span> bị bỏ lỡ, hỗ trợ bàn giao nhân sự — dành cho đội ngũ Sales & CS SME tại Việt Nam.</p>
             </div>
             <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10">
               <div class="flex items-center gap-2 mb-2">
@@ -698,7 +699,7 @@
                 <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">4</span>
                 <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">In-Scope (v1)</span>
               </div>
-              <p class="text-white/80 text-sm">Customer Mgmt · Lead Mgmt · Sales Pipeline · Interaction History · Team Mgmt · Standard Reports</p>
+              <p class="text-white/80 text-sm">Customer Mgmt · Lead Mgmt · Sales <span class="term" data-tip="Quy trình theo dõi khách hàng từ lead đến deal đóng">Pipeline</span> · Interaction History · Team Mgmt · Standard Reports</p>
             </div>
             <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10 sm:col-span-2">
               <div class="flex items-center gap-2 mb-2">
@@ -751,11 +752,11 @@
           </label>
           <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
             <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
-            <div><span class="text-sm font-medium text-ink">Pain Point đánh giá đầy đủ</span><p class="text-stone text-xs mt-0.5">Severity / Frequency / Scope</p></div>
+            <div><span class="text-sm font-medium text-ink"><span class="term" data-tip="Vấn đề thực tế mà người dùng gặp phải trong công việc">Pain Point</span> đánh giá đầy đủ</span><p class="text-stone text-xs mt-0.5">Severity / Frequency / Scope</p></div>
           </label>
           <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
             <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
-            <div><span class="text-sm font-medium text-ink">Baseline Metrics có</span><p class="text-stone text-xs mt-0.5">4 metrics đo lường hiện trạng</p></div>
+            <div><span class="text-sm font-medium text-ink"><span class="term" data-tip="Chỉ số nền tảng — giá trị hiện tại trước khi cải tiến">Baseline Metrics</span> có</span><p class="text-stone text-xs mt-0.5">4 metrics đo lường hiện trạng</p></div>
           </label>
           <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
             <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
@@ -791,7 +792,7 @@
           </label>
           <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
             <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
-            <div><span class="text-sm font-medium text-ink">Go/No-Go rõ ràng</span><p class="text-stone text-xs mt-0.5">Go — Proceed to PRD</p></div>
+            <div><span class="text-sm font-medium text-ink"><span class="term" data-tip="Quyết định tiến hành hoặc dừng lại">Go/No-Go</span> rõ ràng</span><p class="text-stone text-xs mt-0.5">Go — Proceed to PRD</p></div>
           </label>
           <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
             <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
