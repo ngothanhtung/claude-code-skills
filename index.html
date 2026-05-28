@@ -1,13 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Bộ tài liệu phát triển phần mềm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'canvas-dark': '#0a0a0a',
+            'charcoal': '#1c1c1e',
+            'mint': '#00d4a4',
+            'mint-deep': '#00b48a',
+            'mint-soft': '#7cebcb',
+            'muted': '#a8a8aa',
+            'stone': '#888888',
+            'border-dark': '#2a2a2c',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    [data-tooltip-wrapper] { position: relative; display: inline; }
+    [data-tooltip-wrapper]:hover .tooltip { opacity: 1; pointer-events: auto; }
+    .tooltip {
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: #2a2a2c; border: 1px solid #00d4a4;
+      color: #ffffff; font-size: 12px; padding: 6px 10px; border-radius: 6px;
+      opacity: 0; transition: opacity 150ms ease, transform 150ms ease;
+      pointer-events: none; z-index: 50; max-width: 320px; white-space: normal; text-align: left;
+    }
+    .tooltip::after {
+      content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent; border-top-color: #00d4a4;
+    }
+    .timeline-card { position: relative; }
+    .timeline-card:not(:last-child)::before {
+      content: ''; position: absolute; left: 27px; top: 100%; width: 2px; height: 24px;
+      background: linear-gradient(to bottom, #00d4a4, #00d4a420);
+    }
+    .timeline-card {
+      transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+    }
+    .timeline-card:hover {
+      border-color: #00d4a4 !important;
+      background-color: #1e1e20;
+      transform: translateX(2px);
+    }
+    .btn-outline {
+      border: 1px solid #00d4a4; color: #00d4a4; padding: 6px 16px;
+      border-radius: 6px; font-size: 13px; font-weight: 500;
+      transition: background-color 150ms ease, color 150ms ease; display: inline-block;
+    }
+    .btn-outline:hover { background-color: #00d4a4; color: #0a0a0a; }
+  </style>
 </head>
 
-<body>
+<body class="bg-canvas-dark font-sans text-white min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="text-center pt-16 pb-12 px-6">
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+      Bộ tài liệu phát triển phần mềm
+    </h1>
+    <p class="text-muted text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+      Hệ thống tài liệu từ ý tưởng đến sản phẩm hoàn chỉnh — từ PRD, User Story, Use Case đến SRS.
+    </p>
+  </header>
+
+  <!-- Timeline -->
+  <main class="flex-1 px-6 pb-16">
+    <div class="max-w-2xl mx-auto space-y-4">
+
+      <!-- Card 1: PRD -->
+      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
+        <!-- Icon -->
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10,9 9,9 8,9"/>
+          </svg>
+        </div>
+        <!-- Content -->
+        <div class="flex-1 min-w-0">
+          <h2 class="text-base font-semibold text-white mb-1">
+            <span data-tooltip="Product Requirements Document — Tài liệu mô tả sản phẩm ở góc độ kinh doanh và người dùng">PRD</span>
+          </h2>
+          <p class="text-muted text-sm leading-relaxed mb-3">
+            Trả lời: Xây cái gì? Cho ai? Tại sao? Đây là kim chỉ nam để cả team hiểu cùng một sản phẩm.
+          </p>
+          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
+        </div>
+      </div>
+
+      <!-- Card 2: User Story + Acceptance Criteria -->
+      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="text-base font-semibold text-white mb-1">
+            <span data-tooltip="Câu chuyện người dùng — mô tả tính năng từ góc nhìn của người dùng cuối">User Story</span>
+            <span class="text-muted font-normal mx-1">+</span>
+            <span data-tooltip="Tiêu chí nghiệm thu — danh sách điều kiện cụ thể để biết một tính năng đã xong hay chưa">Acceptance Criteria</span>
+          </h2>
+          <p class="text-muted text-sm leading-relaxed mb-3">
+            Chia nhỏ PRD thành các đơn vị giá trị cho người dùng, đủ nhỏ để team dev làm trong 1 sprint.
+          </p>
+          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Use Case -->
+      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="6" height="6" rx="1"/>
+            <rect x="15" y="3" width="6" height="6" rx="1"/>
+            <rect x="9" y="15" width="6" height="6" rx="1"/>
+            <path d="M6 9v3a3 3 0 0 0 3 3h0"/>
+            <path d="M18 9v3a3 3 0 0 1-3 3h0"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="text-base font-semibold text-white mb-1">
+            <span data-tooltip="Bản mô tả chi tiết các bước tương tác giữa người dùng/hệ thống và phần mềm để hoàn thành một mục tiêu">Use Case</span>
+          </h2>
+          <p class="text-muted text-sm leading-relaxed mb-1">
+            Mô tả chi tiết tương tác giữa
+            <span data-tooltip="Người hoặc hệ thống bên ngoài tương tác với phần mềm">Actor</span>
+            và System để hoàn thành một mục tiêu cụ thể.
+          </p>
+          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
+        </div>
+      </div>
+
+      <!-- Card 4: SRS -->
+      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <path d="M4.93 4.93a10 10 0 0 0 0 14.14"/>
+            <path d="M14.83 9.17a4 4 0 0 1 0 5.66"/>
+            <path d="M9.17 9.17a4 4 0 0 0 0 5.66"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="text-base font-semibold text-white mb-1">
+            <span data-tooltip="Software Requirements Specification — Đặc tả yêu cầu phần mềm, tài liệu kỹ thuật chi tiết cho team dev/test">SRS</span>
+          </h2>
+          <p class="text-muted text-sm leading-relaxed mb-3">
+            Đặc tả kỹ thuật chi tiết cho team dev/test thực thi. Thường theo chuẩn IEEE 830.
+          </p>
+          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center pb-10 px-6">
+    <p class="text-stone text-sm">
+      <a href="https://github.com/ngothanhtung/claude-code-skills" target="_blank" rel="noopener noreferrer" class="hover:text-mint transition-colors duration-150">
+        GitHub Repository
+      </a>
+    </p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-tooltip]').forEach(el => {
+      const wrapper = document.createElement('span');
+      wrapper.setAttribute('data-tooltip-wrapper', '');
+      wrapper.style.position = 'relative';
+      wrapper.style.display = 'inline';
+      el.parentNode.insertBefore(wrapper, el);
+      wrapper.appendChild(el);
+      const tip = document.createElement('span');
+      tip.className = 'tooltip';
+      tip.textContent = el.dataset.tooltip;
+      wrapper.appendChild(tip);
+    });
+  </script>
 
 </body>
 
