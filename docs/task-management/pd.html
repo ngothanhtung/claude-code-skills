@@ -110,6 +110,7 @@
     .chart-container-sm { position: relative; height: 220px; }
     .chart-container-lg { position: relative; height: 320px; }
   </style>
+  <link rel="stylesheet" href="../dark-theme.css" />
 </head>
 <body class="bg-canvas text-ink">
 
@@ -126,7 +127,7 @@
         <div class="hidden md:flex items-center gap-6">
           <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Dashboard</a>
           <a href="#" class="body-sm font-medium text-ink">Quản lý công việc</a>
-          <a href="#" class="body-sm text-steel hover:text-ink transition-colors">backlog</a>
+          <a href="#" class="body-sm text-steel hover:text-ink transition-colors"><span class="term" data-tip="Danh sách công việc cần làm, được sắp xếp theo ưu tiên">Backlog</span></a>
           <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Timeline</a>
           <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Báo cáo</a>
         </div>
@@ -237,7 +238,7 @@
                 <td class="py-3 pl-3 text-charcoal">Toàn hệ thống</td>
               </tr>
               <tr class="border-b border-hairline-soft">
-                <td class="py-3 pr-4 text-ink">Khó dự báo Thời hạn — thiếu biểu đồ Gantt và phụ thuộc công việc</td>
+                <td class="py-3 pr-4 text-ink">Khó dự báo Thời hạn — thiếu biểu đồ <span class="term" data-tip="Biểu đồ Gantt — dạng biểu đồ thanh ngang thể hiện tiến độ và phụ thuộc công việc theo thời gian">Gantt</span> và phụ thuộc công việc</td>
                 <td class="py-3 px-3"><span class="inline-flex items-center gap-1.5 bg-brand-error/10 text-brand-error caption-bold rounded-full px-2.5 py-0.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-error"></span>Cao</span></td>
                 <td class="py-3 px-3 text-charcoal">Thường xuyên</td>
                 <td class="py-3 pl-3 text-charcoal">Nhóm</td>
@@ -310,7 +311,7 @@
             </div>
             <div class="bg-canvas rounded-lg p-4 border border-hairline">
               <div class="flex items-center justify-between mb-1">
-                <span class="body-sm text-charcoal">NPS công cụ</span>
+                <span class="body-sm text-charcoal"><span class="term" data-tip="Net Promoter Score — Chỉ số đo lường mức độ hài lòng và trung thành của khách hàng">NPS</span> công cụ</span>
                 <span class="caption-bold text-brand-warn">↑ +28 pts</span>
               </div>
               <div class="flex items-center gap-2 mt-2">
@@ -361,18 +362,18 @@
                 <span class="body-md-medium text-ink">Kinh doanh Analyst</span>
                 <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">người dùng</span>
               </div>
-              <p class="caption text-steel">Cần backlog Quản lý, viết Yêu cầu, ưu tiên công việc</p>
+              <p class="caption text-steel">Cần <span class="term" data-tip="Danh sách công việc cần làm, được sắp xếp theo ưu tiên">Backlog</span> Quản lý, viết Yêu cầu, ưu tiên công việc</p>
             </div>
             <div class="bg-canvas rounded-lg p-4 border border-hairline">
               <div class="flex items-center justify-between mb-1">
-                <span class="body-md-medium text-ink">C-Level / CTO</span>
+                <span class="body-md-medium text-ink"><span class="term" data-tip="C-Level — nhóm quản lý cấp cao: CEO, CTO, CFO, COO...">C-Level</span> / <span class="term" data-tip="Chief Technology Officer — Giám đốc kỹ thuật">CTO</span></span>
                 <span class="Nhãn-blue caption-bold rounded-full px-2.5 py-0.5">Người tài trợ</span>
               </div>
               <p class="caption text-steel">Cần báo cáo chi phí, chất lượng Giao hàng, tổng quan portfolio dự án</p>
             </div>
             <div class="bg-canvas rounded-lg p-4 border border-hairline">
               <div class="flex items-center justify-between mb-1">
-                <span class="body-md-medium text-ink">QA Engineer</span>
+                <span class="body-md-medium text-ink"><span class="term" data-tip="Quality Assurance — Đảm bảo chất lượng sản phẩm">QA</span> Engineer</span>
                 <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">người dùng</span>
               </div>
               <p class="caption text-steel">Cần link Kiểm thử case với công việc, theo dõi Lỗi, kết quả Kiểm thử</p>
@@ -391,7 +392,7 @@
         <div class="space-y-8">
           <!-- 2.2 Influence/Interest Grid -->
           <div class="bg-surface rounded-lg p-xxl border border-hairline">
-            <h3 class="heading-5 text-ink mb-4">2.2 Influence/Interest Grid</h3>
+            <h3 class="heading-5 text-ink mb-4">2.2 <span class="term" data-tip="Ma trận đánh giá mức ảnh hưởng và quan tâm của bên liên quan">Influence/Interest Grid</span></h3>
             <div class="grid grid-cols-2 gap-3">
               <!-- Header -->
               <div></div>
@@ -400,7 +401,7 @@
               <!-- Row: Ảnh hưởng cao -->
               <div class="caption-bold text-steel text-right pr-3 pt-3">Ảnh hưởng cao</div>
               <div class="bg-brand-green/8 rounded-lg p-3 border border-brand-green/20">
-                <div class="caption-bold text-brand-green-deep mb-1">PM, C-Level/CTO</div>
+                <div class="caption-bold text-brand-green-deep mb-1"><span class="term" data-tip="Project Manager — Quản lý dự án, chịu trách nhiệm tiến độ và nguồn lực">PM</span>, <span class="term" data-tip="C-Level — nhóm quản lý cấp cao: CEO, CTO, CFO, COO...">C-Level</span>/<span class="term" data-tip="Chief Technology Officer — Giám đốc kỹ thuật">CTO</span></div>
                 <p class="caption text-steel">Quan tâm nhiều, ảnh hưởng lớn đến quyết định đầu tư và Lộ trình</p>
               </div>
               <div class="bg-surface rounded-lg p-3 border border-hairline">
@@ -410,7 +411,7 @@
               <!-- Row: Ảnh hưởng thấp -->
               <div class="caption-bold text-steel text-right pr-3 pt-3">Ảnh hưởng thấp</div>
               <div class="bg-surface rounded-lg p-3 border border-hairline">
-                <div class="caption-bold text-ink mb-1">Lập trình viên, BA, QA</div>
+                <div class="caption-bold text-ink mb-1">Lập trình viên, BA, <span class="term" data-tip="Quality Assurance — Đảm bảo chất lượng sản phẩm">QA</span></div>
                 <p class="caption text-steel">Quan tâm nhiều đến trải nghiệm sử dụng hàng ngày</p>
               </div>
               <div class="bg-surface rounded-lg p-3 border border-hairline">
@@ -425,14 +426,14 @@
             <h3 class="heading-5 text-ink mb-4">2.3 Information Needs</h3>
             <div class="space-y-2">
               <div class="flex items-center justify-between py-2 border-b border-hairline-soft">
-                <span class="body-sm text-ink">PM / C-Level</span>
+                <span class="body-sm text-ink"><span class="term" data-tip="Project Manager — Quản lý dự án, chịu trách nhiệm tiến độ và nguồn lực">PM</span> / <span class="term" data-tip="C-Level — nhóm quản lý cấp cao: CEO, CTO, CFO, COO...">C-Level</span></span>
                 <div class="flex gap-2">
-                  <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Problem Statement + ROI</span>
+                  <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Problem Statement + <span class="term" data-tip="Return on Investment — Tỷ lệ lợi nhuận trên vốn đầu tư">ROI</span></span>
                   <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Slide / Báo cáo</span>
                 </div>
               </div>
               <div class="flex items-center justify-between py-2 border-b border-hairline-soft">
-                <span class="body-sm text-ink">Lập trình viên / BA / QA</span>
+                <span class="body-sm text-ink">Lập trình viên / BA / <span class="term" data-tip="Quality Assurance — Đảm bảo chất lượng sản phẩm">QA</span></span>
                 <div class="flex gap-2">
                   <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Workflow Demo</span>
                   <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Tính năng List</span>
@@ -493,8 +494,8 @@
                 </div>
               </div>
               <div class="bg-canvas rounded-lg p-4 border border-hairline">
-                <p class="caption-bold text-ink mb-2">ROI dự kiến</p>
-                <p class="body-sm text-charcoal">nhóm 20 người tiết kiệm ~2h/tuần = <strong>40h/tuần</strong>. Với 500k/h = <strong class="text-brand-green-deep">20M/tháng</strong>. ROI trong <strong class="text-brand-green-deep">3-6 tháng</strong>.</p>
+                <p class="caption-bold text-ink mb-2"><span class="term" data-tip="Return on Investment — Tỷ lệ lợi nhuận trên vốn đầu tư">ROI</span> dự kiến</p>
+                <p class="body-sm text-charcoal">nhóm 20 người tiết kiệm ~2h/tuần = <strong>40h/tuần</strong>. Với 500k/h = <strong class="text-brand-green-deep">20M/tháng</strong>. <span class="term" data-tip="Return on Investment — Tỷ lệ lợi nhuận trên vốn đầu tư">ROI</span> trong <strong class="text-brand-green-deep">3-6 tháng</strong>.</p>
               </div>
             </div>
           </div>
@@ -508,13 +509,13 @@
               <div class="w-6 h-6 rounded-full bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <p class="body-sm text-charcoal">Thị trường PM tools toàn cầu đạt <strong>$8.5B năm 2026</strong>, CAGR 13%</p>
+              <p class="body-sm text-charcoal">Thị trường PM tools toàn cầu đạt <strong>$8.5B năm 2026</strong>, <span class="term" data-tip="Compound Annual Growth Rate — Tỷ lệ tăng trưởng kép hàng năm">CAGR</span> 13%</p>
             </div>
             <div class="flex items-start gap-3">
               <div class="w-6 h-6 rounded-full bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <p class="body-sm text-charcoal">80% SMB/startup tại APAC chưa có giải pháp tích hợp</p>
+              <p class="body-sm text-charcoal">80% <span class="term" data-tip="Small and Medium Business — Doanh nghiệp vừa và nhỏ">SMB</span>/startup tại <span class="term" data-tip="Asia-Pacific — Khu vực châu Á-Thái Bình Dương">APAC</span> chưa có giải pháp tích hợp</p>
             </div>
             <div class="flex items-start gap-3">
               <div class="w-6 h-6 rounded-full bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -542,13 +543,13 @@
               <div class="w-5 h-5 rounded bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <p class="body-sm text-charcoal"><strong class="text-ink">Nâng cao năng suất nhóm</strong> — Một trong 3 OKR quý</p>
+              <p class="body-sm text-charcoal"><strong class="text-ink">Nâng cao năng suất nhóm</strong> — Một trong 3 <span class="term" data-tip="Objectives and Key Results — Mục tiêu và kết quả then chốt">OKR</span> quý</p>
             </div>
             <div class="flex items-start gap-3">
               <div class="w-5 h-5 rounded bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <p class="body-sm text-charcoal"><strong class="text-ink">Cải thiện Giao hàng Khả năng dự báo</strong> — KPI của Engineering</p>
+              <p class="body-sm text-charcoal"><strong class="text-ink">Cải thiện Giao hàng Khả năng dự báo</strong> — <span class="term" data-tip="Key Performance Indicator — Chỉ số đo lường hiệu suất chính">KPI</span> của Engineering</p>
             </div>
             <div class="flex items-start gap-3">
               <div class="w-5 h-5 rounded bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -687,7 +688,7 @@
       <!-- 4.2 Trade-off Analysis -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="bg-surface rounded-lg p-xxl border border-hairline">
-          <h3 class="heading-5 text-ink mb-4">4.2 Trade-off Analysis</h3>
+          <h3 class="heading-5 text-ink mb-4">4.2 <span class="term" data-tip="Sự đánh đổi — chọn cái này thì mất cái kia">Trade-off</span> Analysis</h3>
           <div class="bg-canvas rounded-lg p-4 border border-hairline">
             <p class="caption-bold text-steel micro-uppercase mb-3">So sánh phương án</p>
             <div class="chart-container">
@@ -710,7 +711,7 @@
               <span class="body-md-medium text-brand-green-deep">Khuyến nghị: Phương án A — Tự xây dựng</span>
             </div>
             <div class="body-sm text-charcoal space-y-2">
-              <p><strong>Lý do:</strong> Nhu cầu bao gồm 10 module (Dashboard, công việc, backlog, Timeline, nhóm, Ngân sách, Rủi ro, Document, Meeting, Báo cáo) — không có giải pháp nào đáp ứng đầy đủ mà không cần tùy chỉnh nặng.</p>
+              <p><strong>Lý do:</strong> Nhu cầu bao gồm 10 module (Dashboard, công việc, <span class="term" data-tip="Danh sách công việc cần làm, được sắp xếp theo ưu tiên">Backlog</span>, Timeline, nhóm, Ngân sách, Rủi ro, Document, Meeting, Báo cáo) — không có giải pháp nào đáp ứng đầy đủ mà không cần tùy chỉnh nặng.</p>
               <p><strong>Chiến lược kết hợp:</strong> Giai đoạn 1 (Sản phẩm khả thi tối thiểu — 4 module) trong 3 tháng để xác nhận tính khả thi, sau đó mở rộng theo phản hồi. Điều này giảm rủi ro so với xây 10 module cùng lúc.</p>
             </div>
           </div>
@@ -741,21 +742,21 @@
                 <span class="body-md-medium text-ink">Technical Tính khả thi</span>
                 <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">Khả thi</span>
               </div>
-              <p class="caption text-steel">Stack hiện tại (React, Node.js, PostgreSQL) đủ để Xây dựng 10 modules. Cần đánh giá thêm: real-time architecture (WebSocket vs SSE), offline-first capability, và multi-tenancy nếu có khách hàng external.</p>
+              <p class="caption text-steel">Stack hiện tại (React, Node.js, PostgreSQL) đủ để Xây dựng 10 modules. Cần đánh giá thêm: real-time architecture (<span class="term" data-tip="Giao thức kết nối hai chiều thời gian thực giữa client và server">WebSocket</span> vs <span class="term" data-tip="Server-Sent Events — server tự động gửi dữ liệu đến client qua HTTP, một chiều">SSE</span>), offline-first capability, và multi-tenancy nếu có khách hàng external.</p>
             </div>
             <div class="bg-canvas rounded-lg p-4 border border-hairline">
               <div class="flex items-center justify-between mb-2">
                 <span class="body-md-medium text-ink">Nguồn lực Tính khả thi</span>
                 <span class="Nhãn-orange caption-bold rounded-full px-2.5 py-0.5">Cần đánh giá thêm</span>
               </div>
-              <p class="caption text-steel">Cần 2 FE + 2 BE + 1 PM + 1 UX cho MVP 4 tháng. Hiện tại có 1 FE + 1 BE + 1 PM. <span class="Nhãn-red caption-bold rounded-full px-1.5 py-0.5 text-xs">Thiếu 1 FE + 1 BE</span></p>
+              <p class="caption text-steel">Cần 2 <span class="term" data-tip="Frontend — Phần giao diện người dùng (client-side)">FE</span> + 2 <span class="term" data-tip="Backend — Phần xử lý phía server (server-side)">BE</span> + 1 <span class="term" data-tip="Project Manager — Quản lý dự án, chịu trách nhiệm tiến độ và nguồn lực">PM</span> + 1 <span class="term" data-tip="User Experience — Trải nghiệm người dùng">UX</span> cho <span class="term" data-tip="Minimum Viable Product — Sản phẩm khả thi tối thiểu, phiên bản cơ bản nhất để kiểm chứng giả thuyết">MVP</span> 4 tháng. Hiện tại có 1 <span class="term" data-tip="Frontend — Phần giao diện người dùng (client-side)">FE</span> + 1 <span class="term" data-tip="Backend — Phần xử lý phía server (server-side)">BE</span> + 1 <span class="term" data-tip="Project Manager — Quản lý dự án, chịu trách nhiệm tiến độ và nguồn lực">PM</span>. <span class="Nhãn-red caption-bold rounded-full px-1.5 py-0.5 text-xs">Thiếu 1 <span class="term" data-tip="Frontend — Phần giao diện người dùng (client-side)">FE</span> + 1 <span class="term" data-tip="Backend — Phần xử lý phía server (server-side)">BE</span></span></p>
             </div>
             <div class="bg-canvas rounded-lg p-4 border border-hairline">
               <div class="flex items-center justify-between mb-2">
                 <span class="body-md-medium text-ink">Legal / Tuân thủ</span>
                 <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">OK</span>
               </div>
-              <p class="caption text-steel">Không có yêu cầu Tuân thủ đặc biệt (GDPR applies nếu có người dùng EU). Data residency: Vietnam/Singapore. Cần kiểm tra internal data policy.</p>
+              <p class="caption text-steel">Không có yêu cầu Tuân thủ đặc biệt (<span class="term" data-tip="General Data Protection Regulation — Quy định bảo vệ dữ liệu cá nhân của Liên minh Châu Âu">GDPR</span> applies nếu có người dùng EU). Data residency: Vietnam/Singapore. Cần kiểm tra internal data policy.</p>
             </div>
           </div>
         </div>
@@ -775,10 +776,10 @@
                 <span class="body-md-medium text-ink">Rủi ro 1: Low người dùng Áp dụng</span>
                 <span class="Nhãn-red caption-bold rounded-full px-2.5 py-0.5">Cao</span>
               </div>
-              <p class="caption text-steel mb-2">nhóm không chuyển đổi từ công cụ cũ → không đạt mục tiêu ROI</p>
+              <p class="caption text-steel mb-2">nhóm không chuyển đổi từ công cụ cũ → không đạt mục tiêu <span class="term" data-tip="Return on Investment — Tỷ lệ lợi nhuận trên vốn đầu tư">ROI</span></p>
               <div class="bg-brand-green/8 rounded-md p-2 border border-brand-green/20">
-                <p class="caption-bold text-brand-green-deep mb-1">Mitigation</p>
-                <p class="caption text-steel">Thử nghiệm thí điểm 1 nhóm 10 người trước. UX research trước khi Xây dựng. Incentive program cho early adopters. Dashboard tự động cập nhật thay vì manual input.</p>
+                <p class="caption-bold text-brand-green-deep mb-1"><span class="term" data-tip="Biện pháp giảm thiểu rủi ro">Mitigation</span></p>
+                <p class="caption text-steel">Thử nghiệm thí điểm 1 nhóm 10 người trước. <span class="term" data-tip="User Experience — Trải nghiệm người dùng">UX</span> research trước khi Xây dựng. Incentive program cho early adopters. Dashboard tự động cập nhật thay vì manual input.</p>
               </div>
             </div>
             <div class="bg-canvas rounded-lg p-4 border border-hairline">
@@ -788,8 +789,8 @@
               </div>
               <p class="caption text-steel mb-2">Liên tục thêm Tính năng mới → delayed Giao hàng, chất lượng giảm</p>
               <div class="bg-brand-green/8 rounded-md p-2 border border-brand-green/20">
-                <p class="caption-bold text-brand-green-deep mb-1">Mitigation</p>
-                <p class="caption text-steel">MoSCoW prioritization cứng nhắc. MVP chỉ 4 module (Dashboard, công việc, nhóm, Auth). Giai đoạn-gated development với checkpoint Đánh giá mỗi sprint.</p>
+                <p class="caption-bold text-brand-green-deep mb-1"><span class="term" data-tip="Biện pháp giảm thiểu rủi ro">Mitigation</span></p>
+                <p class="caption text-steel"><span class="term" data-tip="Must-have, Should-have, Could-have, Won't-have — phương pháp phân loại ưu tiên">MoSCoW</span> prioritization cứng nhắc. <span class="term" data-tip="Minimum Viable Product — Sản phẩm khả thi tối thiểu, phiên bản cơ bản nhất để kiểm chứng giả thuyết">MVP</span> chỉ 4 module (Dashboard, công việc, nhóm, Auth). Giai đoạn-gated development với checkpoint Đánh giá mỗi <span class="term" data-tip="Chu kỳ phát triển ngắn (thường 1-4 tuần) trong Agile">Sprint</span>.</p>
               </div>
             </div>
             <div class="bg-canvas rounded-lg p-4 border border-hairline">
@@ -799,7 +800,7 @@
               </div>
               <p class="caption text-steel mb-2">Database query chậm → UX degradation khi scale</p>
               <div class="bg-brand-green/8 rounded-md p-2 border border-brand-green/20">
-                <p class="caption-bold text-brand-green-deep mb-1">Mitigation</p>
+                <p class="caption-bold text-brand-green-deep mb-1"><span class="term" data-tip="Biện pháp giảm thiểu rủi ro">Mitigation</span></p>
                 <p class="caption text-steel">Technical Đánh giá kỹ thuật 2 tuần. Database indexing Chiến lược từ đầu. Virtual scrolling cho large lists. Load Kiểm thử trước mỗi major Phát hành.</p>
               </div>
             </div>
@@ -823,7 +824,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- 6.1 Tác động/Công sức Matrix -->
         <div class="bg-surface rounded-lg p-xxl border border-hairline">
-          <h3 class="heading-5 text-ink mb-6">6.1 Tác động/Công sức Matrix</h3>
+          <h3 class="heading-5 text-ink mb-6">6.1 <span class="term" data-tip="Ma trận đánh giá tác động và công sức cần thiết">Tác động/Công sức Matrix</span></h3>
           <!-- ASCII-style matrix -->
           <div class="relative">
             <div class="flex items-center gap-4 mb-2">
@@ -853,7 +854,7 @@
                   <span class="absolute -top-3 left-3 bg-brand-green/10 px-2 py-0.5 rounded-full border border-brand-green/30">
                     <span class="caption-bold text-brand-green-deep">②</span>
                   </span>
-                  <span class="caption-bold text-ink mb-1">công việc CRUD + 3 Views</span>
+                  <span class="caption-bold text-ink mb-1">công việc <span class="term" data-tip="Create, Read, Update, Delete — Bốn thao tác cơ bản trên dữ liệu">CRUD</span> + 3 Views</span>
                   <span class="caption text-steel">MVP core</span>
                   <span class="Nhãn-green caption rounded-full px-2 py-0.5 mt-2">Ưu tiên cao</span>
                 </div>
@@ -887,7 +888,7 @@
 
         <!-- 6.2 Go/No-Go -->
         <div class="bg-surface rounded-lg p-xxl border border-hairline">
-          <h3 class="heading-5 text-ink mb-6">6.2 Go/No-Go Khuyến nghị</h3>
+          <h3 class="heading-5 text-ink mb-6">6.2 <span class="term" data-tip="Quyết định tiến hành hoặc dừng lại">Go / No-Go</span> Khuyến nghị</h3>
           <div class="bg-brand-green/8 rounded-lg p-lg border-2 border-brand-green mb-6">
             <div class="flex items-center gap-3 mb-3">
               <div class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center">
@@ -906,7 +907,7 @@
                 <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-error/10 text-brand-error caption-bold flex items-center justify-center">!</span>
                 <div>
                   <p class="body-sm-medium text-ink mb-1">Điều kiện 1: Nguồn lực confirmation</p>
-                  <p class="caption text-steel">Cần hire thêm 1 FE trước sprint 1. Hoặc timeline MVP kéo dài thêm 1 tháng.</p>
+                  <p class="caption text-steel">Cần hire thêm 1 <span class="term" data-tip="Frontend — Phần giao diện người dùng (client-side)">FE</span> trước <span class="term" data-tip="Chu kỳ phát triển ngắn (thường 1-4 tuần) trong Agile">Sprint</span> 1. Hoặc timeline <span class="term" data-tip="Minimum Viable Product — Sản phẩm khả thi tối thiểu, phiên bản cơ bản nhất để kiểm chứng giả thuyết">MVP</span> kéo dài thêm 1 tháng.</p>
                 </div>
               </div>
             </div>
@@ -915,7 +916,7 @@
                 <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-error/10 text-brand-error caption-bold flex items-center justify-center">!</span>
                 <div>
                   <p class="body-sm-medium text-ink mb-1">Điều kiện 2: Technical Đánh giá kỹ thuật ĐẠT</p>
-                  <p class="caption text-steel">2 tuần Đánh giá kỹ thuật phải xác nhận: real-time architecture feasible, 10,000 Công việc query &lt; 200ms, WebSocket cho 50+ concurrent Người dùng.</p>
+                  <p class="caption text-steel">2 tuần Đánh giá kỹ thuật phải xác nhận: real-time architecture feasible, 10,000 Công việc query &lt; 200ms, <span class="term" data-tip="Giao thức kết nối hai chiều thời gian thực giữa client và server">WebSocket</span> cho 50+ concurrent Người dùng.</p>
                 </div>
               </div>
             </div>
@@ -924,7 +925,7 @@
                 <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-error/10 text-brand-error caption-bold flex items-center justify-center">!</span>
                 <div>
                   <p class="body-sm-medium text-ink mb-1">Điều kiện 3: Thử nghiệm thí điểm nhóm Cam kết</p>
-                  <p class="caption text-steel">Cần 1 nhóm 10 người cam kết sử dụng MVP trong 2 tuần Thử nghiệm thí điểm. Nếu không có nhóm, hủy bỏ hoặc chuyển sang Phương án C (SaaS).</p>
+                  <p class="caption text-steel">Cần 1 nhóm 10 người cam kết sử dụng <span class="term" data-tip="Minimum Viable Product — Sản phẩm khả thi tối thiểu, phiên bản cơ bản nhất để kiểm chứng giả thuyết">MVP</span> trong 2 tuần Thử nghiệm thí điểm. Nếu không có nhóm, hủy bỏ hoặc chuyển sang Phương án C (SaaS).</p>
                 </div>
               </div>
             </div>
@@ -992,7 +993,7 @@
             </div>
             <h4 class="heading-5 text-ink mb-2">Phạm vi ngoài (Out-of-Phạm vi)</h4>
             <ul class="body-sm text-charcoal space-y-1">
-              <li>• Biểu đồ Gantt (thuộc module Timeline — Giai đoạn 1)</li>
+              <li>• Biểu đồ <span class="term" data-tip="Biểu đồ Gantt — dạng biểu đồ thanh ngang thể hiện tiến độ và phụ thuộc công việc theo thời gian">Gantt</span> (thuộc module Timeline — Giai đoạn 1)</li>
               <li>• Quản lý backlog, theo dõi chi phí, đăng ký rủi ro</li>
               <li>• Quản lý tài liệu, tích hợp cuộc họp</li>
               <li>• Quy tắc tự động hóa, thao tác hàng loạt</li>
@@ -1009,7 +1010,7 @@
               <li>• Phân quyền theo vai trò: Quản trị viên (toàn quyền), Quản lý (cấp dự án), Thành viên (công việc của mình)</li>
               <li>• Thời gian thực: độ trễ ≤ 1 giây cho hơn 50 người dùng đồng thời</li>
               <li>• Hiệu năng: thời gian tải &lt; 2 giây, tìm kiếm &lt; 500 mili giây</li>
-              <li>• Thời gian hoạt động: cam kết mức dịch vụ 99.5%, sao lưu hàng ngày, nhật ký kiểm toán</li>
+              <li>• Thời gian hoạt động: cam kết mức dịch vụ 99.5% (<span class="term" data-tip="Service Level Agreement — Thỏa thuận mức dịch vụ, cam kết về uptime và hiệu năng">SLA</span>), sao lưu hàng ngày, nhật ký kiểm toán</li>
             </ul>
           </div>
         </div>
@@ -1161,7 +1162,7 @@
     new Chart(document.getElementById('chartBaseline'), {
       type: 'bar',
       data: {
-        labels: ['Thời gian cập nhật\n(tuần)', 'Giao hàng đúng hạn\n(%)', 'Vượt ngân sách\n(%)', 'Tìm kiếm tài liệu\n(phút/ngày)', 'NPS công cụ\n(score)'],
+        labels: ['Thời gian cập nhật\n(tuần)', 'Giao hàng đúng hạn\n(%)', 'Vượt ngân sách\n(%)', 'Tìm kiếm tài liệu\n(phút/ngày)', '<span class="term" data-tip="Net Promoter Score — Chỉ số đo lường mức độ hài lòng và trung thành của khách hàng">NPS</span> công cụ\n(score)'],
         datasets: [
           {
             label: 'Hiện tại',
