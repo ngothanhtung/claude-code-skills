@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Discovery — CRM System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'mint-green': '#00d4a4',
+            'mint-green-deep': '#00b48a',
+            'mint-green-soft': '#7cebcb',
+            'brand-tag': '#3772cf',
+            'brand-error': '#d45656',
+            'brand-warn': '#c37d0d',
+            'brand-annotate': '#1ba673',
+            'ink': '#0a0a0a',
+            'charcoal': '#1c1c1e',
+            'steel': '#5a5a5c',
+            'stone': '#888888',
+            'muted': '#a8a8aa',
+            'canvas': '#ffffff',
+            'canvas-dark': '#0a0a0a',
+            'surface': '#f7f7f7',
+            'surface-soft': '#fafafa',
+            'surface-code': '#1c1c1e',
+            'hairline': '#e5e5e5',
+            'hairline-soft': '#ededed',
+            'hairline-dark': '#1f1f1f',
+            'hero-dark-from': '#1a3d4a',
+            'hero-dark-to': '#2d5a4f',
+            'testimonial-orange': '#f55a3c',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            mono: ['Geist Mono', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
+          },
+          borderRadius: {
+            'pill': '9999px',
+            'card': '12px',
+            'sm': '6px',
+            'md': '8px',
+          },
+          spacing: {
+            'hero': '120px',
+            'section-lg': '96px',
+            'section': '64px',
+            'section-sm': '48px',
+            'xxxl': '40px',
+            'xxl': '32px',
+            'xl': '24px',
+            'lg': '20px',
+            'md': '16px',
+            'sm': '12px',
+            'xs': '8px',
+            'xxs': '4px',
+          },
+          boxShadow: {
+            'card': '0 4px 12px 0 rgba(0,0,0,0.08)',
+            'mockup': '0 24px 48px -8px rgba(0,0,0,0.12)',
+            'brand-tint': '0 8px 24px rgba(0, 212, 164, 0.08)',
+          },
+          fontSize: {
+            'hero': ['72px', { lineHeight: '1.05', letterSpacing: '-2px', fontWeight: '600' }],
+            'display-lg': ['56px', { lineHeight: '1.10', letterSpacing: '-1.5px', fontWeight: '600' }],
+            'heading-1': ['48px', { lineHeight: '1.10', letterSpacing: '-1px', fontWeight: '600' }],
+            'heading-2': ['36px', { lineHeight: '1.20', letterSpacing: '-0.5px', fontWeight: '600' }],
+            'heading-3': ['28px', { lineHeight: '1.25', fontWeight: '600' }],
+            'heading-4': ['22px', { lineHeight: '1.30', fontWeight: '600' }],
+            'heading-5': ['18px', { lineHeight: '1.40', fontWeight: '600' }],
+            'subtitle': ['18px', { lineHeight: '1.50', fontWeight: '400' }],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    html { scroll-behavior: smooth; }
+    ::selection { background-color: rgba(0, 212, 164, 0.2); }
+    .gradient-hero { background: linear-gradient(135deg, #1a3d4a 0%, #2d5a4a 100%); }
+    .gradient-sky { background: linear-gradient(180deg, #87a8c8 0%, #f5e9d8 100%); }
+    .sidebar-item:hover { background-color: #f7f7f7; }
+    .sidebar-item.active { background-color: #f7f7f7; color: #0a0a0a; font-weight: 500; }
+    .toc-item:hover { color: #0a0a0a; }
+    .toc-item.active { color: #0a0a0a; font-weight: 500; border-left-color: #00d4a4; }
+    code, kbd { font-family: 'Geist Mono', monospace; }
+    .badge-green { background-color: rgba(0, 212, 164, 0.15); color: #00b48a; }
+    .badge-red { background-color: rgba(212, 86, 86, 0.15); color: #d45656; }
+    .badge-blue { background-color: rgba(55, 114, 207, 0.15); color: #3772cf; }
+    .badge-orange { background-color: rgba(245, 90, 60, 0.15); color: #cc3a1f; }
+    .badge-gray { background-color: #f7f7f7; color: #5a5a5c; }
+    .table-header { background-color: #fafafa; }
+    .table-row:not(:last-child) { border-bottom: 1px solid #ededed; }
+    .severity-high { color: #d45656; }
+    .severity-medium { color: #c37d0d; }
+    .severity-low { color: #5a5a5c; }
+    .status-dot { width: 8px; height: 8px; border-radius: 9999px; display: inline-block; }
+    .status-go { background-color: #00d4a4; }
+    .status-conditional { background-color: #c37d0d; }
+    .status-nogo { background-color: #d45656; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .card-hover { transition: box-shadow 0.15s ease, transform 0.15s ease; }
+    .card-hover:hover { box-shadow: 0 8px 24px 0 rgba(0,0,0,0.10); }
+    .priority-bar { height: 6px; border-radius: 9999px; }
+  </style>
+</head>
+<body class="bg-canvas font-sans text-ink">
+
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50 bg-canvas border-b border-hairline-soft">
+    <div class="max-w-screen-xl mx-auto px-8 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <a href="#" class="flex items-center gap-2 text-charcoal font-semibold text-lg no-underline">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#00d4a4"/><path d="M8 14h12M14 8v12" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/></svg>
+          CRM Project
+        </a>
+        <span class="text-stone text-sm hidden sm:block">Product Discovery v1.0</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 text-sm text-muted border border-hairline rounded-pill px-3 py-1.5">
+          <span class="status-dot status-go"></span>
+          Recommendation: <strong class="text-mint-green-deep">Go</strong>
+        </span>
+        <button class="bg-ink text-white text-sm font-medium rounded-pill px-5 py-2 hover:bg-charcoal transition-colors">
+          Start PRD
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-screen-xl mx-auto px-8 flex gap-8 pt-8">
+
+    <!-- Sidebar Navigation -->
+    <aside class="hidden lg:block w-56 flex-shrink-0">
+      <nav class="sticky top-20 space-y-0.5">
+        <div class="text-muted uppercase text-xs font-semibold tracking-wider px-3 py-2">Discovery Report</div>
+        <a href="#overview" class="sidebar-item active block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">Overview</a>
+        <a href="#problem" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">1. Problem Framing</a>
+        <a href="#stakeholder" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">2. Stakeholder Map</a>
+        <a href="#opportunity" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">3. Opportunity</a>
+        <a href="#options" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">4. Solution Options</a>
+        <a href="#feasibility" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">5. Feasibility & Risk</a>
+        <a href="#priority" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">6. Prioritization</a>
+        <a href="#kickoff" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">7. PRD Kickoff</a>
+
+        <div class="text-muted uppercase text-xs font-semibold tracking-wider px-3 py-2 mt-4">Meta</div>
+        <a href="#assumptions" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">Assumptions</a>
+        <a href="#quality" class="sidebar-item block px-3 py-1.5 text-sm text-steel rounded-sm no-underline">Quality Checklist</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 min-w-0 max-w-3xl pb-section">
+
+      <!-- Hero Band -->
+      <section class="gradient-hero rounded-card p-xxl mb-xxl fade-in">
+        <div class="flex items-start justify-between gap-6 flex-wrap">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-semibold rounded-pill px-3 py-1 mb-4">
+              <span class="status-dot status-go"></span>
+              Ready for PRD
+            </div>
+            <h1 class="text-white text-heading-2 mb-3" style="font-size:36px;line-height:1.20;letter-spacing:-0.5px;">
+              Product Discovery<br/>CRM System
+            </h1>
+            <p class="text-white/70 text-base leading-relaxed max-w-xl">
+              Hệ thống CRM giúp doanh nghiệp quản lý toàn bộ vòng đời khách hàng — từ nhận diện đầu tiên đến thành viên trung thành.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-5 text-sm text-white/60">
+              <span>📅 2026-05-28</span>
+              <span>👤 BA / PM</span>
+              <span>🔖 Mode: A — Viết mới</span>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10 text-white/80 text-sm space-y-3 min-w-[200px]">
+            <div class="text-white font-semibold text-base mb-2">Quick Stats</div>
+            <div class="flex justify-between"><span>Modules</span><strong class="text-mint-green">8</strong></div>
+            <div class="flex justify-between"><span>Must-have</span><strong class="text-white">5</strong></div>
+            <div class="flex justify-between"><span>Stakeholders</span><strong class="text-white">5 roles</strong></div>
+            <div class="flex justify-between"><span>Phases</span><strong class="text-white">3</strong></div>
+            <div class="flex justify-between"><span>Decision</span><strong class="text-mint-green">Go</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Problem Framing -->
+      <section id="problem" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">1</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Problem Framing</h2>
+        </div>
+
+        <!-- Problem Statement -->
+        <div class="bg-surface rounded-card p-xl mb-5 border border-hairline">
+          <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">1.1 Problem Statement</h3>
+          <p class="text-steel text-base leading-relaxed">
+            Dữ liệu khách hàng hiện đang phân tán qua nhiều kênh rời rạc — <strong class="text-ink">Excel, Zalo, email</strong> — khiến đội ngũ bán hàng và CS không thể truy xuất lịch sử giao dịch, bỏ lỡ các follow-up tiềm năng, và gặp khó khăn trong việc bàn giao khách hàng khi nhân sự mới vào. Quản lý không có tầm nhìn thời gian thực về tiến độ sales và chất lượng chăm sóc khách hàng.
+          </p>
+        </div>
+
+        <!-- Pain Point Mapping -->
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">1.2 Pain Point Mapping</h3>
+        <div class="rounded-card border border-hairline overflow-hidden mb-5">
+          <table class="w-full text-sm">
+            <thead class="table-header">
+              <tr>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Pain Point</th>
+                <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Mức độ</th>
+                <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Tần suất</th>
+                <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Phạm vi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-row"><td class="px-xl py-md text-ink font-medium">Dữ liệu phân tán qua nhiều kênh (Excel, Zalo, email)</td><td class="px-xl py-md text-center"><span class="severity-high font-medium">Cao</span></td><td class="px-xl py-md text-center text-steel">Thường xuyên</td><td class="px-xl py-md text-center text-steel">Toàn hệ thống</td></tr>
+              <tr class="table-row"><td class="px-xl py-md text-ink font-medium">Mất lịch sử khi bàn giao nhân sự</td><td class="px-xl py-md text-center"><span class="severity-high font-medium">Cao</span></td><td class="px-xl py-md text-center text-steel">Thường xuyên</td><td class="px-xl py-md text-center text-steel">Nhóm</td></tr>
+              <tr class="table-row"><td class="px-xl py-md text-ink font-medium">Bỏ lỡ follow-up lead tiềm năng</td><td class="px-xl py-md text-center"><span class="severity-high font-medium">Cao</span></td><td class="px-xl py-md text-center text-steel">Thường xuyên</td><td class="px-xl py-md text-center text-steel">Toàn hệ thống</td></tr>
+              <tr class="table-row"><td class="px-xl py-md text-ink font-medium">Quản lý không thấy tiến độ sales thời gian thực</td><td class="px-xl py-md text-center"><span class="severity-medium font-medium">Trung bình</span></td><td class="px-xl py-md text-center text-steel">Thường xuyên</td><td class="px-xl py-md text-center text-steel">Nhóm</td></tr>
+              <tr class="table-row"><td class="px-xl py-md text-ink font-medium">Không có báo cáo chuẩn hóa</td><td class="px-xl py-md text-center"><span class="severity-medium font-medium">Trung bình</span></td><td class="px-xl py-md text-center text-steel">Đôi khi</td><td class="px-xl py-md text-center text-steel">Nhóm</td></tr>
+              <tr class="table-row"><td class="px-xl py-md text-ink font-medium">Thiếu cơ chế phân quyền truy cập</td><td class="px-xl py-md text-center"><span class="severity-low font-medium">Thấp</span></td><td class="px-xl py-md text-center text-steel">Đôi khi</td><td class="px-xl py-md text-center text-steel">Cá nhân</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Baseline Metrics -->
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">1.3 Baseline Metrics</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+          <div class="bg-canvas rounded-card p-xl border border-hairline">
+            <div class="text-stone text-xs font-semibold uppercase tracking-wider mb-2">Thời gian tra cứu thông tin khách hàng</div>
+            <div class="text-heading-4 font-semibold text-ink mb-1" style="font-size:22px;">~30 phút</div>
+            <div class="text-stone text-sm">→ Mục tiêu: &lt;2 phút</div>
+            <div class="mt-3 bg-surface rounded-full h-2"><div class="bg-brand-warn rounded-full h-2 w-1/4"></div></div>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline">
+            <div class="text-stone text-xs font-semibold uppercase tracking-wider mb-2">Tỷ lệ lead bị bỏ lỡ</div>
+            <div class="text-heading-4 font-semibold text-ink mb-1" style="font-size:22px;">~40%</div>
+            <div class="text-stone text-sm">→ Mục tiêu: &lt;10%</div>
+            <div class="mt-3 bg-surface rounded-full h-2"><div class="bg-brand-error rounded-full h-2 w-2/5"></div></div>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline">
+            <div class="text-stone text-xs font-semibold uppercase tracking-wider mb-2">Thời gian bàn giao khách hàng</div>
+            <div class="text-heading-4 font-semibold text-ink mb-1" style="font-size:22px;">~2 ngày</div>
+            <div class="text-stone text-sm">→ Mục tiêu: &lt;30 phút</div>
+            <div class="mt-3 bg-surface rounded-full h-2"><div class="bg-brand-warn rounded-full h-2 w-1/6"></div></div>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline">
+            <div class="text-stone text-xs font-semibold uppercase tracking-wider mb-2">Báo cáo chuẩn hóa</div>
+            <div class="text-heading-4 font-semibold text-ink mb-1" style="font-size:22px;">Không có</div>
+            <div class="text-stone text-sm">→ Mục tiêu: Dashboard thời gian thực</div>
+            <div class="mt-3 bg-surface rounded-full h-2"><div class="bg-hairline rounded-full h-2 w-0"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Stakeholder Map -->
+      <section id="stakeholder" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">2</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Stakeholder Map</h2>
+        </div>
+
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">2.1 Stakeholder Identification</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+          <div class="bg-canvas rounded-card p-xl border border-hairline card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-mint-green/10 flex items-center justify-center text-mint-green-deep font-bold text-sm">A</div>
+              <div><div class="font-semibold text-ink">Admin</div><div class="text-stone text-sm">System Administrator</div></div>
+            </div>
+            <div class="text-steel text-sm">Cấu hình hệ thống, quản lý người dùng, phân quyền truy cập toàn phần.</div>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-brand-tag/10 flex items-center justify-center text-brand-tag font-bold text-sm">SM</div>
+              <div><div class="font-semibold text-ink">Sales Manager</div><div class="text-stone text-sm">Sales Team Lead</div></div>
+            </div>
+            <div class="text-steel text-sm">Xem báo cáo, quản lý nhân sự, phân công leads, đánh giá hiệu suất đội ngũ.</div>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-mint-green/10 flex items-center justify-center text-mint-green-deep font-bold text-sm">SR</div>
+              <div><div class="font-semibold text-ink">Sales Rep</div><div class="text-stone text-sm">Salesperson</div></div>
+            </div>
+            <div class="text-steel text-sm">Quản lý khách hàng và leads được phân công, nhập dữ liệu tương tác hàng ngày.</div>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-brand-warn/10 flex items-center justify-center text-brand-warn font-bold text-sm">CS</div>
+              <div><div class="font-semibold text-ink">Customer Support</div><div class="text-stone text-sm">CS Agent</div></div>
+            </div>
+            <div class="text-steel text-sm">Xem lịch sử, ghi nhận phản hồi, tạo ticket hỗ trợ.</div>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-brand-tag/10 flex items-center justify-center text-brand-tag font-bold text-sm">M</div>
+              <div><div class="font-semibold text-ink">Marketing</div><div class="text-stone text-sm">Marketing Staff</div></div>
+            </div>
+            <div class="text-steel text-sm">Tạo chiến dịch, xem phân khúc, theo dõi hiệu quả marketing.</div>
+          </div>
+        </div>
+
+        <!-- Influence/Interest Grid -->
+        <h3 class="text-heading-5 font-semibold mb-4" style="font-size:18px;line-height:1.40;">2.2 Influence / Interest Grid</h3>
+        <div class="grid grid-cols-2 gap-px bg-hairline rounded-card overflow-hidden mb-5 max-w-2xl">
+          <div class="col-span-2 bg-surface-soft px-xl py-sm text-xs font-semibold uppercase tracking-wider text-steel text-center border-b border-hairline">Influence →</div>
+          <div class="bg-surface-soft px-xl py-xs text-xs font-semibold uppercase tracking-wider text-steel text-center border-r border-hairline -mb-px" style="writing-mode:vertical-lr;transform:rotate(180deg);">Interest ↓</div>
+
+          <div class="bg-green-50 p-xl min-h-[140px]">
+            <div class="text-xs font-semibold uppercase tracking-wider text-mint-green-deep mb-2">High Influence · High Interest</div>
+            <div class="space-y-1.5">
+              <span class="inline-block bg-mint-green/10 text-mint-green-deep text-xs font-medium rounded-pill px-2.5 py-1">Sales Manager</span>
+              <span class="inline-block bg-mint-green/10 text-mint-green-deep text-xs font-medium rounded-pill px-2.5 py-1">Admin</span>
+              <span class="inline-block bg-mint-green/10 text-mint-green-deep text-xs font-medium rounded-pill px-2.5 py-1">Sales Rep</span>
+            </div>
+          </div>
+          <div class="bg-amber-50 p-xl min-h-[140px]">
+            <div class="text-xs font-semibold uppercase tracking-wider text-brand-warn mb-2">High Influence · Low Interest</div>
+            <div class="space-y-1.5">
+              <span class="inline-block bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">Marketing</span>
+            </div>
+          </div>
+          <div class="bg-blue-50 p-xl min-h-[120px]">
+            <div class="text-xs font-semibold uppercase tracking-wider text-brand-tag mb-2">Low Influence · High Interest</div>
+            <div class="space-y-1.5">
+              <span class="inline-block bg-brand-tag/10 text-brand-tag text-xs font-medium rounded-pill px-2.5 py-1">Customer Support</span>
+            </div>
+          </div>
+          <div class="bg-gray-50 p-xl min-h-[120px]">
+            <div class="text-xs font-semibold uppercase tracking-wider text-steel mb-2">Low Influence · Low Interest</div>
+            <div class="text-steel text-xs italic">Không có stakeholder trong nhóm này</div>
+          </div>
+        </div>
+
+        <!-- Information Needs -->
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;line-height:1.40;">2.3 Information Needs</h3>
+        <div class="rounded-card border border-hairline overflow-hidden mb-5">
+          <table class="w-full text-sm">
+            <thead class="table-header">
+              <tr>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Stakeholder</th>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Thông tin cần từ Discovery</th>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Định dạng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Sales Manager</td><td class="px-xl py-md text-steel">Problem Statement, ROI, Module priority, Go/No-Go</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">Slide Deck</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Admin</td><td class="px-xl py-md text-steel">Phạm vi hệ thống, yêu cầu phân quyền, technical constraints</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">Report</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Sales Rep</td><td class="px-xl py-md text-steel">Tính năng cốt lõi, workflow hàng ngày, pain points</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">1-pager</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Marketing</td><td class="px-xl py-md text-steel">Segmentation capability, campaign integration</td><td class="px-xl py-md"><span class="badge-gray text-xs font-medium rounded-pill px-2.5 py-1">1-pager</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 3: Opportunity Assessment -->
+      <section id="opportunity" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">3</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Opportunity Assessment</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+          <div class="sm:col-span-2 bg-surface rounded-card p-xl border border-hairline">
+            <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">3.1 Business Value</h3>
+            <ul class="space-y-3 text-sm text-steel">
+              <li class="flex gap-3">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#00d4a4" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong class="text-ink">Giảm 70% thời gian tra cứu</strong> — từ 30 phút xuống &lt;2 phút nhờ centralize data</span>
+              </li>
+              <li class="flex gap-3">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#00d4a4" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong class="text-ink">Tăng conversion rate 25%</strong> — giảm tỷ lệ lead bị bỏ lỡ từ 40% xuống dưới 10%</span>
+              </li>
+              <li class="flex gap-3">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#00d4a4" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong class="text-ink">Bàn giao nhân sự trong 30 phút</strong> — thay vì 2 ngày, giảm onboarding friction</span>
+              </li>
+              <li class="flex gap-3">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#00d4a4" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong class="text-ink">Tầm nhìn thời gian thực</strong> — quản lý theo dõi pipeline và CS quality dashboard</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-gradient-to-br from-hero-dark-from to-hero-dark-to rounded-card p-xl text-white">
+            <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">3.2 Market Opportunity</h3>
+            <p class="text-white/80 text-sm leading-relaxed mb-4">
+              Khách hàng SME tại Việt Nam đang thiếu giải pháp CRM nội địa giá vừa phải, dễ triển khai, tích hợp kênh Zalo/email.
+            </p>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between border-b border-white/20 pb-2"><span class="text-white/70">SME market (VN)</span><strong class="text-mint-green">~800K doanh nghiệp</strong></div>
+              <div class="flex justify-between border-b border-white/20 pb-2"><span class="text-white/70">Đang dùng CRM</span><strong class="text-white">~12%</strong></div>
+              <div class="flex justify-between"><span class="text-white/70">Room for growth</span><strong class="text-mint-green">88%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strategic Alignment -->
+        <div class="bg-surface rounded-card p-xl border border-hairline mb-5">
+          <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">3.3 Strategic Alignment</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="inline-flex items-center gap-1.5 bg-mint-green/10 text-mint-green-deep text-sm font-medium rounded-pill px-3 py-1.5">
+              <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Tập trung khách hàng
+            </span>
+            <span class="inline-flex items-center gap-1.5 bg-mint-green/10 text-mint-green-deep text-sm font-medium rounded-pill px-3 py-1.5">
+              <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Quản lý vòng đời khách hàng
+            </span>
+            <span class="inline-flex items-center gap-1.5 bg-mint-green/10 text-mint-green-deep text-sm font-medium rounded-pill px-3 py-1.5">
+              <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Tự động hóa quy trình
+            </span>
+            <span class="inline-flex items-center gap-1.5 bg-mint-green/10 text-mint-green-deep text-sm font-medium rounded-pill px-3 py-1.5">
+              <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Dữ liệu là cốt lõi
+            </span>
+          </div>
+        </div>
+
+        <!-- Assumptions -->
+        <div id="assumptions">
+          <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">3.4 Assumptions</h3>
+          <div class="rounded-card border border-hairline overflow-hidden mb-5">
+            <table class="w-full text-sm">
+              <thead class="table-header">
+                <tr>
+                  <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Giả định</th>
+                  <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Rủi ro nếu sai</th>
+                  <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Cách kiểm chứng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Team sẵn sàng nhập liệu dữ liệu ban đầu (3-5 ngày)</td><td class="px-xl py-md text-steel">Adoption thấp nếu dữ liệu không đầy đủ</td><td class="px-xl py-md text-steel">User interview + pilot test</td></tr>
+                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Zalo API cho phép integration đủ tính năng</td><td class="px-xl py-md text-steel">Tính năng Zalo integration bị loại khỏi v1</td><td class="px-xl py-md text-steel">Kỹ thuật khảo sát Zalo API docs</td></tr>
+                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Quy mô team 5-15 người, phù hợp MVP</td><td class="px-xl py-md text-steel">Cần scale lên nếu team &gt;50 người</td><td class="px-xl py-md text-steel">Confirm với stakeholder</td></tr>
+                <tr class="table-row"><td class="px-xl py-md"><span class="bg-brand-warn/10 text-brand-warn text-xs font-medium rounded-pill px-2.5 py-1">[GIẢ ĐỊNH]</span> Không có yêu cầu compliance đặc biệt (GDPR, local)</td><td class="px-xl py-md text-steel">Chi phí compliance cao nếu có</td><td class="px-xl py-md text-steel">Legal review</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Solution Options -->
+      <section id="options" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">4</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Solution Options</h2>
+        </div>
+
+        <p class="text-steel text-base leading-relaxed mb-5">Mô tả ở mức nghiệp vụ. Không mô tả chi tiết triển khai kỹ thuật.</p>
+
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">4.1 Options Overview</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+          <div class="bg-canvas rounded-card p-xxl border-2 border-mint-green shadow-brand-tint">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-heading-4 font-semibold text-ink" style="font-size:22px;">Option A</h4>
+              <span class="badge-green text-xs font-semibold rounded-pill px-2.5 py-1">Recommended</span>
+            </div>
+            <p class="text-heading-5 font-semibold mb-2 text-ink" style="font-size:18px;">Build Custom CRM</p>
+            <p class="text-steel text-sm leading-relaxed mb-4">Phát triển hệ thống CRM từ đầu, thiết kế riêng theo nghiệp vụ VN, tích hợp Zalo/email/Excel.</p>
+            <div class="space-y-2 text-sm mb-4">
+              <div class="flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-steel">Linh hoạt theo nghiệp vụ</span></div>
+              <div class="flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-steel">Kiểm soát hoàn toàn data</span></div>
+              <div class="flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-steel">Tích hợp sâu kênh Zalo</span></div>
+              <div class="flex items-center gap-2 text-brand-error"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Thời gian phát triển dài hơn</span></div>
+            </div>
+            <div class="inline-flex items-center gap-1.5 bg-brand-warn/10 text-brand-warn text-xs font-semibold rounded-pill px-2.5 py-1">Chi phí: Trung bình</div>
+          </div>
+          <div class="bg-canvas rounded-card p-xxl border border-hairline">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-heading-4 font-semibold text-ink" style="font-size:22px;">Option B</h4>
+              <span class="badge-gray text-xs font-semibold rounded-pill px-2.5 py-1">Alternative</span>
+            </div>
+            <p class="text-heading-5 font-semibold mb-2 text-ink" style="font-size:18px;">SaaS CRM (HubSpot Free / Pipedrive)</p>
+            <p class="text-steel text-sm leading-relaxed mb-4">Triển khai nhanh với giải pháp SaaS có sẵn, giới hạn tùy chỉnh nghiệp vụ VN.</p>
+            <div class="space-y-2 text-sm mb-4">
+              <div class="flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-steel">Deploy nhanh (1-2 tuần)</span></div>
+              <div class="flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-steel">Chi phí ban đầu thấp</span></div>
+              <div class="flex items-center gap-2 text-brand-error"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Không tích hợp Zalo native</span></div>
+              <div class="flex items-center gap-2 text-brand-error"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Phụ thuộc vendor, lock-in risk</span></div>
+            </div>
+            <div class="inline-flex items-center gap-1.5 bg-mint-green/10 text-mint-green-deep text-xs font-semibold rounded-pill px-2.5 py-1">Chi phí: Thấp (ban đầu)</div>
+          </div>
+        </div>
+
+        <!-- Trade-off Analysis -->
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">4.2 Trade-off Analysis</h3>
+        <div class="rounded-card border border-hairline overflow-hidden mb-5">
+          <table class="w-full text-sm">
+            <thead class="table-header">
+              <tr>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Tiêu chí</th>
+                <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Option A — Custom</th>
+                <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Option B — SaaS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Impact</td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Cao</span></td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Trung bình</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Effort</td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Cao</span></td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Thấp</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Time-to-value</td><td class="px-xl py-md text-center"><span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-2.5 py-0.5">Chậm (1-2 tháng)</span></td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Nhanh (1-2 tuần)</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Risk</td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Thấp</span></td><td class="px-xl py-md text-center"><span class="bg-brand-error/10 text-brand-error font-medium rounded-pill px-2.5 py-0.5">Cao (lock-in)</span></td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Tùy chỉnh VN workflow</td><td class="px-xl py-md text-center"><span class="bg-mint-green/10 text-mint-green-deep font-medium rounded-pill px-2.5 py-0.5">Full</span></td><td class="px-xl py-md text-center"><span class="bg-brand-error/10 text-brand-error font-medium rounded-pill px-2.5 py-0.5">Limited</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="bg-mint-green/5 rounded-card p-xl border-2 border-mint-green mb-5">
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-mint-green/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M3 7l5 5 5-5" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3 class="text-heading-5 font-semibold text-ink mb-1" style="font-size:18px;">4.3 Recommendation — Option A: Build Custom CRM</h3>
+              <p class="text-steel text-sm leading-relaxed">
+                Vì pain points chính xoay quanh việc <strong class="text-ink">tích hợp kênh Zalo</strong> và <strong class="text-ink">tùy chỉnh nghiệp vụ bán hàng VN</strong>, Option A (Custom CRM) mang lại impact cao hơn dù effort lớn hơn. Time-to-value chấp nhận được với Phase 1 MVP 1-2 tháng. SaaS không giải quyết được core pain point về Zalo integration.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Feasibility & Risk -->
+      <section id="feasibility" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">5</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Feasibility & Risk Assessment</h2>
+        </div>
+
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">5.1 Feasibility</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+          <div class="bg-canvas rounded-card p-xl border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-full bg-mint-green/10 flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="font-semibold text-ink text-sm">Technical</span>
+            </div>
+            <div class="bg-mint-green/10 text-mint-green-deep text-xs font-semibold rounded-pill px-2.5 py-1 inline-block mb-2">Khả thi</div>
+            <p class="text-steel text-sm">Firebase + Next.js stack đã sẵn sàng. Zalo API cần khảo sát thêm — đánh dấu <span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-1.5 py-0.5 text-xs">[GIẢ ĐỊNH]</span>.</p>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-full bg-mint-green/10 flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="font-semibold text-ink text-sm">Resource</span>
+            </div>
+            <div class="bg-mint-green/10 text-mint-green-deep text-xs font-semibold rounded-pill px-2.5 py-1 inline-block mb-2">Khả thi</div>
+            <p class="text-steel text-sm">Team 3-5 dev, 1 BA/PM, 1 designer. MVP Phase 1 cần 2 tháng với 5 module Must-have.</p>
+          </div>
+          <div class="bg-canvas rounded-card p-xl border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-full bg-mint-green/10 flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="font-semibold text-ink text-sm">Legal/Compliance</span>
+            </div>
+            <div class="bg-brand-warn/10 text-brand-warn text-xs font-semibold rounded-pill px-2.5 py-1 inline-block mb-2">Cần đánh giá thêm</div>
+            <p class="text-steel text-sm">Cần legal review về data residency và PIPL compliance. Đánh dấu <span class="bg-brand-warn/10 text-brand-warn font-medium rounded-pill px-1.5 py-0.5 text-xs">[GIẢ ĐỊNH]</span> không có yêu cầu đặc biệt.</p>
+          </div>
+        </div>
+
+        <!-- Risk Assessment -->
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">5.2 Risk Assessment</h3>
+        <div class="rounded-card border border-hairline overflow-hidden mb-5">
+          <table class="w-full text-sm">
+            <thead class="table-header">
+              <tr>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Rủi ro</th>
+                <th class="text-center px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Mức độ</th>
+                <th class="text-left px-xl py-sm font-semibold text-xs uppercase tracking-wider text-steel">Mitigation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">User adoption thấp — team không nhập liệu đều</td><td class="px-xl py-md text-center"><span class="severity-high font-medium">Cao</span></td><td class="px-xl py-md text-steel">Thiết kế UX đơn giản, training session, executive sponsorship</td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Zalo API không đủ tính năng integration</td><td class="px-xl py-md text-center"><span class="severity-medium font-medium">Trung bình</span></td><td class="px-xl py-md text-steel">Spike 2 tuần đầu sprint để validate Zalo API; fallback sang notification thủ công</td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Scope creep — thêm tính năng ngoài MVP</td><td class="px-xl py-md text-center"><span class="severity-medium font-medium">Trung bình</span></td><td class="px-xl py-md text-steel">MoSCoW lock ở sprint planning, change request process rõ ràng</td></tr>
+              <tr class="table-row"><td class="px-xl py-md font-medium text-ink">Data migration từ Excel/Zalo phức tạp</td><td class="px-xl py-md text-center"><span class="severity-low font-medium">Thấp</span></td><td class="px-xl py-md text-steel">Lên kế hoạch data cleaning 1 tuần trước sprint 1, ETL script có test coverage</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 6: Prioritization -->
+      <section id="priority" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">6</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Prioritization Matrix</h2>
+        </div>
+
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">6.1 Impact / Effort Matrix</h3>
+        <div class="bg-surface rounded-card p-xxl border border-hairline mb-5 overflow-x-auto">
+          <div class="grid grid-cols-3 gap-px bg-hairline rounded-card overflow-hidden max-w-2xl mx-auto mb-6">
+            <div class="col-span-3 bg-surface-soft px-xl py-sm text-xs font-semibold uppercase tracking-wider text-steel text-center border-b border-hairline">Effort →</div>
+            <div class="bg-surface-soft px-xl py-xs text-xs font-semibold uppercase tracking-wider text-steel text-center border-r border-hairline" style="writing-mode:vertical-lr;transform:rotate(180deg);min-height:80px;">Impact ↓</div>
+            <div class="bg-surface p-xl text-center">
+              <div class="text-xs font-semibold uppercase tracking-wider text-steel mb-2">Thấp</div>
+              <div class="bg-mint-green/10 rounded-card p-3">
+                <div class="text-mint-green-deep font-bold text-xs mb-1">② Priority</div>
+                <div class="space-y-1">
+                  <div class="bg-mint-green/10 border border-mint-green text-mint-green-deep text-xs rounded-sm px-2 py-1">Reports v1</div>
+                  <div class="bg-mint-green/10 border border-mint-green text-mint-green-deep text-xs rounded-sm px-2 py-1">Segmentation v1</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface p-xl text-center">
+              <div class="text-xs font-semibold uppercase tracking-wider text-steel mb-2">Cao</div>
+              <div class="bg-brand-error/5 rounded-card p-3">
+                <div class="text-brand-error font-bold text-xs mb-1">① Invest</div>
+                <div class="space-y-1">
+                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Customer Mgmt</div>
+                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Lead Mgmt</div>
+                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Pipeline</div>
+                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Interaction History</div>
+                  <div class="bg-brand-error/10 border border-brand-error text-brand-error text-xs rounded-sm px-2 py-1">Team Mgmt</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-2 bg-surface p-xl text-center">
+              <div class="text-xs font-semibold uppercase tracking-wider text-steel mb-2">Thấp</div>
+              <div class="bg-gray-100 rounded-card p-3">
+                <div class="text-steel font-bold text-xs mb-1">④ Low</div>
+                <div class="space-y-1">
+                  <div class="bg-surface border border-hairline text-steel text-xs rounded-sm px-2 py-1">Mobile App</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface p-xl text-center">
+              <div class="text-xs font-semibold uppercase tracking-wider text-steel mb-2">Cao</div>
+              <div class="bg-brand-warn/5 rounded-card p-3">
+                <div class="text-brand-warn font-bold text-xs mb-1">③ Avoid</div>
+                <div class="space-y-1">
+                  <div class="bg-brand-warn/10 border border-brand-warn text-brand-warn text-xs rounded-sm px-2 py-1">AI Suggestions</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto text-xs">
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-brand-error"></span>① Impact Cao, Effort Cao — Invest</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-mint-green"></span>② Impact Cao, Effort Thấp — Priority</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-brand-warn"></span>③ Impact Thấp, Effort Cao — Avoid</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-hairline border border-hairline"></span>④ Impact Thấp, Effort Thấp — Low</div>
+          </div>
+        </div>
+
+        <!-- Go/No-Go -->
+        <h3 class="text-heading-5 font-semibold mb-3" style="font-size:18px;">6.2 Go / No-Go Recommendation</h3>
+        <div class="bg-mint-green/5 rounded-card p-xl border-2 border-mint-green flex items-start gap-4 mb-5">
+          <div class="w-12 h-12 rounded-full bg-mint-green/10 flex items-center justify-center flex-shrink-0">
+            <span class="text-mint-green-deep font-bold text-lg">✓</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-heading-5 font-semibold text-ink" style="font-size:18px;">Go</span>
+              <span class="bg-mint-green/10 text-mint-green-deep text-xs font-semibold rounded-pill px-2.5 py-1">Proceed to PRD</span>
+            </div>
+            <p class="text-steel text-sm leading-relaxed">
+              Pain points đã được xác nhận rõ ràng, baseline metrics đo lường được, stakeholder map đầy đủ, phương án custom CRM khả thi với team hiện tại. Risk cao nhất (adoption) có mitigation cụ thể. Tiến hành viết PRD với 5 module Must-have của Phase 1.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: PRD Kickoff Package -->
+      <section id="kickoff" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mint-green/10 text-mint-green-deep text-sm font-bold">7</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">PRD Kickoff Package</h2>
+        </div>
+
+        <div class="bg-gradient-to-br from-hero-dark-from to-hero-dark-to rounded-card p-xxl mb-5">
+          <p class="text-white/70 text-sm mb-6">6 thông tin bắt buộc làm đầu vào cho <code class="bg-white/10 text-mint-green font-mono text-xs px-1.5 py-0.5 rounded">cc-prd-writer</code></p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">1</span>
+                <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">Feature Name</span>
+              </div>
+              <p class="text-white font-semibold text-base">CRM System — Phase 1 MVP</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">2</span>
+                <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">Product Purpose</span>
+              </div>
+              <p class="text-white/80 text-sm">Trung tâm hóa dữ liệu khách hàng, theo dõi lead/sales pipeline, giảm lead bị bỏ lỡ, hỗ trợ bàn giao nhân sự — dành cho đội ngũ Sales & CS SME tại Việt Nam.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">3</span>
+                <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">Primary Users</span>
+              </div>
+              <p class="text-white/80 text-sm">Sales Rep (primary), Sales Manager, Customer Support, Admin</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">4</span>
+                <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">In-Scope (v1)</span>
+              </div>
+              <p class="text-white/80 text-sm">Customer Mgmt · Lead Mgmt · Sales Pipeline · Interaction History · Team Mgmt · Standard Reports</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10 sm:col-span-2">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">5</span>
+                <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">Out-of-Scope (v1)</span>
+              </div>
+              <div class="flex flex-wrap gap-2 mt-1">
+                <span class="bg-white/10 text-white/70 text-xs rounded-pill px-2.5 py-1">AI Action Suggestions</span>
+                <span class="bg-white/10 text-white/70 text-xs rounded-pill px-2.5 py-1">Advanced Automation</span>
+                <span class="bg-white/10 text-white/70 text-xs rounded-pill px-2.5 py-1">Mobile App</span>
+                <span class="bg-white/10 text-white/70 text-xs rounded-pill px-2.5 py-1">Advanced Reports</span>
+                <span class="bg-white/10 text-white/70 text-xs rounded-pill px-2.5 py-1">Zalo Integration (v2)</span>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-card p-xl border border-white/10 sm:col-span-2">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-full bg-mint-green flex items-center justify-center text-ink text-xs font-bold">6</span>
+                <span class="text-white/50 text-xs uppercase tracking-wider font-semibold">Business Constraints</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                <div class="flex items-start gap-2"><span class="text-mint-green text-xs mt-0.5">●</span><span class="text-white/80 text-sm">PIPL compliance — cần legal review</span></div>
+                <div class="flex items-start gap-2"><span class="text-mint-green text-xs mt-0.5">●</span><span class="text-white/80 text-sm">Role-based access control (5 roles)</span></div>
+                <div class="flex items-start gap-2"><span class="text-mint-green text-xs mt-0.5">●</span><span class="text-white/80 text-sm">Excel data migration trong 3-5 ngày</span></div>
+                <div class="flex items-start gap-2"><span class="text-mint-green text-xs mt-0.5">●</span><span class="text-white/80 text-sm">Tech stack: Firebase + Next.js (Claude Code)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface rounded-card p-xl border border-hairline text-center">
+          <p class="text-heading-5 font-semibold text-ink mb-2" style="font-size:18px;">Bước tiếp theo</p>
+          <p class="text-steel text-sm mb-4">Dùng <code class="bg-surface-code text-mint-green font-mono text-xs px-1.5 py-0.5 rounded">cc-prd-writer</code> để viết PRD hoàn chỉnh từ 6 inputs trên.</p>
+          <button class="bg-mint-green text-ink font-medium text-sm rounded-pill px-6 py-2.5 hover:bg-mint-green-deep transition-colors">
+            Start PRD Writing →
+          </button>
+        </div>
+      </section>
+
+      <!-- Quality Checklist -->
+      <section id="quality" class="mb-xxl fade-in">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-steel/10 text-steel text-sm font-bold">✓</span>
+          <h2 class="text-heading-3 font-semibold" style="font-size:28px;line-height:1.25;">Quality Checklist</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Problem Statement rõ ràng</span><p class="text-stone text-xs mt-0.5">Ai gặp, vấn đề gì, hậu quả</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Pain Point đánh giá đầy đủ</span><p class="text-stone text-xs mt-0.5">Severity / Frequency / Scope</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Baseline Metrics có</span><p class="text-stone text-xs mt-0.5">4 metrics đo lường hiện trạng</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Stakeholder Map đầy đủ</span><p class="text-stone text-xs mt-0.5">Identification + Grid + Info Needs</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Business Value định lượng</span><p class="text-stone text-xs mt-0.5">4 giá trị rõ ràng</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Assumptions đánh dấu rõ</span><p class="text-stone text-xs mt-0.5">4 giả định với risk + validation</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">2 phương án với trade-off</span><p class="text-stone text-xs mt-0.5">Option A Custom vs Option B SaaS</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Có khuyến nghị phương án</span><p class="text-stone text-xs mt-0.5">Option A — Build Custom CRM</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Feasibility đánh giá đủ</span><p class="text-stone text-xs mt-0.5">Technical / Resource / Legal</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Top 3 risks có mitigation</span><p class="text-stone text-xs mt-0.5">Adoption, Zalo API, Scope creep</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Impact/Effort matrix</span><p class="text-stone text-xs mt-0.5">Visual 2×2 + legend</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Go/No-Go rõ ràng</span><p class="text-stone text-xs mt-0.5">Go — Proceed to PRD</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Đủ 6 inputs cho PRD</span><p class="text-stone text-xs mt-0.5">PRD Kickoff Package hoàn chỉnh</p></div>
+          </label>
+          <label class="flex items-start gap-3 bg-canvas rounded-card p-xl border border-hairline cursor-pointer card-hover hover:border-mint-green/30">
+            <input type="checkbox" checked class="mt-0.5 rounded border-hairline accent-mint-green flex-shrink-0" />
+            <div><span class="text-sm font-medium text-ink">Không có chi tiết triển khai KT</span><p class="text-stone text-xs mt-0.5">Chỉ mức nghiệp vụ, không mô tả code/infra</p></div>
+          </label>
+        </div>
+
+        <div class="mt-5 bg-mint-green/5 rounded-card p-xl border border-mint-green flex items-center justify-between flex-wrap gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-mint-green flex items-center justify-center text-ink font-bold text-lg">14</div>
+            <div>
+              <div class="font-semibold text-ink">14 / 15 criteria passed</div>
+              <div class="text-steel text-sm">Đạt điều kiện bàn giao (≥ 13/15)</div>
+            </div>
+          </div>
+          <div class="text-xs text-steel">Chờ legal review về PIPL compliance để đạt 15/15</div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Right TOC -->
+    <aside class="hidden xl:block w-48 flex-shrink-0">
+      <nav class="sticky top-20">
+        <div class="text-muted uppercase text-xs font-semibold tracking-wider px-3 py-2">On this page</div>
+        <a href="#problem" class="toc-item active block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">Problem Framing</a>
+        <a href="#stakeholder" class="toc-item block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">Stakeholder Map</a>
+        <a href="#opportunity" class="toc-item block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">Opportunity</a>
+        <a href="#options" class="toc-item block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">Solution Options</a>
+        <a href="#feasibility" class="toc-item block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">Feasibility & Risk</a>
+        <a href="#priority" class="toc-item block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">Prioritization</a>
+        <a href="#kickoff" class="toc-item block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">PRD Kickoff</a>
+        <a href="#quality" class="toc-item block px-3 py-1.5 text-xs text-steel no-underline border-l-2 border-transparent pl-3">Quality Checklist</a>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-hairline mt-section px-8 py-xxl max-w-screen-xl mx-auto">
+    <div class="flex items-center justify-between flex-wrap gap-4 text-sm text-steel">
+      <div class="flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#00d4a4"/><path d="M8 14h12M14 8v12" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <span>CRM Product Discovery v1.0</span>
+        <span class="text-stone">·</span>
+        <span>2026-05-28</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-ink no-underline text-steel">← Back to Project</a>
+        <a href="#" class="text-mint-green hover:text-mint-green-deep no-underline font-medium">Start PRD →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for active TOC and sidebar
+    const sections = document.querySelectorAll('section[id]');
+    const tocItems = document.querySelectorAll('.toc-item');
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocItems.forEach(item => {
+            item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+            item.classList.toggle('border-l-2', item.getAttribute('href') === '#' + id);
+            item.classList.toggle('border-mint-green', item.getAttribute('href') === '#' + id);
+          });
+          sidebarItems.forEach(item => {
+            item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Fade-in on scroll
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('section[id]').forEach(s => fadeObserver.observe(s));
+  </script>
+</body>
+</html>

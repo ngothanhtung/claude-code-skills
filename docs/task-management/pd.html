@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sản phẩm Discovery — ProjectOS Quản lý công việc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0a0a0a',
+            'brand-green': '#00d4a4',
+            'brand-green-deep': '#00b48a',
+            'brand-green-soft': '#7cebcb',
+            'brand-tag': '#3772cf',
+            'brand-error': '#d45656',
+            'brand-warn': '#c37d0d',
+            'canvas': '#ffffff',
+            'canvas-dark': '#0a0a0a',
+            'surface': '#f7f7f7',
+            'surface-soft': '#fafafa',
+            'surface-code': '#1c1c1e',
+            'hairline': '#e5e5e5',
+            'hairline-soft': '#ededed',
+            'ink': '#0a0a0a',
+            'charcoal': '#1c1c1e',
+            'steel': '#5a5a5c',
+            'stone': '#888888',
+            'muted': '#a8a8aa',
+            'hero-sky-from': '#87a8c8',
+            'hero-sky-to': '#f5e9d8',
+            'testimonial-orange': '#f55a3c',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            mono: ['Geist Mono', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
+          },
+          borderRadius: {
+            xs: '4px',
+            sm: '6px',
+            md: '8px',
+            lg: '12px',
+            xl: '16px',
+            xxl: '24px',
+            full: '9999px',
+          },
+          spacing: {
+            'xxs': '4px',
+            'xs': '8px',
+            'sm': '12px',
+            'md': '16px',
+            'lg': '20px',
+            'xl': '24px',
+            'xxl': '32px',
+            'xxxl': '40px',
+            'section-sm': '48px',
+            'section': '64px',
+            'section-lg': '96px',
+            'hero': '120px',
+          },
+          letterSpacing: {
+            'tighter': '-0.02em',
+            'tight': '-0.015em',
+            'normal': '0em',
+            'wide': '0.05em',
+          },
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    code, .font-mono { font-family: 'Geist Mono', monospace; }
+    .prose { line-height: 1.5; }
+    .prose-sm { line-height: 1.5; font-size: 14px; }
+    .display-hero { font-size: 72px; font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; }
+    .heading-1 { font-size: 48px; font-weight: 600; line-height: 1.10; letter-spacing: -0.01em; }
+    .heading-2 { font-size: 36px; font-weight: 600; line-height: 1.20; letter-spacing: -0.005em; }
+    .heading-3 { font-size: 28px; font-weight: 600; line-height: 1.25; }
+    .heading-4 { font-size: 22px; font-weight: 600; line-height: 1.30; }
+    .heading-5 { font-size: 18px; font-weight: 600; line-height: 1.40; }
+    .subtitle { font-size: 18px; font-weight: 400; line-height: 1.50; }
+    .body-md { font-size: 16px; font-weight: 400; line-height: 1.50; }
+    .body-md-medium { font-size: 16px; font-weight: 500; line-height: 1.50; }
+    .body-sm { font-size: 14px; font-weight: 400; line-height: 1.50; }
+    .body-sm-medium { font-size: 14px; font-weight: 500; line-height: 1.50; }
+    .caption { font-size: 13px; font-weight: 400; line-height: 1.40; }
+    .caption-bold { font-size: 13px; font-weight: 600; line-height: 1.40; }
+    .micro-uppercase { font-size: 11px; font-weight: 600; line-height: 1.40; letter-spacing: 0.05em; text-transform: uppercase; }
+    .code-inline { font-size: 13px; font-weight: 500; line-height: 1.30; font-family: 'Geist Mono', monospace; }
+    .section-divider { border-bottom: 1px solid #e5e5e5; }
+    .table-header { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #5a5a5c; }
+    .tag-green { background: rgba(0,212,164,0.12); color: #00b48a; }
+    .tag-blue { background: rgba(55,114,207,0.12); color: #3772cf; }
+    .tag-red { background: rgba(212,86,86,0.12); color: #d45656; }
+    .tag-orange { background: rgba(195,125,13,0.12); color: #c37d0d; }
+    .shadow-card { box-shadow: rgba(0,0,0,0.08) 0px 4px 12px 0px; }
+    .shadow-mockup { box-shadow: rgba(0,0,0,0.12) 0px 24px 48px -8px; }
+    .badge-green-border { border: 2px solid #00d4a4; box-shadow: rgba(0,212,164,0.08) 0px 8px 24px; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    canvas { max-width: 100%; }
+    .chart-container { position: relative; height: 280px; }
+    .chart-container-sm { position: relative; height: 220px; }
+    .chart-container-lg { position: relative; height: 320px; }
+  </style>
+</head>
+<body class="bg-canvas text-ink">
+
+  <!-- Top Navigation -->
+  <nav class="sticky top-0 z-50 bg-canvas border-b border-hairline-soft">
+    <div class="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="#" class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-md bg-brand-green flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="#0a0a0a"/><rect x="9" y="2" width="5" height="5" rx="1" fill="#0a0a0a"/><rect x="2" y="9" width="5" height="5" rx="1" fill="#0a0a0a"/><rect x="9" y="9" width="5" height="5" rx="1" fill="#0a0a0a"/></svg>
+          </div>
+          <span class="body-md-medium text-ink">ProjectOS</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Dashboard</a>
+          <a href="#" class="body-sm font-medium text-ink">Quản lý công việc</a>
+          <a href="#" class="body-sm text-steel hover:text-ink transition-colors">backlog</a>
+          <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Timeline</a>
+          <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Báo cáo</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="h-9 px-4 rounded-full bg-primary text-white body-sm-medium flex items-center gap-2">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Tạo công việc mới
+        </button>
+        <div class="w-8 h-8 rounded-full bg-surface flex items-center justify-center body-sm-medium text-steel">TT</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <div class="max-w-7xl mx-auto px-8 py-3 flex items-center gap-2 text-steel body-sm">
+    <a href="#" class="hover:text-ink transition-colors">Tài liệu</a>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <a href="#" class="hover:text-ink transition-colors">Best Practices</a>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="text-ink">Sản phẩm Discovery — Quản lý công việc</span>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden" style="background: linear-gradient(180deg, #87a8c8 0%, #f5e9d8 100%);">
+    <div class="max-w-7xl mx-auto px-8 py-16">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm rounded-full px-3 py-1 mb-6">
+          <div class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></div>
+          <span class="caption-bold text-charcoal">Sản phẩm Discovery v1.0</span>
+        </div>
+        <h1 class="display-hero text-ink mb-6">ProjectOS — Quản lý công việc</h1>
+        <p class="subtitle text-charcoal mb-8">Khám phá cơ hội xây dựng nền tảng quản lý dự án tích hợp cho nhóm phát triển phần mềm. Tập trung vào vấn đề và cơ hội trước khi đầu tư.</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="bg-white/70 backdrop-blur-sm rounded-full px-3 py-1.5 caption-bold text-charcoal">Chế độ: Viết mới (A)</span>
+          <span class="bg-white/70 backdrop-blur-sm rounded-full px-3 py-1.5 caption text-charcoal">2026-05-28</span>
+          <span class="bg-white/70 backdrop-blur-sm rounded-full px-3 py-1.5 caption text-charcoal">Ngô Thanh Tùng</span>
+        </div>
+      </div>
+    </div>
+    <!-- Decorative -->
+    <div class="absolute right-0 top-0 bottom-0 w-1/3 opacity-10">
+      <svg viewBox="0 0 400 400" fill="none" class="w-full h-full">
+        <circle cx="300" cy="200" r="150" stroke="#0a0a0a" stroke-width="1"/>
+        <circle cx="300" cy="200" r="100" stroke="#0a0a0a" stroke-width="1"/>
+        <circle cx="300" cy="200" r="50" stroke="#0a0a0a" stroke-width="1"/>
+        <line x1="150" y1="200" x2="450" y2="200" stroke="#0a0a0a" stroke-width="1"/>
+        <line x1="300" y1="50" x2="300" y2="350" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-8 py-section">
+
+    <!-- Section 1: Problem Framing -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM10 6v4l3 3" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">1. Problem Framing</h2>
+          <p class="caption text-steel mt-0.5">Định nghĩa vấn đề cốt lõi</p>
+        </div>
+      </div>
+
+      <!-- 1.1 Problem Statement -->
+      <div class="bg-surface rounded-lg p-xxl mb-8 border border-hairline">
+        <h3 class="heading-5 text-ink mb-4">1.1 Problem Statement</h3>
+        <div class="bg-canvas rounded-lg p-lg border border-hairline">
+          <p class="body-md text-charcoal leading-relaxed">
+            Các nhóm phát triển phần mềm hiện đang sử dụng <strong>nhiều công cụ rời rạc</strong> (bảng tính, email, ứng dụng nhắn tin, tài liệu) để quản lý công việc — dẫn đến <strong>thiếu tầm nhìn về tiến độ</strong>, <strong>giao tiếp không đồng bộ</strong>, và <strong>khó kiểm soát chi phí dự án</strong>. Hậu quả: thời hạn bị trễ, ngân sách vượt kiểm soát, và thời gian họp tăng vôi.
+          </p>
+        </div>
+      </div>
+
+      <!-- 1.2 Pain Point Mapping -->
+      <div class="bg-surface rounded-lg p-xxl mb-8 border border-hairline">
+        <h3 class="heading-5 text-ink mb-4">1.2 Pain Point Mapping</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-hairline-soft">
+                <th class="text-left py-3 pr-4 table-header">Pain Point</th>
+                <th class="text-left py-3 px-3 table-header w-36">Mức độ nghiêm trọng</th>
+                <th class="text-left py-3 px-3 table-header w-32">Tần suất</th>
+                <th class="text-left py-3 pl-3 table-header w-40">Phạm vi ảnh hưởng</th>
+              </tr>
+            </thead>
+            <tbody class="body-sm">
+              <tr class="border-b border-hairline-soft">
+                <td class="py-3 pr-4 text-ink">Thiếu tầm nhìn tiến độ dự án — PM phải hỏi từng thành viên</td>
+                <td class="py-3 px-3"><span class="inline-flex items-center gap-1.5 bg-brand-error/10 text-brand-error caption-bold rounded-full px-2.5 py-0.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-error"></span>Cao</span></td>
+                <td class="py-3 px-3 text-charcoal">Thường xuyên</td>
+                <td class="py-3 pl-3 text-charcoal">Toàn hệ thống</td>
+              </tr>
+              <tr class="border-b border-hairline-soft">
+                <td class="py-3 pr-4 text-ink">Dữ liệu phân tán — Ngân sách trên Excel, công việc trên Trello, rủi ro trên doc</td>
+                <td class="py-3 px-3"><span class="inline-flex items-center gap-1.5 bg-brand-error/10 text-brand-error caption-bold rounded-full px-2.5 py-0.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-error"></span>Cao</span></td>
+                <td class="py-3 px-3 text-charcoal">Thường xuyên</td>
+                <td class="py-3 pl-3 text-charcoal">Nhóm / Cá nhân</td>
+              </tr>
+              <tr class="border-b border-hairline-soft">
+                <td class="py-3 pr-4 text-ink">Thời gian họp tăng — 30-50% thời gian dùng để cập nhật trạng thái</td>
+                <td class="py-3 px-3"><span class="inline-flex items-center gap-1.5 bg-brand-warn/10 text-brand-warn caption-bold rounded-full px-2.5 py-0.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-warn"></span>Trung bình</span></td>
+                <td class="py-3 px-3 text-charcoal">Thường xuyên</td>
+                <td class="py-3 pl-3 text-charcoal">Toàn hệ thống</td>
+              </tr>
+              <tr class="border-b border-hairline-soft">
+                <td class="py-3 pr-4 text-ink">Khó dự báo Thời hạn — thiếu biểu đồ Gantt và phụ thuộc công việc</td>
+                <td class="py-3 px-3"><span class="inline-flex items-center gap-1.5 bg-brand-error/10 text-brand-error caption-bold rounded-full px-2.5 py-0.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-error"></span>Cao</span></td>
+                <td class="py-3 px-3 text-charcoal">Thường xuyên</td>
+                <td class="py-3 pl-3 text-charcoal">Nhóm</td>
+              </tr>
+              <tr class="border-b border-hairline-soft">
+                <td class="py-3 pr-4 text-ink">Rủi ro được phát hiện muộn — không có Rủi ro register tập trung</td>
+                <td class="py-3 px-3"><span class="inline-flex items-center gap-1.5 bg-brand-warn/10 text-brand-warn caption-bold rounded-full px-2.5 py-0.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-warn"></span>Trung bình</span></td>
+                <td class="py-3 px-3 text-charcoal">Đôi khi</td>
+                <td class="py-3 pl-3 text-charcoal">Toàn hệ thống</td>
+              </tr>
+              <tr>
+                <td class="py-3 pr-4 text-ink">Công cụ hiện tại không tích hợp — context switching giảm năng suất</td>
+                <td class="py-3 px-3"><span class="inline-flex items-center gap-1.5 bg-brand-warn/10 text-brand-warn caption-bold rounded-full px-2.5 py-0.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-warn"></span>Trung bình</span></td>
+                <td class="py-3 px-3 text-charcoal">Thường xuyên</td>
+                <td class="py-3 pl-3 text-charcoal">Cá nhân</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 1.3 Mức nền chỉ số -->
+      <div class="bg-surface rounded-lg p-xxl border border-hairline">
+        <h3 class="heading-5 text-ink mb-4">1.3 Mức nền chỉ số</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <!-- Chart -->
+          <div class="lg:col-span-3 bg-canvas rounded-lg p-lg border border-hairline">
+            <p class="caption-bold text-steel mb-4 micro-uppercase">Hiện tại vs Mục tiêu</p>
+            <div class="chart-container">
+              <canvas id="chartBaseline"></canvas>
+            </div>
+          </div>
+          <!-- Legend cards -->
+          <div class="lg:col-span-2 space-y-3">
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-sm text-charcoal">Thời gian cập nhật tiến độ</span>
+                <span class="caption-bold text-brand-error">↑ 500%</span>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="flex-1 h-2 bg-hairline rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-error rounded-full" style="width:100%"></div>
+                </div>
+                <span class="caption text-steel whitespace-nowrap">2.5h → 30m</span>
+              </div>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-sm text-charcoal">Tỷ lệ giao hàng đúng hạn</span>
+                <span class="caption-bold text-brand-error">↑ gap 15%</span>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="flex-1 h-2 bg-hairline rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-error rounded-full" style="width:60%"></div>
+                </div>
+                <span class="caption text-steel whitespace-nowrap">60% → 75%</span>
+              </div>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-sm text-charcoal">Ngân sách overrun</span>
+                <span class="caption-bold text-brand-green-deep">↓ Mục tiêu -15%</span>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="flex-1 h-2 bg-hairline rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-error rounded-full" style="width:25%"></div>
+                </div>
+                <span class="caption text-steel whitespace-nowrap">25% → &lt;10%</span>
+              </div>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-sm text-charcoal">NPS công cụ</span>
+                <span class="caption-bold text-brand-warn">↑ +28 pts</span>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="flex-1 h-2 bg-hairline rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-warn rounded-full" style="width:30%"></div>
+                </div>
+                <span class="caption text-steel whitespace-nowrap">+12 → +40</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Bên liên quan Map -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-brand-Nhãn/10 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="7" cy="6" r="3" stroke="#3772cf" stroke-width="1.5"/><circle cx="13" cy="6" r="3" stroke="#3772cf" stroke-width="1.5"/><path d="M2 17c0-3 2.5-5 5-5h6c2.5 0 5 2 5 5" stroke="#3772cf" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">2. Bên liên quan Map</h2>
+          <p class="caption text-steel mt-0.5">Ai liên quan và mối quan tâm của họ</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- 2.1 Bên liên quan Identification -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">2.1 Bên liên quan Identification</h3>
+          <div class="space-y-3">
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-md-medium text-ink">Dự án Manager</span>
+                <span class="Nhãn-blue caption-bold rounded-full px-2.5 py-0.5">Người tài trợ</span>
+              </div>
+              <p class="caption text-steel">Cần Tầm nhìn tiến độ, kiểm soát Thời hạn &amp; Ngân sách, giảm thời gian họp</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-md-medium text-ink">nhóm Trưởng nhóm / Lập trình viên</span>
+                <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">người dùng</span>
+              </div>
+              <p class="caption text-steel">Cần quản lý công việc, xem timeline, theo dõi khối lượng công việc</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-md-medium text-ink">Kinh doanh Analyst</span>
+                <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">người dùng</span>
+              </div>
+              <p class="caption text-steel">Cần backlog Quản lý, viết Yêu cầu, ưu tiên công việc</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-md-medium text-ink">C-Level / CTO</span>
+                <span class="Nhãn-blue caption-bold rounded-full px-2.5 py-0.5">Người tài trợ</span>
+              </div>
+              <p class="caption text-steel">Cần báo cáo chi phí, chất lượng Giao hàng, tổng quan portfolio dự án</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-md-medium text-ink">QA Engineer</span>
+                <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">người dùng</span>
+              </div>
+              <p class="caption text-steel">Cần link Kiểm thử case với công việc, theo dõi Lỗi, kết quả Kiểm thử</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-1">
+                <span class="body-md-medium text-ink">Khách hàng</span>
+                <span class="Nhãn-blue caption-bold rounded-full px-2.5 py-0.5">External</span>
+              </div>
+              <p class="caption text-steel">Cần xem tiến độ dự án (read-only portal), nhận thông báo Cột mốc</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.2 & 2.3 -->
+        <div class="space-y-8">
+          <!-- 2.2 Influence/Interest Grid -->
+          <div class="bg-surface rounded-lg p-xxl border border-hairline">
+            <h3 class="heading-5 text-ink mb-4">2.2 Influence/Interest Grid</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <!-- Header -->
+              <div></div>
+              <div class="caption-bold text-center text-steel mb-3">Quan tâm cao</div>
+              <div class="caption-bold text-center text-steel mb-3">Quan tâm thấp</div>
+              <!-- Row: Ảnh hưởng cao -->
+              <div class="caption-bold text-steel text-right pr-3 pt-3">Ảnh hưởng cao</div>
+              <div class="bg-brand-green/8 rounded-lg p-3 border border-brand-green/20">
+                <div class="caption-bold text-brand-green-deep mb-1">PM, C-Level/CTO</div>
+                <p class="caption text-steel">Quan tâm nhiều, ảnh hưởng lớn đến quyết định đầu tư và Lộ trình</p>
+              </div>
+              <div class="bg-surface rounded-lg p-3 border border-hairline">
+                <div class="caption-bold text-steel mb-1">IT Quản trị viên, Bảo mật</div>
+                <p class="caption text-steel">Ít quan tâm nhưng ảnh hưởng lớn đến triển khai kỹ thuật</p>
+              </div>
+              <!-- Row: Ảnh hưởng thấp -->
+              <div class="caption-bold text-steel text-right pr-3 pt-3">Ảnh hưởng thấp</div>
+              <div class="bg-surface rounded-lg p-3 border border-hairline">
+                <div class="caption-bold text-ink mb-1">Lập trình viên, BA, QA</div>
+                <p class="caption text-steel">Quan tâm nhiều đến trải nghiệm sử dụng hàng ngày</p>
+              </div>
+              <div class="bg-surface rounded-lg p-3 border border-hairline">
+                <div class="caption-bold text-steel mb-1">Khách hàng</div>
+                <p class="caption text-steel">Quan tâm đến kết quả cuối, không quan tâm công cụ bên trong</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2.3 Information Needs -->
+          <div class="bg-surface rounded-lg p-xxl border border-hairline">
+            <h3 class="heading-5 text-ink mb-4">2.3 Information Needs</h3>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between py-2 border-b border-hairline-soft">
+                <span class="body-sm text-ink">PM / C-Level</span>
+                <div class="flex gap-2">
+                  <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Problem Statement + ROI</span>
+                  <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Slide / Báo cáo</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-hairline-soft">
+                <span class="body-sm text-ink">Lập trình viên / BA / QA</span>
+                <div class="flex gap-2">
+                  <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Workflow Demo</span>
+                  <span class="Nhãn-blue caption rounded-full px-2 py-0.5">Tính năng List</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between py-2">
+                <span class="body-sm text-ink">Khách hàng</span>
+                <div class="flex gap-2">
+                  <span class="Nhãn-blue caption rounded-full px-2 py-0.5">1-pager</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Cơ hội Assessment -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l7 14H3L10 2z" stroke="#00d4a4" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">3. Cơ hội Assessment</h2>
+          <p class="caption text-steel mt-0.5">Giá trị kinh doanh và cơ hội thị trường</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <!-- 3.1 Kinh doanh Giá trị -->
+        <div class="lg:col-span-2 bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">3.1 Kinh doanh Giá trị</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <p class="caption-bold text-steel micro-uppercase mb-3">Các chỉ số cải thiện</p>
+              <div class="chart-container-sm">
+                <canvas id="chartBusinessValue"></canvas>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-canvas rounded-lg p-4 border border-hairline text-center">
+                  <p class="heading-2 text-brand-green">20%</p>
+                  <p class="caption text-steel">Giảm thời gian quản lý</p>
+                </div>
+                <div class="bg-canvas rounded-lg p-4 border border-hairline text-center">
+                  <p class="heading-2 text-brand-green">+15%</p>
+                  <p class="caption text-steel">Cải thiện giao hàng đúng hạn</p>
+                </div>
+                <div class="bg-canvas rounded-lg p-4 border border-hairline text-center">
+                  <p class="heading-2 text-brand-green">30%</p>
+                  <p class="caption text-steel">Giảm cuộc họp</p>
+                </div>
+                <div class="bg-canvas rounded-lg p-4 border border-hairline text-center">
+                  <p class="heading-2 text-brand-green">25%</p>
+                  <p class="caption text-steel">Cải thiện kiểm soát chi phí</p>
+                </div>
+              </div>
+              <div class="bg-canvas rounded-lg p-4 border border-hairline">
+                <p class="caption-bold text-ink mb-2">ROI dự kiến</p>
+                <p class="body-sm text-charcoal">nhóm 20 người tiết kiệm ~2h/tuần = <strong>40h/tuần</strong>. Với 500k/h = <strong class="text-brand-green-deep">20M/tháng</strong>. ROI trong <strong class="text-brand-green-deep">3-6 tháng</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.2 Thị trường Cơ hội -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">3.2 Thị trường Cơ hội</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="body-sm text-charcoal">Thị trường PM tools toàn cầu đạt <strong>$8.5B năm 2026</strong>, CAGR 13%</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="body-sm text-charcoal">80% SMB/startup tại APAC chưa có giải pháp tích hợp</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="body-sm text-charcoal">Cơ hội với các nhóm cần multi-module: Ngân sách + Rủi ro + Tài liệu + Meeting</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="body-sm text-charcoal">Khách hàng rời Jira/Asana vì thiếu tích hợp Chi phí theo dõi &amp; Rủi ro</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.3 & 3.4 -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- 3.3 Chiến lược Alignment -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">3.3 Chiến lược Alignment</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-5 h-5 rounded bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="body-sm text-charcoal"><strong class="text-ink">Nâng cao năng suất nhóm</strong> — Một trong 3 OKR quý</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-5 h-5 rounded bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="body-sm text-charcoal"><strong class="text-ink">Cải thiện Giao hàng Khả năng dự báo</strong> — KPI của Engineering</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-5 h-5 rounded bg-brand-green/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#00d4a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="body-sm text-charcoal"><strong class="text-ink">Platform-as-Sản phẩm Chiến lược</strong> — Mở rộng từ internal tool</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.4 Giả định -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">3.4 Giả định <span class="Nhãn-red caption-bold rounded-full px-2 py-0.5 ml-2">GIẢ ĐỊNH</span></h3>
+          <div class="space-y-3">
+            <div class="bg-canvas rounded-lg p-3 border border-hairline">
+              <p class="body-sm-medium text-ink mb-1">[GIẢ ĐỊNH 1]</p>
+              <p class="caption text-steel">nhóm chấp nhận chuyển đổi từ công cụ rời rạc sang unified platform trong 2 tuần</p>
+              <p class="caption text-steel mt-1"><strong class="text-brand-error">Nếu sai:</strong> Áp dụng rate &lt; 50% → không đạt mục tiêu ROI</p>
+              <p class="caption text-brand-Nhãn mt-1"><strong>Kiểm chứng:</strong> Thử nghiệm thí điểm với 1 nhóm 10 người trong 2 tuần</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-3 border border-hairline">
+              <p class="body-sm-medium text-ink mb-1">[GIẢ ĐỊNH 2]</p>
+              <p class="caption text-steel">Người dùng cần 3 chế độ view (List/Kanban/Calendar) là đủ cho 80% use case</p>
+              <p class="caption text-steel mt-1"><strong class="text-brand-error">Nếu sai:</strong> người dùng satisfaction thấp → Tỷ lệ rời bỏ cao</p>
+              <p class="caption text-brand-Nhãn mt-1"><strong>Kiểm chứng:</strong> Survey 50 người dùng về view preference</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-3 border border-hairline">
+              <p class="body-sm-medium text-ink mb-1">[GIẢ ĐỊNH 3]</p>
+              <p class="caption text-steel">Chi phí vận hành &lt; $500/tháng cho 100 người dùng (infra + hosting)</p>
+              <p class="caption text-steel mt-1"><strong class="text-brand-error">Nếu sai:</strong> Kinh doanh model không bền vững</p>
+              <p class="caption text-brand-Nhãn mt-1"><strong>Kiểm chứng:</strong> POC technical Đánh giá kỹ thuật trước khi Xây dựng</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Solution Options -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" stroke="#00d4a4" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1" stroke="#00d4a4" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1" stroke="#00d4a4" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1" stroke="#00d4a4" stroke-width="1.5"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">4. Solution Options</h2>
+          <p class="caption text-steel mt-0.5">Phương án nghiệp vụ — không mô tả chi tiết triển khai kỹ thuật</p>
+        </div>
+      </div>
+
+      <!-- 4.1 Options Overview -->
+      <div class="bg-surface rounded-lg p-xxl border border-hairline mb-6">
+        <h3 class="heading-5 text-ink mb-4">4.1 Options Overview</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-hairline-soft">
+                <th class="text-left py-3 pr-4 table-header w-24">Phương án</th>
+                <th class="text-left py-3 px-3 table-header">Mô tả</th>
+                <th class="text-left py-3 px-3 table-header">Lợi ích chính</th>
+                <th class="text-left py-3 px-3 table-header">Rủi ro chính</th>
+                <th class="text-left py-3 pl-3 table-header w-32">Chi phí</th>
+              </tr>
+            </thead>
+            <tbody class="body-sm">
+              <tr class="border-b border-hairline-soft">
+                <td class="py-3 pr-4"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white caption-bold">A</span></td>
+                <td class="py-3 px-3 text-ink">
+                  <span class="body-md-medium">Tự xây dựng — Phát triển nội bộ</span>
+                  <p class="caption text-steel mt-1">Xây dựng proprietary PM platform từ đầu, phù hợp với internal use case</p>
+                </td>
+                <td class="py-3 px-3 text-charcoal">
+                  <ul class="space-y-1">
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Full control — Tùy chỉnh hoàn toàn</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Tích hợp sâu với hệ sinh thái</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Không phụ thuộc vendor</li>
+                  </ul>
+                </td>
+                <td class="py-3 px-3 text-charcoal">
+                  <ul class="space-y-1">
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Thời gian phát triển 6-12 tháng</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Rủi ro Xây dựng sai Tính năng</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Chi phí Duy trì lâu dài</li>
+                  </ul>
+                </td>
+                <td class="py-3 pl-3"><span class="Nhãn-red caption-bold rounded-full px-2.5 py-0.5">Cao</span></td>
+              </tr>
+              <tr class="border-b border-hairline-soft">
+                <td class="py-3 pr-4"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-brand-green text-primary caption-bold">B</span></td>
+                <td class="py-3 px-3 text-ink">
+                  <span class="body-md-medium">Mở rộng công cụ hiện có — Jira/Linear</span>
+                  <p class="caption text-steel mt-1">Custom plugin trên nền tảng PM tool hiện có, thêm module Chi phí &amp; Rủi ro</p>
+                </td>
+                <td class="py-3 px-3 text-charcoal">
+                  <ul class="space-y-1">
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Time-to-Giá trị nhanh (3-4 tháng)</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>người dùng quen thuộc với tool gốc</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Chi phí thấp hơn Xây dựng from scratch</li>
+                  </ul>
+                </td>
+                <td class="py-3 px-3 text-charcoal">
+                  <ul class="space-y-1">
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Phụ thuộc vendor Lộ trình</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Giới hạn Tùy chỉnh</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Không fit nếu cần 10 module đầy đủ</li>
+                  </ul>
+                </td>
+                <td class="py-3 pl-3"><span class="Nhãn-orange caption-bold rounded-full px-2.5 py-0.5">Trung bình</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 pr-4"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-steel text-white caption-bold">C</span></td>
+                <td class="py-3 px-3 text-ink">
+                  <span class="body-md-medium">SaaS Subscription — Mua giải pháp có sẵn</span>
+                  <p class="caption text-steel mt-1">Thuê platform PM SaaS như Monday.com, ClickUp, hoặc Wrike</p>
+                </td>
+                <td class="py-3 px-3 text-charcoal">
+                  <ul class="space-y-1">
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Triển khai nhanh nhất (1-2 tuần)</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Không cần nhóm kỹ thuật Duy trì</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Có Tính năng đã được Xác nhận</li>
+                  </ul>
+                </td>
+                <td class="py-3 px-3 text-charcoal">
+                  <ul class="space-y-1">
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Chi phí subscription dài hạn cao</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Không Tùy chỉnh được sâu</li>
+                    <li class="flex items-start gap-1.5"><svg class="w-4 h-4 text-brand-error flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Vendor lock-in, data privacy</li>
+                  </ul>
+                </td>
+                <td class="py-3 pl-3"><span class="Nhãn-blue caption-bold rounded-full px-2.5 py-0.5">Thấp</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 4.2 Trade-off Analysis -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">4.2 Trade-off Analysis</h3>
+          <div class="bg-canvas rounded-lg p-4 border border-hairline">
+            <p class="caption-bold text-steel micro-uppercase mb-3">So sánh phương án</p>
+            <div class="chart-container">
+              <canvas id="chartTradeoff"></canvas>
+            </div>
+            <div class="flex items-center justify-center gap-6 mt-3">
+              <div class="flex items-center gap-1.5"><div class="w-3 h-0.5 bg-primary rounded"></div><span class="caption text-steel">A: Tự xây dựng</span></div>
+              <div class="flex items-center gap-1.5"><div class="w-3 h-0.5 bg-brand-green rounded"></div><span class="caption text-steel">B: Mở rộng</span></div>
+              <div class="flex items-center gap-1.5"><div class="w-3 h-0.5 bg-steel rounded"></div><span class="caption text-steel">C: Thuê SaaS</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4.3 Khuyến nghị -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">4.3 Khuyến nghị</h3>
+          <div class="bg-brand-green/8 rounded-lg p-lg border-2 border-brand-green mb-4">
+            <div class="flex items-center gap-2 mb-3">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6l2-6z" fill="#00d4a4"/></svg>
+              <span class="body-md-medium text-brand-green-deep">Khuyến nghị: Phương án A — Tự xây dựng</span>
+            </div>
+            <div class="body-sm text-charcoal space-y-2">
+              <p><strong>Lý do:</strong> Nhu cầu bao gồm 10 module (Dashboard, công việc, backlog, Timeline, nhóm, Ngân sách, Rủi ro, Document, Meeting, Báo cáo) — không có giải pháp nào đáp ứng đầy đủ mà không cần tùy chỉnh nặng.</p>
+              <p><strong>Chiến lược kết hợp:</strong> Giai đoạn 1 (Sản phẩm khả thi tối thiểu — 4 module) trong 3 tháng để xác nhận tính khả thi, sau đó mở rộng theo phản hồi. Điều này giảm rủi ro so với xây 10 module cùng lúc.</p>
+            </div>
+          </div>
+          <p class="caption text-steel"><strong>Lưu ý:</strong> Cần thêm <span class="Nhãn-red caption-bold rounded-full px-2 py-0.5">Technical Đánh giá kỹ thuật 2 tuần</span> để xác nhận feasible architecture trước khi commit full development.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Tính khả thi & Rủi ro Assessment -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-brand-error/10 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3l8 15H2L10 3z" stroke="#d45656" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 9v4M10 15h.01" stroke="#d45656" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">5. Tính khả thi &amp; Rủi ro Assessment</h2>
+          <p class="caption text-steel mt-0.5">Đánh giá khả thi và rủi ro</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- 5.1 Tính khả thi -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">5.1 Tính khả thi</h3>
+          <div class="space-y-4">
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-2">
+                <span class="body-md-medium text-ink">Technical Tính khả thi</span>
+                <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">Khả thi</span>
+              </div>
+              <p class="caption text-steel">Stack hiện tại (React, Node.js, PostgreSQL) đủ để Xây dựng 10 modules. Cần đánh giá thêm: real-time architecture (WebSocket vs SSE), offline-first capability, và multi-tenancy nếu có khách hàng external.</p>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-2">
+                <span class="body-md-medium text-ink">Nguồn lực Tính khả thi</span>
+                <span class="Nhãn-orange caption-bold rounded-full px-2.5 py-0.5">Cần đánh giá thêm</span>
+              </div>
+              <p class="caption text-steel">Cần 2 FE + 2 BE + 1 PM + 1 UX cho MVP 4 tháng. Hiện tại có 1 FE + 1 BE + 1 PM. <span class="Nhãn-red caption-bold rounded-full px-1.5 py-0.5 text-xs">Thiếu 1 FE + 1 BE</span></p>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-2">
+                <span class="body-md-medium text-ink">Legal / Tuân thủ</span>
+                <span class="Nhãn-green caption-bold rounded-full px-2.5 py-0.5">OK</span>
+              </div>
+              <p class="caption text-steel">Không có yêu cầu Tuân thủ đặc biệt (GDPR applies nếu có người dùng EU). Data residency: Vietnam/Singapore. Cần kiểm tra internal data policy.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.2 Rủi ro Assessment -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-4">5.2 Rủi ro Assessment</h3>
+	          <div class="bg-canvas rounded-lg p-4 border border-hairline mb-4">
+	            <p class="caption-bold text-steel micro-uppercase mb-3">Rủi ro Heatmap — Tác động vs Likelihood</p>
+	            <div class="chart-container-sm">
+	              <canvas id="chartRisk"></canvas>
+	            </div>
+	          </div>
+          <div class="space-y-3">
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-2">
+                <span class="body-md-medium text-ink">Rủi ro 1: Low người dùng Áp dụng</span>
+                <span class="Nhãn-red caption-bold rounded-full px-2.5 py-0.5">Cao</span>
+              </div>
+              <p class="caption text-steel mb-2">nhóm không chuyển đổi từ công cụ cũ → không đạt mục tiêu ROI</p>
+              <div class="bg-brand-green/8 rounded-md p-2 border border-brand-green/20">
+                <p class="caption-bold text-brand-green-deep mb-1">Mitigation</p>
+                <p class="caption text-steel">Thử nghiệm thí điểm 1 nhóm 10 người trước. UX research trước khi Xây dựng. Incentive program cho early adopters. Dashboard tự động cập nhật thay vì manual input.</p>
+              </div>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-2">
+                <span class="body-md-medium text-ink">Rủi ro 2: Phạm vi creep — 10 module cùng lúc</span>
+                <span class="Nhãn-red caption-bold rounded-full px-2.5 py-0.5">Cao</span>
+              </div>
+              <p class="caption text-steel mb-2">Liên tục thêm Tính năng mới → delayed Giao hàng, chất lượng giảm</p>
+              <div class="bg-brand-green/8 rounded-md p-2 border border-brand-green/20">
+                <p class="caption-bold text-brand-green-deep mb-1">Mitigation</p>
+                <p class="caption text-steel">MoSCoW prioritization cứng nhắc. MVP chỉ 4 module (Dashboard, công việc, nhóm, Auth). Giai đoạn-gated development với checkpoint Đánh giá mỗi sprint.</p>
+              </div>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-center justify-between mb-2">
+                <span class="body-md-medium text-ink">Rủi ro 3: Hiệu năng với 10,000+ Công việc</span>
+                <span class="Nhãn-orange caption-bold rounded-full px-2.5 py-0.5">Trung bình</span>
+              </div>
+              <p class="caption text-steel mb-2">Database query chậm → UX degradation khi scale</p>
+              <div class="bg-brand-green/8 rounded-md p-2 border border-brand-green/20">
+                <p class="caption-bold text-brand-green-deep mb-1">Mitigation</p>
+                <p class="caption text-steel">Technical Đánh giá kỹ thuật 2 tuần. Database indexing Chiến lược từ đầu. Virtual scrolling cho large lists. Load Kiểm thử trước mỗi major Phát hành.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Prioritization Matrix -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-brand-Nhãn/10 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="#3772cf" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="1" stroke="#3772cf" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="1" stroke="#3772cf" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="1" stroke="#3772cf" stroke-width="1.5"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">6. Prioritization Matrix</h2>
+          <p class="caption text-steel mt-0.5">Tác động/Công sức Matrix và Go/No-Go Khuyến nghị</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- 6.1 Tác động/Công sức Matrix -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-6">6.1 Tác động/Công sức Matrix</h3>
+          <!-- ASCII-style matrix -->
+          <div class="relative">
+            <div class="flex items-center gap-4 mb-2">
+              <span class="micro-uppercase text-steel w-10">Công sức</span>
+              <div class="flex-1 flex items-center justify-between text-xs text-steel">
+                <span>Thấp</span>
+                <span>Cao</span>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-10 text-right text-xs text-steel flex flex-col justify-around">
+                <span>Cao</span>
+                <span class="mt-8">Thấp</span>
+              </div>
+              <div class="flex-1 grid grid-cols-2 gap-2 h-64">
+                <!-- Q1: Tác động Cao, Công sức Cao -->
+                <div class="relative rounded-lg border border-hairline bg-canvas p-3 flex flex-col items-center justify-center text-center">
+                  <span class="absolute -top-3 left-3 bg-surface px-2 py-0.5 rounded-full border border-hairline">
+                    <span class="caption-bold text-ink">①</span>
+                  </span>
+                  <span class="caption-bold text-ink mb-1">Dashboard + nhóm Mgmt</span>
+                  <span class="caption text-steel">Xây dựng đầy đủ</span>
+                  <span class="Nhãn-red caption rounded-full px-2 py-0.5 mt-2">Cao Công sức</span>
+                </div>
+                <!-- Q2: Tác động Cao, Công sức Thấp -->
+                <div class="relative rounded-lg border-2 border-brand-green bg-brand-green/5 p-3 flex flex-col items-center justify-center text-center">
+                  <span class="absolute -top-3 left-3 bg-brand-green/10 px-2 py-0.5 rounded-full border border-brand-green/30">
+                    <span class="caption-bold text-brand-green-deep">②</span>
+                  </span>
+                  <span class="caption-bold text-ink mb-1">công việc CRUD + 3 Views</span>
+                  <span class="caption text-steel">MVP core</span>
+                  <span class="Nhãn-green caption rounded-full px-2 py-0.5 mt-2">Ưu tiên cao</span>
+                </div>
+                <!-- Q3: Tác động Thấp, Công sức Cao -->
+                <div class="relative rounded-lg border border-hairline bg-canvas p-3 flex flex-col items-center justify-center text-center opacity-60">
+                  <span class="absolute -top-3 left-3 bg-surface px-2 py-0.5 rounded-full border border-hairline">
+                    <span class="caption-bold text-steel">③</span>
+                  </span>
+                  <span class="caption-bold text-steel mb-1">Mobile App</span>
+                  <span class="caption text-steel">Giai đoạn 2+</span>
+                </div>
+                <!-- Q4: Tác động Thấp, Công sức Thấp -->
+                <div class="relative rounded-lg border border-hairline bg-canvas p-3 flex flex-col items-center justify-center text-center">
+                  <span class="absolute -top-3 left-3 bg-surface px-2 py-0.5 rounded-full border border-hairline">
+                    <span class="caption-bold text-steel">④</span>
+                  </span>
+                  <span class="caption-bold text-ink mb-1">Templates + Bulk ops</span>
+                  <span class="caption text-steel">Should have</span>
+                </div>
+              </div>
+            </div>
+            <!-- Legend -->
+            <div class="mt-4 flex flex-wrap gap-3">
+              <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-brand-green/20 border border-brand-green"></div><span class="caption text-steel">② Ưu tiên cao — làm ngay</span></div>
+              <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-canvas border border-hairline"></div><span class="caption text-steel">① Chờ nguồn lực / chia nhỏ</span></div>
+              <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-canvas border border-hairline opacity-40"></div><span class="caption text-steel">③ Tránh / từ chối</span></div>
+              <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-canvas border border-hairline"></div><span class="caption text-steel">④ Hạng thấp</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6.2 Go/No-Go -->
+        <div class="bg-surface rounded-lg p-xxl border border-hairline">
+          <h3 class="heading-5 text-ink mb-6">6.2 Go/No-Go Khuyến nghị</h3>
+          <div class="bg-brand-green/8 rounded-lg p-lg border-2 border-brand-green mb-6">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <span class="heading-4 text-brand-green-deep">GO — Conditional</span>
+                <p class="caption text-steel">Khuyến nghị tiến hành với điều kiện</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-error/10 text-brand-error caption-bold flex items-center justify-center">!</span>
+                <div>
+                  <p class="body-sm-medium text-ink mb-1">Điều kiện 1: Nguồn lực confirmation</p>
+                  <p class="caption text-steel">Cần hire thêm 1 FE trước sprint 1. Hoặc timeline MVP kéo dài thêm 1 tháng.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-error/10 text-brand-error caption-bold flex items-center justify-center">!</span>
+                <div>
+                  <p class="body-sm-medium text-ink mb-1">Điều kiện 2: Technical Đánh giá kỹ thuật ĐẠT</p>
+                  <p class="caption text-steel">2 tuần Đánh giá kỹ thuật phải xác nhận: real-time architecture feasible, 10,000 Công việc query &lt; 200ms, WebSocket cho 50+ concurrent Người dùng.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-canvas rounded-lg p-4 border border-hairline">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-error/10 text-brand-error caption-bold flex items-center justify-center">!</span>
+                <div>
+                  <p class="body-sm-medium text-ink mb-1">Điều kiện 3: Thử nghiệm thí điểm nhóm Cam kết</p>
+                  <p class="caption text-steel">Cần 1 nhóm 10 người cam kết sử dụng MVP trong 2 tuần Thử nghiệm thí điểm. Nếu không có nhóm, hủy bỏ hoặc chuyển sang Phương án C (SaaS).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: PRD Kickoff Package -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-brand-green flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4v12" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">7. PRD Kickoff Package</h2>
+          <p class="caption text-steel mt-0.5">6 thông tin bắt buộc làm đầu vào cho <code class="code-inline bg-surface px-1.5 py-0.5 rounded-xs border border-hairline text-brand-Nhãn">cc-prd-writer</code></p>
+        </div>
+      </div>
+
+      <div class="bg-surface rounded-lg p-xxl border border-hairline">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-canvas rounded-lg p-lg border-2 border-brand-green">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-brand-green text-primary caption-bold flex items-center justify-center">1</span>
+              <span class="caption-bold text-steel micro-uppercase">Input</span>
+            </div>
+            <h4 class="heading-5 text-ink mb-2">Tên tính năng</h4>
+            <p class="body-sm text-charcoal">ProjectOS — Quản lý công việc Module (MVP)</p>
+          </div>
+          <div class="bg-canvas rounded-lg p-lg border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-steel text-white caption-bold flex items-center justify-center">2</span>
+              <span class="caption-bold text-steel micro-uppercase">Input</span>
+            </div>
+            <h4 class="heading-5 text-ink mb-2">Mục đích sản phẩm</h4>
+            <p class="body-sm text-charcoal">Cung cấp unified platform quản lý công việc với 3 view (List/Kanban/Calendar), giúp PM và nhóm có Tầm nhìn tiến độ real-time, giảm 30% thời gian họp, và cải thiện 15% tỷ lệ giao hàng đúng hạn.</p>
+          </div>
+          <div class="bg-canvas rounded-lg p-lg border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-steel text-white caption-bold flex items-center justify-center">3</span>
+              <span class="caption-bold text-steel micro-uppercase">Input</span>
+            </div>
+            <h4 class="heading-5 text-ink mb-2">Đối tượng sử dụng chính</h4>
+            <p class="body-sm text-charcoal">Dự án Manager (primary), nhóm Trưởng nhóm, Developer, Kinh doanh Analyst, QA Engineer trong các nhóm phát triển phần mềm từ 5-50 người.</p>
+          </div>
+          <div class="bg-canvas rounded-lg p-lg border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-steel text-white caption-bold flex items-center justify-center">4</span>
+              <span class="caption-bold text-steel micro-uppercase">Input</span>
+            </div>
+            <h4 class="heading-5 text-ink mb-2">Phạm vi trong (In-Phạm vi)</h4>
+            <ul class="body-sm text-charcoal space-y-1">
+              <li>• công việc CRUD với trường: title, description, Người phụ trách, Trạng thái, Mức ưu tiên, due date, Nhãn</li>
+              <li>• 3 chế độ xem: Danh sách, Kanban (kéo-thả), Lịch</li>
+              <li>• Lọc và sắp xếp theo người phụ trách, trạng thái, mức ưu tiên, ngày hết hạn</li>
+              <li>• Bình luận và @đề cập trên công việc</li>
+              <li>• Cập nhật thời gian thực</li>
+            </ul>
+          </div>
+          <div class="bg-canvas rounded-lg p-lg border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-steel text-white caption-bold flex items-center justify-center">5</span>
+              <span class="caption-bold text-steel micro-uppercase">Input</span>
+            </div>
+            <h4 class="heading-5 text-ink mb-2">Phạm vi ngoài (Out-of-Phạm vi)</h4>
+            <ul class="body-sm text-charcoal space-y-1">
+              <li>• Biểu đồ Gantt (thuộc module Timeline — Giai đoạn 1)</li>
+              <li>• Quản lý backlog, theo dõi chi phí, đăng ký rủi ro</li>
+              <li>• Quản lý tài liệu, tích hợp cuộc họp</li>
+              <li>• Quy tắc tự động hóa, thao tác hàng loạt</li>
+              <li>• Ứng dụng di động, chế độ ngoại tuyến, dự đoán bằng trí tuệ nhân tạo</li>
+            </ul>
+          </div>
+          <div class="bg-canvas rounded-lg p-lg border border-hairline">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-steel text-white caption-bold flex items-center justify-center">6</span>
+              <span class="caption-bold text-steel micro-uppercase">Input</span>
+            </div>
+            <h4 class="heading-5 text-ink mb-2">Ràng buộc nghiệp vụ</h4>
+            <ul class="body-sm text-charcoal space-y-1">
+              <li>• Phân quyền theo vai trò: Quản trị viên (toàn quyền), Quản lý (cấp dự án), Thành viên (công việc của mình)</li>
+              <li>• Thời gian thực: độ trễ ≤ 1 giây cho hơn 50 người dùng đồng thời</li>
+              <li>• Hiệu năng: thời gian tải &lt; 2 giây, tìm kiếm &lt; 500 mili giây</li>
+              <li>• Thời gian hoạt động: cam kết mức dịch vụ 99.5%, sao lưu hàng ngày, nhật ký kiểm toán</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Next Step -->
+        <div class="mt-8 bg-canvas-dark rounded-lg p-lg border border-hairline-dark">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-green flex items-center justify-center flex-shrink-0">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4v12" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <p class="body-md-medium text-white mb-1">Bước tiếp theo</p>
+              <p class="body-sm text-on-dark-muted">Dùng <code class="code-inline bg-hairline-dark px-1.5 py-0.5 rounded-xs text-brand-green">cc-prd-writer</code> để viết PRD hoàn chỉnh từ 6 inputs trên. Đảm bảo bao gồm: Tính năng Specification, người dùng Flows, Kinh doanh Rules, và NFR.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quality Checklist -->
+    <section class="mb-section">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M9 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6l2-6z" stroke="#5a5a5c" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h2 class="heading-3 text-ink">Quality Checklist</h2>
+          <p class="caption text-steel mt-0.5">Tự kiểm tra 15 điểm — đạt ≥ 13/15 để bàn giao</p>
+        </div>
+      </div>
+
+      <div class="bg-surface rounded-lg p-xxl border border-hairline">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Doughnut chart -->
+          <div class="flex flex-col items-center justify-center">
+            <div class="relative w-40 h-40">
+              <canvas id="chartQuality"></canvas>
+              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span class="heading-2 text-brand-green leading-none">15</span>
+                <span class="caption text-steel">/ 15</span>
+              </div>
+            </div>
+            <p class="caption-bold text-brand-green-deep mt-4">Sẵn sàng bàn giao</p>
+            <p class="caption text-steel text-center mt-1">≥ 13/15 = passed</p>
+          </div>
+          <!-- Checklist items by section -->
+          <div class="lg:col-span-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Problem Statement rõ ràng</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Pain Point severity/frequency/Phạm vi</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Mức nền chỉ số đầy đủ</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Bên liên quan Map đầy đủ</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Kinh doanh Giá trị định lượng</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Giả định đánh dấu [GIẢ ĐỊNH]</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">≥ 2 phương án với trade-off</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Khuyến nghị phương án</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Tính khả thi đánh giá đủ</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Top 3 Rủi ro + mitigation</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Tác động/Công sức matrix</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Go/No-Go rõ ràng</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Đủ 6 inputs cho cc-prd-writer</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Không có chi tiết triển khai kỹ thuật</span>
+              </div>
+              <div class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-canvas border border-hairline">
+                <svg class="w-4 h-4 text-brand-green flex-shrink-0" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="caption text-ink">Influence/Interest Grid + Info Needs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 text-center">
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-hairline bg-surface-soft">
+    <div class="max-w-7xl mx-auto px-8 py-section-sm">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded bg-brand-green flex items-center justify-center">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="#0a0a0a"/><rect x="9" y="2" width="5" height="5" rx="1" fill="#0a0a0a"/><rect x="2" y="9" width="5" height="5" rx="1" fill="#0a0a0a"/><rect x="9" y="9" width="5" height="5" rx="1" fill="#0a0a0a"/></svg>
+          </div>
+          <span class="body-sm text-steel">ProjectOS — Sản phẩm Discovery v1.0</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Discovery Template</a>
+          <a href="#" class="body-sm text-steel hover:text-ink transition-colors">Quality Checklist</a>
+          <a href="#" class="inline-flex items-center gap-1.5 body-sm text-brand-green hover:text-brand-green-deep transition-colors">
+            Next: cc-prd-writer
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Shared Chart.js defaults — Mintlify design system colors
+    Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, sans-serif";
+    Chart.defaults.font.size = 13;
+    Chart.defaults.color = '#5a5a5c';
+    Chart.defaults.borderColor = '#e5e5e5';
+
+    // ── 1. Baseline Metrics: grouped bar (current vs target) ──────────────
+    new Chart(document.getElementById('chartBaseline'), {
+      type: 'bar',
+      data: {
+        labels: ['Thời gian cập nhật\n(tuần)', 'Giao hàng đúng hạn\n(%)', 'Vượt ngân sách\n(%)', 'Tìm kiếm tài liệu\n(phút/ngày)', 'NPS công cụ\n(score)'],
+        datasets: [
+          {
+            label: 'Hiện tại',
+            data: [150, 60, 25, 45, 12],
+            backgroundColor: 'rgba(212,86,86,0.15)',
+            borderColor: 'rgba(212,86,86,0.6)',
+            borderWidth: 1.5,
+            borderRadius: 6,
+          },
+          {
+            label: 'Mục tiêu',
+            data: [30, 75, 10, 10, 40],     // scaled: 30=30m
+            backgroundColor: 'rgba(0,212,164,0.15)',
+            borderColor: 'rgba(0,212,164,0.6)',
+            borderWidth: 1.5,
+            borderRadius: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            align: 'end',
+            labels: { boxWidth: 12, boxHeight: 12, borderRadius: 3, useBorderRadius: true, padding: 16 },
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                const vals = ['', '2.5h', '60%', '25%', '45m', '+12',
+                                  '30m', '75%', '<10%', '10m', '+40'];
+                const idx = ctx.dataIndex * 2 + ctx.datasetIndex + 1;
+                return ctx.dataset.label + ': ' + (vals[idx] || ctx.raw);
+              },
+            },
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: '#ededed' },
+            ticks: {
+              callback: (v, i, arr) => {
+                const labels = ['', '2.5h', '60%', '25%', '45m', '+12', '', '30m', '75%', '<10%', '10m', '+40'];
+                return labels[i] || v;
+              },
+              maxTicksLimit: 8,
+            },
+          },
+          x: {
+            grid: { display: false },
+            ticks: { maxRotation: 0 },
+          },
+        },
+      },
+    });
+
+    // ── 2. Business Value: horizontal bar ───────────────────────────────
+    new Chart(document.getElementById('chartBusinessValue'), {
+      type: 'bar',
+      data: {
+        labels: ['Giảm thời gian quản lý', 'Cải thiện giao hàng đúng hạn', 'Giảm cuộc họp', 'Cải thiện kiểm soát chi phí'],
+        datasets: [{
+          label: 'Mức cải thiện (%)',
+          data: [20, 15, 30, 25],
+          backgroundColor: [
+            'rgba(0,212,164,0.7)',
+            'rgba(0,212,164,0.6)',
+            'rgba(0,212,164,0.8)',
+            'rgba(0,212,164,0.65)',
+          ],
+          borderColor: 'rgba(0,212,164,1)',
+          borderWidth: 1.5,
+          borderRadius: 6,
+          barThickness: 28,
+        }],
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.raw + '% cải thiện',
+            },
+          },
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 40,
+            grid: { color: '#ededed' },
+            ticks: { callback: v => v + '%' },
+          },
+          y: {
+            grid: { display: false },
+          },
+        },
+      },
+    });
+
+    // ── 3. Trade-off Analysis: radar chart ────────────────────────────────
+    // Ghi chú: Công sức và Rủi ro "thấp = tốt" — đảo ngược trên chart (5-raw)
+    new Chart(document.getElementById('chartTradeoff'), {
+      type: 'radar',
+      data: {
+        labels: ['Tác động', 'Công sức', 'Thời gian tạo giá trị', 'Rủi ro'],
+        datasets: [
+          {
+            label: 'A: Tự xây dựng',
+            data: [5, 5, 5, 5],
+            backgroundColor: 'rgba(10,10,10,0.1)',
+            borderColor: '#0a0a0a',
+            borderWidth: 2,
+            pointBackgroundColor: '#0a0a0a',
+            pointRadius: 4,
+          },
+          {
+            label: 'B: Mở rộng',
+            data: [3, 3, 3, 3],
+            backgroundColor: 'rgba(0,212,164,0.1)',
+            borderColor: '#00d4a4',
+            borderWidth: 2,
+            pointBackgroundColor: '#00d4a4',
+            pointRadius: 4,
+          },
+          {
+            label: 'C: Thuê SaaS',
+            data: [2, 1, 1, 1],
+            backgroundColor: 'rgba(90,90,92,0.1)',
+            borderColor: '#5a5a5c',
+            borderWidth: 2,
+            pointBackgroundColor: '#5a5a5c',
+            pointRadius: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                const criteria = ['Tác động (cao=hơn)', 'Công sức (thấp=hơn)', 'Thời gian tạo giá trị (thấp=hơn)', 'Rủi ro (thấp=hơn)'];
+                return ctx.dataset.label + ': ' + criteria[ctx.dataIndex] + ' → điểm ' + ctx.raw + '/5';
+              },
+            },
+          },
+        },
+        scales: {
+          r: {
+            min: 0,
+            max: 5,
+            ticks: { stepSize: 1, display: false },
+            grid: { color: '#ededed' },
+            angleLines: { color: '#ededed' },
+            pointLabels: {
+              font: { size: 12, weight: '600' },
+              color: '#0a0a0a',
+            },
+          },
+        },
+      },
+    });
+
+    // ── 4. Risk Assessment: scatter / bubble (Impact vs Likelihood) ─────
+    const riskCtx = document.getElementById('chartRisk').getContext('2d');
+    const riskBubble = new Chart(riskCtx, {
+      type: 'bubble',
+      data: {
+        datasets: [
+          {
+            label: 'Rủi ro 1: Áp dụng thấp',
+            data: [{ x: 8, y: 7, r: 20 }],
+            backgroundColor: 'rgba(212,86,86,0.25)',
+            borderColor: 'rgba(212,86,86,0.8)',
+            borderWidth: 2,
+          },
+          {
+            label: 'Rủi ro 2: Phạm vi mở rộng',
+            data: [{ x: 7, y: 8, r: 18 }],
+            backgroundColor: 'rgba(212,86,86,0.25)',
+            borderColor: 'rgba(212,86,86,0.8)',
+            borderWidth: 2,
+          },
+          {
+            label: 'Rủi ro 3: Hiệu năng',
+            data: [{ x: 5, y: 6, r: 14 }],
+            backgroundColor: 'rgba(195,125,13,0.25)',
+            borderColor: 'rgba(195,125,13,0.8)',
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            align: 'end',
+            labels: { boxWidth: 10, boxHeight: 10, borderRadius: 5, useBorderRadius: true, padding: 12 },
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                const d = ctx.raw;
+                return ctx.dataset.label + ': Khả năng xảy ra=' + d.x + '/10, Tác động=' + d.y + '/10';
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Khả năng xảy ra (1–10)', font: { weight: '600' }, color: '#3a3a3c' },
+            min: 0,
+            max: 10,
+            grid: { color: '#ededed' },
+            ticks: { stepSize: 2 },
+          },
+          y: {
+            title: { display: true, text: 'Tác động (1–10)', font: { weight: '600' }, color: '#3a3a3c' },
+            min: 0,
+            max: 10,
+            grid: { color: '#ededed' },
+            ticks: { stepSize: 2 },
+          },
+        },
+      },
+    });
+
+    // ── 5. Quality Checklist: doughnut ───────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function() {
+      const qCtx = document.getElementById('chartQuality');
+      if (qCtx) {
+        new Chart(qCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Đã hoàn thành', 'Còn lại'],
+            datasets: [{
+              data: [15, 0],
+              backgroundColor: ['#00d4a4', '#f0f0f0'],
+              borderColor: ['#00d4a4', '#e5e5e5'],
+              borderWidth: 2,
+              hoverOffset: 4,
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '72%',
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => ctx.label + ': ' + ctx.raw + '/15',
+                },
+              },
+            },
+          },
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
