@@ -23,8 +23,7 @@ body,
 }
 
 /* ── 2. Borders / Hairlines ────────────────── */
-.border-hairline,
-.border-hairline-soft {
+.border-hairline {
   border-color: #2a2a2a !important;
 }
 
@@ -190,7 +189,7 @@ section,
 /* ── 12. Code & Mono ─────────────────────── */
 code,
 .font-mono,
-code-inline,
+.code-inline,
 .bg-surface-code {
   background-color: #1c1c1e !important;
   color: #e0e0e0 !important;
@@ -228,6 +227,19 @@ canvas {
   background-color: transparent !important;
 }
 
+/* Chart.js default border color for grid lines */
+.chart-container canvas,
+.chart-container-sm canvas,
+.chart-container-lg canvas {
+  border: none;
+}
+
+/* Chart.js grid lines */
+canvas + canvas,
+canvas ~ canvas {
+  filter: none;
+}
+
 /* ── 14. Footer ─────────────────────────── */
 footer {
   border-color: #2a2a2a !important;
@@ -235,6 +247,10 @@ footer {
 }
 
 /* ── 15. Hover States ─────────────────────── */
+a {
+  color: #00d4a4;
+}
+
 a:hover {
   color: #f0f0f0 !important;
 }
@@ -304,9 +320,6 @@ select {
 }
 
 /* ── 22. Breadcrumbs ──────────────────────── */
-.bg-surface-soft {
-  background-color: #141414 !important;
-}
 
 /* ============================================
    TOOLTIP SYSTEM
@@ -316,13 +329,13 @@ select {
   border-bottom: 1px dotted currentColor;
   cursor: help;
   position: relative;
-  display: inline;
+  display: inline-block;
 }
 
 .term:hover::after {
   content: attr(data-tip);
   position: absolute;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
   background: #1e1e1e;
@@ -331,9 +344,9 @@ select {
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 13px;
-  max-width: 300px;
+  max-width: 280px;
   white-space: normal;
-  z-index: 9999;
+  z-index: 999;
   opacity: 0;
   pointer-events: none;
   transition: opacity 150ms ease, transform 150ms ease;
