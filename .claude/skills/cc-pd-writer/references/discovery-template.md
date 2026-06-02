@@ -6,6 +6,7 @@
 ---
 
 # PRODUCT DISCOVERY REPORT
+
 ## [Tên tính năng / Vấn đề cần khám phá]
 
 **Phiên bản:** X.Y
