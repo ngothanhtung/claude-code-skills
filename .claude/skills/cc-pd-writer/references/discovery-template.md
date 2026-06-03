@@ -5,9 +5,9 @@
 
 ---
 
-# PRODUCT DISCOVERY REPORT
+## PRODUCT DISCOVERY REPORT
 
-## [Tên tính năng / Vấn đề cần khám phá]
+### [Tên tính năng / Vấn đề cần khám phá]
 
 **Phiên bản:** X.Y
 **Ngày:** YYYY-MM-DD
@@ -31,8 +31,8 @@ VD: "Khách hàng SME không thể tự quản lý hóa đơn GTGT trên hệ th
 
 | Pain Point | Mức độ nghiêm trọng | Tần suất | Phạm vi ảnh hưởng |
 | :--- | :--- | :--- | :--- |
-| [Mô tả pain point 1] | [ Cao / Trung bình / Thấp] | [Thường xuyên / Đôi khi / Hiếm] | [Toàn hệ thống / Nhóm / Cá nhân] |
-| [Pain point 2] | [ Cao / Trung bình / Thấp] | [Thường xuyên / Đôi khi / Hiếm] | [Toàn hệ thống / Nhóm / Cá nhân] |
+| [Mô tả pain point 1] | [Cao / Trung bình / Thấp] | [Thường xuyên / Đôi khi / Hiếm] | [Toàn hệ thống / Nhóm / Cá nhân] |
+| [Pain point 2] | [Cao / Trung bình / Thấp] | [Thường xuyên / Đôi khi / Hiếm] | [Toàn hệ thống / Nhóm / Cá nhân] |
 
 ### 1.3 Baseline Metrics
 
@@ -110,9 +110,9 @@ VD: "Khách hàng SME không thể tự quản lý hóa đơn GTGT trên hệ th
 
 ---
 
-## 4. Solution Options
+## 4. Business Solution Options
 
-*[CHỉ mô tả ở mức nghiệp vụ. Không mô tả chi tiết triển khai kỹ thuật — đó là việc của SRS.]*
+*[Chỉ mô tả phương án ở mức nghiệp vụ / product direction. Không mô tả chi tiết triển khai kỹ thuật — đó là việc của SRS.]*
 
 ### 4.1 Options Overview
 
@@ -122,7 +122,7 @@ VD: "Khách hàng SME không thể tự quản lý hóa đơn GTGT trên hệ th
 | **Mô tả** | [Nghiệp vụ gì, không phải tech gì] | [Nghiệp vụ gì] | [Nghiệp vụ gì] |
 | **Lợi ích chính** | [Lợi ích nghiệp vụ] | [Lợi ích nghiệp vụ] | [Lợi ích nghiệp vụ] |
 | **Rủi ro chính** | [Rủi ro nghiệp vụ] | [Rủi ro nghiệp vụ] | [Rủi ro nghiệp vụ] |
-| **Chi phí ước lượng** | [ Cao / Trung bình / Thấp] | [ Cao / Trung bình / Thấp] | [ Cao / Trung bình / Thấp] |
+| **Chi phí ước lượng** | [Cao / Trung bình / Thấp] | [Cao / Trung bình / Thấp] | [Cao / Trung bình / Thấp] |
 
 ### 4.2 Trade-off Analysis
 

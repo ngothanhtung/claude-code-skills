@@ -1,20 +1,20 @@
 # PRD Quality Checklist — 20 điểm tự kiểm tra
 
-Dùng danh mục này trước khi bàn giao PRD cho đội ngũ phát triển. Mỗi mục phải đạt mới nên coi là hoàn thành.
+Dùng danh mục này trước khi bàn giao PRD cho đội ngũ phát triển. PRD đạt khi tổng điểm từ 18/20 trở lên và tất cả mục critical đều đạt.
 
 ---
 
 ## Phần 1: Thông tin tổng quan (2 điểm)
 
 - [ ] **1.1** Tên sản phẩm / tính năng được đặt rõ ràng, không mơ hồ.
-- [ ] **1.2** Có bảng In-scope / Out-of-scope đầy đủ. Out-of-scope không được trống.
+- [ ] **1.2 [CRITICAL]** Có bảng In-scope / Out-of-scope đầy đủ. Out-of-scope không được trống.
 
 ---
 
 ## Phần 2: Yêu cầu chức năng (6 điểm)
 
 - [ ] **2.1** Mỗi yêu cầu chức năng (FR) có mã duy nhất theo format `FR-[số]`.
-- [ ] **2.2** Mỗi FR có mô tả nghiệp vụ rõ ràng — **không chứa thuật ngữ kỹ thuật** (API, database, protocol, framework).
+- [ ] **2.2 [CRITICAL]** Mỗi FR có mô tả nghiệp vụ rõ ràng — **không chứa thuật ngữ kỹ thuật** (API, database, protocol, framework).
 - [ ] **2.3** Mỗi FR có đủ 6 thành phần: Mô tả, Tác nhân, Trigger, Happy Path, Alternative Flow, Expected Outcome.
 - [ ] **2.4** Mỗi FR có **tối thiểu 1 quy tắc nghiệp vụ** (Business Rule) dạng mệnh đề.
 - [ ] **2.5** FR được nhóm theo module / nhóm chức năng logic.
@@ -44,9 +44,9 @@ Dùng danh mục này trước khi bàn giao PRD cho đội ngũ phát triển. 
 
 ## Phần 6: User Stories và Ma trận truy xuất (4 điểm)
 
-- [ ] **6.1** Mỗi FR có User Story tương ứng trong ma trận truy xuất (RTM).
+- [ ] **6.1 [CRITICAL]** Mỗi FR P0/P1 có User Story tương ứng trong ma trận truy xuất (RTM). FR P2 có thể để trống nếu ghi rõ lý do.
 - [ ] **6.2** Mỗi User Story đạt đủ 06 tiêu chí INVEST (Independent, Negotiable, Valuable, Estimable, Small, Testable).
-- [ ] **6.3** Mỗi User Story có tối thiểu 2 tiêu chí nghiệp thu (Acceptance Criteria) dạng Given-When-Then.
+- [ ] **6.3 [CRITICAL]** Mỗi User Story có tối thiểu 3 tiêu chí nghiệm thu (Acceptance Criteria) dạng Given-When-Then: Happy Path, Edge Case / Business Rule Validation, Error Path.
 - [ ] **6.4** Ma trận truy xuất có đủ cột: FR, Tên, Nguồn, Độ ưu tiên, User Story, Phase.
 
 ---
@@ -60,7 +60,7 @@ Dùng danh mục này trước khi bàn giao PRD cho đội ngũ phát triển. 
 
 ## Phần 8: Chất lượng tổng thể (1 điểm)
 
-- [ ] **8.1** Không có giả định nào được tự suy diễn mà không được đánh dấu `[GIẢ ĐỊNH: ...]`.
+- [ ] **8.1 [CRITICAL]** Không có giả định nào được tự suy diễn mà không được đánh dấu `[GIẢ ĐỊNH: ...]`.
 
 ---
 
@@ -78,4 +78,4 @@ Dùng danh mục này trước khi bàn giao PRD cho đội ngũ phát triển. 
 | 8. Chất lượng tổng thể | /1 | | /1 |
 | **Tổng cộng** | **/20** | | **/20** |
 
-**Ngưỡng bàn giao:** 18/20 (90%). PRD dưới 18 điểm cần được tinh chỉnh trước khi bàn giao.
+**Ngưỡng bàn giao:** 18/20 (90%) và tất cả mục `[CRITICAL]` phải đạt. PRD dưới 18 điểm hoặc trượt bất kỳ mục critical nào cần được tinh chỉnh trước khi bàn giao.

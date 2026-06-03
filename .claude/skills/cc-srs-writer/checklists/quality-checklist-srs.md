@@ -1,14 +1,14 @@
 # SRS Quality Checklist — 20 điểm tự kiểm tra
 
-Dùng danh mục này trước khi bàn giao SRS cho đội ngũ phát triển. Mỗi mục phải đạt mới nên coi là hoàn thành.
+Dùng danh mục này trước khi bàn giao SRS cho đội ngũ phát triển. SRS đạt khi tổng điểm từ 18/20 trở lên và tất cả mục critical đều đạt.
 
 ---
 
 ## Phần 1: Nguồn gốc yêu cầu (3 điểm)
 
-- [ ] **1.1** Mỗi SRS-[mã] có FR-[mã] nguồn được ghi rõ trong tài liệu.
-- [ ] **1.2** Có ma trận truy xuất (RTM) liên kết SRS-[mã] ↔ FR-[mã].
-- [ ] **1.3** Không có SRS-[mã] "mồ côi" — không có FR nguồn.
+- [ ] **1.1 [CRITICAL]** Mỗi SRS-[mã] có FR-[mã] nguồn được ghi rõ trong tài liệu.
+- [ ] **1.2 [CRITICAL]** Có ma trận truy xuất (RTM) liên kết SRS-[mã] ↔ FR-[mã].
+- [ ] **1.3 [CRITICAL]** Không có SRS-[mã] "mồ côi" — không có FR nguồn.
 
 ---
 
@@ -24,38 +24,38 @@ Dùng danh mục này trước khi bàn giao SRS cho đội ngũ phát triển. 
 
 ## Phần 3: Yêu cầu phi chức năng (3 điểm)
 
-- [ ] **3.1** Mỗi NFR có ngưỡng cụ thể (số đo được — VD: p95 < 200ms, không phải "nhanh").
-- [ ] **3.2** Mỗi NFR có điều kiện đo và phương pháp đo được ghi rõ.
+- [ ] **3.1 [CRITICAL]** Mỗi NFR có ngưỡng cụ thể (số đo được — VD: p95 < 200ms, không phải "nhanh").
+- [ ] **3.2 [CRITICAL]** Mỗi NFR có điều kiện đo và phương pháp đo được ghi rõ.
 - [ ] **3.3** NFR được phân biệt rõ: Performance, Security, Availability, Scalability, Compatibility.
 
 ---
 
 ## Phần 4: Giới hạn phạm vi (4 điểm)
 
-- [ ] **4.1** Không có tech stack được tự chọn (framework, database, cloud) — trừ khi đã được xác nhận.
-- [ ] **4.2** Không có chức năng nào vượt quá phạm vi FR trong PRD nguồn.
-- [ ] **4.3** Không có CI/CD pipeline, deployment strategy, hoặc monitoring setup.
-- [ ] **4.4** Không có microservices architecture, service decomposition, hoặc deployment topology.
+- [ ] **4.1 [CRITICAL]** Không có tech stack được tự chọn (framework, database, cloud) — trừ khi đã được xác nhận.
+- [ ] **4.2 [CRITICAL]** Không có chức năng nào vượt quá phạm vi FR trong PRD nguồn.
+- [ ] **4.3 [CRITICAL]** Không có CI/CD pipeline, deployment strategy, hoặc monitoring setup.
+- [ ] **4.4 [CRITICAL]** Không có microservices architecture, service decomposition, hoặc deployment topology.
 
 ---
 
 ## Phần 5: Tích hợp hệ thống (2 điểm)
 
-- [ ] **5.1** Mỗi tích hợp bên ngoài có contract rõ (API format, message format) — không phải tên provider cụ thể.
-- [ ] **5.2** Không có third-party service được thêm mà không có trong PRD.
+- [ ] **5.1** Mỗi tích hợp bên ngoài có contract rõ (API format, message format). Provider chỉ được ghi nếu đã có trong PRD/FR hoặc đã được xác nhận.
+- [ ] **5.2 [CRITICAL]** Không có third-party service được thêm mà không có trong PRD.
 
 ---
 
 ## Phần 6: Quyết định kiến trúc (1 điểm)
 
-- [ ] **6.1** Các quyết định kỹ thuật quan trọng được ghi trong phần ADR (Architecture Decision Records).
+- [ ] **6.1** Các quyết định kỹ thuật cục bộ phục vụ FR được ghi trong phần ADR (Architecture Decision Records); quyết định kiến trúc tổng thể chuyển sang ADD.
 
 ---
 
 ## Phần 7: Chất lượng tài liệu (2 điểm)
 
 - [ ] **7.1** Thuật ngữ và từ viết tắt được định nghĩa trong phần 1.3.
-- [ ] **7.2** Không có giả định nào không được ghi nhận — mọi tech choice không xác định phải có `[CHƯA XÁC ĐỊNH]`.
+- [ ] **7.2 [CRITICAL]** Không có giả định nào không được ghi nhận — mọi tech choice không xác định phải có `[CHƯA XÁC ĐỊNH]`.
 
 ---
 
@@ -72,4 +72,4 @@ Dùng danh mục này trước khi bàn giao SRS cho đội ngũ phát triển. 
 | 7. Chất lượng tài liệu | /2 | | /2 |
 | **Tổng cộng** | **/20** | | **/20** |
 
-**Ngưỡng bàn giao:** 18/20 (90%). SRS dưới 18 điểm cần được tinh chỉnh trước khi bàn giao.
+**Ngưỡng bàn giao:** 18/20 (90%) và tất cả mục `[CRITICAL]` phải đạt. SRS dưới 18 điểm hoặc trượt bất kỳ mục critical nào cần được tinh chỉnh trước khi bàn giao.

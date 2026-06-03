@@ -10,7 +10,7 @@ description: |
 
 ## Mục đích
 
-Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắt buộc cho `cc-prd-writer` một cách có hệ thống — trước khi viết PRD. Discovery tập trung vào **vấn đề và cơ hội**, không phải giải pháp hay thiết kế kỹ thuật.
+Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắt buộc cho `cc-prd-writer` một cách có hệ thống — trước khi viết PRD. Discovery tập trung vào **vấn đề, cơ hội và hướng xử lý ở mức nghiệp vụ**, không đi vào thiết kế giải pháp hay chi tiết kỹ thuật.
 
 ## Phân biệt Discovery và PRD
 
@@ -21,7 +21,7 @@ Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắ
 | **Nội dung** | Problem, Opportunity, Feasibility, Risk | Feature, Flow, Business Rule, NFR |
 | **Chi tiết triển khai** | Không | Không |
 
-**Quy tắc vàng:** Mô tả **VẤN ĐỀ** và **CƠ HỘI**. Không mô tả **GIẢI PHÁP** hay **CƠ CHẾ KỸ THUẬT**.
+**Quy tắc vàng:** Mô tả **VẤN ĐỀ**, **CƠ HỘI** và **PHƯƠNG ÁN NGHIỆP VỤ**. Không mô tả **SOLUTION DESIGN**, **API**, **DATABASE**, **UI COMPONENT** hay **CƠ CHẾ KỸ THUẬT**.
 
 ## Quy trình thực hiện (Workflow)
 
@@ -42,10 +42,14 @@ Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắ
 
 **Khi thiếu thông tin:**
 
-- < 2 thông tin: **ĐẶT CÂU HỎI LÀM RÕ** trước. Không tự suy diễn.
-- Người dùng yêu cầu viết ngay: Ghi rõ `[GIẢ ĐỊNH: ...]` trong mỗi phần.
+- Có 0-1 thông tin: **ĐẶT CÂU HỎI LÀM RÕ** trước. Không tự suy diễn.
+- Có 2-3 thông tin: Có thể viết bản nháp nếu người dùng muốn tiếp tục, nhưng phải đánh dấu rõ `[GIẢ ĐỊNH: ...]` ở từng phần liên quan.
+- Có đủ 4 thông tin: Có thể viết Discovery Report hoàn chỉnh.
+- Không hỏi quá 5 câu/lượt. Ưu tiên hỏi về Persona, Goal, Business Value, Context, Scope, Constraints để chuẩn bị đầu vào cho PRD.
 
-### Bước 3: Thực hiện 7 hoạt động Discovery
+### Bước 3: Sinh Discovery Report theo 7 phần
+
+Sử dụng mẫu compact dưới đây để tạo nhanh kết quả. Khi cần tài liệu đầy đủ hơn, dùng [discovery-template.md](./references/discovery-template.md).
 
 ```markdown
 # PRODUCT DISCOVERY REPORT
@@ -67,14 +71,14 @@ Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắ
 
 | Pain Point | Mức độ nghiêm trọng | Tần suất | Phạm vi ảnh hưởng |
 | :--- | :--- | :--- | :--- |
-| [Mô tả] | [ Cao / Trung bình / Thấp] | [Thường xuyên / Đôi khi / Hiếm] | [Toàn hệ thống / Nhóm / Cá nhân] |
+| [Mô tả] | [Cao / Trung bình / Thấp] | [Thường xuyên / Đôi khi / Hiếm] | [Toàn hệ thống / Nhóm / Cá nhân] |
 
 ### 1.3 Baseline Metrics
 [Chỉ số hiện tại nào sẽ được cải thiện?]
 
-| Chỉ số | Giá trị hiện tại | Mục tiêu (ước lượng) |
-| :--- | :--- | :--- |
-| [VD: Thời gian xử lý đơn hàng] | [VD: 5 phút] | [VD: < 1 phút] |
+| Chỉ số | Giá trị hiện tại | Mục tiêu (ước lượng) | Cách đo |
+| :--- | :--- | :--- | :--- |
+| [VD: Thời gian xử lý đơn hàng] | [VD: 5 phút] | [VD: < 1 phút] | [VD: System report] |
 
 ---
 
@@ -120,16 +124,16 @@ Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắ
 
 ---
 
-## 4. Solution Options
+## 4. Business Solution Options
 
-*[Chỉ mô tả phương án ở mức nghiệp vụ. Không mô tả chi tiết triển khai kỹ thuật.]*
+*[Chỉ mô tả phương án ở mức nghiệp vụ / product direction. Không mô tả chi tiết triển khai kỹ thuật.]*
 
 ### 4.1 Options Overview
 
 | Phương án | Mô tả | Lợi ích chính | Rủi ro chính | Chi phí ước lượng |
 | :--- | :--- | :--- | :--- | :--- |
-| A | [Tên phương án] | [Lợi ích] | [Rủi ro] | [ Cao / Trung bình / Thấp] |
-| B | [Tên phương án] | [Lợi ích] | [Rủi ro] | [ Cao / Trung bình / Thấp] |
+| A | [Tên phương án] | [Lợi ích] | [Rủi ro] | [Cao / Trung bình / Thấp] |
+| B | [Tên phương án] | [Lợi ích] | [Rủi ro] | [Cao / Trung bình / Thấp] |
 
 ### 4.2 Trade-off Analysis
 
@@ -151,7 +155,7 @@ Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắ
 
 | Tiêu chí | Đánh giá | Ghi chú |
 | :--- | :--- | :--- |
-| Technical Feasibility | [Khả thi / Cần đánh giá thêm / Không khả thi] | [Lý do] |
+| Technical Feasibility | [Khả thi / Cần đánh giá thêm / Không khả thi] | [Đánh giá ở mức khả thi, không mô tả thiết kế kỹ thuật] |
 | Resource Feasibility | [Khả thi / Cần đánh giá thêm / Không khả thi] | [VD: team size, budget] |
 | Legal/Compliance | [OK / Rủi ro tiềm ẩn / Không OK] | [VD: GDPR, data residency] |
 
@@ -159,9 +163,9 @@ Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắ
 
 | Rủi ro | Mức độ | Mitigation |
 | :--- | :--- | :--- |
-| [Rủi ro 1] | [ Cao / Trung bình / Thấp] | [Cách xử lý cụ thể] |
-| [Rủi ro 2] | [ Cao / Trung bình / Thấp] | [Cách xử lý cụ thể] |
-| [Rủi ro 3] | [ Cao / Trung bình / Thấp] | [Cách xử lý cụ thể] |
+| [Rủi ro 1] | [Cao / Trung bình / Thấp] | [Cách xử lý cụ thể] |
+| [Rủi ro 2] | [Cao / Trung bình / Thấp] | [Cách xử lý cụ thể] |
+| [Rủi ro 3] | [Cao / Trung bình / Thấp] | [Cách xử lý cụ thể] |
 
 ---
 
@@ -179,12 +183,12 @@ Thấp    │  ③      │  ④     │
         └─────────┴─────────┘
 ```
 
-| Vùng | Hành động |
-| :--- | :--- |
-| ① Impact Cao, Effort Cao | Chờ nguồn lực hoặc chia nhỏ |
-| ② Impact Cao, Effort Thấp | **Ưu tiên cao — làm ngay** |
-| ③ Impact Thấp, Effort Cao | Tránh hoặc từ chối |
-| ④ Impact Thấp, Effort Thấp | Hạng thấp |
+| Vùng | Phương án | Hành động |
+| :--- | :--- | :--- |
+| ① Impact Cao, Effort Cao | [Phương án nào] | Chờ nguồn lực hoặc chia nhỏ |
+| ② Impact Cao, Effort Thấp | [Phương án nào] | **Ưu tiên cao — làm ngay** |
+| ③ Impact Thấp, Effort Cao | [Phương án nào] | Tránh hoặc từ chối |
+| ④ Impact Thấp, Effort Thấp | [Phương án nào] | Hạng thấp |
 
 ### 6.2 Go/No-Go Recommendation
 
@@ -216,7 +220,7 @@ Thấp    │  ③      │  ④     │
 | Nhảy thẳng sang giải pháp mà chưa định nghĩa rõ vấn đề | Viết Problem Statement rõ ràng trước |
 | Không xác định stakeholder → thông tin không đúng người | Lập Stakeholder Map với Influence/Interest Grid |
 | Bỏ qua giả định → discovery dựa trên assumption sai | Đánh dấu `[GIẢ ĐỊNH: ...]` rõ ràng |
-| Mô tả solution spec trong discovery | Chỉ nêu phương án, không mô tả triển khai |
+| Mô tả solution spec trong discovery | Chỉ nêu phương án nghiệp vụ, không mô tả triển khai |
 | Không có Go/No-Go | Đưa ra recommendation rõ ràng |
 | Không có baseline metrics | Xác định chỉ số hiện tại để đo lường success |
 | Tự suy diễn khi thiếu thông tin | Đặt câu hỏi hoặc đánh dấu [GIẢ ĐỊNH] |
@@ -240,6 +244,7 @@ Trước khi trình bày kết quả, tự kiểm tra theo [quality-checklist-di
 - [ ] Go/No-Go rõ ràng?
 - [ ] Đủ 6 inputs cho cc-prd-writer?
 - [ ] Không có chi tiết triển khai kỹ thuật?
+- [ ] Không có giả định ngầm chưa được đánh dấu?
 
 Đạt ≥ 13/15 để bàn giao.
 

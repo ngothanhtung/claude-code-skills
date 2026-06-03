@@ -102,5 +102,5 @@ Template để đánh giá cơ hội kinh doanh trong Product Discovery.
 
 | Rủi ro | Xác suất | Mức độ ảnh hưởng | Mitigation |
 | :--- | :--- | :--- | :--- |
-| [VD: Thị trường nhỏ hơn ước lượng] | [Cao / Trung bình / Thấp] | [ Cao / Trung bình / Thấp] | [VD: Survey trước, MVP validate] |
-| [VD: KH không willing to pay] | [Cao / Trung bình / Thấp] | [ Cao / Trung bình / Thấp] | [VD: A/B test pricing, freemium] |
+| [VD: Thị trường nhỏ hơn ước lượng] | [Cao / Trung bình / Thấp] | [Cao / Trung bình / Thấp] | [VD: Survey trước, MVP validate] |
+| [VD: KH không willing to pay] | [Cao / Trung bình / Thấp] | [Cao / Trung bình / Thấp] | [VD: A/B test pricing, freemium] |

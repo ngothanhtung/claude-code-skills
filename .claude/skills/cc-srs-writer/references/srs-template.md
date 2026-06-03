@@ -1,4 +1,5 @@
 # TÀI LIỆU ĐẶC TẢ YÊU CẦU PHẦN MỀM (SRS)
+
 ## [Tên hệ thống / Tính năng]
 
 **Phiên bản:** X.Y
@@ -28,6 +29,7 @@
 **Chuẩn tham chiếu:**
 
 - [IEEE 830-1998] — Recommended Practice for Software Requirements Specifications
+- [ISO/IEC/IEEE 29148] — Requirements engineering
 - [ISO/IEC 25010:2011] — Systems and software Quality Requirements and Evaluation (SQuaRE)
 
 ### 1.4 Người đọc dự kiến
@@ -170,11 +172,11 @@
 
 ### 4.3 Giao diện phần mềm (Software Interface)
 
-[Tích hợp với hệ thống bên ngoài — ghi rõ contract, KHÔNG chỉ định tech stack]
+[Tích hợp với hệ thống bên ngoài — ghi rõ contract. Provider chỉ được ghi nếu đã có trong PRD/FR hoặc đã được xác nhận.]
 
-| Hệ thống | Chức năng tích hợp | Contract (API / Message format) | Ghi chú |
+| Hệ thống | Chức năng tích hợp | Contract (API / Message format) | Trạng thái xác nhận |
 | :--- | :--- | :--- | :--- |
-| [VD: MoMo Payment Gateway] | [Tạo yêu cầu thanh toán, nhận webhook] | [Request/response JSON schema] | [Sandbox URL, timeout] |
+| [VD: MoMo Payment Gateway, nếu đã có trong PRD] | [Tạo yêu cầu thanh toán, nhận webhook] | [Request/response JSON schema] | [Đã xác nhận / CHƯA XÁC ĐỊNH] |
 
 ### 4.4 Giao diện truyền thông (Communication Interface)
 
@@ -191,6 +193,8 @@
 ---
 
 ## 6. Nhật ký quyết định kiến trúc (Architecture Decision Records)
+
+*[Chỉ ghi các quyết định kỹ thuật cục bộ phục vụ FR. Service decomposition, deployment topology hoặc scaling architecture tổng thể thuộc ADD.]*
 
 | ADR-[mã] | Quyết định | Bối cảnh | Lựa chọn | Hệ quả |
 | :--- | :--- | :--- | :--- | :--- |

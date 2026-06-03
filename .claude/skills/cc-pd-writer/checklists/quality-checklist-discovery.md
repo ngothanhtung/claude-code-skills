@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Problem Framing (/4)
+## 1. Problem Framing (/3)
 
 - [ ] **1.1 Problem Statement** — Mô tả rõ: (a) vấn đề là gì, (b) ai gặp, (c) hậu quả?
   - ✅ đầy đủ / ⚠️ thiếu 1 yếu tố / ❌ mơ hồ hoặc nhầm với giải pháp
@@ -35,9 +35,9 @@
 - [ ] **3.2 Assumptions marked** — Các giả định được đánh dấu `[GIẢ ĐỊNH: ...]` rõ ràng?
   - ✅ ≥ 1 assumption được đánh dấu / ⚠️ có nhưng không rõ / ❌ không có
 
-## 4. Solution Options (/2)
+## 4. Business Solution Options (/2)
 
-- [ ] **4.1 Options Coverage** — Có tối thiểu 2 phương án với: mô tả, lợi ích, rủi ro, chi phí?
+- [ ] **4.1 Options Coverage** — Có tối thiểu 2 phương án nghiệp vụ với: mô tả, lợi ích, rủi ro, chi phí?
   - ✅ 2+ phương án đầy đủ / ⚠️ thiếu thông tin / ❌ 1 phương án
 
 - [ ] **4.2 Recommendation** — Có khuyến nghị phương án (hoặc ghi rõ cần thêm thông tin gì)?
@@ -78,10 +78,10 @@
 
 | Section | Điểm tối đa | Điểm thực |
 | :--- | :---: | :---: |
-| 1. Problem Framing | 4 | __/4 |
+| 1. Problem Framing | 3 | __/3 |
 | 2. Stakeholder Map | 3 | __/3 |
 | 3. Opportunity Assessment | 2 | __/2 |
-| 4. Solution Options | 2 | __/2 |
+| 4. Business Solution Options | 2 | __/2 |
 | 5. Feasibility & Risk | 2 | __/2 |
 | 6. Prioritization | 2 | __/2 |
 | 7. PRD Kickoff Package | 1 | __/1 |

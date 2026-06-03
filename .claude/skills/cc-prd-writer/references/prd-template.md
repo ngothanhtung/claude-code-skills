@@ -1,4 +1,5 @@
 # TÀI LIỆU YÊU CẦU SẢN PHẨM (PRD)
+
 ## [Tên sản phẩm / Tính năng]
 
 **Phiên bản:** X.Y
@@ -85,9 +86,9 @@
 
 | Tiêu chí | Yêu cầu | Ghi chú |
 | :--- | :--- | :--- |
-| Xác thực | [VD: JWT / OAuth 2.0] | [Nếu có] |
-| Phân quyền | [VD: RBAC theo vai trò] | [Nếu có] |
-| Mã hóa | [VD: TLS cho dữ liệu truyền] | [Nếu có] |
+| Xác thực | [VD: Người dùng phải được xác minh danh tính trước khi truy cập] | [Nếu có] |
+| Phân quyền | [VD: Quyền thao tác được giới hạn theo vai trò nghiệp vụ] | [Nếu có] |
+| Bảo vệ dữ liệu | [VD: Dữ liệu nhạy cảm phải được bảo vệ trong quá trình sử dụng và trao đổi] | [Nếu có] |
 
 ### 3.3 Khả dụng (Availability)
 
@@ -132,13 +133,13 @@
 
 *[Chỉ mô tả nếu có tích hợp với hệ thống bên thứ ba hoặc module khác]*
 
-| Hệ thống | Chức năng tích hợp | Dữ liệu trao đổi | Ghi chú |
+| Hệ thống | Chức năng tích hợp | Dữ liệu nghiệp vụ trao đổi | Ràng buộc nghiệp vụ / SLA |
 | :--- | :--- | :--- | :--- |
-| [VD: MoMo] | [Thanh toán] | [Mã giao dịch, số tiền, trạng thái] | [URL webhook, sandbox] |
+| [VD: MoMo] | [Thanh toán] | [Mã giao dịch, số tiền, trạng thái] | [Thời gian xác nhận thanh toán, trạng thái phụ thuộc] |
 
 ---
 
-## 6. Kế hoạch triển khai (Implementation Plan)
+## 6. Kế hoạch phát hành / Phân kỳ triển khai (Release Plan)
 
 | Giai đoạn | Mục tiêu | FR liên quan | Thời gian ước lượng |
 | :--- | :--- | :--- | :--- |
@@ -153,7 +154,7 @@
 
 | Rủi ro | Mức độ | Giải pháp dự phòng |
 | :--- | :--- | :--- |
-| [Rủi ro 1] | [ Cao / Trung bình / Thấp] | [Cách xử lý] |
+| [Rủi ro 1] | [Cao / Trung bình / Thấp] | [Cách xử lý] |
 
 ### 7.2 Giả định
 
@@ -175,7 +176,7 @@
 
 ## 9. User Stories
 
-*[Tái sử dụng skill **cc-user-story-acceptance-criteria-writer** cho phần này. Đảm bảo mỗi User Story gắn với FR tương ứng trong ma trận truy xuất.]*
+*[Tái sử dụng skill **cc-user-story-acceptance-criteria-writer** cho phần này. Đảm bảo mỗi User Story gắn với FR tương ứng trong ma trận truy xuất và có tối thiểu 3 Acceptance Criteria dạng Given-When-Then: Happy Path, Edge Case / Business Rule Validation, Error Path.]*
 
 ---
 
