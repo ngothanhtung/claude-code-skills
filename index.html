@@ -4,202 +4,891 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bộ tài liệu phát triển phần mềm</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'canvas-dark': '#0a0a0a',
-            'charcoal': '#1c1c1e',
-            'mint': '#00d4a4',
-            'muted': '#a8a8aa',
-            'stone': '#888888',
-            'border-dark': '#2a2a2c',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          }
-        }
+  <title>Claude Code Skills Library</title>
+  <style>
+    :root {
+      --ink: #171717;
+      --paper: #f7f7f4;
+      --panel: #ffffff;
+      --line: #d9d7cf;
+      --muted: #666861;
+      --soft: #eceae2;
+      --green: #0f8f6f;
+      --green-ink: #063d30;
+      --coral: #e25f3f;
+      --blue: #275d9f;
+      --yellow: #f2bd3d;
+      --shadow: 0 18px 55px rgba(23, 23, 23, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(23, 23, 23, 0.045) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(23, 23, 23, 0.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(226, 95, 63, 0.16), transparent 32%),
+        radial-gradient(circle at 82% 20%, rgba(15, 143, 111, 0.16), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      color: #fff;
+      background: var(--ink);
+      border-radius: 8px;
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 8px 10px;
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--green-ink);
+      background: rgba(15, 143, 111, 0.12);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+      gap: 42px;
+      align-items: center;
+      padding: 58px 0 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--green-ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(15, 143, 111, 0.12);
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 18px;
+      font-size: 56px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .lead {
+      max-width: 650px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--ink);
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button.primary {
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 5px 5px 0 var(--yellow);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .button:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 6px 6px 0 rgba(226, 95, 63, 0.55);
+    }
+
+    .workflow-poster {
+      position: relative;
+      min-height: 430px;
+      padding: 28px;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .workflow-poster::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(23, 23, 23, 0.18);
+      pointer-events: none;
+    }
+
+    .poster-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      padding: 6px 9px;
+      color: #fff;
+      background: var(--coral);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .rail {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .rail-step {
+      display: grid;
+      grid-template-columns: 62px minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      min-height: 86px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .rail-step:hover {
+      border-color: rgba(15, 143, 111, 0.42);
+      box-shadow: 0 12px 26px rgba(23, 23, 23, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .rail-copy {
+      min-width: 0;
+    }
+
+    .rail-copy strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .rail-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .rail-number {
+      display: grid;
+      width: 62px;
+      height: 62px;
+      place-items: center;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--green);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rail-tag {
+      justify-self: end;
+      max-width: 176px;
+      padding: 5px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--green-ink);
+      background: rgba(15, 143, 111, 0.1);
+      font-size: 11px;
+      font-weight: 900;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: 42px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 12px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    .section-note {
+      max-width: 430px;
+      margin: 0;
+      color: var(--muted);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      position: relative;
+      display: flex;
+      min-height: 280px;
+      flex-direction: column;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--accent, var(--green));
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.84);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(23, 23, 23, 0.45);
+      box-shadow: 0 16px 34px rgba(23, 23, 23, 0.12);
+    }
+
+    .skill-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .skill-id {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .skill-icon {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--accent, var(--green));
+    }
+
+    .skill-card h3 {
+      margin: 0 0 10px;
+      font-size: 25px;
+      line-height: 1.05;
+    }
+
+    .skill-card p {
+      margin: 0;
+      color: var(--muted);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .deliverables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 18px 0 20px;
+      padding: 0;
+      list-style: none;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .deliverables li {
+      padding: 5px 7px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--green-ink);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .path {
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .open-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      border: 1px solid var(--ink);
+      border-radius: 7px;
+      background: #fff;
+      font-weight: 900;
+    }
+
+    .open-link:hover {
+      color: #fff;
+      background: var(--ink);
+    }
+
+    .handoff {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .handoff-panel {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.84);
+    }
+
+    .handoff-panel h3 {
+      margin: 0 0 12px;
+      font-size: 23px;
+    }
+
+    .handoff-panel ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .handoff-panel li {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .handoff-panel li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      background: var(--accent, var(--green));
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 34px 0 42px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 13px;
+    }
+
+    footer a {
+      font-weight: 800;
+      color: var(--green-ink);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .handoff {
+        grid-template-columns: 1fr;
+      }
+
+      .workflow-poster {
+        min-height: auto;
+      }
+
+      .skill-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
-  </script>
-  <style>
-    [data-tooltip-wrapper] { position: relative; display: inline; }
-    [data-tooltip-wrapper]:hover .tooltip { opacity: 1; pointer-events: auto; }
-    .tooltip {
-      position: absolute; bottom: calc(100% + 8px); left: 50%;
-      transform: translateX(-50%) translateY(4px);
-      background: #2a2a2c; border: 1px solid #00d4a4;
-      color: #ffffff; font-size: 12px; padding: 6px 10px; border-radius: 6px;
-      opacity: 0; transition: opacity 150ms ease, transform 150ms ease;
-      pointer-events: none; z-index: 50; max-width: 320px; white-space: normal; text-align: left;
+
+      @media (max-width: 680px) {
+      .page {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .topbar,
+      .section-head,
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      h1 {
+        font-size: 39px;
+      }
+
+      .lead {
+        font-size: 17px;
+      }
+
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rail-step {
+        grid-template-columns: 48px 1fr;
+        gap: 12px;
+        min-height: auto;
+        padding: 12px;
+      }
+
+      .rail-number {
+        width: 48px;
+        height: 48px;
+        font-size: 15px;
+      }
+
+      .rail-tag {
+        grid-column: 2;
+        justify-self: start;
+        max-width: 100%;
+      }
     }
-    .tooltip::after {
-      content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-      border: 5px solid transparent; border-top-color: #00d4a4;
-    }
-    .timeline-card { position: relative; }
-    .timeline-card:not(:last-child)::before {
-      content: ''; position: absolute; left: 27px; top: 100%; width: 2px; height: 24px;
-      background: linear-gradient(to bottom, #00d4a4, #00d4a420);
-    }
-    .timeline-card {
-      transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
-    }
-    .timeline-card:hover {
-      border-color: #00d4a4 !important;
-      background-color: #1e1e20;
-      transform: translateX(2px);
-    }
-    .btn-outline {
-      border: 1px solid #00d4a4; color: #00d4a4; padding: 6px 16px;
-      border-radius: 6px; font-size: 13px; font-weight: 500;
-      transition: background-color 150ms ease, color 150ms ease; display: inline-block;
-    }
-    .btn-outline:hover { background-color: #00d4a4; color: #0a0a0a; }
   </style>
 </head>
 
-<body class="bg-canvas-dark font-sans text-white min-h-screen flex flex-col">
-
-  <!-- Header -->
-  <header class="text-center pt-16 pb-12 px-6">
-    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
-      Bộ tài liệu phát triển phần mềm
-    </h1>
-    <p class="text-muted text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-      Hệ thống tài liệu từ ý tưởng đến sản phẩm hoàn chỉnh — từ PRD, User Story, Use Case đến SRS.
-    </p>
-  </header>
-
-  <!-- Timeline -->
-  <main class="flex-1 px-6 pb-16">
-    <div class="max-w-2xl mx-auto space-y-4">
-
-      <!-- Card 1: PRD -->
-      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
-        <!-- Icon -->
-        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14,2 14,8 20,8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10,9 9,9 8,9"/>
-          </svg>
-        </div>
-        <!-- Content -->
-        <div class="flex-1 min-w-0">
-          <h2 class="text-base font-semibold text-white mb-1">
-            <span data-tooltip="Product Requirements Document — Tài liệu mô tả sản phẩm ở góc độ kinh doanh và người dùng">PRD</span>
-          </h2>
-          <p class="text-muted text-sm leading-relaxed mb-3">
-            Trả lời: Xây cái gì? Cho ai? Tại sao? Đây là kim chỉ nam để cả team hiểu cùng một sản phẩm.
-          </p>
-          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <!-- Card 2: User Story + Acceptance Criteria -->
-      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
-        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </div>
-        <div class="flex-1 min-w-0">
-          <h2 class="text-base font-semibold text-white mb-1">
-            <span data-tooltip="Câu chuyện người dùng — mô tả tính năng từ góc nhìn của người dùng cuối">User Story</span>
-            <span class="text-muted font-normal mx-1">+</span>
-            <span data-tooltip="Tiêu chí nghiệm thu — danh sách điều kiện cụ thể để biết một tính năng đã xong hay chưa">Acceptance Criteria</span>
-          </h2>
-          <p class="text-muted text-sm leading-relaxed mb-3">
-            Chia nhỏ PRD thành các đơn vị giá trị cho người dùng, đủ nhỏ để team dev làm trong 1 sprint.
-          </p>
-          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <!-- Card 3: Use Case -->
-      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
-        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="6" height="6" rx="1"/>
-            <rect x="15" y="3" width="6" height="6" rx="1"/>
-            <rect x="9" y="15" width="6" height="6" rx="1"/>
-            <path d="M6 9v3a3 3 0 0 0 3 3h0"/>
-            <path d="M18 9v3a3 3 0 0 1-3 3h0"/>
-          </svg>
-        </div>
-        <div class="flex-1 min-w-0">
-          <h2 class="text-base font-semibold text-white mb-1">
-            <span data-tooltip="Bản mô tả chi tiết các bước tương tác giữa người dùng/hệ thống và phần mềm để hoàn thành một mục tiêu">Use Case</span>
-          </h2>
-          <p class="text-muted text-sm leading-relaxed mb-3">
-            Mô tả chi tiết tương tác giữa
-            <span data-tooltip="Người hoặc hệ thống bên ngoài tương tác với phần mềm">Actor</span>
-            và System để hoàn thành một mục tiêu cụ thể.
-          </p>
-          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <!-- Card 4: SRS -->
-      <div class="timeline-card bg-charcoal border border-border-dark rounded-xl p-5 flex gap-4">
-        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-canvas-dark border border-border-dark flex items-center justify-center" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d4a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-            <path d="M4.93 4.93a10 10 0 0 0 0 14.14"/>
-            <path d="M14.83 9.17a4 4 0 0 1 0 5.66"/>
-            <path d="M9.17 9.17a4 4 0 0 0 0 5.66"/>
-          </svg>
-        </div>
-        <div class="flex-1 min-w-0">
-          <h2 class="text-base font-semibold text-white mb-1">
-            <span data-tooltip="Software Requirements Specification — Đặc tả yêu cầu phần mềm, tài liệu kỹ thuật chi tiết cho team dev/test">SRS</span>
-          </h2>
-          <p class="text-muted text-sm leading-relaxed mb-3">
-            Đặc tả kỹ thuật chi tiết cho team dev/test thực thi. Thường theo chuẩn IEEE 830.
-          </p>
-          <a href="#" class="btn-outline text-sm">Xem chi tiết</a>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="text-center pb-10 px-6">
-    <p class="text-stone text-sm">
-      <a href="https://github.com/ngothanhtung/claude-code-skills" target="_blank" rel="noopener noreferrer" class="hover:text-mint transition-colors duration-150">
-        GitHub Repository
+<body>
+  <div class="page">
+    <header class="topbar" aria-label="Điều hướng chính">
+      <a class="brand" href="#">
+        <span class="brand-mark">cc</span>
+        <span>Claude Code Skills Library</span>
       </a>
-    </p>
-  </footer>
+      <nav class="nav" aria-label="Nhóm nội dung">
+        <a href="#core-flow">Core Flow</a>
+        <a href="#support-skills">Support Skills</a>
+        <a href="#handoff">Handoff</a>
+        <a href="https://github.com/ngothanhtung/claude-code-skills" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
 
-  <script>
-    document.querySelectorAll('[data-tooltip]').forEach(el => {
-      const wrapper = document.createElement('span');
-      wrapper.setAttribute('data-tooltip-wrapper', '');
-      wrapper.style.position = 'relative';
-      wrapper.style.display = 'inline';
-      el.parentNode.insertBefore(wrapper, el);
-      wrapper.appendChild(el);
-      const tip = document.createElement('span');
-      tip.className = 'tooltip';
-      tip.textContent = el.dataset.tooltip;
-      wrapper.appendChild(tip);
-    });
-  </script>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>Vietnamese BA / PM / PO toolchain</div>
+          <h1 id="page-title">Từ ý tưởng đến đặc tả kỹ thuật, không rơi mất ngữ cảnh.</h1>
+          <p class="lead">
+            Trang index cho các skill bắt đầu bằng <strong>cc-</strong>: discovery, PRD, User Story,
+            Use Case, SRS, Test Case và landing page. Mỗi skill giữ một ranh giới rõ để tài liệu đi tuần tự,
+            có truy xuất nguồn gốc và dễ bàn giao.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#core-flow">Xem chuỗi chính <span aria-hidden="true">↓</span></a>
+            <a class="button secondary" href=".claude/skills/">Mở thư mục skills</a>
+          </div>
+        </div>
 
+        <aside class="workflow-poster" aria-label="Chuỗi tài liệu chính">
+          <div class="poster-label">Toolchain Flow</div>
+          <div class="rail">
+            <a class="rail-step" href=".claude/skills/cc-pd-writer/SKILL.md">
+              <span class="rail-number">01</span>
+              <span class="rail-copy"><strong>Product Discovery</strong><span>Problem, opportunity, feasibility, Go/No-Go.</span></span>
+              <span class="rail-tag">cc-pd-writer</span>
+            </a>
+            <a class="rail-step" href=".claude/skills/cc-prd-writer/SKILL.md">
+              <span class="rail-number">02</span>
+              <span class="rail-copy"><strong>Product Requirements</strong><span>Feature scope, FR, NFR, RTM.</span></span>
+              <span class="rail-tag">cc-prd-writer</span>
+            </a>
+            <a class="rail-step" href=".claude/skills/cc-user-story-acceptance-criteria-writer/SKILL.md">
+              <span class="rail-number">03</span>
+              <span class="rail-copy"><strong>User Story + AC</strong><span>INVEST stories and 3 Gherkin scenarios.</span></span>
+              <span class="rail-tag">cc-user-story</span>
+            </a>
+            <a class="rail-step" href=".claude/skills/cc-use-case-writer/SKILL.md">
+              <span class="rail-number">04</span>
+              <span class="rail-copy"><strong>Use Case</strong><span>Karl Wiegers / IIBA 13-field interaction spec.</span></span>
+              <span class="rail-tag">cc-use-case</span>
+            </a>
+            <a class="rail-step" href=".claude/skills/cc-srs-writer/SKILL.md">
+              <span class="rail-number">05</span>
+              <span class="rail-copy"><strong>SRS</strong><span>Interface, contract, data model and technical rules.</span></span>
+              <span class="rail-tag">cc-srs-writer</span>
+            </a>
+            <a class="rail-step" href=".claude/skills/cc-test-case-writer/SKILL.md">
+              <span class="rail-number">06</span>
+              <span class="rail-copy"><strong>Test Case</strong><span>Traceable QA cases, test data and coverage matrix.</span></span>
+              <span class="rail-tag">cc-test-case</span>
+            </a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="core-flow" aria-labelledby="core-title">
+        <div class="section-head">
+          <h2 class="section-title" id="core-title">Core cc- Flow</h2>
+          <p class="section-note">Các skill dùng trực tiếp trong chuỗi BA/PM/PO từ discovery đến handoff kỹ thuật.</p>
+        </div>
+
+        <div class="skill-grid">
+          <article class="skill-card" style="--accent: var(--green)">
+            <div class="skill-top">
+              <span class="skill-id">01 / Discovery</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M10 18a8 8 0 1 1 5.6-2.3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  <path d="M8 10h6M8 13h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>Product Discovery Writer</h3>
+            <p>Khám phá vấn đề, cơ hội, stakeholder, feasibility và rủi ro trước khi quyết định viết PRD.</p>
+            <ul class="deliverables">
+              <li>Problem framing</li>
+              <li>Stakeholder map</li>
+              <li>Go/No-Go</li>
+              <li>PRD kickoff</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-pd-writer</span>
+              <a class="open-link" href=".claude/skills/cc-pd-writer/SKILL.md" aria-label="Mở cc-pd-writer">↗</a>
+            </div>
+          </article>
+
+          <article class="skill-card" style="--accent: var(--blue)">
+            <div class="skill-top">
+              <span class="skill-id">02 / PRD</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 3h9l3 3v15H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                  <path d="M14 3v4h4M9 11h6M9 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>PRD Writer</h3>
+            <p>Viết Product Requirements Document ở góc nhìn nghiệp vụ, kết quả mong đợi và phạm vi sản phẩm.</p>
+            <ul class="deliverables">
+              <li>FR / NFR</li>
+              <li>Scope</li>
+              <li>Release plan</li>
+              <li>RTM</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-prd-writer</span>
+              <a class="open-link" href=".claude/skills/cc-prd-writer/SKILL.md" aria-label="Mở cc-prd-writer">↗</a>
+            </div>
+          </article>
+
+          <article class="skill-card" style="--accent: var(--coral)">
+            <div class="skill-top">
+              <span class="skill-id">03 / Agile</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0zM4 21a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>User Story &amp; Acceptance Criteria</h3>
+            <p>Chia nhỏ yêu cầu thành User Story đạt INVEST và Acceptance Criteria dạng Given-When-Then.</p>
+            <ul class="deliverables">
+              <li>INVEST</li>
+              <li>Happy path</li>
+              <li>Edge case</li>
+              <li>Error path</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-user-story-acceptance-criteria-writer</span>
+              <a class="open-link" href=".claude/skills/cc-user-story-acceptance-criteria-writer/SKILL.md" aria-label="Mở cc-user-story-acceptance-criteria-writer">↗</a>
+            </div>
+          </article>
+
+          <article class="skill-card" style="--accent: var(--yellow)">
+            <div class="skill-top">
+              <span class="skill-id">04 / Interaction</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 5h6v6H4zM14 5h6v6h-6zM9 17h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                  <path d="M7 11v2a4 4 0 0 0 4 4h1a4 4 0 0 0 4-4v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>Use Case Writer</h3>
+            <p>Mô tả tương tác actor-system theo template 13 trường Karl Wiegers / IIBA và kiểm tra phạm vi user-goal.</p>
+            <ul class="deliverables">
+              <li>Primary actor</li>
+              <li>Normal course</li>
+              <li>Alternative</li>
+              <li>Exceptions</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-use-case-writer</span>
+              <a class="open-link" href=".claude/skills/cc-use-case-writer/SKILL.md" aria-label="Mở cc-use-case-writer">↗</a>
+            </div>
+          </article>
+
+          <article class="skill-card" style="--accent: var(--ink)">
+            <div class="skill-top">
+              <span class="skill-id">05 / Technical</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v18M4 7h16M6 12h12M8 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>SRS Writer</h3>
+            <p>Chuyển PRD/Use Case thành SRS: interface, contract, data model, processing rules và traceability.</p>
+            <ul class="deliverables">
+              <li>API contract</li>
+              <li>Data model</li>
+              <li>NFR</li>
+              <li>ADR scoped</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-srs-writer</span>
+              <a class="open-link" href=".claude/skills/cc-srs-writer/SKILL.md" aria-label="Mở cc-srs-writer">↗</a>
+            </div>
+          </article>
+
+          <article class="skill-card" style="--accent: var(--green)">
+            <div class="skill-top">
+              <span class="skill-id">06 / QA</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M4 21h16M4 3h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>Test Case Writer</h3>
+            <p>Chuyển PRD, User Story, AC, Use Case hoặc SRS thành test cases có traceability và coverage matrix.</p>
+            <ul class="deliverables">
+              <li>Test data</li>
+              <li>Steps</li>
+              <li>Expected result</li>
+              <li>Coverage</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-test-case-writer</span>
+              <a class="open-link" href=".claude/skills/cc-test-case-writer/SKILL.md" aria-label="Mở cc-test-case-writer">↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="support-skills" aria-labelledby="support-title">
+        <div class="section-head">
+          <h2 class="section-title" id="support-title">Support cc- Skills</h2>
+          <p class="section-note">Các skill phụ trợ khi cần output tiếng Anh hoặc tạo trang giới thiệu / bán hàng.</p>
+        </div>
+
+        <div class="skill-grid">
+          <article class="skill-card" style="--accent: var(--blue)">
+            <div class="skill-top">
+              <span class="skill-id">EN / Agile</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 5h16M4 12h9M4 19h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>User Story Writer English</h3>
+            <p>Phiên bản tiếng Anh cho User Story và Acceptance Criteria, phù hợp khi bàn giao cho đội quốc tế.</p>
+            <ul class="deliverables">
+              <li>English output</li>
+              <li>INVEST</li>
+              <li>Gherkin</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-user-story-acceptance-criteria-writer-english</span>
+              <a class="open-link" href=".claude/skills/cc-user-story-acceptance-criteria-writer-english/SKILL.md" aria-label="Mở cc-user-story-acceptance-criteria-writer-english">↗</a>
+            </div>
+          </article>
+
+          <article class="skill-card" style="--accent: var(--green)">
+            <div class="skill-top">
+              <span class="skill-id">Web / Conversion</span>
+              <span class="skill-icon" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 5h16v14H4zM4 9h16M8 14h4M8 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </div>
+            <h3>Landing Page Generator</h3>
+            <p>Tạo landing page theo ngành, chọn tech stack, thiết kế section và copy tối ưu chuyển đổi.</p>
+            <ul class="deliverables">
+              <li>Tech stack</li>
+              <li>Design system</li>
+              <li>CTA copy</li>
+              <li>HTML/CSS</li>
+            </ul>
+            <div class="card-footer">
+              <span class="path">.claude/skills/cc-landing-page-generator</span>
+              <a class="open-link" href=".claude/skills/cc-landing-page-generator/SKILL.md" aria-label="Mở cc-landing-page-generator">↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="handoff" aria-labelledby="handoff-title">
+        <div class="section-head">
+          <h2 class="section-title" id="handoff-title">Ranh giới bàn giao</h2>
+          <p class="section-note">Các `cc-*` skills hoạt động tốt nhất khi mỗi tài liệu giữ đúng vai trò trong chuỗi.</p>
+        </div>
+
+        <div class="handoff">
+          <div class="handoff-panel" style="--accent: var(--green)">
+            <h3>BA / PM / PO</h3>
+            <ul>
+              <li>Discovery trả lời có nên đầu tư và cần xác thực giả định nào.</li>
+              <li>PRD mô tả hành vi sản phẩm, phạm vi, quy tắc nghiệp vụ và kết quả mong đợi.</li>
+              <li>User Story + AC chia nhỏ yêu cầu để estimate, plan và test theo Gherkin.</li>
+            </ul>
+          </div>
+
+          <div class="handoff-panel" style="--accent: var(--blue)">
+            <h3>Dev / QA / Architect</h3>
+            <ul>
+              <li>Use Case làm rõ tương tác actor-system ở user-goal level.</li>
+              <li>SRS chuyển yêu cầu nguồn thành interface, contract, data model và NFR đo được.</li>
+              <li>Test Case Writer tạo test data, steps, expected results và coverage matrix để QA execute.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>8 cc- skills · Vietnamese software delivery workflow</span>
+      <a href="https://github.com/ngothanhtung/claude-code-skills" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+    </footer>
+  </div>
 </body>
 
 </html>
-
