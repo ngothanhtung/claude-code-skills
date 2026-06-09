@@ -16,6 +16,7 @@ This is a **Claude Code Skills library** — a curated collection of specialized
   cc-user-story-acceptance-criteria-writer-english/  # English variant
   cc-use-case-writer/    # Detailed Use Cases
   cc-srs-writer/         # Software Requirements Specification (IEEE 830)
+  cc-test-case-writer/   # Functional test cases + coverage matrix
   cc-landing-page-generator/  # Landing page generation
   brainstorming/
   writing-plans/
@@ -58,6 +59,8 @@ cc-user-story-acceptance-criteria-writer (User Stories + AC)
     ↓ user stories
 cc-use-case-writer (Use Cases) / cc-srs-writer (SRS)
     ↓ requirements
+cc-test-case-writer (Test Cases)
+    ↓ test suite + coverage matrix
 Implementation: writing-plans → executing-plans → verification-before-completion
     ↓
 test-driven-development / systematic-debugging
