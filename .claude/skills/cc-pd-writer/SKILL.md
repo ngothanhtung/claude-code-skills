@@ -8,6 +8,13 @@ description: |
 
 # Product Discovery Writer
 
+## Lịch sử phiên bản (Version Log)
+
+| Phiên bản | Ngày | Thay đổi |
+| :--- | :--- | :--- |
+| 1.0 | 2026-05-01 | Phiên bản đầu tiên: workflow 6 bước, template 7 phần, anti-patterns. |
+| 1.1 | 2026-07-14 | Sửa lỗi character tiếng Trung trong opportunity-assessment-template; thêm version log + 1-page printable checklist + Discovery example thực tế. |
+
 ## Mục đích
 
 Hỗ trợ BA / PM / PO thu thập và xác nhận 6 thông tin đầu vào bắt buộc cho `cc-prd-writer` một cách có hệ thống — trước khi viết PRD. Discovery tập trung vào **vấn đề, cơ hội và hướng xử lý ở mức nghiệp vụ**, không đi vào thiết kế giải pháp hay chi tiết kỹ thuật.
@@ -250,8 +257,21 @@ Trước khi trình bày kết quả, tự kiểm tra theo [quality-checklist-di
 
 ## Tài liệu tham khảo
 
-- [discovery-template.md](./references/discovery-template.md) — Biểu mẫu Discovery Report đầy đủ.
-- [stakeholder-map-template.md](./references/stakeholder-map-template.md) — Template Influence/Interest Grid.
-- [opportunity-assessment-template.md](./references/opportunity-assessment-template.md) — Template đánh giá cơ hội kinh doanh.
-- [quality-checklist-discovery.md](./checklists/quality-checklist-discovery.md) — Checklist 15 điểm tự đánh giá.
-- **CHUỖI KẾ TIẾP:** `cc-prd-writer` — dùng 6 inputs từ PRD Kickoff Package để viết PRD hoàn chỉnh.
+**Templates:**
+
+- [discovery-template.md](./references/discovery-template.md) — Biểu mẫu Discovery Report đầy đủ (7 phần).
+- [stakeholder-map-template.md](./references/stakeholder-map-template.md) — Template Influence/Interest Grid + vai trò chuẩn (EU/SU/SP/RE/TE/DE).
+- [opportunity-assessment-template.md](./references/opportunity-assessment-template.md) — Template đánh giá cơ hội kinh doanh (Business Value + Market + Strategic Alignment).
+
+**Discovery mẫu thực tế:**
+
+- [Discovery mẫu — CRM](./references/discovery-example.md) — Discovery hoàn chỉnh về CRM Quản lý Khách hàng. Dùng làm tham chiếu khi cần xem output thực tế thay vì template placeholder.
+
+**Checklists:**
+
+- [quality-checklist-discovery.md](./checklists/quality-checklist-discovery.md) — Danh mục tự kiểm tra 15 điểm chất lượng trước khi bàn giao.
+- [quick-checklist-discovery-1page.md](./checklists/quick-checklist-discovery-1page.md) — Checklist 1 trang ngắn gọn, dùng khi review nhanh. Có thể in ra paper.
+
+**Skill liên quan:**
+
+- **CHUỖI KẾ TIẾP:** `cc-prd-writer` — dùng 6 inputs từ PRD Kickoff Package (Section 7) để viết PRD hoàn chỉnh.

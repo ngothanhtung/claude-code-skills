@@ -79,7 +79,7 @@ Template để đánh giá cơ hội kinh doanh trong Product Discovery.
 | Yếu tố | Đánh giá |
 | :--- | :--- |
 | [VD: Tương thích với roadmap hiện tại?] | [VD: Có — nằm trong initiative "SME productivity"] |
-| [VD: Leverage现有 assets/features?] | [VD: Có — tích hợp với hệ thống invoice hiện tại] |
+| [VD: Leverage existing assets/features?] | [VD: Có — tích hợp với hệ thống invoice hiện tại] |
 | [VD: Cross-sell / upsell opportunity?] | [VD: Có — khách hàng dùng tính năng này sẽ cần thêm reporting] |
 
 ---

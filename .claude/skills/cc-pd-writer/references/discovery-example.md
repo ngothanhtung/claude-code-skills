@@ -1,0 +1,1 @@
+../../../../../docs/crm/customer-management/customer-list/discovery.md
