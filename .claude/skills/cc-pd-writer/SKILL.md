@@ -265,7 +265,7 @@ Trước khi trình bày kết quả, tự kiểm tra theo [quality-checklist-di
 
 **Discovery mẫu thực tế:**
 
-- [Discovery mẫu — CRM](./references/discovery-example.md) — Discovery hoàn chỉnh về CRM Quản lý Khách hàng. Dùng làm tham chiếu khi cần xem output thực tế thay vì template placeholder.
+- *Hiện chưa có file example đính kèm. Tham khảo template đầy đủ ở `discovery-template.md` và checklist ở `quality-checklist-discovery.md`.*
 
 **Checklists:**
 

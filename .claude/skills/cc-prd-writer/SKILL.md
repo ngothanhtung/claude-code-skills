@@ -343,11 +343,6 @@ Sau khi tự kiểm tra đạt, trình bày theo thứ tự:
 - [prd-template.md](./references/prd-template.md) — Biểu mẫu PRD đầy đủ có thể sao chép. Dùng làm baseline khi viết PRD thực tế.
 - [prd-vs-srs.md](./references/prd-vs-srs.md) — Tài liệu phân biệt chi tiết PRD và SRS với ví dụ song song.
 
-**PRD mẫu thực tế:**
-
-- [PRD mẫu — LMS (dài)](./references/prd-example.md) — PRD hoàn chỉnh về Phân hệ Học viên — Hệ thống LMS (~100 dòng FR). Dùng khi cần xem PRD chi tiết, nhiều FR.
-- [PRD mẫu — CRM (ngắn)](./references/prd-example-crm.md) — PRD gọn về CRM Quản lý Khách hàng (~6 FR, ngắn gọn). Dùng khi cần xem PRD module nhỏ, dễ tiếp cận.
-
 **Checklists:**
 
 - [quality-checklist-prd.md](./checklists/quality-checklist-prd.md) — Danh mục tự kiểm tra 20 điểm chất lượng PRD trước khi bàn giao.

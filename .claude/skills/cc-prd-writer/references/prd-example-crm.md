@@ -1,1 +1,0 @@
-../../../../../docs/crm/customer-management/customer-list/prd.md

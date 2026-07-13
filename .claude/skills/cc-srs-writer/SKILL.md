@@ -353,7 +353,7 @@ Các mục critical bắt buộc đạt:
 
 **SRS mẫu thực tế:**
 
-- [SRS mẫu — CRM](./references/srs-example.md) — SRS hoàn chỉnh về CRM Quản lý Khách hàng (4 API endpoints + Data Model + ADR). Dùng làm tham khảo khi cần xem output thực tế thay vì template placeholder.
+- *Hiện chưa có file example đính kèm. Tham khảo template đầy đủ ở `srs-template.md` và checklist ở `quality-checklist-srs.md`.*
 
 **Checklists:**
 
