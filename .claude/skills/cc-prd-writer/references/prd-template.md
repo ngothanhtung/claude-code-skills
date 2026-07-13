@@ -176,7 +176,7 @@
 
 ## 9. User Stories
 
-*[Tái sử dụng skill **cc-user-story-acceptance-criteria-writer** cho phần này. Đảm bảo mỗi User Story gắn với FR tương ứng trong ma trận truy xuất và có tối thiểu 3 Acceptance Criteria dạng Given-When-Then: Happy Path, Edge Case / Business Rule Validation, Error Path.]*
+> **REQUIRED SUB-SKILL:** Dùng `cc-user-story-acceptance-criteria-writer` cho phần này. Mỗi User Story phải được gắn với FR tương ứng trong ma trận truy xuất (Section 8) và có tối thiểu 3 Acceptance Criteria dạng Given-When-Then: Happy Path, Edge Case / Business Rule Validation, Error Path.
 
 ---
 
