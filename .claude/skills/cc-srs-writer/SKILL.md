@@ -363,5 +363,8 @@ Các mục critical bắt buộc đạt:
 **Skills liên quan:**
 
 - **RELATED SKILL:** `cc-use-case-writer` — Dùng khi cần chuyển Use Case (Karl Wiegers 13 trường) thành SRS.
+  - Tham chiếu: [examples.md](../cc-use-case-writer/references/examples.md) — 2 Use Case mẫu (Create Project, Assign Task) — input cho SRS Mode B.
+  - Tham chiếu: [template-guide.md](../cc-use-case-writer/references/template-guide.md) — Hướng dẫn chi tiết 13 trường Use Case.
 - **RELATED SKILL:** `cc-prd-writer` — Dùng để tạo PRD trước khi chuyển sang SRS.
+  - Tham chiếu: [prd-template.md](../cc-prd-writer/references/prd-template.md) — PRD template — FR trong PRD là input cho SRS Mode A.
 - **RELATED SKILL:** `cc-user-story-acceptance-criteria-writer` — Dùng khi cần bổ sung User Story ở tầng PRD / Sprint planning; SRS chỉ tham chiếu nếu User Story đã có.

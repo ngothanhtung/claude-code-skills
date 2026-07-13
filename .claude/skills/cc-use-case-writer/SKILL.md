@@ -240,6 +240,7 @@ Template copy tại `assets/uc-template.md`.
 | `references/quality-checklist.md` | Checklist 20 điểm + ví dụ pass/fail |
 | `references/examples.md` | 2 Use Case mẫu hoàn chỉnh (Create Project, Assign Task) |
 | `templates/use-case-template.md` | Template sao chép sẵn dùng |
+| `../cc-srs-writer/references/srs-template.md` | Tham chiếu SRS template — Use Case là đầu vào cho Mode B của cc-srs-writer |
 
 ---
 

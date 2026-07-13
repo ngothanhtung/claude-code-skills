@@ -275,3 +275,4 @@ Trước khi trình bày kết quả, tự kiểm tra theo [quality-checklist-di
 **Skill liên quan:**
 
 - **CHUỖI KẾ TIẾP:** `cc-prd-writer` — dùng 6 inputs từ PRD Kickoff Package (Section 7) để viết PRD hoàn chỉnh.
+- **THAM CHIẾU:** Xem [prd-template.md](../cc-prd-writer/references/prd-template.md) để hiểu cấu trúc output PRD mà bạn đang cung cấp đầu vào cho.

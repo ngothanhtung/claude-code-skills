@@ -165,3 +165,7 @@ Trình bày theo thứ tự sau:
 - [invest-criteria.md](./references/invest-criteria.md) - Tài liệu phân tích sâu về 06 tiêu chí INVEST.
 - [examples.md](./references/examples.md) - 4 ví dụ mẫu thực tế thuộc lĩnh vực Quản lý dự án (ProjectOS).
 - [quality-checklist.md](./checklists/quality-checklist.md) - Danh mục tự kiểm tra chất lượng trước khi bàn giao.
+
+**Tham chiếu chéo skills:**
+
+- [prd-template.md](../cc-prd-writer/references/prd-template.md) - PRD template — FR trong PRD là input chính khi viết User Story theo từng FR.

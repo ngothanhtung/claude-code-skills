@@ -351,4 +351,7 @@ Sau khi tự kiểm tra đạt, trình bày theo thứ tự:
 **Skills liên quan:**
 
 - **REQUIRED SUB-SKILL:** `cc-user-story-acceptance-criteria-writer` — Bắt buộc dùng để sinh User Stories và Acceptance Criteria tích hợp trong PRD.
+  - Tham chiếu: [user-story-template-example.md](../cc-user-story-acceptance-criteria-writer/templates/user-story-template-example.md) — worked example US "Tạo dự án" với AC Given-When-Then.
+  - Tham chiếu: [invest-criteria.md](../cc-user-story-acceptance-criteria-writer/references/invest-criteria.md) — Tiêu chí INVEST đánh giá chất lượng User Story.
 - **RELATED SKILL:** `cc-use-case-writer` — Viết Use Case chuẩn tắc (Karl Wiegers) khi cần mô tả luồng tương tác chi tiết.
+  - Tham chiếu: [examples.md](../cc-use-case-writer/references/examples.md) — 2 Use Case mẫu (Create Project, Assign Task).

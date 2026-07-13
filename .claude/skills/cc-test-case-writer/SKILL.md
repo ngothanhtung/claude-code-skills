@@ -191,6 +191,10 @@ Trước khi trình bày kết quả, tự kiểm tra theo [quality-checklist-te
 - [test-case-template.md](./templates/test-case-template.md) — Template test case suite đầy đủ.
 - [quality-checklist-test-case.md](./checklists/quality-checklist-test-case.md) — Checklist 20 điểm trước khi bàn giao.
 - **RELATED SKILL:** `cc-user-story-acceptance-criteria-writer` — Dùng để tạo User Story / AC trước khi viết test cases.
+  - Tham chiếu: [examples.md](../cc-user-story-acceptance-criteria-writer/references/examples.md) — 4 User Story mẫu (ProjectOS domain) — mỗi US có AC Given-When-Then có thể dùng làm test case trực tiếp.
 - **RELATED SKILL:** `cc-use-case-writer` — Dùng khi cần làm rõ luồng actor-system trước khi viết test cases.
+  - Tham chiếu: [examples.md](../cc-use-case-writer/references/examples.md) — 2 Use Case mẫu với alternate flows — map sang test case exception/sad path.
 - **RELATED SKILL:** `cc-prd-writer` — Dùng khi thiếu PRD / FR nguồn.
+  - Tham chiếu: [prd-template.md](../cc-prd-writer/references/prd-template.md) — FR trong PRD là input cho test case.
 - **RELATED SKILL:** `cc-srs-writer` — Dùng khi cần contract kỹ thuật trước khi viết integration test cases.
+  - Tham chiếu: [srs-template.md](../cc-srs-writer/references/srs-template.md) — Error codes + API contract là input cho integration test case.
