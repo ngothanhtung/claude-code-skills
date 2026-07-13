@@ -44,7 +44,7 @@ Phòng kinh doanh hiện quản lý danh sách khách hàng trên Google Sheets 
 | Nhân viên kinh doanh | End User | 15 người, tra cứu và cập nhật KH hàng ngày | Tra cứu nhanh, nhập liệu dễ |
 | Quản lý kinh doanh | Supervisor | 2 người, giám sát hoạt động kinh doanh | Theo dõi danh sách, kiểm tra trùng |
 | Admin hệ thống | Technical | 1 người, quản trị CRM | Triển khai và bảo trì |
-| Nhân viên nghỉ việc (tương lai) | Regulator | — | Đảm bảo dữ liệu KH không bị mất khi nghỉ |
+| Nhân viên nghỉ việc (tương lai) | (không áp dụng) | Nhóm bị ảnh hưởng gián tiếp — không trực tiếp dùng hệ thống | Dữ liệu KH theo họ không bị mất |
 
 ### 2.2 Influence/Interest Grid
 
@@ -83,7 +83,7 @@ Phù hợp với chiến lược "Số hóa quy trình kinh doanh" năm 2026. CR
 | Giả định | Rủi ro nếu sai | Cách kiểm chứng |
 | :--- | :--- | :--- |
 | [GIẢ ĐỊNH: Nhân viên kinh doanh sẵn sàng chuyển từ Sheets sang CRM] | Tỷ lệ sử dụng thấp, Sheets vẫn được dùng song song | Phỏng vấn 5 nhân viên kinh doanh |
-| [GIẢ ĐỊNH: Dữ liệu Sheets hiện tại đã được chuẩn hóaพอ để import] | Import sai dữ liệu, cần xử lý thủ công nhiều | Kiểm tra sample 50 bản ghi Sheets |
+| [GIẢ ĐỊNH: Dữ liệu Sheets hiện tại đã được chuẩn hóa đủ để import] | Import sai dữ liệu, cần xử lý thủ công nhiều | Kiểm tra sample 50 bản ghi Sheets |
 | [GIẢ ĐỊNH: Office 365 / Google Workspace có thể SSO với CRM] | Cần tích hợp SSO thủ công, tăng effort | Kiểm tra API documentation |
 
 ---
