@@ -1,16 +1,19 @@
 ---
 name: cc-srs-writer
 description: |
-  Sinh tài liệu đặc tả yêu cầu phần mềm (Software Requirements Specification - SRS) chuẩn cho trưởng nhóm phát triển (Development Lead) và kiến trúc sư hệ thống (System Architect).
-  Hỗ trợ 3 chế độ: Chuyển đổi từ PRD, Mở rộng từ Use Case, Viết mới từ đầu.
-
-  KÍCH HOẠT khi người dùng yêu cầu: viết, tạo, chuyển đổi, mở rộng hoặc đánh giá tài liệu đặc tả yêu cầu phần mềm (SRS / Software Requirements Specification).
-  Kể cả khi người dùng dán tài liệu yêu cầu sản phẩm (PRD), Use Case, hoặc feature description để yêu cầu sinh SRS.
-
-  KHÔNG DÙNG ĐỂ: viết tài liệu yêu cầu sản phẩm (Product Requirements Document - PRD) (dùng cc-prd-writer), viết câu chuyện người dùng (User Story) hoặc tiêu chí nghiệm thu (Acceptance Criteria) (dùng cc-user-story-acceptance-criteria-writer), viết Use Case chuẩn tắc (dùng cc-use-case-writer), hoặc viết tài liệu thiết kế kiến trúc (Architecture Design Document) (dùng design-document-writer hoặc tài liệu riêng).
+  Viết SRS chuẩn IEEE 830 cho Dev Lead / System Architect. Hỗ trợ 3 chế độ: Chuyển đổi từ PRD, Mở rộng từ Use Case, Viết mới.
+  KÍCH HOẠT khi người dùng yêu cầu viết, tạo, chuyển đổi, mở rộng hoặc review SRS — kể cả khi họ dán PRD, Use Case hoặc feature description để yêu cầu sinh SRS.
+  Không dùng để viết PRD (dùng cc-prd-writer), User Story (dùng cc-user-story-acceptance-criteria-writer), Use Case (dùng cc-use-case-writer), hay Architecture Design Document (dùng tài liệu riêng).
 ---
 
 # Software Requirements Specification Writer
+
+## Lịch sử phiên bản (Version Log)
+
+| Phiên bản | Ngày | Thay đổi |
+| :--- | :--- | :--- |
+| 1.0 | 2026-05-01 | Phiên bản đầu tiên: workflow 6 bước, template IEEE 830, guardrails chống over-engineering. |
+| 1.1 | 2026-07-14 | Tóm gọn frontmatter; thêm version log; bảng tóm tắt checklist trong SKILL.md; tham chiếu SRS mẫu thực tế; thêm checklist 1 trang printable. |
 
 ## Mục đích
 
@@ -296,6 +299,21 @@ Trình bày theo cấu trúc IEEE 830 / ISO/IEC/IEEE 29148 — mỗi phần gắ
 
 Trước khi trình bày kết quả, tự kiểm tra theo **SRS Quality Checklist** 20 điểm (xem [quality-checklist-srs.md](./checklists/quality-checklist-srs.md)). Không dùng danh sách rút gọn làm tiêu chí bàn giao.
 
+**Tóm tắt checklist chất lượng SRS:**
+
+| # | Phần | Tiêu chí quan trọng | Điểm |
+| :--- | :--- | :--- | :--- |
+| 1 | Nguồn gốc yêu cầu | Mỗi SRS-[mã] có FR nguồn **[CRITICAL]**, có RTM liên kết SRS ↔ FR **[CRITICAL]**, không có SRS mồ côi **[CRITICAL]** | /3 |
+| 2 | Giao diện kỹ thuật | API có request/response schema + error code; Data model có field + constraint + index | /5 |
+| 3 | Yêu cầu phi chức năng | Mỗi NFR có ngưỡng đo được **[CRITICAL]** + điều kiện đo + phương pháp đo **[CRITICAL]** | /3 |
+| 4 | Giới hạn phạm vi | Không tự chọn tech stack **[CRITICAL]**, không mở rộng ngoài FR **[CRITICAL]**, không có CI/CD **[CRITICAL]**, không có microservices design **[CRITICAL]** | /4 |
+| 5 | Tích hợp hệ thống | Mỗi tích hợp có contract rõ, không thêm third-party ngoài PRD **[CRITICAL]** | /2 |
+| 6 | Quyết định kiến trúc | ADR cho FR cục bộ; quyết định kiến trúc tổng thể chuyển sang ADD | /1 |
+| 7 | Chất lượng tài liệu | Thuật ngữ định nghĩa rõ, mọi `[CHƯA XÁC ĐỊNH]` được ghi nhận **[CRITICAL]** | /2 |
+| **Tổng** | | | **/20** |
+
+**Ngưỡng bàn giao:** 18/20 (90%) và tất cả mục `[CRITICAL]` phải đạt.
+
 Các mục critical bắt buộc đạt:
 
 - [ ] Mỗi SRS-[mã] có FR nguồn được ghi rõ?
@@ -328,9 +346,22 @@ Các mục critical bắt buộc đạt:
 
 ## Tài liệu tham khảo liên quan
 
-- [quality-checklist-srs.md](./checklists/quality-checklist-srs.md) — Danh mục tự kiểm tra 20 điểm chất lượng SRS trước khi bàn giao.
+**Templates & Reference:**
+
 - [srs-template.md](./references/srs-template.md) — Biểu mẫu SRS đầy đủ theo cấu trúc IEEE 830 / ISO/IEC/IEEE 29148.
 - [prd-vs-srs.md](../cc-prd-writer/references/prd-vs-srs.md) — Tài liệu phân biệt chi tiết PRD và SRS.
+
+**SRS mẫu thực tế:**
+
+- [SRS mẫu — CRM](./references/srs-example.md) — SRS hoàn chỉnh về CRM Quản lý Khách hàng (4 API endpoints + Data Model + ADR). Dùng làm tham khảo khi cần xem output thực tế thay vì template placeholder.
+
+**Checklists:**
+
+- [quality-checklist-srs.md](./checklists/quality-checklist-srs.md) — Danh mục tự kiểm tra 20 điểm chất lượng SRS trước khi bàn giao.
+- [quick-checklist-srs-1page.md](./checklists/quick-checklist-srs-1page.md) — Checklist 1 trang ngắn gọn, dùng khi review nhanh. Có thể in ra paper.
+
+**Skills liên quan:**
+
 - **RELATED SKILL:** `cc-use-case-writer` — Dùng khi cần chuyển Use Case (Karl Wiegers 13 trường) thành SRS.
 - **RELATED SKILL:** `cc-prd-writer` — Dùng để tạo PRD trước khi chuyển sang SRS.
 - **RELATED SKILL:** `cc-user-story-acceptance-criteria-writer` — Dùng khi cần bổ sung User Story ở tầng PRD / Sprint planning; SRS chỉ tham chiếu nếu User Story đã có.
