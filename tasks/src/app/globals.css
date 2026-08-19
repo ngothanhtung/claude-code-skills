@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-zilla-slab), serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+
+  --color-paper: #f2ede4;
+  --color-manila: #fbf7ee;
+  --color-ink: #1f2a3c;
+  --color-stamp: #b7472a;
+  --color-ledger: #3f6b4a;
+  --color-seal: #c08a2e;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-paper);
+  background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(31, 42, 60, 0.05) 28px);
+  color: var(--color-ink);
+}
+
+.rule-double {
+  border-bottom: 1px solid rgba(31, 42, 60, 0.25);
+  box-shadow: 0 3px 0 -1px rgba(31, 42, 60, 0.12);
+}
+
+.wordmark {
+  letter-spacing: 0.04em;
+}
+
+.stub {
+  position: relative;
+  background: var(--color-manila);
+  border: 1px solid rgba(31, 42, 60, 0.18);
+}
+.stub::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  width: 1px;
+  background-image: radial-gradient(circle 3px, var(--color-paper) 3px, transparent 3.5px);
+  background-size: 1px 16px;
+  background-repeat: repeat-y;
+}
+
+.ticket-card {
+  position: relative;
+  background: var(--color-manila);
+  border: 1px solid rgba(31, 42, 60, 0.16);
+}
+.ticket-card::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 9px;
+  background-image: radial-gradient(circle 3px, var(--color-paper) 3px, transparent 3.6px);
+  background-size: 9px 15px;
+  background-repeat: repeat-y;
+  pointer-events: none;
+}
+
+.priority-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 3px rgba(31, 42, 60, 0.06);
+}
+
+.chip {
+  border: 1px solid rgba(31, 42, 60, 0.22);
+  background: var(--color-manila);
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.chip[data-active="true"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+.chip:hover {
+  transform: translateY(-1px);
+}
+
+.stamp-btn {
+  background: var(--color-stamp);
+  color: var(--color-manila);
+  border: 2px dashed rgba(251, 247, 238, 0.55);
+  transition: transform 0.18s ease;
+}
+.stamp-btn:hover {
+  transform: rotate(-2deg) scale(1.02);
+}
+.stamp-btn:active {
+  transform: rotate(0) scale(0.98);
+}
+
+.stamp-mark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 3px double var(--color-stamp);
+  color: var(--color-stamp);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transform: rotate(-9deg);
+  opacity: 0;
+  pointer-events: none;
+}
+.stamped .stamp-mark {
+  animation: stampIn 0.45s ease-out forwards;
+}
+@keyframes stampIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-9deg) scale(2.4);
+  }
+  55% {
+    opacity: 1;
+    transform: rotate(-9deg) scale(0.88);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-9deg) scale(1);
+  }
+}
+
+.card-enter {
+  animation: cardIn 0.3s ease-out;
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.checkbox-stamp {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--color-ink);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+}
+.checkbox-stamp:hover {
+  border-color: var(--color-ledger);
+}
+.checkbox-stamp.done {
+  background: var(--color-ledger);
+  border-color: var(--color-ledger);
+}
+
+.lined-textarea {
+  background-image: repeating-linear-gradient(transparent, transparent 23px, rgba(31, 42, 60, 0.16) 24px);
+  line-height: 24px;
+}
+
+.field-underline {
+  border: none;
+  border-bottom: 1.5px dashed rgba(31, 42, 60, 0.35);
+  background: transparent;
+}
+.field-underline:focus {
+  outline: none;
+  border-bottom-color: var(--color-ink);
+}
+
+.dragging {
+  opacity: 0.35;
+}
+.drop-zone {
+  background: rgba(31, 42, 60, 0.05);
+}
+
+::selection {
+  background: var(--color-seal);
+  color: var(--color-manila);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.column-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.column-scroll::-webkit-scrollbar-thumb {
+  background: rgba(31, 42, 60, 0.2);
+  border-radius: 4px;
+}

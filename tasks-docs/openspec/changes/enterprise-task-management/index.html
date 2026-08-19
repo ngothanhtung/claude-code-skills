@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Task Management — Change Proposal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+  .flow-arrow::after {
+    content: "";
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 8px solid #94a3b8;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .spec-panel { display: none; }
+  .spec-panel.active { display: block; }
+  .task-done .task-text { text-decoration: line-through; color: #94a3b8; }
+  .task-done .task-check { color: #10b981; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<!-- Top bar -->
+<header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
+        <i data-lucide="git-pull-request-draft" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h1 class="font-semibold text-slate-900 leading-tight">enterprise-task-management</h1>
+        <p class="text-xs text-slate-500 leading-tight">OpenSpec change · schema: spec-driven</p>
+      </div>
+    </div>
+    <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
+      <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> 4/4 artifacts complete
+    </span>
+  </div>
+  <nav class="max-w-6xl mx-auto px-6 flex gap-1 overflow-x-auto text-sm">
+    <button class="tab-btn px-4 py-3 border-b-2 border-indigo-600 text-indigo-600 font-medium whitespace-nowrap" data-tab="proposal">Đề xuất</button>
+    <button class="tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap" data-tab="specs">Đặc tả (Specs)</button>
+    <button class="tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap" data-tab="design">Thiết kế</button>
+    <button class="tab-btn px-4 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap" data-tab="tasks">Công việc</button>
+  </nav>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-10">
+
+  <!-- ============================================================ -->
+  <!-- PROPOSAL -->
+  <!-- ============================================================ -->
+  <section id="proposal" class="tab-panel active space-y-8">
+    <div>
+      <p class="text-xs font-medium text-indigo-600 mb-1 flex items-center gap-1.5"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> proposal.md</p>
+      <h2 class="text-2xl font-bold text-slate-900">Vì sao cần thay đổi này</h2>
+      <p class="mt-2 text-slate-600 max-w-3xl">Doanh nghiệp nhiều phòng ban hiện chưa có công cụ tập trung để giao việc, xác nhận hoàn thành, và theo dõi tiến độ theo từng phòng ban.
+      Trưởng phòng không có cái nhìn tổng quan về khối lượng công việc và các việc quá hạn của nhân viên, còn nhân viên thiếu một nơi duy nhất để biết mình cần làm gì và trạng thái được duyệt ra sao.</p>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-white p-6">
+      <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-4"><i data-lucide="list-plus" class="w-4 h-4 text-slate-400"></i> Những gì sẽ thay đổi</h3>
+      <ul class="grid sm:grid-cols-2 gap-3 text-sm">
+        <li class="flex gap-2"><i data-lucide="building-2" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> Mô hình tổ chức tự quản lý: Admin tạo/gán phòng ban và nhân viên</li>
+        <li class="flex gap-2"><i data-lucide="users" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> 3 vai trò — Admin, Trưởng phòng, Nhân viên — Trưởng phòng chỉ thao tác trong phòng mình</li>
+        <li class="flex gap-2"><i data-lucide="workflow" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> Luồng công việc có phê duyệt: Cần làm → Đang làm → Chờ duyệt → Hoàn thành (hoặc trả lại)</li>
+        <li class="flex gap-2"><i data-lucide="alarm-clock" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> Cờ "quá hạn" tính song song từ due_date, không phải một trạng thái riêng</li>
+        <li class="flex gap-2"><i data-lucide="message-square" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> Comment đầy đủ + @mention, tách biệt với audit trail</li>
+        <li class="flex gap-2"><i data-lucide="bell" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> Thông báo in-app qua polling định kỳ — không email/SMS ở MVP</li>
+        <li class="flex gap-2"><i data-lucide="layout-dashboard" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> Dashboard theo phòng ban: tổng quan + khối lượng theo từng nhân viên</li>
+        <li class="flex gap-2"><i data-lucide="smartphone" class="w-4 h-4 text-indigo-500 shrink-0 mt-0.5"></i> Web responsive, tối ưu riêng thao tác duyệt/thông báo trên di động</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-4"><i data-lucide="box" class="w-4 h-4 text-slate-400"></i> Capabilities mới</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="capability-cards"></div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-white p-6">
+      <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-3"><i data-lucide="target" class="w-4 h-4 text-slate-400"></i> Phạm vi ảnh hưởng</h3>
+      <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+        <li>Hệ thống mới hoàn toàn — chưa có codebase triển khai trước đó</li>
+        <li>Cần thiết kế data model: Department, User, Task, StatusHistory, Comment, Notification</li>
+        <li>Cần cơ chế phân quyền theo vai trò và theo phạm vi phòng ban</li>
+        <li>Cần cơ chế polling định kỳ cho thông báo in-app</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SPECS -->
+  <!-- ============================================================ -->
+  <section id="specs" class="tab-panel space-y-6">
+    <div>
+      <p class="text-xs font-medium text-indigo-600 mb-1 flex items-center gap-1.5"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> specs/*/spec.md</p>
+      <h2 class="text-2xl font-bold text-slate-900">Đặc tả hành vi theo từng capability</h2>
+      <p class="mt-2 text-slate-600 max-w-3xl">Mỗi capability là một hợp đồng hành vi: requirement kèm scenario WHEN/THEN có thể kiểm thử được.</p>
+    </div>
+
+    <div class="flex flex-wrap gap-2" id="spec-nav"></div>
+    <div id="spec-panels"></div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- DESIGN -->
+  <!-- ============================================================ -->
+  <section id="design" class="tab-panel space-y-8">
+    <div>
+      <p class="text-xs font-medium text-indigo-600 mb-1 flex items-center gap-1.5"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> design.md</p>
+      <h2 class="text-2xl font-bold text-slate-900">Thiết kế kỹ thuật</h2>
+      <p class="mt-2 text-slate-600 max-w-3xl">Hệ thống mới hoàn toàn. Thiết kế tập trung vào data model, phân quyền, và các quyết định kỹ thuật cần thống nhất trước khi chia task — không chọn tech stack cụ thể.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="rounded-2xl border border-slate-200 bg-white p-5">
+        <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-2"><i data-lucide="target" class="w-4 h-4 text-emerald-500"></i> Goals</h3>
+        <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+          <li>Data model đủ để 5 capability triển khai nhất quán</li>
+          <li>Luật phân quyền rõ ràng, không diễn giải khác nhau giữa các capability</li>
+          <li>Cơ chế polling và ràng buộc kéo-thả Kanban không phá workflow duyệt</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-5">
+        <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-2"><i data-lucide="ban" class="w-4 h-4 text-rose-500"></i> Non-Goals</h3>
+        <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+          <li>Không chọn tech stack cụ thể</li>
+          <li>Không tích hợp HR/AD/SSO ngoài</li>
+          <li>Không thiết kế email/SMS hay hạ tầng realtime</li>
+          <li>Không thiết kế báo cáo xuyên phòng ban / trên cấp trưởng phòng</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Data model diagram -->
+    <div class="rounded-2xl border border-slate-200 bg-white p-6 overflow-x-auto">
+      <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="database" class="w-4 h-4 text-slate-400"></i> Decision 1 — Data model</h3>
+      <div class="flex items-center gap-10 min-w-[820px] justify-center py-4">
+        <div class="rounded-xl border-2 border-indigo-200 bg-indigo-50 px-4 py-3 text-center w-40">
+          <i data-lucide="building-2" class="w-5 h-5 mx-auto text-indigo-600 mb-1"></i>
+          <p class="font-semibold text-sm text-indigo-900">Department</p>
+        </div>
+        <div class="relative w-14 flow-arrow"><div class="h-px bg-slate-300 w-full mt-0"></div></div>
+        <div class="rounded-xl border-2 border-amber-200 bg-amber-50 px-4 py-3 text-center w-40">
+          <i data-lucide="users" class="w-5 h-5 mx-auto text-amber-600 mb-1"></i>
+          <p class="font-semibold text-sm text-amber-900">User</p>
+          <p class="text-xs text-amber-600">admin/manager/employee</p>
+        </div>
+        <div class="relative w-14 flow-arrow"><div class="h-px bg-slate-300 w-full mt-0"></div></div>
+        <div class="rounded-xl border-2 border-rose-300 bg-rose-50 px-4 py-3 text-center w-48">
+          <i data-lucide="square-check-big" class="w-5 h-5 mx-auto text-rose-600 mb-1"></i>
+          <p class="font-semibold text-sm text-rose-900">Task</p>
+          <p class="text-xs text-rose-600">created_by = approver</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-center gap-10 min-w-[820px] pb-2">
+        <div class="rounded-xl border-2 border-sky-200 bg-sky-50 px-4 py-3 text-center w-40">
+          <i data-lucide="history" class="w-5 h-5 mx-auto text-sky-600 mb-1"></i>
+          <p class="font-semibold text-sm text-sky-900">StatusHistory</p>
+        </div>
+        <div class="rounded-xl border-2 border-violet-200 bg-violet-50 px-4 py-3 text-center w-40">
+          <i data-lucide="message-square" class="w-5 h-5 mx-auto text-violet-600 mb-1"></i>
+          <p class="font-semibold text-sm text-violet-900">Comment</p>
+        </div>
+        <div class="rounded-xl border-2 border-emerald-200 bg-emerald-50 px-4 py-3 text-center w-40">
+          <i data-lucide="bell" class="w-5 h-5 mx-auto text-emerald-600 mb-1"></i>
+          <p class="font-semibold text-sm text-emerald-900">Notification</p>
+        </div>
+      </div>
+      <p class="text-center text-xs text-slate-400 mt-2">created_by đóng vai trò approver cố định — không cần trường approver_id riêng</p>
+    </div>
+
+    <!-- Permission matrix -->
+    <div class="rounded-2xl border border-slate-200 bg-white p-6">
+      <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-slate-400"></i> Decision 2 — Phân quyền theo vai trò &amp; phạm vi</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-slate-500 border-b border-slate-200">
+              <th class="py-2 pr-4">Hành động</th><th class="py-2 px-3 text-center">Admin</th><th class="py-2 px-3 text-center">Trưởng phòng</th><th class="py-2 px-3 text-center">Nhân viên</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100" id="permission-rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="rounded-2xl border border-slate-200 bg-white p-5">
+        <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-2"><i data-lucide="move" class="w-4 h-4 text-amber-500"></i> Decision 3 — Ràng buộc kéo-thả Kanban</h3>
+        <p class="text-sm text-slate-600">Kanban chỉ cho kéo tới cột hợp lệ theo bảng phân quyền. UI validate để phản hồi tức thì, nhưng server luôn chặn lại — đây là ràng buộc nghiệp vụ, không chỉ UX.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-5">
+        <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-2"><i data-lucide="refresh-cw" class="w-4 h-4 text-sky-500"></i> Decision 4 — Thông báo qua polling</h3>
+        <p class="text-sm text-slate-600">Polling ~30s hoặc khi tab focus, không dùng WebSocket/SSE. Độ trễ vài chục giây không ảnh hưởng nghiệp vụ nội bộ, và đơn giản hoá hạ tầng cho MVP.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 sm:col-span-2">
+        <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-2"><i data-lucide="calculator" class="w-4 h-4 text-rose-500"></i> Decision 5 — "Quá hạn" là giá trị computed, không lưu trữ</h3>
+        <p class="text-sm text-slate-600"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">is_overdue = due_date &lt; now() AND status != hoan_thanh</code> tính tại thời điểm truy vấn, không phải một status riêng trong DB — tránh job nền quét theo thời gian thực, giữ status là nguồn sự thật duy nhất cho workflow chính.</p>
+      </div>
+    </div>
+
+    <!-- Risks -->
+    <div class="rounded-2xl border border-slate-200 bg-white p-6">
+      <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="triangle-alert" class="w-4 h-4 text-slate-400"></i> Risks / Trade-offs</h3>
+      <div class="space-y-3" id="risk-rows"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="rounded-2xl border border-slate-200 bg-white p-5">
+        <h3 class="font-semibold text-slate-900 flex items-center gap-2 mb-2"><i data-lucide="rocket" class="w-4 h-4 text-indigo-500"></i> Migration Plan</h3>
+        <p class="text-sm text-slate-600">Hệ thống mới hoàn toàn — không có dữ liệu cần di trú. Seed một tài khoản Admin, sau đó Admin tạo phòng ban và gán nhân viên trước khi các capability khác có dữ liệu để hoạt động.</p>
+      </div>
+      <div class="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+        <h3 class="font-semibold text-amber-900 flex items-center gap-2 mb-2"><i data-lucide="help-circle" class="w-4 h-4" ></i> Open Questions</h3>
+        <ul class="text-sm text-amber-900 space-y-1.5 list-disc list-inside">
+          <li>Có cần gắn nhãn/loại công việc, hay chỉ dùng priority?</li>
+          <li>@mention giới hạn trong cùng phòng ban, hay toàn công ty?</li>
+          <li>Có cần export báo cáo (CSV/Excel) từ dashboard phòng ban?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TASKS -->
+  <!-- ============================================================ -->
+  <section id="tasks" class="tab-panel space-y-6">
+    <div class="flex items-start justify-between flex-wrap gap-4">
+      <div>
+        <p class="text-xs font-medium text-indigo-600 mb-1 flex items-center gap-1.5"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> tasks.md</p>
+        <h2 class="text-2xl font-bold text-slate-900">Checklist triển khai</h2>
+        <p class="mt-2 text-slate-600 max-w-2xl">44 task theo 9 nhóm, thứ tự phụ thuộc. Tick để theo dõi tiến độ của riêng bạn khi triển khai — trạng thái được lưu ngay trên trình duyệt này.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-4 min-w-[220px]">
+        <div class="flex items-baseline justify-between mb-1.5">
+          <span class="text-xs text-slate-500">Tổng tiến độ</span>
+          <span class="text-sm font-semibold text-slate-800" id="overall-count">0/44</span>
+        </div>
+        <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
+          <div class="h-full bg-indigo-500 transition-all" id="overall-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="task-groups" class="space-y-4"></div>
+  </section>
+
+</main>
+
+<footer class="border-t border-slate-200 py-6 mt-10">
+  <p class="text-center text-xs text-slate-400">enterprise-task-management/index.html · Bản HTML tương ứng với proposal.md · design.md · tasks.md · specs/*.md</p>
+</footer>
+
+<script>
+// ---------------------------------------------------------------
+// Data (mirrors the .md source files)
+// ---------------------------------------------------------------
+const CAPABILITIES = [
+  { id: 'org-management', icon: 'building-2', color: 'indigo', title: 'org-management', desc: 'Admin tạo/sửa phòng ban, gán nhân viên và trưởng phòng vào từng phòng ban.' },
+  { id: 'task-assignment', icon: 'user-plus', color: 'amber', title: 'task-assignment', desc: 'Tạo, sửa, phân loại (priority, due date) và giao việc trong phạm vi một phòng ban.' },
+  { id: 'approval-workflow', icon: 'shield-check', color: 'emerald', title: 'approval-workflow', desc: 'Chuyển trạng thái qua Cần làm/Đang làm/Chờ duyệt/Hoàn thành, phê duyệt hoặc trả lại, tính cờ quá hạn.' },
+  { id: 'comments-notifications', icon: 'message-square', color: 'violet', title: 'comments-notifications', desc: 'Comment có @mention trên task, và thông báo in-app theo bảng ánh xạ sự kiện → người nhận.' },
+  { id: 'department-dashboard', icon: 'gauge', color: 'sky', title: 'department-dashboard', desc: 'Dashboard tổng hợp theo phòng ban: số liệu tổng quan + khối lượng theo nhân viên.' },
+];
+
+const COLOR_MAP = {
+  indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', border: 'border-indigo-200' },
+  amber: { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-200' },
+  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-200' },
+  violet: { bg: 'bg-violet-50', text: 'text-violet-600', border: 'border-violet-200' },
+  sky: { bg: 'bg-sky-50', text: 'text-sky-600', border: 'border-sky-200' },
+};
+
+const SPECS = {
+  'org-management': {
+    purpose: 'Cho phép Admin thiết lập và duy trì cơ cấu tổ chức nội bộ (phòng ban, nhân viên, trưởng phòng) làm nền tảng cho việc giao việc và phân quyền trong toàn hệ thống.',
+    requirements: [
+      { name: 'Admin quản lý phòng ban', text: 'Hệ thống SHALL cho phép Admin tạo, sửa, và xoá phòng ban.', scenarios: [
+        ['Tạo phòng ban mới', 'Admin tạo một phòng ban với tên hợp lệ', 'hệ thống lưu phòng ban mới và hiển thị trong danh sách'],
+        ['Xoá phòng ban còn nhân viên', 'Admin xoá một phòng ban đang có nhân viên được gán', 'hệ thống từ chối xoá và yêu cầu chuyển/gỡ nhân viên trước'],
+      ]},
+      { name: 'Admin gán nhân viên và trưởng phòng', text: 'Hệ thống SHALL cho phép Admin gán mỗi nhân viên vào đúng một phòng ban, và chỉ định Trưởng phòng.', scenarios: [
+        ['Gán nhân viên vào phòng ban', 'Admin gán một tài khoản nhân viên vào một phòng ban', 'tài khoản đó thuộc phòng ban đó và có thể được giao việc bởi trưởng phòng của phòng ban đó'],
+        ['Chỉ định trưởng phòng', 'Admin gán vai trò Trưởng phòng cho một nhân viên thuộc phòng ban', 'người đó có quyền giao việc và phê duyệt việc cho nhân viên khác trong cùng phòng ban'],
+      ]},
+      { name: 'Chỉ Admin quản lý cơ cấu tổ chức', text: 'Hệ thống SHALL giới hạn quyền tạo/sửa/xoá phòng ban và gán nhân viên chỉ cho vai trò Admin.', scenarios: [
+        ['Trưởng phòng cố gắng tạo phòng ban', 'một Trưởng phòng gọi chức năng tạo phòng ban', 'hệ thống từ chối thao tác với lỗi không đủ quyền'],
+      ]},
+    ],
+  },
+  'task-assignment': {
+    purpose: 'Cho phép Trưởng phòng tạo và giao công việc cho nhân viên trong phạm vi phòng ban mình quản lý, với đầy đủ thông tin ưu tiên và hạn hoàn thành.',
+    requirements: [
+      { name: 'Trưởng phòng tạo và giao việc trong phòng ban', text: 'Hệ thống SHALL cho phép Trưởng phòng tạo task và giao cho một nhân viên thuộc cùng phòng ban.', scenarios: [
+        ['Giao việc cho nhân viên trong phòng ban', 'Trưởng phòng tạo một task và chọn một nhân viên thuộc phòng ban mình làm assignee', 'hệ thống tạo task ở trạng thái "Cần làm", gán assignee, và ghi nhận Trưởng phòng là approver'],
+        ['Từ chối giao việc xuyên phòng ban', 'Trưởng phòng cố giao việc cho nhân viên không thuộc phòng ban mình', 'hệ thống từ chối với lỗi ngoài phạm vi phòng ban'],
+      ]},
+      { name: 'Thông tin bắt buộc của công việc', text: 'Mỗi công việc SHALL có tiêu đề, mức độ ưu tiên, và hạn hoàn thành; mô tả là tuỳ chọn.', scenarios: [
+        ['Tạo task thiếu tiêu đề', 'Trưởng phòng cố tạo task không có tiêu đề', 'hệ thống từ chối lưu và báo lỗi thiếu trường bắt buộc'],
+        ['Tạo task đầy đủ thông tin', 'Trưởng phòng nhập tiêu đề, ưu tiên, và hạn hoàn thành hợp lệ', 'hệ thống lưu task với đầy đủ các trường đó'],
+      ]},
+      { name: 'Chỉnh sửa công việc chưa hoàn thành', text: 'Hệ thống SHALL cho phép Trưởng phòng chỉnh sửa task chưa ở trạng thái "Hoàn thành".', scenarios: [
+        ['Đổi hạn hoàn thành của task đang làm', 'Trưởng phòng cập nhật due date của một task "Đang làm"', 'hệ thống lưu hạn mới và tính lại cờ quá hạn'],
+      ]},
+    ],
+  },
+  'approval-workflow': {
+    purpose: 'Định nghĩa luồng trạng thái của công việc, bao gồm bước phê duyệt bắt buộc bởi người giao việc, và cách hệ thống đánh dấu công việc quá hạn.',
+    requirements: [
+      { name: 'Chuỗi trạng thái công việc', text: 'Hệ thống SHALL quản lý trạng thái theo đúng thứ tự: Cần làm → Đang làm → Chờ duyệt → Hoàn thành.', scenarios: [
+        ['Nhân viên nhận việc', 'Nhân viên chuyển task từ "Cần làm" sang "Đang làm"', 'hệ thống cập nhật trạng thái và ghi vào audit trail'],
+        ['Ngăn nhảy cóc trạng thái', 'Nhân viên cố chuyển task trực tiếp từ "Đang làm" sang "Hoàn thành"', 'hệ thống từ chối vì thiếu bước phê duyệt'],
+      ]},
+      { name: 'Báo hoàn thành và chờ duyệt', text: 'Hệ thống SHALL cho phép Nhân viên chuyển task từ "Đang làm" sang "Chờ duyệt".', scenarios: [
+        ['Báo hoàn thành hợp lệ', 'Nhân viên chuyển task "Đang làm" sang "Chờ duyệt"', 'hệ thống cập nhật trạng thái và thông báo cho approver'],
+      ]},
+      { name: 'Phê duyệt bởi người giao việc', text: 'Hệ thống SHALL chỉ cho phép approver (= người tạo task) duyệt hoặc trả lại task "Chờ duyệt".', scenarios: [
+        ['Người giao việc duyệt task', 'approver duyệt một task đang "Chờ duyệt"', 'hệ thống chuyển task sang "Hoàn thành" và thông báo người được giao'],
+        ['Người khác cố gắng duyệt', 'một người không phải approver cố duyệt task', 'hệ thống từ chối với lỗi không đủ quyền'],
+        ['Trả lại công việc không đạt', 'approver trả lại task "Chờ duyệt" kèm lý do', 'hệ thống chuyển task về "Đang làm", lưu lý do, và thông báo người được giao'],
+        ['Trả lại thiếu lý do', 'approver cố trả lại task mà không nhập lý do', 'hệ thống từ chối và yêu cầu nhập lý do'],
+      ]},
+      { name: 'Đánh dấu công việc quá hạn', text: 'Hệ thống SHALL đánh dấu task "quá hạn" khi due date đã qua và trạng thái chưa phải "Hoàn thành".', scenarios: [
+        ['Task quá hạn khi chưa hoàn thành', 'ngày hiện tại vượt quá due date của task "Đang làm" hoặc "Chờ duyệt"', 'hệ thống hiển thị cờ "quá hạn" trên mọi view liên quan'],
+        ['Task hoàn thành không bị tính quá hạn', 'ngày hiện tại vượt quá due date nhưng task đã "Hoàn thành"', 'hệ thống không đánh dấu task đó là quá hạn'],
+      ]},
+    ],
+  },
+  'comments-notifications': {
+    purpose: 'Cho phép người dùng thảo luận trực tiếp trên từng công việc qua comment kèm @mention, và giữ mọi người liên quan cập nhật kịp thời qua thông báo in-app.',
+    requirements: [
+      { name: 'Thêm comment trên công việc', text: 'Hệ thống SHALL cho phép người tạo task, người được giao, và người được mention thêm comment.', scenarios: [
+        ['Thêm comment', 'một người liên quan nhập nội dung comment và gửi', 'hệ thống lưu comment kèm tác giả và thời gian, tách biệt với audit trail'],
+      ]},
+      { name: '@mention trong comment', text: 'Hệ thống SHALL cho phép mention một hoặc nhiều người dùng khác, kể cả người không liên quan trực tiếp.', scenarios: [
+        ['Mention một người dùng', 'người viết comment gõ @mention và chọn một người dùng hợp lệ', 'hệ thống lưu comment kèm mentions và gửi thông báo cho người đó'],
+      ]},
+      { name: 'Thông báo theo sự kiện', text: 'Hệ thống SHALL tạo thông báo in-app đúng người nhận theo từng loại sự kiện.', scenarios: [
+        ['Thông báo khi giao việc mới', 'Trưởng phòng giao một task cho nhân viên', 'hệ thống tạo thông báo in-app cho nhân viên đó'],
+        ['Thông báo khi task quá hạn', 'một task chuyển sang trạng thái "quá hạn"', 'hệ thống thông báo cho cả người được giao và Trưởng phòng'],
+      ]},
+      { name: 'Xem và đánh dấu đã đọc thông báo', text: 'Hệ thống SHALL hiển thị số thông báo chưa đọc và điều hướng đến task khi click.', scenarios: [
+        ['Badge số thông báo chưa đọc', 'người dùng có 3 thông báo chưa đọc', 'chuông thông báo hiển thị badge số "3"'],
+        ['Mở thông báo điều hướng đến task', 'người dùng click vào một thông báo', 'hệ thống đánh dấu đã đọc và mở màn hình chi tiết task tương ứng'],
+      ]},
+      { name: 'Cập nhật thông báo qua polling định kỳ', text: 'Hệ thống SHALL cập nhật thông báo bằng polling, không yêu cầu kết nối realtime.', scenarios: [
+        ['Thông báo mới xuất hiện sau chu kỳ polling', 'có một thông báo mới được tạo cho người dùng đang mở app', 'giao diện hiển thị thông báo đó ở lần truy vấn định kỳ kế tiếp'],
+      ]},
+    ],
+  },
+  'department-dashboard': {
+    purpose: 'Cho Trưởng phòng cái nhìn tổng quan về tiến độ và khối lượng công việc của phòng ban mình quản lý.',
+    requirements: [
+      { name: 'Dashboard tổng quan theo phòng ban', text: 'Hệ thống SHALL hiển thị tổng số, đang làm, quá hạn, chờ duyệt của phòng ban.', scenarios: [
+        ['Xem số liệu tổng quan', 'Trưởng phòng mở dashboard phòng ban của mình', 'hệ thống hiển thị đúng 4 chỉ số tính từ các task thuộc phòng ban đó'],
+        ['Chỉ thấy dữ liệu phòng ban mình quản lý', 'Trưởng phòng A xem dashboard', 'hệ thống chỉ hiển thị số liệu của phòng ban A'],
+      ]},
+      { name: 'Khối lượng công việc theo nhân viên', text: 'Hệ thống SHALL hiển thị tỷ lệ hoàn thành và cảnh báo quá hạn theo từng nhân viên.', scenarios: [
+        ['Xem tiến độ từng nhân viên', 'Trưởng phòng xem phần khối lượng công việc', 'hệ thống hiển thị mỗi nhân viên kèm tỷ lệ hoàn thành dạng thanh tiến độ'],
+        ['Cảnh báo nhân viên có việc quá hạn', 'một nhân viên đang có ít nhất một task quá hạn', 'hệ thống hiển thị dấu cảnh báo bên cạnh tên nhân viên đó'],
+      ]},
+      { name: 'Không hiển thị báo cáo toàn công ty', text: 'Hệ thống SHALL giới hạn dashboard trong phạm vi một phòng ban.', scenarios: [
+        ['Trưởng phòng không thấy dữ liệu phòng khác', 'Trưởng phòng cố truy cập dashboard phòng ban khác', 'hệ thống từ chối truy cập với lỗi không đủ quyền'],
+      ]},
+    ],
+  },
+};
+
+const PERMISSIONS = [
+  ['Tạo/sửa/xoá phòng ban, gán nhân viên', true, false, false],
+  ['Tạo/giao task trong phòng ban mình quản lý', false, 'partial', false],
+  ['Chuyển Cần làm → Đang làm, Đang làm → Chờ duyệt', false, false, 'partial'],
+  ['Duyệt / trả lại', false, 'partial', false],
+  ['Xem dashboard phòng ban', false, 'partial', false],
+  ['Comment / @mention', true, true, true],
+];
+
+const RISKS = [
+  ['Polling định kỳ có thể tạo tải không cần thiết khi số người dùng tăng', 'Endpoint polling trả về nhẹ (chỉ đếm + N thông báo gần nhất); có thể tăng chu kỳ nếu cần'],
+  ['created_by = approver cố định có thể không đủ linh hoạt khi cần uỷ quyền duyệt (nghỉ phép)', 'Đã xác nhận ngoài phạm vi MVP; nếu phát sinh, thêm delta spec riêng cho approval-workflow'],
+  ['Kiểm tra phạm vi phòng ban lặp lại ở nhiều capability có nguy cơ lệch logic', 'Dùng chung một hàm kiểm tra quyền theo department_id, áp dụng nhất quán khi triển khai'],
+];
+
+const TASK_GROUPS = [
+  { title: 'Nền tảng dữ liệu & phân quyền', icon: 'foundation', items: [
+    ['1.1', 'Khởi tạo project và cấu trúc module theo tech stack đã chọn'],
+    ['1.2', 'Tạo schema/migration cho Department, User, Task, StatusHistory, Comment, Notification'],
+    ['1.3', 'Cài đặt cơ chế xác thực và vai trò (Admin / Trưởng phòng / Nhân viên)'],
+    ['1.4', 'Cài đặt hàm kiểm tra quyền dùng chung theo department_id'],
+    ['1.5', 'Seed một tài khoản Admin khởi tạo'],
+  ]},
+  { title: 'Org Management', icon: 'building-2', items: [
+    ['2.1', 'API/thao tác tạo, sửa, xoá phòng ban (chặn xoá khi còn nhân viên)'],
+    ['2.2', 'API/thao tác gán nhân viên vào phòng ban'],
+    ['2.3', 'API/thao tác chỉ định vai trò Trưởng phòng'],
+    ['2.4', 'Giới hạn thao tác chỉ cho vai trò Admin'],
+    ['2.5', 'Màn hình quản trị tổ chức cho Admin'],
+  ]},
+  { title: 'Task Assignment', icon: 'user-plus', items: [
+    ['3.1', 'API/thao tác tạo task (title bắt buộc, priority, due date)'],
+    ['3.2', 'API/thao tác giao task cho nhân viên trong cùng phòng ban'],
+    ['3.3', 'Chặn giao việc xuyên phòng ban bằng hàm kiểm tra quyền dùng chung'],
+    ['3.4', 'API/thao tác chỉnh sửa task chưa hoàn thành'],
+    ['3.5', 'Form tạo/sửa task cho Trưởng phòng'],
+  ]},
+  { title: 'Approval Workflow', icon: 'shield-check', items: [
+    ['4.1', 'Cài đặt state machine trạng thái task'],
+    ['4.2', 'Chặn mọi chuyển trạng thái không hợp lệ ở tầng server'],
+    ['4.3', 'API/thao tác nhân viên chuyển trạng thái (nhận việc, báo hoàn thành)'],
+    ['4.4', 'API/thao tác approver duyệt hoặc trả lại (bắt buộc lý do)'],
+    ['4.5', 'Ghi StatusHistory cho mọi lần chuyển trạng thái'],
+    ['4.6', 'Cài đặt thuộc tính "quá hạn" dạng computed'],
+    ['4.7', 'Hiển thị cờ quá hạn nhất quán trên List, Kanban, Dashboard'],
+  ]},
+  { title: 'Comments & Notifications', icon: 'message-square', items: [
+    ['5.1', 'API/thao tác thêm comment vào task'],
+    ['5.2', 'Cài đặt @mention trong comment'],
+    ['5.3', 'Cài đặt notification engine theo bảng sự kiện → người nhận'],
+    ['5.4', 'API endpoint trả về số thông báo chưa đọc + danh sách gần nhất'],
+    ['5.5', 'Client polling định kỳ cập nhật chuông thông báo'],
+    ['5.6', 'UI chuông thông báo: badge, dropdown, đánh dấu đã đọc, điều hướng'],
+  ]},
+  { title: 'Department Dashboard', icon: 'gauge', items: [
+    ['6.1', 'API tổng hợp số liệu theo phòng ban'],
+    ['6.2', 'API khối lượng công việc theo từng nhân viên'],
+    ['6.3', 'Giới hạn dashboard chỉ hiển thị phòng ban Trưởng phòng đang quản lý'],
+    ['6.4', 'Màn hình dashboard: stat cards + bảng tiến độ theo nhân viên'],
+  ]},
+  { title: 'Giao diện "Việc của tôi" & Kanban', icon: 'layout-list', items: [
+    ['7.1', 'View List mặc định: lọc/sort theo trạng thái, priority, due date'],
+    ['7.2', 'View Kanban tuỳ chọn (toggle từ List)'],
+    ['7.3', 'Ràng buộc kéo-thả Kanban theo vai trò, validate cả client lẫn server'],
+    ['7.4', 'Màn hình chi tiết task: nút hành động theo vai trò, khu vực comment/@mention'],
+  ]},
+  { title: 'Responsive & Mobile', icon: 'smartphone', items: [
+    ['8.1', 'Đảm bảo layout List/Kanban/Dashboard responsive trên di động'],
+    ['8.2', 'Thiết kế riêng luồng duyệt/trả lại trên mobile'],
+    ['8.3', 'Màn hình danh sách thông báo tối ưu cho mobile'],
+  ]},
+  { title: 'Kiểm thử & Xác minh', icon: 'check-check', items: [
+    ['9.1', 'Test ràng buộc phân quyền theo phòng ban'],
+    ['9.2', 'Test state machine: mọi chuyển trạng thái hợp lệ/không hợp lệ'],
+    ['9.3', 'Test tính toán cờ quá hạn ở các mốc thời gian biên'],
+    ['9.4', 'Test notification sinh đúng người nhận cho từng sự kiện'],
+    ['9.5', 'Kiểm tra thủ công luồng chính trên trình duyệt di động'],
+  ]},
+];
+
+// ---------------------------------------------------------------
+// Render: capability cards
+// ---------------------------------------------------------------
+const capWrap = document.getElementById('capability-cards');
+CAPABILITIES.forEach(c => {
+  const col = COLOR_MAP[c.color];
+  capWrap.insertAdjacentHTML('beforeend', `
+    <div class="rounded-2xl border border-slate-200 bg-white p-5">
+      <div class="w-10 h-10 rounded-xl ${col.bg} ${col.text} flex items-center justify-center mb-3">
+        <i data-lucide="${c.icon}" class="w-5 h-5"></i>
+      </div>
+      <h4 class="font-semibold text-slate-900 font-mono text-sm">${c.title}</h4>
+      <p class="text-sm text-slate-500 mt-1">${c.desc}</p>
+    </div>
+  `);
+});
+
+// ---------------------------------------------------------------
+// Render: spec nav + panels
+// ---------------------------------------------------------------
+const specNav = document.getElementById('spec-nav');
+const specPanels = document.getElementById('spec-panels');
+CAPABILITIES.forEach((c, i) => {
+  const col = COLOR_MAP[c.color];
+  specNav.insertAdjacentHTML('beforeend', `
+    <button class="spec-nav-btn inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border ${i === 0 ? col.border + ' ' + col.bg + ' ' + col.text : 'border-slate-200 text-slate-500 hover:text-slate-800'}" data-spec="${c.id}">
+      <i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i> ${c.title}
+    </button>
+  `);
+
+  const spec = SPECS[c.id];
+  const reqsHtml = spec.requirements.map(r => `
+    <div class="rounded-2xl border border-slate-200 bg-white p-5">
+      <h4 class="font-semibold text-slate-900 mb-1">${r.name}</h4>
+      <p class="text-sm text-slate-600 mb-3">${r.text}</p>
+      <div class="space-y-2">
+        ${r.scenarios.map(s => `
+          <div class="rounded-lg bg-slate-50 border border-slate-100 p-3 text-xs">
+            <p class="font-medium text-slate-700 mb-1 flex items-center gap-1.5"><i data-lucide="flask-conical" class="w-3 h-3 text-slate-400"></i> ${s[0]}</p>
+            <p class="text-slate-500"><span class="font-semibold text-slate-600">WHEN</span> ${s[1]}</p>
+            <p class="text-slate-500"><span class="font-semibold text-slate-600">THEN</span> ${s[2]}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  specPanels.insertAdjacentHTML('beforeend', `
+    <div class="spec-panel ${i === 0 ? 'active' : ''} space-y-4" id="spec-panel-${c.id}">
+      <div class="rounded-2xl ${col.bg} border ${col.border} p-5">
+        <p class="text-xs font-semibold ${col.text} mb-1 uppercase tracking-wide">Purpose</p>
+        <p class="text-sm text-slate-700">${spec.purpose}</p>
+      </div>
+      ${reqsHtml}
+    </div>
+  `);
+});
+
+// ---------------------------------------------------------------
+// Render: permission table
+// ---------------------------------------------------------------
+const permWrap = document.getElementById('permission-rows');
+function permCell(v) {
+  if (v === true) return `<i data-lucide="check" class="w-4 h-4 text-emerald-600 mx-auto"></i>`;
+  if (v === false) return `<i data-lucide="x" class="w-4 h-4 text-slate-300 mx-auto"></i>`;
+  return `<span class="text-xs text-amber-600 font-medium">chỉ phòng mình</span>`;
+}
+PERMISSIONS.forEach(row => {
+  permWrap.insertAdjacentHTML('beforeend', `
+    <tr>
+      <td class="py-2.5 pr-4 text-slate-700">${row[0]}</td>
+      <td class="py-2.5 px-3 text-center">${permCell(row[1])}</td>
+      <td class="py-2.5 px-3 text-center">${permCell(row[2])}</td>
+      <td class="py-2.5 px-3 text-center">${permCell(row[3])}</td>
+    </tr>
+  `);
+});
+
+// ---------------------------------------------------------------
+// Render: risks
+// ---------------------------------------------------------------
+const riskWrap = document.getElementById('risk-rows');
+RISKS.forEach(r => {
+  riskWrap.insertAdjacentHTML('beforeend', `
+    <div class="rounded-xl border border-slate-200 p-4 text-sm">
+      <p class="text-slate-700"><i data-lucide="triangle-alert" class="w-3.5 h-3.5 text-rose-500 inline mr-1.5 -mt-0.5"></i><span class="font-medium">Risk</span> — ${r[0]}</p>
+      <p class="text-slate-500 mt-1"><i data-lucide="arrow-right" class="w-3.5 h-3.5 text-emerald-500 inline mr-1.5 -mt-0.5"></i><span class="font-medium text-slate-600">Mitigation</span> — ${r[1]}</p>
+    </div>
+  `);
+});
+
+// ---------------------------------------------------------------
+// Render: tasks (interactive checklist, persisted in localStorage)
+// ---------------------------------------------------------------
+const STORAGE_KEY = 'etm-tasks-done-v1';
+const done = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+const taskWrap = document.getElementById('task-groups');
+TASK_GROUPS.forEach((g, gi) => {
+  const itemsHtml = g.items.map(([id, text]) => `
+    <li class="task-item flex items-start gap-2.5 py-1.5 cursor-pointer select-none ${done[id] ? 'task-done' : ''}" data-id="${id}">
+      <i data-lucide="${done[id] ? 'check-square' : 'square'}" class="task-check w-4 h-4 text-slate-300 shrink-0 mt-0.5"></i>
+      <span class="task-text text-sm text-slate-700"><span class="font-mono text-xs text-slate-400 mr-1.5">${id}</span>${text}</span>
+    </li>
+  `).join('');
+
+  taskWrap.insertAdjacentHTML('beforeend', `
+    <div class="rounded-2xl border border-slate-200 bg-white p-5" id="group-${gi}">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-semibold text-slate-900 flex items-center gap-2"><i data-lucide="${g.icon}" class="w-4 h-4 text-slate-400"></i> ${gi + 1}. ${g.title}</h3>
+        <span class="text-xs text-slate-400 font-mono" data-group-count="${gi}"></span>
+      </div>
+      <ul class="divide-y divide-slate-50" data-group-list="${gi}">${itemsHtml}</ul>
+    </div>
+  `);
+});
+
+function updateProgress() {
+  let totalDone = 0, total = 0;
+  TASK_GROUPS.forEach((g, gi) => {
+    const groupDone = g.items.filter(([id]) => done[id]).length;
+    totalDone += groupDone;
+    total += g.items.length;
+    document.querySelector(`[data-group-count="${gi}"]`).textContent = `${groupDone}/${g.items.length}`;
+  });
+  document.getElementById('overall-count').textContent = `${totalDone}/${total}`;
+  document.getElementById('overall-bar').style.width = `${(totalDone / total) * 100}%`;
+}
+updateProgress();
+
+taskWrap.addEventListener('click', (e) => {
+  const li = e.target.closest('.task-item');
+  if (!li) return;
+  const id = li.dataset.id;
+  done[id] = !done[id];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(done));
+  li.classList.toggle('task-done', done[id]);
+  li.querySelector('.task-check').setAttribute('data-lucide', done[id] ? 'check-square' : 'square');
+  lucide.createIcons();
+  updateProgress();
+});
+
+// ---------------------------------------------------------------
+// Tab wiring
+// ---------------------------------------------------------------
+lucide.createIcons();
+
+const btns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => { b.classList.remove('border-indigo-600', 'text-indigo-600', 'font-medium'); b.classList.add('border-transparent', 'text-slate-500'); });
+    btn.classList.add('border-indigo-600', 'text-indigo-600', 'font-medium');
+    btn.classList.remove('border-transparent', 'text-slate-500');
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+const specBtns = document.querySelectorAll('.spec-nav-btn');
+specBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    specBtns.forEach(b => {
+      b.className = 'spec-nav-btn inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 text-slate-500 hover:text-slate-800';
+    });
+    const cap = CAPABILITIES.find(c => c.id === btn.dataset.spec);
+    const col = COLOR_MAP[cap.color];
+    btn.className = `spec-nav-btn inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border ${col.border} ${col.bg} ${col.text}`;
+    document.querySelectorAll('.spec-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(`spec-panel-${btn.dataset.spec}`).classList.add('active');
+    lucide.createIcons();
+  });
+});
+</script>
+
+</body>
+</html>

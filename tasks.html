@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sổ Giao Việc — Quản lý & theo dõi công việc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#F2EDE4',
+          manila: '#FBF7EE',
+          ink: '#1F2A3C',
+          stamp: '#B7472A',
+          ledger: '#3F6B4A',
+          seal: '#C08A2E',
+        },
+        fontFamily: {
+          display: ['"Zilla Slab"', 'serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root{
+    --paper:#F2EDE4;
+    --manila:#FBF7EE;
+    --ink:#1F2A3C;
+    --stamp:#B7472A;
+    --ledger:#3F6B4A;
+    --seal:#C08A2E;
+  }
+
+  *{ -webkit-font-smoothing:antialiased; }
+
+  body{
+    background-color:var(--paper);
+    background-image:
+      repeating-linear-gradient(transparent, transparent 27px, rgba(31,42,60,0.05) 28px);
+    color:var(--ink);
+  }
+
+  .rule-double{
+    border-bottom:1px solid rgba(31,42,60,0.25);
+    box-shadow:0 3px 0 -1px rgba(31,42,60,0.12);
+  }
+
+  .wordmark{
+    letter-spacing:0.04em;
+  }
+
+  .stub{
+    position:relative;
+    background:var(--manila);
+    border:1px solid rgba(31,42,60,0.18);
+  }
+  .stub::after{
+    content:"";
+    position:absolute;
+    top:0; bottom:0; right:-1px; width:1px;
+    background-image:radial-gradient(circle 3px, var(--paper) 3px, transparent 3.5px);
+    background-size:1px 16px;
+    background-repeat:repeat-y;
+  }
+
+  .ticket-card{
+    position:relative;
+    background:var(--manila);
+    border:1px solid rgba(31,42,60,0.16);
+  }
+  .ticket-card::before{
+    content:"";
+    position:absolute;
+    left:-1px; top:0; bottom:0; width:9px;
+    background-image:radial-gradient(circle 3px, var(--paper) 3px, transparent 3.6px);
+    background-size:9px 15px;
+    background-repeat:repeat-y;
+    pointer-events:none;
+  }
+
+  .priority-dot{
+    width:9px; height:9px; border-radius:9999px;
+    box-shadow:0 0 0 3px rgba(31,42,60,0.06);
+  }
+
+  .chip{
+    border:1px solid rgba(31,42,60,0.22);
+    background:var(--manila);
+    transition:transform .15s ease, background-color .15s ease, color .15s ease;
+  }
+  .chip[data-active="true"]{
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+  .chip:hover{ transform:translateY(-1px); }
+
+  .stamp-btn{
+    background:var(--stamp);
+    color:var(--manila);
+    border:2px dashed rgba(251,247,238,0.55);
+    transition:transform .18s ease;
+  }
+  .stamp-btn:hover{ transform:rotate(-2deg) scale(1.02); }
+  .stamp-btn:active{ transform:rotate(0) scale(0.98); }
+
+  .stamp-mark{
+    position:absolute;
+    top:10px; right:10px;
+    border:3px double var(--stamp);
+    color:var(--stamp);
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px;
+    letter-spacing:0.08em;
+    padding:3px 6px;
+    border-radius:4px;
+    transform:rotate(-9deg);
+    opacity:0;
+    pointer-events:none;
+  }
+  .stamped .stamp-mark{
+    animation:stampIn .45s ease-out forwards;
+  }
+  @keyframes stampIn{
+    0%{ opacity:0; transform:rotate(-9deg) scale(2.4); }
+    55%{ opacity:1; transform:rotate(-9deg) scale(0.88); }
+    100%{ opacity:1; transform:rotate(-9deg) scale(1); }
+  }
+
+  .card-enter{ animation:cardIn .3s ease-out; }
+  @keyframes cardIn{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .checkbox-stamp{
+    width:22px; height:22px;
+    border:2px solid var(--ink);
+    border-radius:9999px;
+    display:flex; align-items:center; justify-content:center;
+    transition:background-color .15s ease, border-color .15s ease;
+    flex-shrink:0;
+  }
+  .checkbox-stamp:hover{ border-color:var(--ledger); }
+  .checkbox-stamp.done{
+    background:var(--ledger);
+    border-color:var(--ledger);
+  }
+
+  .lined-textarea{
+    background-image:repeating-linear-gradient(transparent, transparent 23px, rgba(31,42,60,0.16) 24px);
+    line-height:24px;
+  }
+
+  .field-underline{
+    border:none;
+    border-bottom:1.5px dashed rgba(31,42,60,0.35);
+    background:transparent;
+  }
+  .field-underline:focus{
+    outline:none;
+    border-bottom-color:var(--ink);
+  }
+
+  .dragging{ opacity:0.35; }
+  .drop-zone{ background:rgba(31,42,60,0.05); }
+
+  ::selection{ background:var(--seal); color:var(--manila); }
+
+  *:focus-visible{
+    outline:2px solid var(--ink);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  .column-scroll::-webkit-scrollbar{ width:8px; }
+  .column-scroll::-webkit-scrollbar-thumb{ background:rgba(31,42,60,0.2); border-radius:4px; }
+</style>
+</head>
+<body class="font-body text-ink min-h-screen">
+
+<header class="sticky top-0 z-30 bg-paper/95 backdrop-blur rule-double">
+  <div class="max-w-[1400px] mx-auto px-5 md:px-8 py-4 flex items-center gap-4 flex-wrap">
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-full border-2 border-ink flex items-center justify-center">
+        <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h1 class="font-display font-bold text-xl wordmark leading-none">SỔ GIAO VIỆC</h1>
+        <p class="font-mono text-[10px] tracking-widest text-ink/60 uppercase mt-1">Quản lý · Giao việc · Theo dõi</p>
+      </div>
+    </div>
+
+    <div class="flex-1 min-w-[180px] max-w-md ml-2">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink/50"></i>
+        <input id="searchInput" type="text" placeholder="Tìm việc theo tên…"
+          class="w-full field-underline border-b-2 pl-9 pr-3 py-2 text-sm font-body placeholder:text-ink/40">
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 ml-auto">
+      <button type="button" aria-label="Thông báo" class="w-10 h-10 rounded-full border border-ink/25 flex items-center justify-center hover:bg-manila transition-colors">
+        <i data-lucide="bell" class="w-4 h-4"></i>
+      </button>
+      <button type="button" id="openModalBtn" class="stamp-btn rounded-md px-4 py-2.5 flex items-center gap-2 font-display font-semibold text-sm">
+        <i data-lucide="stamp" class="w-4 h-4"></i>
+        Giao việc mới
+      </button>
+      <div class="w-10 h-10 rounded-full bg-ink text-paper flex items-center justify-center font-mono text-xs font-semibold" title="Quản lý: Bạn">QL</div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1400px] mx-auto px-5 md:px-8 py-8">
+
+  <section aria-label="Tổng quan" class="grid grid-cols-2 md:grid-cols-4 gap-0 mb-8 border border-ink/15">
+    <div class="stub p-5">
+      <div class="flex items-center justify-between">
+        <i data-lucide="layers" class="w-4 h-4 text-ink/60"></i>
+        <span class="font-mono text-[10px] text-ink/50">TỔNG SỐ</span>
+      </div>
+      <p id="statTotal" class="font-display text-3xl font-bold mt-3">10</p>
+      <p class="text-xs text-ink/60 mt-1">công việc đang theo dõi</p>
+    </div>
+    <div class="stub p-5">
+      <div class="flex items-center justify-between">
+        <i data-lucide="loader-circle" class="w-4 h-4 text-ink/60"></i>
+        <span class="font-mono text-[10px] text-ink/50">ĐANG LÀM</span>
+      </div>
+      <p id="statDoing" class="font-display text-3xl font-bold mt-3">2</p>
+      <p class="text-xs text-ink/60 mt-1">việc đang triển khai</p>
+    </div>
+    <div class="stub p-5">
+      <div class="flex items-center justify-between">
+        <i data-lucide="alarm-clock" class="w-4 h-4 text-stamp"></i>
+        <span class="font-mono text-[10px] text-ink/50">SẮP ĐẾN HẠN</span>
+      </div>
+      <p id="statSoon" class="font-display text-3xl font-bold mt-3 text-stamp">0</p>
+      <p class="text-xs text-ink/60 mt-1">trong 2 ngày tới</p>
+    </div>
+    <div class="stub p-5">
+      <div class="flex items-center justify-between">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-ledger"></i>
+        <span class="font-mono text-[10px] text-ink/50">HOÀN THÀNH</span>
+      </div>
+      <p id="statDone" class="font-display text-3xl font-bold mt-3 text-ledger">3</p>
+      <p class="text-xs text-ink/60 mt-1">trong tháng này</p>
+    </div>
+  </section>
+
+  <section aria-label="Bộ lọc" class="flex flex-wrap items-center gap-2 mb-6">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-ink/50 mr-1">Lọc theo:</span>
+    <button type="button" class="chip filter-priority rounded-full px-3 py-1.5 text-xs font-medium" data-active="true" data-priority="all">Tất cả mức độ</button>
+    <button type="button" class="chip filter-priority rounded-full px-3 py-1.5 text-xs font-medium flex items-center gap-1.5" data-priority="cao">
+      <span class="priority-dot" style="background:#B7472A"></span>Ưu tiên cao
+    </button>
+    <button type="button" class="chip filter-priority rounded-full px-3 py-1.5 text-xs font-medium flex items-center gap-1.5" data-priority="trung">
+      <span class="priority-dot" style="background:#C08A2E"></span>Trung bình
+    </button>
+    <button type="button" class="chip filter-priority rounded-full px-3 py-1.5 text-xs font-medium flex items-center gap-1.5" data-priority="thap">
+      <span class="priority-dot" style="background:#3F6B4A"></span>Thấp
+    </button>
+    <span class="w-px h-5 bg-ink/15 mx-2 hidden sm:block"></span>
+    <button type="button" class="chip filter-assignee rounded-full px-3 py-1.5 text-xs font-medium" data-active="true" data-assignee="all">Tất cả người phụ trách</button>
+    <button type="button" class="chip filter-assignee rounded-full px-3 py-1.5 text-xs font-medium" data-assignee="Lan Anh">Lan Anh</button>
+    <button type="button" class="chip filter-assignee rounded-full px-3 py-1.5 text-xs font-medium" data-assignee="Minh Quân">Minh Quân</button>
+    <button type="button" class="chip filter-assignee rounded-full px-3 py-1.5 text-xs font-medium" data-assignee="Thu Hà">Thu Hà</button>
+    <button type="button" class="chip filter-assignee rounded-full px-3 py-1.5 text-xs font-medium" data-assignee="Đức Anh">Đức Anh</button>
+    <button type="button" class="chip filter-assignee rounded-full px-3 py-1.5 text-xs font-medium" data-assignee="Ngọc Mai">Ngọc Mai</button>
+  </section>
+
+  <section aria-label="Bảng công việc" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+    <div class="flex flex-col">
+      <div class="flex items-center gap-2 pb-3 mb-3 border-b-2 border-ink/20">
+        <i data-lucide="inbox" class="w-4 h-4"></i>
+        <h2 class="font-display font-semibold text-sm uppercase tracking-wide">Cần làm</h2>
+        <span class="col-count ml-auto font-mono text-xs bg-ink text-paper rounded-full px-2 py-0.5">0</span>
+      </div>
+      <div class="task-column column-scroll flex flex-col gap-3 min-h-[120px] pb-2 overflow-y-auto max-h-[70vh]" data-status="Cần làm" id="col-todo"></div>
+    </div>
+
+    <div class="flex flex-col">
+      <div class="flex items-center gap-2 pb-3 mb-3 border-b-2 border-ink/20">
+        <i data-lucide="loader-circle" class="w-4 h-4"></i>
+        <h2 class="font-display font-semibold text-sm uppercase tracking-wide">Đang làm</h2>
+        <span class="col-count ml-auto font-mono text-xs bg-ink text-paper rounded-full px-2 py-0.5">0</span>
+      </div>
+      <div class="task-column column-scroll flex flex-col gap-3 min-h-[120px] pb-2 overflow-y-auto max-h-[70vh]" data-status="Đang làm" id="col-doing"></div>
+    </div>
+
+    <div class="flex flex-col">
+      <div class="flex items-center gap-2 pb-3 mb-3 border-b-2 border-ink/20">
+        <i data-lucide="eye" class="w-4 h-4"></i>
+        <h2 class="font-display font-semibold text-sm uppercase tracking-wide">Chờ duyệt</h2>
+        <span class="col-count ml-auto font-mono text-xs bg-ink text-paper rounded-full px-2 py-0.5">0</span>
+      </div>
+      <div class="task-column column-scroll flex flex-col gap-3 min-h-[120px] pb-2 overflow-y-auto max-h-[70vh]" data-status="Chờ duyệt" id="col-review"></div>
+    </div>
+
+    <div class="flex flex-col">
+      <div class="flex items-center gap-2 pb-3 mb-3 border-b-2 border-ink/20">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-ledger"></i>
+        <h2 class="font-display font-semibold text-sm uppercase tracking-wide">Hoàn thành</h2>
+        <span class="col-count ml-auto font-mono text-xs bg-ink text-paper rounded-full px-2 py-0.5">0</span>
+      </div>
+      <div class="task-column column-scroll flex flex-col gap-3 min-h-[120px] pb-2 overflow-y-auto max-h-[70vh]" data-status="Hoàn thành" id="col-done"></div>
+    </div>
+
+  </section>
+</main>
+
+<footer class="max-w-[1400px] mx-auto px-5 md:px-8 py-8 mt-4 border-t border-ink/15">
+  <p class="font-mono text-[10px] text-ink/45 uppercase tracking-widest">Kéo thẻ để đổi trạng thái · Nhấn vào ô tròn để đóng dấu hoàn thành</p>
+</footer>
+
+<div id="modalOverlay" class="fixed inset-0 bg-ink/50 z-40 hidden items-center justify-center p-4">
+  <div id="modalBox" class="bg-paper max-w-lg w-full border-2 border-ink relative" style="box-shadow:6px 6px 0 rgba(31,42,60,0.15)">
+    <div class="border-b-2 border-ink px-6 py-4 flex items-center justify-between">
+      <div>
+        <h2 class="font-display font-bold text-lg uppercase tracking-wide">Phiếu giao việc</h2>
+        <p class="font-mono text-[10px] text-ink/50">Điền đầy đủ thông tin bên dưới</p>
+      </div>
+      <button type="button" id="closeModalBtn" aria-label="Đóng" class="w-8 h-8 rounded-full border border-ink/30 flex items-center justify-center hover:bg-manila">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <form id="taskForm" class="px-6 py-5 flex flex-col gap-5">
+      <div>
+        <label for="taskTitle" class="block font-mono text-[10px] uppercase tracking-widest text-ink/60 mb-1.5">Tên công việc</label>
+        <input required id="taskTitle" type="text" placeholder="Ví dụ: Soạn báo cáo doanh thu tháng 9"
+          class="field-underline border-b-2 w-full py-2 text-sm font-body">
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="taskAssignee" class="block font-mono text-[10px] uppercase tracking-widest text-ink/60 mb-1.5">Người phụ trách</label>
+          <select id="taskAssignee" class="field-underline border-b-2 w-full py-2 text-sm font-body bg-transparent">
+            <option>Lan Anh</option>
+            <option>Minh Quân</option>
+            <option>Thu Hà</option>
+            <option>Đức Anh</option>
+            <option>Ngọc Mai</option>
+          </select>
+        </div>
+        <div>
+          <label for="taskDue" class="block font-mono text-[10px] uppercase tracking-widest text-ink/60 mb-1.5">Hạn hoàn thành</label>
+          <input required id="taskDue" type="date" class="field-underline border-b-2 w-full py-2 text-sm font-body">
+        </div>
+      </div>
+
+      <div>
+        <span class="block font-mono text-[10px] uppercase tracking-widest text-ink/60 mb-1.5">Mức độ ưu tiên</span>
+        <div class="flex gap-2">
+          <label class="priority-radio flex-1 cursor-pointer">
+            <input type="radio" name="priority" value="cao" class="sr-only peer">
+            <span class="block text-center py-2 rounded-md border border-ink/25 text-xs font-medium peer-checked:bg-stamp peer-checked:text-manila peer-checked:border-stamp transition-colors">Cao</span>
+          </label>
+          <label class="priority-radio flex-1 cursor-pointer">
+            <input type="radio" name="priority" value="trung" class="sr-only peer" checked>
+            <span class="block text-center py-2 rounded-md border border-ink/25 text-xs font-medium peer-checked:bg-seal peer-checked:text-manila peer-checked:border-seal transition-colors">Trung bình</span>
+          </label>
+          <label class="priority-radio flex-1 cursor-pointer">
+            <input type="radio" name="priority" value="thap" class="sr-only peer">
+            <span class="block text-center py-2 rounded-md border border-ink/25 text-xs font-medium peer-checked:bg-ledger peer-checked:text-manila peer-checked:border-ledger transition-colors">Thấp</span>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label for="taskDesc" class="block font-mono text-[10px] uppercase tracking-widest text-ink/60 mb-1.5">Mô tả công việc</label>
+        <textarea id="taskDesc" rows="3" placeholder="Chi tiết yêu cầu, kết quả mong đợi…"
+          class="lined-textarea w-full text-sm font-body bg-transparent resize-none focus:outline-none"></textarea>
+      </div>
+
+      <button type="submit" class="stamp-btn rounded-md py-3 flex items-center justify-center gap-2 font-display font-semibold text-sm mt-1">
+        <i data-lucide="stamp" class="w-4 h-4"></i>
+        Đóng dấu giao việc
+      </button>
+    </form>
+  </div>
+</div>
+
+<template id="cardTemplate">
+  <article class="ticket-card rounded-md pl-5 pr-4 py-4" draggable="true">
+    <div class="flex items-start justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="priority-dot"></span>
+        <span class="card-id font-mono text-[10px] text-ink/50"></span>
+      </div>
+      <button type="button" class="delete-btn text-ink/30 hover:text-stamp transition-colors" aria-label="Xoá công việc">
+        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+    <h3 class="card-title font-display font-semibold text-[15px] leading-snug mt-2"></h3>
+    <p class="card-desc text-xs text-ink/60 mt-1.5 leading-relaxed"></p>
+    <div class="due-badge-slot mt-2"></div>
+    <div class="flex items-center justify-between mt-3 pt-3 border-t border-dashed border-ink/20">
+      <div class="flex items-center gap-2">
+        <div class="card-avatar w-7 h-7 rounded-full flex items-center justify-center font-mono text-[10px] font-semibold text-manila"></div>
+        <span class="card-assignee-name text-xs text-ink/70"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="card-due font-mono text-[11px] text-ink/60 flex items-center gap-1"></span>
+        <button type="button" class="checkbox-stamp" aria-label="Đánh dấu hoàn thành"></button>
+      </div>
+    </div>
+    <span class="stamp-mark">ĐÃ XONG</span>
+  </article>
+</template>
+
+<script>
+  const TODAY = new Date('2026-08-19');
+  const AVATAR_COLORS = {
+    'Lan Anh': '#B7472A',
+    'Minh Quân': '#1F2A3C',
+    'Thu Hà': '#3F6B4A',
+    'Đức Anh': '#C08A2E',
+    'Ngọc Mai': '#1F2A3C',
+  };
+  const PRIORITY_META = {
+    cao:   { label: 'Cao',         color: '#B7472A' },
+    trung: { label: 'Trung bình',  color: '#C08A2E' },
+    thap:  { label: 'Thấp',        color: '#3F6B4A' },
+  };
+
+  const seedTasks = [
+    { id:'CV-021', title:'Thiết kế lại biểu mẫu đăng ký khách hàng', desc:'Rút gọn còn 4 trường, thêm xác thực số điện thoại.', assignee:'Lan Anh', due:'2026-08-25', priority:'cao', status:'Cần làm' },
+    { id:'CV-022', title:'Tổng hợp phản hồi khảo sát Q3', desc:'Phân loại theo mức độ hài lòng và gửi báo cáo tổng hợp.', assignee:'Ngọc Mai', due:'2026-08-28', priority:'thap', status:'Cần làm' },
+    { id:'CV-023', title:'Chuẩn bị slide báo cáo tuần', desc:'Cập nhật số liệu doanh thu và tiến độ dự án hiện tại.', assignee:'Thu Hà', due:'2026-08-21', priority:'trung', status:'Cần làm' },
+    { id:'CV-018', title:'Xây dựng API tích hợp thanh toán VNPay', desc:'Hoàn thiện luồng callback và xử lý lỗi giao dịch.', assignee:'Minh Quân', due:'2026-08-24', priority:'cao', status:'Đang làm' },
+    { id:'CV-019', title:'Viết test case cho module giỏ hàng', desc:'Bao phủ các trường hợp thêm/xoá/áp mã giảm giá.', assignee:'Đức Anh', due:'2026-08-26', priority:'trung', status:'Đang làm' },
+    { id:'CV-015', title:'Bản dịch tài liệu hướng dẫn sử dụng sang tiếng Anh', desc:'Bản dịch cần đối chiếu thuật ngữ với tài liệu gốc.', assignee:'Thu Hà', due:'2026-08-20', priority:'trung', status:'Chờ duyệt' },
+    { id:'CV-016', title:'Thiết kế banner khuyến mãi tháng 9', desc:'Hai phiên bản: web và mạng xã hội, tỉ lệ 16:9 và 1:1.', assignee:'Lan Anh', due:'2026-08-20', priority:'cao', status:'Chờ duyệt' },
+    { id:'CV-009', title:'Cập nhật chính sách đổi trả trên website', desc:'Bổ sung điều khoản đổi trả trong 7 ngày cho đơn hàng lỗi.', assignee:'Ngọc Mai', due:'2026-08-15', priority:'thap', status:'Hoàn thành' },
+    { id:'CV-010', title:'Rà soát lỗi hiển thị trên mobile', desc:'Sửa lỗi vỡ giao diện ở màn hình dưới 375px.', assignee:'Minh Quân', due:'2026-08-16', priority:'cao', status:'Hoàn thành' },
+    { id:'CV-011', title:'Đào tạo nhân viên mới về quy trình CSKH', desc:'Buổi đào tạo 2 tiếng kèm tài liệu quy trình chuẩn.', assignee:'Đức Anh', due:'2026-08-17', priority:'trung', status:'Hoàn thành' },
+  ];
+
+  const columnMap = {
+    'Cần làm': document.getElementById('col-todo'),
+    'Đang làm': document.getElementById('col-doing'),
+    'Chờ duyệt': document.getElementById('col-review'),
+    'Hoàn thành': document.getElementById('col-done'),
+  };
+
+  let taskCounter = 24;
+
+  function formatDue(dateStr){
+    const d = new Date(dateStr);
+    return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+  }
+
+  function dueBadge(dateStr, status){
+    if(status === 'Hoàn thành') return '';
+    const diffDays = Math.round((new Date(dateStr) - TODAY) / 86400000);
+    if(diffDays < 0) return `<span class="inline-flex items-center gap-1 font-mono text-[10px] bg-stamp/10 text-stamp px-2 py-0.5 rounded"><i data-lucide="triangle-alert" class="w-3 h-3"></i>Trễ hạn</span>`;
+    if(diffDays <= 2) return `<span class="inline-flex items-center gap-1 font-mono text-[10px] bg-seal/10 text-seal px-2 py-0.5 rounded"><i data-lucide="alarm-clock" class="w-3 h-3"></i>Sắp đến hạn</span>`;
+    return '';
+  }
+
+  function buildCard(task){
+    const tpl = document.getElementById('cardTemplate');
+    const node = tpl.content.firstElementChild.cloneNode(true);
+    node.dataset.id = task.id;
+    node.dataset.priority = task.priority;
+    node.dataset.assignee = task.assignee;
+    node.dataset.title = task.title.toLowerCase();
+    node.dataset.status = task.status;
+    node.dataset.due = task.due;
+
+    node.querySelector('.priority-dot').style.background = PRIORITY_META[task.priority].color;
+    node.querySelector('.card-id').textContent = task.id;
+    node.querySelector('.card-title').textContent = task.title;
+    node.querySelector('.card-desc').textContent = task.desc;
+    node.querySelector('.due-badge-slot').innerHTML = dueBadge(task.due, task.status);
+
+    const avatar = node.querySelector('.card-avatar');
+    avatar.style.background = AVATAR_COLORS[task.assignee] || '#1F2A3C';
+    avatar.textContent = task.assignee.split(' ').map(w => w[0]).slice(-2).join('').toUpperCase();
+
+    node.querySelector('.card-assignee-name').textContent = task.assignee;
+    node.querySelector('.card-due').innerHTML = `<i data-lucide="calendar" class="w-3 h-3"></i>${formatDue(task.due)}`;
+
+    if(task.status === 'Hoàn thành'){
+      node.classList.add('stamped');
+      node.querySelector('.checkbox-stamp').classList.add('done');
+    }
+
+    node.addEventListener('dragstart', () => node.classList.add('dragging'));
+    node.addEventListener('dragend', () => { node.classList.remove('dragging'); updateCounts(); });
+
+    node.querySelector('.delete-btn').addEventListener('click', () => {
+      node.remove();
+      updateCounts();
+    });
+
+    node.querySelector('.checkbox-stamp').addEventListener('click', () => {
+      const doneCol = columnMap['Hoàn thành'];
+      node.dataset.status = 'Hoàn thành';
+      node.querySelector('.due-badge-slot').innerHTML = '';
+      node.querySelector('.checkbox-stamp').classList.add('done');
+      node.classList.add('stamped');
+      doneCol.prepend(node);
+      updateCounts();
+    });
+
+    return node;
+  }
+
+  function renderSeed(){
+    seedTasks.forEach(t => columnMap[t.status].appendChild(buildCard(t)));
+    lucide.createIcons();
+    updateCounts();
+  }
+
+  function updateCounts(){
+    let total = 0, doing = 0, done = 0, soon = 0;
+    document.querySelectorAll('.task-column').forEach(col => {
+      const count = col.children.length;
+      col.parentElement.querySelector('.col-count').textContent = count;
+      total += count;
+      if(col.dataset.status === 'Đang làm') doing = count;
+      if(col.dataset.status === 'Hoàn thành') done = count;
+    });
+    document.querySelectorAll('.ticket-card').forEach(card => {
+      if(card.dataset.status === 'Hoàn thành') return;
+      const diffDays = Math.round((new Date(card.dataset.due) - TODAY) / 86400000);
+      if(diffDays <= 2) soon++;
+    });
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statDoing').textContent = doing;
+    document.getElementById('statDone').textContent = done;
+    document.getElementById('statSoon').textContent = soon;
+  }
+
+  Object.values(columnMap).forEach(col => {
+    col.addEventListener('dragover', e => {
+      e.preventDefault();
+      col.classList.add('drop-zone');
+      const dragging = document.querySelector('.dragging');
+      if(dragging) col.appendChild(dragging);
+    });
+    col.addEventListener('dragleave', () => col.classList.remove('drop-zone'));
+    col.addEventListener('drop', () => {
+      col.classList.remove('drop-zone');
+      const dragging = document.querySelector('.dragging');
+      if(dragging){
+        dragging.dataset.status = col.dataset.status;
+        const badgeSlot = dragging.querySelector('.due-badge-slot');
+        badgeSlot.innerHTML = dueBadge(dragging.dataset.due, col.dataset.status);
+        const box = dragging.querySelector('.checkbox-stamp');
+        if(col.dataset.status === 'Hoàn thành'){
+          dragging.classList.add('stamped');
+          box.classList.add('done');
+        } else {
+          dragging.classList.remove('stamped');
+          box.classList.remove('done');
+        }
+        lucide.createIcons();
+      }
+    });
+  });
+
+  function applyFilters(){
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    const activePriority = document.querySelector('.filter-priority[data-active="true"]')?.dataset.priority || 'all';
+    const activeAssignee = document.querySelector('.filter-assignee[data-active="true"]')?.dataset.assignee || 'all';
+
+    document.querySelectorAll('.ticket-card').forEach(card => {
+      const matchesQuery = !query || card.dataset.title.includes(query);
+      const matchesPriority = activePriority === 'all' || card.dataset.priority === activePriority;
+      const matchesAssignee = activeAssignee === 'all' || card.dataset.assignee === activeAssignee;
+      card.style.display = (matchesQuery && matchesPriority && matchesAssignee) ? '' : 'none';
+    });
+  }
+
+  document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+  function wireChipGroup(selector){
+    const chips = document.querySelectorAll(selector);
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.dataset.active = 'false');
+        chip.dataset.active = 'true';
+        applyFilters();
+      });
+    });
+  }
+  wireChipGroup('.filter-priority');
+  wireChipGroup('.filter-assignee');
+
+  const overlay = document.getElementById('modalOverlay');
+  const openModalBtn = document.getElementById('openModalBtn');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  function openModal(){
+    overlay.classList.remove('hidden');
+    overlay.classList.add('flex');
+    document.getElementById('taskTitle').focus();
+  }
+  function closeModal(){
+    overlay.classList.add('hidden');
+    overlay.classList.remove('flex');
+  }
+  openModalBtn.addEventListener('click', openModal);
+  closeModalBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && !overlay.classList.contains('hidden')) closeModal(); });
+
+  document.getElementById('taskForm').addEventListener('submit', e => {
+    e.preventDefault();
+    taskCounter++;
+    const title = document.getElementById('taskTitle').value.trim();
+    const assignee = document.getElementById('taskAssignee').value;
+    const due = document.getElementById('taskDue').value || '2026-08-30';
+    const priority = document.querySelector('input[name="priority"]:checked').value;
+    const desc = document.getElementById('taskDesc').value.trim() || 'Chưa có mô tả chi tiết.';
+
+    const task = { id:`CV-${taskCounter}`, title, desc, assignee, due, priority, status:'Cần làm' };
+    const card = buildCard(task);
+    card.classList.add('card-enter');
+    columnMap['Cần làm'].prepend(card);
+    lucide.createIcons();
+    updateCounts();
+    applyFilters();
+
+    e.target.reset();
+    document.querySelector('input[name="priority"][value="trung"]').checked = true;
+    closeModal();
+  });
+
+  renderSeed();
+</script>
+</body>
+</html>
