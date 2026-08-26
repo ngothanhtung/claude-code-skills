@@ -23,26 +23,28 @@ Khi người dùng yêu cầu tạo landing page, bạn cần đề xuất các 
 
 Khi nhận yêu cầu tạo landing page, **KHÔNG viết code ngay**. Luôn chào hỏi thân thiện, gợi ý techstack, và thu thập đủ thông tin trước khi bắt đầu.
 
+Chuyển sang chế độ PLAN mode để thu thập và phân tích yêu cầu.
+
 ---
 
 ### 1.1 — NHẬN DIỆN NGÀNH HÀNG (TỰ ĐỘNG PHÁT HIỆN)
 
 Ưu tiên #1: nếu người dùng nêu rõ ngành → dùng ngay. Ưu tiên #2: nếu không nêu → tự suy luận từ keyword.
 
-| Keyword trong tin nhắn | Ngành tự động nhận diện |
-|---|---|
-| khóa học, học online, mentor, edu, course, webinar, workshop, đào tạo | Khóa học / Giáo dục |
-| spa, massage, thẩm mỹ, làm đẹp, nail, hair salon, wellness, skincare | Spa / Thẩm mỹ / Wellness |
-| mỹ phẩm, son, kem, serum, dưỡng da, organic, thuần chay | Mỹ phẩm / Skincare |
-| nhà hàng, quán ăn, cafe, café, F&B, ẩm thực, bar, bakery, pub | F&B / Nhà hàng / Café |
-| SaaS, app, startup, công cụ, platform, tool, software, API, dashboard | SaaS / Tech / Startup |
-| agency, portfolio, studio, thiết kế, branding, creative, freelance | Agency / Studio / Portfolio |
-| sự kiện, event, hội thảo, talk show, concert, meetup, summit | Sự kiện / Workshop |
-| bất động sản, nhà đất, căn hộ, dự án, property, land, real estate | Bất động sản / Dịch vụ cao cấp |
+| Keyword trong tin nhắn                                                  | Ngành tự động nhận diện         |
+| ----------------------------------------------------------------------- | ------------------------------- |
+| khóa học, học online, mentor, edu, course, webinar, workshop, đào tạo   | Khóa học / Giáo dục             |
+| spa, massage, thẩm mỹ, làm đẹp, nail, hair salon, wellness, skincare    | Spa / Thẩm mỹ / Wellness        |
+| mỹ phẩm, son, kem, serum, dưỡng da, organic, thuần chay                 | Mỹ phẩm / Skincare              |
+| nhà hàng, quán ăn, cafe, café, F&B, ẩm thực, bar, bakery, pub           | F&B / Nhà hàng / Café           |
+| SaaS, app, startup, công cụ, platform, tool, software, API, dashboard   | SaaS / Tech / Startup           |
+| agency, portfolio, studio, thiết kế, branding, creative, freelance      | Agency / Studio / Portfolio     |
+| sự kiện, event, hội thảo, talk show, concert, meetup, summit            | Sự kiện / Workshop              |
+| bất động sản, nhà đất, căn hộ, dự án, property, land, real estate       | Bất động sản / Dịch vụ cao cấp  |
 | thu lead, đăng ký, tải app, waitlist, pre-order, early bird, ebook, PDF | Landing Page Thu Lead / Đăng ký |
-| bán hàng, shop, e-commerce, sản phẩm, online store | Sản phẩm / E-commerce |
+| bán hàng, shop, e-commerce, sản phẩm, online store                      | Sản phẩm / E-commerce           |
 
-Nếu không nhận diện được ngành: hỏi trực tiếp "Trang này thuộc ngành/niche nào vậy?"
+Nếu không nhận diện được ngành: bắt buộc hỏi trực tiếp "Trang này thuộc ngành/niche nào?"
 
 ---
 
@@ -53,7 +55,7 @@ Luôn gửi message chào hỏi kèm 3 lựa chọn techstack. Đây là **templ
 ```text
 Chào bạn! Mình sẽ giúp bạn tạo một landing page chuyên nghiệp, tối ưu chuyển đổi.
 
-Trước tiên, mình cần gợi ý 3 lựa chọn techstack phù hợp:
+Trước tiên, mình cần phải gợi ý 3 lựa chọn techstack phù hợp (bắt buộc người dùng phải chọn một trong 3):
 
 ━━━━━━━━━━━━━━━━━━━━━━
 🚀 LỰA CHỌN TECHSTACK
@@ -76,7 +78,7 @@ Trước tiên, mình cần gợi ý 3 lựa chọn techstack phù hợp:
 📋 THÔNG TIN CẦN THIẾT
 ━━━━━━━━━━━━━━━━━━━━━━
 
-Ngoài techstack, mình cần biết thêm:
+Ngoài techstack, mình cần biết thêm, bắt buộc phải trả lời đầy đủ các thông tin sau:
 
 1. Tên thương hiệu & slogan (nếu có)?
 2. Sản phẩm / dịch vụ chính? (mô tả 1-3 dòng)
@@ -100,15 +102,15 @@ Mình sẽ tự điền các thông tin còn thiếu từ ngành hàng!
 
 ### 1.3 — LOGIC XỬ LÝ KHI THIẾU THÔNG TIN
 
-| Thông tin người dùng cung cấp | Hành động của mình |
-|---|---|
-| Chỉ chọn techstack + tên | Tự suy ra: ngành (keyword), màu sắc (theo ngành BƯỚC 2), sections mặc định, tone hợp lý |
-| Không chọn techstack | Mặc định dùng **Lựa chọn 1** (HTML + CSS + Vanilla JS) |
-| Không nêu màu sắc | Tự chọn theo ngành đã xác định ở 1.1 |
-| Không nêu tone giọng | Mặc định: thân thiện (Edu, Spa, F&B) / chuyên nghiệp (SaaS, BĐS, Agency) |
-| Không nêu sections | Dùng đầy đủ 10 sections mặc định |
-| Không có giá / ưu đãi | Bỏ pricing section, thay bằng CTA section (liên hệ / đăng ký) |
-| Không có đối tượng khách | Viết copy hướng đến pain point chung của ngành |
+| Thông tin người dùng cung cấp | Hành động của mình                                                                      |
+| ----------------------------- | --------------------------------------------------------------------------------------- |
+| Chỉ chọn techstack + tên      | Tự suy ra: ngành (keyword), màu sắc (theo ngành BƯỚC 2), sections mặc định, tone hợp lý |
+| Không chọn techstack          | Mặc định dùng **Lựa chọn 1** (HTML + CSS + Vanilla JS)                                  |
+| Không nêu màu sắc             | Tự chọn theo ngành đã xác định ở 1.1                                                    |
+| Không nêu tone giọng          | Mặc định: thân thiện (Edu, Spa, F&B) / chuyên nghiệp (SaaS, BĐS, Agency)                |
+| Không nêu sections            | Dùng đầy đủ 10 sections mặc định                                                        |
+| Không có giá / ưu đãi         | Bỏ pricing section, thay bằng CTA section (liên hệ / đăng ký)                           |
+| Không có đối tượng khách      | Viết copy hướng đến pain point chung của ngành                                          |
 
 **Quy tắc vàng:** Không bao giờ để người dùng đợi code. Nếu thiếu ≤ 3 thông tin → tự điền hợp lý và thông báo. Nếu thiếu > 3 → hỏi ngắn gọn 1-2 câu trước khi code.
 
@@ -131,7 +133,7 @@ Khi đã thu thập đủ thông tin, tổng hợp thành một prompt rõ ràng
 → Animation: Animate.css scroll-triggered + Lucide icons
 ```
 
-*Khi tổng hợp xong → chuyển sang BƯỚC 2 để xây dựng Design System, rồi BƯỚC 3 để cấu trúc sections.*
+_Khi tổng hợp xong → chuyển sang BƯỚC 2 để xây dựng Design System, rồi BƯỚC 3 để cấu trúc sections._
 
 ## BƯỚC 2 — DESIGN SYSTEM THEO NGÀNH HÀNG
 
@@ -141,19 +143,19 @@ Palette màu và font chữ theo từng ngành, tham chiếu từ [getdesign.md]
 
 ### 2.1 — QUICK REFERENCE: MÀU THEO NGÀNH
 
-| Ngành                  | Inspiration (getdesign.md) | Primary           | Accent              | Background         | Font chủ đạo               |
-|------------------------|--------------------------|-------------------|---------------------|--------------------|---------------------------|
-| **Khóa học / Giáo dục**  | Notion / PostHog         | `#5645d4` (Purple) | `#f7a501` (Yellow)   | `#ffffff` / `#eeefe9` | Plus Jakarta Sans, Inter |
-| **Spa / Thẩm mỹ**     | Airbnb                    | `#ff385c` (Coral)  | `#008489` (Teal)     | `#ffffff` / `#f7f7f7` | Cormorant Garamond, Lato |
-| **Mỹ phẩm / Skincare** | Apple / Claude           | `#cc785c` (Coral)  | `#5db8a6` (Teal)    | `#faf9f5` (Cream)   | Playfair Display, Lato |
-| **F&B / Nhà hàng / Café** | Starbucks               | `#00704a` (Green)  | `#cba258` (Gold)     | `#ffffff` / `#f7f4ed` | Playfair Display, Lato |
-| **SaaS Light**        | Stripe / Linear          | `#533afd` (Indigo) | `#ea2261` (Ruby)     | `#ffffff` / `#f6f9fc` | Plus Jakarta Sans, Inter |
-| **SaaS Dark**         | Supabase / Sentry / Raycast | `#3ecf8e` (Emerald) | `#c2ef4e` (Lime) | `#121212` / `#1f1633` | Plus Jakarta Sans, Inter |
-| **Agency / Portfolio** | Framer / Vercel          | `#171717` (Black)  | `#50e3c2` (Teal)    | `#ffffff` / `#000000` | Space Grotesk, Inter |
-| **Sự kiện / Workshop** | PlayStation / Runway     | `#0070d1` (Blue)   | `#d53b00` (Orange)  | `#000000` (Black)   | Montserrat, Inter |
-| **Automotive / Luxury**  | BMW M / Ferrari / Lamborghini | `#000000` (Black) | `#e22718` (M Red) / `#ffc000` (Gold) | `#000000` | Cormorant Garamond, Raleway |
-| **E-commerce / Retail**  | Shopify / Nike           | `#111111` (Black)  | `#1ed760` (Green) / `#d30005` (Red) | `#ffffff` / `#121212` | Inter, DM Sans |
-| **Thu Lead / Đăng ký** | Claude / PostHog         | `#cc785c` (Coral)  | `#f7a501` (Yellow)   | `#faf9f5` (Cream)   | Plus Jakarta Sans, Inter |
+| Ngành                     | Inspiration (getdesign.md)    | Primary             | Accent                               | Background            | Font chủ đạo                |
+| ------------------------- | ----------------------------- | ------------------- | ------------------------------------ | --------------------- | --------------------------- |
+| **Khóa học / Giáo dục**   | Notion / PostHog              | `#5645d4` (Purple)  | `#f7a501` (Yellow)                   | `#ffffff` / `#eeefe9` | Plus Jakarta Sans, Inter    |
+| **Spa / Thẩm mỹ**         | Airbnb                        | `#ff385c` (Coral)   | `#008489` (Teal)                     | `#ffffff` / `#f7f7f7` | Cormorant Garamond, Lato    |
+| **Mỹ phẩm / Skincare**    | Apple / Claude                | `#cc785c` (Coral)   | `#5db8a6` (Teal)                     | `#faf9f5` (Cream)     | Playfair Display, Lato      |
+| **F&B / Nhà hàng / Café** | Starbucks                     | `#00704a` (Green)   | `#cba258` (Gold)                     | `#ffffff` / `#f7f4ed` | Playfair Display, Lato      |
+| **SaaS Light**            | Stripe / Linear               | `#533afd` (Indigo)  | `#ea2261` (Ruby)                     | `#ffffff` / `#f6f9fc` | Plus Jakarta Sans, Inter    |
+| **SaaS Dark**             | Supabase / Sentry / Raycast   | `#3ecf8e` (Emerald) | `#c2ef4e` (Lime)                     | `#121212` / `#1f1633` | Plus Jakarta Sans, Inter    |
+| **Agency / Portfolio**    | Framer / Vercel               | `#171717` (Black)   | `#50e3c2` (Teal)                     | `#ffffff` / `#000000` | Space Grotesk, Inter        |
+| **Sự kiện / Workshop**    | PlayStation / Runway          | `#0070d1` (Blue)    | `#d53b00` (Orange)                   | `#000000` (Black)     | Montserrat, Inter           |
+| **Automotive / Luxury**   | BMW M / Ferrari / Lamborghini | `#000000` (Black)   | `#e22718` (M Red) / `#ffc000` (Gold) | `#000000`             | Cormorant Garamond, Raleway |
+| **E-commerce / Retail**   | Shopify / Nike                | `#111111` (Black)   | `#1ed760` (Green) / `#d30005` (Red)  | `#ffffff` / `#121212` | Inter, DM Sans              |
+| **Thu Lead / Đăng ký**    | Claude / PostHog              | `#cc785c` (Coral)   | `#f7a501` (Yellow)                   | `#faf9f5` (Cream)     | Plus Jakarta Sans, Inter    |
 
 ---
 
@@ -295,37 +297,37 @@ Clean blue identity · Trust-focused institutional feel · White clean surfaces
 
 Dùng các thương hiệu dưới đây làm benchmark cho từng ngành hàng khi thiết kế landing page:
 
-| # | Thương hiệu    | Ngành                  | Đặc điểm design nổi bật                              |
-|---|----------------|------------------------|------------------------------------------------------|
-| 1 | **Apple**    | Tech / Consumer        | Minimalism trắng tay, hero sản phẩm lớn, typography mảnh |
-| 2 | **Stripe**   | Fintech / SaaS          | Light mode chuyên nghiệp, gradient tím-indigo        |
-| 3 | **Airbnb**   | Hospitality / Travel   | Ảnh full-bleed, warm coral, trust signal rõ ràng     |
-| 4 | **Figma**    | Design Tool / SaaS     | Dark UI tối giản, bảng màu tím-hồng, layout grid    |
-| 5 | **Notion**   | Productivity / SaaS     | Charcoal đen-trắng, purple brand, clean density       |
-| 6 | **Vercel**   | Dev Tool / Hosting     | High contrast đen-trắng, neon green, motion mạnh    |
-| 7 | **Linear**   | SaaS / Project Mgmt    | Premium dark mode, blur glass, micro-interactions     |
-| 8 | **Tesla**    | Automotive / Luxury    | Hero image khổng lồ, typography bold, near-zero UI   |
-| 9 | **Nike**     | Sports / Retail        | Bold typography oversize, dramatic photography        |
-|10 | **Spotify**  | Media / Streaming      | Dark green đặc trưng, card-based layout              |
-|11 | **Uber**     | Mobility / Service     | Clean black-white, icon-centric, micro-copy mạnh     |
-|12 | **Shopify**  | E-commerce / Retail    | Green chủ đạo, cinematic dark surfaces              |
-|13 | **BMW M**    | Automotive / Luxury    | Dark bold, M tricolor accent, premium typography      |
-|14 | **Ferrari**  | Automotive / Luxury    | Rosso Corsa đỏ rực, chiaroscuro editorial            |
-|15 | **Supabase** | Open Source / SaaS     | Dark emerald, gradient nhẹ, terminal aesthetic         |
-|16 | **Framer**   | No-code / Design       | White bold layout, typography-driven, experimental   |
-|17 | **Starbucks**  | F&B / Retail           | Starbucks green, warm cream, retail-forward           |
-|18 | **Meta**     | Social Tech / AI       | Blue gradient, pill CTA, binary light/dark surfaces   |
-|19 | **Coinbase** | Fintech / Crypto       | White clean, blue accent, trusted finance tone       |
-|20 | **Runway**   | AI / Creative Tool     | Futuristic dark mode, neon accents, cinematic layout  |
+| #   | Thương hiệu   | Ngành                | Đặc điểm design nổi bật                                  |
+| --- | ------------- | -------------------- | -------------------------------------------------------- |
+| 1   | **Apple**     | Tech / Consumer      | Minimalism trắng tay, hero sản phẩm lớn, typography mảnh |
+| 2   | **Stripe**    | Fintech / SaaS       | Light mode chuyên nghiệp, gradient tím-indigo            |
+| 3   | **Airbnb**    | Hospitality / Travel | Ảnh full-bleed, warm coral, trust signal rõ ràng         |
+| 4   | **Figma**     | Design Tool / SaaS   | Dark UI tối giản, bảng màu tím-hồng, layout grid         |
+| 5   | **Notion**    | Productivity / SaaS  | Charcoal đen-trắng, purple brand, clean density          |
+| 6   | **Vercel**    | Dev Tool / Hosting   | High contrast đen-trắng, neon green, motion mạnh         |
+| 7   | **Linear**    | SaaS / Project Mgmt  | Premium dark mode, blur glass, micro-interactions        |
+| 8   | **Tesla**     | Automotive / Luxury  | Hero image khổng lồ, typography bold, near-zero UI       |
+| 9   | **Nike**      | Sports / Retail      | Bold typography oversize, dramatic photography           |
+| 10  | **Spotify**   | Media / Streaming    | Dark green đặc trưng, card-based layout                  |
+| 11  | **Uber**      | Mobility / Service   | Clean black-white, icon-centric, micro-copy mạnh         |
+| 12  | **Shopify**   | E-commerce / Retail  | Green chủ đạo, cinematic dark surfaces                   |
+| 13  | **BMW M**     | Automotive / Luxury  | Dark bold, M tricolor accent, premium typography         |
+| 14  | **Ferrari**   | Automotive / Luxury  | Rosso Corsa đỏ rực, chiaroscuro editorial                |
+| 15  | **Supabase**  | Open Source / SaaS   | Dark emerald, gradient nhẹ, terminal aesthetic           |
+| 16  | **Framer**    | No-code / Design     | White bold layout, typography-driven, experimental       |
+| 17  | **Starbucks** | F&B / Retail         | Starbucks green, warm cream, retail-forward              |
+| 18  | **Meta**      | Social Tech / AI     | Blue gradient, pill CTA, binary light/dark surfaces      |
+| 19  | **Coinbase**  | Fintech / Crypto     | White clean, blue accent, trusted finance tone           |
+| 20  | **Runway**    | AI / Creative Tool   | Futuristic dark mode, neon accents, cinematic layout     |
 
-*Khi cần reference cho một ngành hàng cụ thể, ưu tiên chọn thương hiệu cùng ngành trước. VD: landing page spa → Airbnb; landing page SaaS light → Stripe; landing page SaaS dark → Linear, Supabase, Sentry; landing page luxury automotive → BMW M, Ferrari, Lamborghini.*
+_Khi cần reference cho một ngành hàng cụ thể, ưu tiên chọn thương hiệu cùng ngành trước. VD: landing page spa → Airbnb; landing page SaaS light → Stripe; landing page SaaS dark → Linear, Supabase, Sentry; landing page luxury automotive → BMW M, Ferrari, Lamborghini._
 
 ---
 
 ## BƯỚC 3 — CẤU TRÚC 10 SECTIONS TỐI ƯU CHUYỂN ĐỔI
 
 1. **Navbar:** Logo bên trái, menu link và CTA bên phải. Hỗ trợ responsive hamburger trên mobile và hiệu ứng scroll blur.
-2. **Hero:** Headline thu hút trong 3 giây đầu (Công thức: *[Kết quả mong muốn] + [Thời gian] + [Xóa bỏ rào cản]*), nút CTA nổi bật kèm trust signal phụ.
+2. **Hero:** Headline thu hút trong 3 giây đầu (Công thức: _[Kết quả mong muốn] + [Thời gian] + [Xóa bỏ rào cản]_), nút CTA nổi bật kèm trust signal phụ.
 3. **Problem (Nỗi đau):** 3-4 vấn đề khách hàng đang gặp phải, sử dụng ngôn ngữ đồng cảm để tạo kết nối.
 4. **Solution (Giải pháp):** Giới thiệu sản phẩm/dịch vụ giải quyết trực tiếp các vấn đề trên.
 5. **Benefits (Lợi ích thực tế):** Tập trung vào giá trị nhận được (VD: "Tiết kiệm 5h/tuần") thay vì chỉ liệt kê tính năng kỹ thuật.
@@ -341,21 +343,21 @@ Dùng các thương hiệu dưới đây làm benchmark cho từng ngành hàng 
 
 ### 1. HTML, CSS, Vanilla JS
 
-* Viết code sạch trong một file duy nhất hoặc chia cấu trúc rõ ràng tùy độ lớn của dự án.
-* Sử dụng CSS Custom Variables (`:root`) cho design system.
-* Tự viết JS tối giản cho Hamburger Menu, FAQ Accordion, Scroll Reveal, Stats Counter và Countdown Timer (không dùng thư viện ngoài cồng kềnh).
+- Viết code sạch trong một file duy nhất hoặc chia cấu trúc rõ ràng tùy độ lớn của dự án.
+- Sử dụng CSS Custom Variables (`:root`) cho design system.
+- Tự viết JS tối giản cho Hamburger Menu, FAQ Accordion, Scroll Reveal, Stats Counter và Countdown Timer (không dùng thư viện ngoài cồng kềnh).
 
 ### 2. HTML, CSS, Tailwindcss
 
-* Nhúng CDN Tailwind CSS (hoặc cấu hình nếu có build step).
-* Sử dụng class utility của Tailwind để dựng layout responsive.
-* Giữ code gọn gàng, tránh lặp lại class bằng cách tổ chức hợp lý.
+- Nhúng CDN Tailwind CSS (hoặc cấu hình nếu có build step).
+- Sử dụng class utility của Tailwind để dựng layout responsive.
+- Giữ code gọn gàng, tránh lặp lại class bằng cách tổ chức hợp lý.
 
 ### 3. Next.js, Tailwind CSS, ShadcnUI
 
-* Dựng component theo chuẩn React/Next.js (App Router, Client/Server Components rõ ràng).
-* Tích hợp ShadcnUI cho các thành phần UI (Accordion cho FAQ, Dialog, Button, v.v.).
-* Đảm bảo responsive, load nhanh và tối ưu hóa SEO bằng Next.js Metadata.
+- Dựng component theo chuẩn React/Next.js (App Router, Client/Server Components rõ ràng).
+- Tích hợp ShadcnUI cho các thành phần UI (Accordion cho FAQ, Dialog, Button, v.v.).
+- Đảm bảo responsive, load nhanh và tối ưu hóa SEO bằng Next.js Metadata.
 
 ---
 
@@ -377,42 +379,42 @@ Nhúng CDN vào `<head>`:
 
 #### Animation phổ biến theo section
 
-| Section       | Animation gợi ý                        | Lý do                                          |
-|---------------|----------------------------------------|------------------------------------------------|
-| **Hero** headline | `fadeInUp`, `fadeInDown`            | Cuốn hút, entrance mềm mại                    |
-| **Hero** CTA button | `pulse`, `heartBeat`               | Thu hút attention, khuyến khích click          |
-| **Hero** image | `zoomIn`, `fadeIn`                    | Sản phẩm xuất hiện nổi bật                    |
-| **Problem** items | `fadeInLeft`, `fadeInRight`        | Xen kẽ left-right tạo nhịp điệu               |
-| **Benefits** cards | `fadeInUp`, `bounceIn`             | Cards pop in lần lượt                         |
-| **Pricing** card nổi bật | `bounceIn`, `jackInTheBox`   | Gói recommended nổi bật hẳn lên                |
-| **Testimonials** | `fadeIn`, `slideInUp`               | Đánh giá xuất hiện mượt, tin cậy              |
-| **FAQ** items | `fadeInDown` khi expand              | Toggle mượt, nội dung rõ                       |
-| **Stats** numbers | `countUp` (JS), `animate__counter` | Số nhảy tăng dần ấn tượng                     |
-| **Navbar** logo/links | `fadeIn` on load              | Load page nhẹ nhàng, chuyên nghiệp            |
-| **Footer** icons | `fadeInUp` delayed                   | Icons mạng xã hội xuất hiện sau cùng         |
+| Section                  | Animation gợi ý                    | Lý do                                 |
+| ------------------------ | ---------------------------------- | ------------------------------------- |
+| **Hero** headline        | `fadeInUp`, `fadeInDown`           | Cuốn hút, entrance mềm mại            |
+| **Hero** CTA button      | `pulse`, `heartBeat`               | Thu hút attention, khuyến khích click |
+| **Hero** image           | `zoomIn`, `fadeIn`                 | Sản phẩm xuất hiện nổi bật            |
+| **Problem** items        | `fadeInLeft`, `fadeInRight`        | Xen kẽ left-right tạo nhịp điệu       |
+| **Benefits** cards       | `fadeInUp`, `bounceIn`             | Cards pop in lần lượt                 |
+| **Pricing** card nổi bật | `bounceIn`, `jackInTheBox`         | Gói recommended nổi bật hẳn lên       |
+| **Testimonials**         | `fadeIn`, `slideInUp`              | Đánh giá xuất hiện mượt, tin cậy      |
+| **FAQ** items            | `fadeInDown` khi expand            | Toggle mượt, nội dung rõ              |
+| **Stats** numbers        | `countUp` (JS), `animate__counter` | Số nhảy tăng dần ấn tượng             |
+| **Navbar** logo/links    | `fadeIn` on load                   | Load page nhẹ nhàng, chuyên nghiệp    |
+| **Footer** icons         | `fadeInUp` delayed                 | Icons mạng xã hội xuất hiện sau cùng  |
 
 #### Các animation hay dùng
 
 **Entrance (vào trang):**
 
-* `fadeIn`, `fadeInUp`, `fadeInDown`, `fadeInLeft`, `fadeInRight`
-* `zoomIn`, `zoomInUp`
-* `slideInUp`, `slideInDown`, `slideInLeft`, `slideInRight`
-* `bounceIn`, `bounceInUp`, `jackInTheBox`
+- `fadeIn`, `fadeInUp`, `fadeInDown`, `fadeInLeft`, `fadeInRight`
+- `zoomIn`, `zoomInUp`
+- `slideInUp`, `slideInDown`, `slideInLeft`, `slideInRight`
+- `bounceIn`, `bounceInUp`, `jackInTheBox`
 
 **Attention (hover/click):**
 
-* `pulse`, `heartBeat`, `rubberBand`
-* `shake`, `wobble`, `swing`
-* `tada`, `jello`, `flip`
+- `pulse`, `heartBeat`, `rubberBand`
+- `shake`, `wobble`, `swing`
+- `tada`, `jello`, `flip`
 
 **Exit:**
 
-* `fadeOut`, `fadeOutDown`, `zoomOut`
+- `fadeOut`, `fadeOutDown`, `zoomOut`
 
 **Loops (lặp):**
 
-* `infinite bounce`, `infinite pulse`, `infinite ping`
+- `infinite bounce`, `infinite pulse`, `infinite ping`
 
 #### Scroll-triggered animation (Intersection Observer)
 
@@ -420,16 +422,19 @@ Dùng Intersection Observer để trigger animation khi element scroll vào view
 
 ```javascript
 // Vanilla JS — Scroll Reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.15 },
+);
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 ```
 
 ```javascript
@@ -463,18 +468,18 @@ lucide.createIcons();
 
 #### Icons theo section
 
-| Section          | Icons gợi ý (lucide-react / lucide)                          | Mô tả                         |
-|-----------------|--------------------------------------------------------------|-------------------------------|
-| **Navbar**     | `Menu`, `X`, `ShoppingCart`, `User`, `Bell`                  | Hamburger, cart, user menu    |
-| **Hero**       | `ArrowRight`, `Play`, `ChevronDown`, `Sparkles`, `Zap`      | CTA arrow, video, scroll     |
-| **Problem**     | `AlertTriangle`, `XCircle`, `Frown`, `ShieldAlert`           | Warning, error, pain points   |
-| **Solution**   | `CheckCircle2`, `Lightbulb`, `Rocket`, `Target`              | Solution, idea, launch        |
-| **Benefits**   | `TrendingUp`, `Clock`, `DollarSign`, `Heart`, `Award`        | Growth, time, money, love      |
-| **Detail**     | `ListChecks`, `BookOpen`, `ClipboardList`, `Layers`          | Curriculum, features          |
-| **Social Proof** | `Star`, `Quote`, `Users`, `ThumbsUp`, `BadgeCheck`           | Ratings, quotes, users        |
-| **Pricing**    | `Check`, `X`, `Tag`, `Percent`, `Zap`, `Crown`               | Feature list, discount, badge |
-| **FAQ**        | `ChevronDown`, `ChevronUp`, `HelpCircle`, `MessageCircle`    | Accordion toggle              |
-| **Footer**     | `Mail`, `Phone`, `MapPin`, `Facebook`, `Instagram`, `Youtube`, `Twitter` | Contact + social links |
+| Section          | Icons gợi ý (lucide-react / lucide)                                      | Mô tả                         |
+| ---------------- | ------------------------------------------------------------------------ | ----------------------------- |
+| **Navbar**       | `Menu`, `X`, `ShoppingCart`, `User`, `Bell`                              | Hamburger, cart, user menu    |
+| **Hero**         | `ArrowRight`, `Play`, `ChevronDown`, `Sparkles`, `Zap`                   | CTA arrow, video, scroll      |
+| **Problem**      | `AlertTriangle`, `XCircle`, `Frown`, `ShieldAlert`                       | Warning, error, pain points   |
+| **Solution**     | `CheckCircle2`, `Lightbulb`, `Rocket`, `Target`                          | Solution, idea, launch        |
+| **Benefits**     | `TrendingUp`, `Clock`, `DollarSign`, `Heart`, `Award`                    | Growth, time, money, love     |
+| **Detail**       | `ListChecks`, `BookOpen`, `ClipboardList`, `Layers`                      | Curriculum, features          |
+| **Social Proof** | `Star`, `Quote`, `Users`, `ThumbsUp`, `BadgeCheck`                       | Ratings, quotes, users        |
+| **Pricing**      | `Check`, `X`, `Tag`, `Percent`, `Zap`, `Crown`                           | Feature list, discount, badge |
+| **FAQ**          | `ChevronDown`, `ChevronUp`, `HelpCircle`, `MessageCircle`                | Accordion toggle              |
+| **Footer**       | `Mail`, `Phone`, `MapPin`, `Facebook`, `Instagram`, `Youtube`, `Twitter` | Contact + social links        |
 
 #### Icons phổ biến cho mọi landing page
 
@@ -493,11 +498,11 @@ Nature/Organic:    Leaf, TreePine, Flower2, Droplets, Sun, Moon
 
 #### Quy tắc dùng icon
 
-* **Kích thước chuẩn:** `24px` (default), `16px` (inline text), `32px` (feature icons), `48px` (section icons hero)
-* **Stroke width:** `2` cho UI icons, `1.5` cho icons nhỏ inline
-* **Màu icon:** Dùng `currentColor` để icon tự thừa hưởng màu text cha, hoặc set màu accent cố định
-* **Spacing:** Icon cách text `8px–12px`, icon trong card padding `12px–16px`
-* **Hover effect:** Icon scale `1.1`–`1.2` hoặc đổi màu khi hover
+- **Kích thước chuẩn:** `24px` (default), `16px` (inline text), `32px` (feature icons), `48px` (section icons hero)
+- **Stroke width:** `2` cho UI icons, `1.5` cho icons nhỏ inline
+- **Màu icon:** Dùng `currentColor` để icon tự thừa hưởng màu text cha, hoặc set màu accent cố định
+- **Spacing:** Icon cách text `8px–12px`, icon trong card padding `12px–16px`
+- **Hover effect:** Icon scale `1.1`–`1.2` hoặc đổi màu khi hover
 
 ```html
 <!-- HTML: dùng inline SVG từ Lucide CDN -->
@@ -544,8 +549,12 @@ import { ArrowRight, Check, Star } from 'lucide-react';
 
 /* Icon spin cho loading */
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .icon-spin {
   animation: spin 1s linear infinite;
@@ -556,13 +565,13 @@ import { ArrowRight, Check, Star } from 'lucide-react';
 
 ## BƯỚC 5 — CHECKLIST TRƯỚC KHI XUẤT BẢN
 
-* [ ] Đã hỏi và áp dụng đúng techstack khách hàng lựa chọn chưa?
-* [ ] Thiết kế có nhất quán với design system của ngành hàng đã chọn không?
-* [ ] Headline có cuốn hút, đúng công thức chuyển đổi không?
-* [ ] Đầy đủ các CTA buttons nổi bật (ít nhất ở Hero, Pricing, và Footer/Navbar)?
-* [ ] Hiển thị hoàn hảo, responsive trên 3 breakpoints (Desktop, Tablet, Mobile)?
-* [ ] Trải nghiệm tương tác mượt mà (Hamburger menu, FAQ toggle, smooth scroll)?
-* [ ] Tên file/component đặt chuẩn và code được tổ chức gọn gàng?
+- [ ] Đã hỏi và áp dụng đúng techstack khách hàng lựa chọn chưa?
+- [ ] Thiết kế có nhất quán với design system của ngành hàng đã chọn không?
+- [ ] Headline có cuốn hút, đúng công thức chuyển đổi không?
+- [ ] Đầy đủ các CTA buttons nổi bật (ít nhất ở Hero, Pricing, và Footer/Navbar)?
+- [ ] Hiển thị hoàn hảo, responsive trên 3 breakpoints (Desktop, Tablet, Mobile)?
+- [ ] Trải nghiệm tương tác mượt mà (Hamburger menu, FAQ toggle, smooth scroll)?
+- [ ] Tên file/component đặt chuẩn và code được tổ chức gọn gàng?
 
 ---
 
@@ -581,6 +590,6 @@ import { ArrowRight, Check, Star } from 'lucide-react';
 
 ### Gợi ý CTA Button Text
 
-* **Mua hàng/Đăng ký:** "Đặt Mua Ngay", "Nhận Ưu Đãi [X]%", "Đăng Ký Học Ngay", "Bắt Đầu Miễn Phí"
-* **Liên hệ:** "Đặt Lịch Miễn Phí", "Tư Vấn Ngay", "Gọi: [SĐT]"
-* **Dịch vụ dùng thử:** "Dùng Thử Miễn Phí 14 Ngày", "Xem Demo"
+- **Mua hàng/Đăng ký:** "Đặt Mua Ngay", "Nhận Ưu Đãi [X]%", "Đăng Ký Học Ngay", "Bắt Đầu Miễn Phí"
+- **Liên hệ:** "Đặt Lịch Miễn Phí", "Tư Vấn Ngay", "Gọi: [SĐT]"
+- **Dịch vụ dùng thử:** "Dùng Thử Miễn Phí 14 Ngày", "Xem Demo"

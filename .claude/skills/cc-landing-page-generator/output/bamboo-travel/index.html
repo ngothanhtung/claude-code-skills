@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bamboo Travel — Khám phá Việt Nam theo cách của Gen Z</title>
+  <meta name="description" content="Bamboo Travel - Tour du lịch Việt Nam dành cho Gen Z. Lịch trình tự do, giá trọn gói từ 3 triệu, không ẩn phí." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#ff385c',
+              active: '#e00b41',
+              light: '#ffd1da',
+            },
+            bamboo: {
+              DEFAULT: '#2d9c7e',
+              dark: '#247a63',
+              light: '#e6f5f0',
+            },
+            ink: '#222222',
+            body: '#3f3f3f',
+            muted: '#6a6a6a',
+            hairline: '#dddddd',
+            canvas: '#ffffff',
+            surface: '#f7f7f7',
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            card: '16px',
+            btn: '8px',
+            pill: '9999px',
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: #222222; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .reveal { opacity: 0; }
+    .reveal.animated { opacity: 1; }
+    .gradient-hero {
+      background: linear-gradient(135deg, rgba(45,156,126,0.12) 0%, rgba(255,56,92,0.08) 100%);
+    }
+    .btn-primary {
+      background-color: #ff385c;
+      color: #ffffff;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover { background-color: #e00b41; transform: translateY(-1px); }
+    .btn-secondary {
+      background-color: #ffffff;
+      color: #222222;
+      border: 1px solid #dddddd;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover { border-color: #222222; }
+    .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+    .nav-blur { backdrop-filter: blur(12px); background-color: rgba(255,255,255,0.92); }
+    .icon-box { background-color: #e6f5f0; color: #2d9c7e; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-item.active .faq-answer { max-height: 300px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+    .pricing-card.featured { border: 2px solid #ff385c; }
+    .original-price { text-decoration: line-through; color: #6a6a6a; }
+    .rating-star { color: #ff385c; }
+  </style>
+</head>
+<body class="bg-canvas antialiased">
+
+  <!-- Navbar -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-canvas border-b border-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 rounded-btn bg-bamboo/10 flex items-center justify-center">
+            <i data-lucide="tree-pine" class="w-6 h-6 text-bamboo"></i>
+          </div>
+          <span class="font-display font-800 text-xl text-ink">Bamboo Travel</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#tours" class="font-body font-600 text-ink hover:text-brand transition-colors">Tour</a>
+          <a href="#destinations" class="font-body font-600 text-ink hover:text-brand transition-colors">Điểm đến</a>
+          <a href="#about" class="font-body font-600 text-ink hover:text-brand transition-colors">Về chúng tôi</a>
+          <a href="#faq" class="font-body font-600 text-ink hover:text-brand transition-colors">FAQ</a>
+        </nav>
+
+        <!-- CTA -->
+        <div class="hidden md:block">
+          <a href="#pricing" class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-btn font-body font-600">
+            Đặt lịch tư vấn
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button id="menuBtn" class="md:hidden p-2 rounded-btn hover:bg-surface transition-colors" aria-label="Menu">
+          <i data-lucide="menu" class="w-6 h-6 text-ink" id="menuIconOpen"></i>
+          <i data-lucide="x" class="w-6 h-6 text-ink hidden" id="menuIconClose"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-hairline bg-canvas">
+      <div class="px-4 py-5 space-y-4">
+        <a href="#tours" class="block font-body font-600 text-ink hover:text-brand">Tour</a>
+        <a href="#destinations" class="block font-body font-600 text-ink hover:text-brand">Điểm đến</a>
+        <a href="#about" class="block font-body font-600 text-ink hover:text-brand">Về chúng tôi</a>
+        <a href="#faq" class="block font-body font-600 text-ink hover:text-brand">FAQ</a>
+        <a href="#pricing" class="btn-primary block text-center px-6 py-3 rounded-btn font-body font-600">
+          Đặt lịch tư vấn
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero" class="pt-32 pb-16 md:pt-40 md:pb-24 gradient-hero relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-pill bg-bamboo/10 text-bamboo font-body font-600 text-sm mb-6">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            Chuyến đi Gen Z đang hot nhất 2026
+          </div>
+          <h1 class="font-display font-800 text-4xl md:text-5xl lg:text-[52px] leading-tight text-ink mb-6">
+            Khám phá Việt Nam theo cách của Gen Z — từ <span class="text-brand">3 triệu</span> cho chuyến đi đáng nhớ
+          </h1>
+          <p class="font-body text-body text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
+            Tour trọn gói, lịch trình tự do, không ẩn phí. Bamboo Travel lo từ A-Z để bạn chỉ việc tận hưởng và sống ảo.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 mb-10">
+            <a href="#pricing" class="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 rounded-btn font-body font-700 text-lg animate__animated animate__pulse animate__infinite animate__slow">
+              Xem tour hot
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+            <a href="#about" class="btn-secondary inline-flex items-center justify-center gap-2 px-8 py-4 rounded-btn font-body font-600 text-lg">
+              <i data-lucide="play-circle" class="w-5 h-5"></i>
+              Tư vấn miễn phí
+            </a>
+          </div>
+          <div class="flex flex-wrap items-center gap-6 text-sm font-body">
+            <div class="flex items-center gap-2">
+              <div class="flex -space-x-2">
+                <div class="w-8 h-8 rounded-full bg-surface border-2 border-white flex items-center justify-center text-xs font-700">T</div>
+                <div class="w-8 h-8 rounded-full bg-bamboo/20 border-2 border-white flex items-center justify-center text-xs font-700">M</div>
+                <div class="w-8 h-8 rounded-full bg-brand/20 border-2 border-white flex items-center justify-center text-xs font-700">L</div>
+              </div>
+              <span class="text-ink font-600">+12.000 bạn trẻ đã đi cùng Bamboo</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+              <span class="font-700 text-ink">4.9/5</span>
+              <span class="text-muted">từ 2.300+ đánh giá</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal relative">
+          <div class="relative rounded-card overflow-hidden shadow-xl aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80" alt="Vịnh Hạ Long" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+              <p class="font-display font-700 text-2xl">Vịnh Hạ Long</p>
+              <p class="font-body text-white/90">Tour 3N2Đ • Từ 3.000.000₫</p>
+            </div>
+          </div>
+          <!-- Floating badge -->
+          <div class="absolute -bottom-4 -left-4 md:-left-8 bg-white rounded-card shadow-lg p-4 max-w-[180px] card-hover">
+            <div class="flex items-center gap-2 mb-2">
+              <i data-lucide="badge-check" class="w-5 h-5 text-bamboo"></i>
+              <span class="font-body font-700 text-sm">Cam kết</span>
+            </div>
+            <p class="font-body text-muted text-sm">Hoàn tiền 100% nếu không hài lòng</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section id="problem" class="py-16 md:py-24 bg-canvas">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+        <span class="inline-block px-4 py-1 rounded-pill bg-brand/10 text-brand font-body font-600 text-sm mb-4">Vấn đề</span>
+        <h2 class="font-display font-800 text-3xl md:text-4xl text-ink mb-4">
+          Bạn muốn đi, nhưng vẫn đang lo lắng?
+        </h2>
+        <p class="font-body text-body text-lg">
+          Đi du lịch đáng ra phải vui. Nhưng nhiều bạn trẻ lại gặp phải những rào cản này.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal p-6 rounded-card bg-surface card-hover">
+          <div class="w-12 h-12 rounded-btn bg-white flex items-center justify-center mb-4 shadow-sm">
+            <i data-lucide="map" class="w-6 h-6 text-brand"></i>
+          </div>
+          <h3 class="font-display font-700 text-lg mb-2">Không biết bắt đầu</h3>
+          <p class="font-body text-muted">Muốn đi nhưng lạc lõng giữa vô vàn thông tin trên mạng.</p>
+        </div>
+        <div class="reveal p-6 rounded-card bg-surface card-hover">
+          <div class="w-12 h-12 rounded-btn bg-white flex items-center justify-center mb-4 shadow-sm">
+            <i data-lucide="users" class="w-6 h-6 text-brand"></i>
+          </div>
+          <h3 class="font-display font-700 text-lg mb-2">Tour gượng ép</h3>
+          <p class="font-body text-muted">Sợ đi theo đoàn đông, lịch trình ríu rít, không có không gian riêng.</p>
+        </div>
+        <div class="reveal p-6 rounded-card bg-surface card-hover">
+          <div class="w-12 h-12 rounded-btn bg-white flex items-center justify-center mb-4 shadow-sm">
+            <i data-lucide="wallet" class="w-6 h-6 text-brand"></i>
+          </div>
+          <h3 class="font-display font-700 text-lg mb-2">Giá ẩn phí</h3>
+          <p class="font-body text-muted">Giá tour rẻ nhưng phát sinh liên tục: ăn uống, tham quan, tip.</p>
+        </div>
+        <div class="reveal p-6 rounded-card bg-surface card-hover">
+          <div class="w-12 h-12 rounded-btn bg-white flex items-center justify-center mb-4 shadow-sm">
+            <i data-lucide="camera-off" class="w-6 h-6 text-brand"></i>
+          </div>
+          <h3 class="font-display font-700 text-lg mb-2">Không có ảnh đẹp</h3>
+          <p class="font-body text-muted">Lịch trình rườm rà, không đủ thời gian check-in những spot hot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section id="about" class="py-16 md:py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1 reveal">
+          <div class="grid grid-cols-2 gap-4">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80" alt="Sapa" class="rounded-card w-full h-48 object-cover" />
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&q=80" alt="Mộc Châu" class="rounded-card w-full h-48 object-cover mt-8" />
+            <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80" alt="Đà Nẵng" class="rounded-card w-full h-48 object-cover -mt-8" />
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80" alt="Phú Quốc" class="rounded-card w-full h-48 object-cover" />
+          </div>
+        </div>
+        <div class="order-1 lg:order-2 reveal">
+          <span class="inline-block px-4 py-1 rounded-pill bg-bamboo/10 text-bamboo font-body font-600 text-sm mb-4">Giải pháp</span>
+          <h2 class="font-display font-800 text-3xl md:text-4xl text-ink mb-6">
+            Bamboo Travel — chuyến đi được thiết kế cho bạn
+          </h2>
+          <p class="font-body text-body text-lg mb-8 leading-relaxed">
+            Chúng mình là agency du lịch dành riêng cho Gen Z. Mỗi tour đều được xây dựng từ thói quen, sở thích và vibe của bạn trẻ Việt.
+          </p>
+          <ul class="space-y-5">
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-bamboo/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-4 h-4 text-bamboo"></i>
+              </div>
+              <div>
+                <h4 class="font-display font-700 text-ink mb-1">Linh hoạt theo nhóm</h4>
+                <p class="font-body text-muted">Tour nhóm nhỏ 8–16 người, dễ dàng kết bạn nhưng vẫn giữ sự riêng tư.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-bamboo/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-4 h-4 text-bamboo"></i>
+              </div>
+              <div>
+                <h4 class="font-display font-700 text-ink mb-1">Giá trọn gói, minh bạch</h4>
+                <p class="font-body text-muted">Mọi chi phí xe, ăn, ở, vé tham quan đều được liệt kê rõ ràng trước khi đặt.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-bamboo/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-4 h-4 text-bamboo"></i>
+              </div>
+              <div>
+                <h4 class="font-display font-700 text-ink mb-1">Hỗ trợ 24/7 trên nhóm chat</h4>
+                <p class="font-body text-muted">Leader nhiệt tình, cộng đồng vui vẻ, giải đáp mọi thắc mắc trong chuyến đi.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefits" class="py-16 md:py-24 bg-canvas">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+        <span class="inline-block px-4 py-1 rounded-pill bg-brand/10 text-brand font-body font-600 text-sm mb-4">Lợi ích</span>
+        <h2 class="font-display font-800 text-3xl md:text-4xl text-ink mb-4">
+          Tại sao Gen Z chọn Bamboo Travel?
+        </h2>
+        <p class="font-body text-body text-lg">
+          Không chỉ là đi du lịch — đó là trải nghiệm được thiết kế cho thế hệ của bạn.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal p-8 rounded-card border border-hairline card-hover text-center">
+          <div class="w-14 h-14 rounded-btn icon-box flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="clock" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-display font-700 text-xl mb-2">Tiết kiệm thời gian</h3>
+          <p class="font-body text-muted">Lịch trình tối ưu, không đi lòng vòng. Dậy sớm đúng chỗ, về muộn đúng lúc.</p>
+        </div>
+        <div class="reveal p-8 rounded-card border border-hairline card-hover text-center">
+          <div class="w-14 h-14 rounded-btn icon-box flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="banknote" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-display font-700 text-xl mb-2">Chi phí minh bạch</h3>
+          <p class="font-body text-muted">Trọn gói từ 3 triệu, không phí ẩn. Biết trước chi tiêu để yên tâm vui chơi.</p>
+        </div>
+        <div class="reveal p-8 rounded-card border border-hairline card-hover text-center">
+          <div class="w-14 h-14 rounded-btn icon-box flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="users-round" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-display font-700 text-xl mb-2">Cộng đồng Gen Z</h3>
+          <p class="font-body text-muted">Đi cùng những người bạn mới vibe hợp gu. Không khoảng cách, không ngại ngùng.</p>
+        </div>
+        <div class="reveal p-8 rounded-card border border-hairline card-hover text-center">
+          <div class="w-14 h-14 rounded-btn icon-box flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="camera" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-display font-700 text-xl mb-2">Ảnh đẹp mỗi ngày</h3>
+          <p class="font-body text-muted">Spot check-in được chọn lọc. Sẵn sàng để bạn có bộ ảnh triệu like.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail / Tours -->
+  <section id="tours" class="py-16 md:py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+        <span class="inline-block px-4 py-1 rounded-pill bg-bamboo/10 text-bamboo font-body font-600 text-sm mb-4">Tour nổi bật</span>
+        <h2 class="font-display font-800 text-3xl md:text-4xl text-ink mb-4">
+          Chọn chuyến đi phù hợp với bạn
+        </h2>
+        <p class="font-body text-body text-lg">
+          Từ tour tiết kiệm đến trải nghiệm cao cấp — Bamboo Travel đều có.
+        </p>
+      </div>
+
+      <div id="destinations" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Tour 1 -->
+        <div class="reveal bg-canvas rounded-card overflow-hidden card-hover">
+          <div class="relative aspect-[16/10]">
+            <img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=600&q=80" alt="Hạ Long 3N2Đ" class="w-full h-full object-cover" />
+            <div class="absolute top-4 left-4 px-3 py-1 rounded-pill bg-brand text-white font-body font-700 text-xs">
+              Bán chạy nhất
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 text-sm text-muted mb-2">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+              Hạ Long • 3N2Đ
+            </div>
+            <h3 class="font-display font-700 text-xl mb-3">Tour ngày thường</h3>
+            <ul class="space-y-2 mb-5">
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="bus" class="w-4 h-4 text-bamboo"></i> Xe limousine đời mới
+              </li>
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="bed" class="w-4 h-4 text-bamboo"></i> Homestay view biển
+              </li>
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="users" class="w-4 h-4 text-bamboo"></i> Nhóm 8–16 người
+              </li>
+            </ul>
+            <div class="flex items-end justify-between pt-4 border-t border-hairline">
+              <div>
+                <p class="original-price font-body text-sm">5.000.000₫</p>
+                <p class="font-display font-800 text-2xl text-brand">3.000.000₫</p>
+              </div>
+              <a href="#pricing" class="btn-primary px-5 py-2.5 rounded-btn font-body font-600 text-sm">Đặt ngay</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tour 2 -->
+        <div class="reveal bg-canvas rounded-card overflow-hidden card-hover">
+          <div class="relative aspect-[16/10]">
+            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600&q=80" alt="Đà Nẵng Hội An" class="w-full h-full object-cover" />
+            <div class="absolute top-4 left-4 px-3 py-1 rounded-pill bg-bamboo text-white font-body font-700 text-xs">
+              Cao điểm
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 text-sm text-muted mb-2">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+              Đà Nẵng – Hội An • 4N3Đ
+            </div>
+            <h3 class="font-display font-700 text-xl mb-3">Tour cao điểm</h3>
+            <ul class="space-y-2 mb-5">
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="plane" class="w-4 h-4 text-bamboo"></i> Vé máy bay khứ hồi
+              </li>
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="hotel" class="w-4 h-4 text-bamboo"></i> Khách sạn 4 sao
+              </li>
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="camera" class="w-4 h-4 text-bamboo"></i> Photoshoot tại Hội An
+              </li>
+            </ul>
+            <div class="flex items-end justify-between pt-4 border-t border-hairline">
+              <div>
+                <p class="font-body text-sm text-muted">Giá mùa cao điểm</p>
+                <p class="font-display font-800 text-2xl text-ink">7.000.000₫</p>
+              </div>
+              <a href="#pricing" class="btn-primary px-5 py-2.5 rounded-btn font-body font-600 text-sm">Đặt ngay</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tour 3 -->
+        <div class="reveal bg-canvas rounded-card overflow-hidden card-hover">
+          <div class="relative aspect-[16/10]">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Tour private" class="w-full h-full object-cover" />
+            <div class="absolute top-4 left-4 px-3 py-1 rounded-pill bg-ink text-white font-body font-700 text-xs">
+              Private
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 text-sm text-muted mb-2">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+              Tùy chọn điểm đến
+            </div>
+            <h3 class="font-display font-700 text-xl mb-3">Tour private</h3>
+            <ul class="space-y-2 mb-5">
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="settings-2" class="w-4 h-4 text-bamboo"></i> Lịch trình linh hoạt
+              </li>
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="camera" class="w-4 h-4 text-bamboo"></i> Photographer riêng
+              </li>
+              <li class="flex items-center gap-2 text-sm text-body">
+                <i data-lucide="crown" class="w-4 h-4 text-bamboo"></i> Trải nghiệm cao cấp
+              </li>
+            </ul>
+            <div class="flex items-end justify-between pt-4 border-t border-hairline">
+              <div>
+                <p class="font-body text-sm text-muted">Báo giá theo nhóm</p>
+                <p class="font-display font-800 text-2xl text-ink">Liên hệ</p>
+              </div>
+              <a href="#pricing" class="btn-secondary px-5 py-2.5 rounded-btn font-body font-600 text-sm">Tư vấn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section id="testimonials" class="py-16 md:py-24 bg-canvas">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+        <span class="inline-block px-4 py-1 rounded-pill bg-brand/10 text-brand font-body font-600 text-sm mb-4">Bằng chứng</span>
+        <h2 class="font-display font-800 text-3xl md:text-4xl text-ink mb-4">
+          Hơn 12.000 bạn trẻ đã trải nghiệm
+        </h2>
+        <p class="font-body text-body text-lg">
+          Họ nói gì về chuyến đi cùng Bamboo Travel?
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-14 reveal">
+        <div class="p-6 rounded-card bg-surface text-center">
+          <p class="font-display font-800 text-4xl text-brand mb-1"><span class="counter" data-target="12000">0</span>+</p>
+          <p class="font-body text-muted text-sm">Khách hàng</p>
+        </div>
+        <div class="p-6 rounded-card bg-surface text-center">
+          <p class="font-display font-800 text-4xl text-brand mb-1"><span class="counter" data-target="50">0</span>+</p>
+          <p class="font-body text-muted text-sm">Điểm đến</p>
+        </div>
+        <div class="p-6 rounded-card bg-surface text-center">
+          <p class="font-display font-800 text-4xl text-brand mb-1"><span class="counter" data-target="98">0</span>%</p>
+          <p class="font-body text-muted text-sm">Khách quay lại</p>
+        </div>
+        <div class="p-6 rounded-card bg-surface text-center">
+          <p class="font-display font-800 text-4xl text-brand mb-1"><span class="counter" data-target="49">0</span>/5</p>
+          <p class="font-body text-muted text-sm">Đánh giá trung bình</p>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal p-6 rounded-card border border-hairline bg-canvas card-hover">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+          </div>
+          <p class="font-body text-body mb-6 leading-relaxed">
+            "Đi Hạ Long 3N2Đ mà như đi với hội bạn thân. Lịch trình chill, đủ thời gian chụp ảnh, ăn uống ngon. Giá 3 triệu quá hợp lý!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-bamboo/20 flex items-center justify-center font-display font-700 text-bamboo">NT</div>
+            <div>
+              <p class="font-body font-700 text-sm">Ngọc Trâm</p>
+              <p class="font-body text-muted text-xs">24 tuổi • Hà Nội</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal p-6 rounded-card border border-hairline bg-canvas card-hover">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+          </div>
+          <p class="font-body text-body mb-6 leading-relaxed">
+            "Lần đầu đi tour mà không thấy gượng ép. Leader vui tính, nhóm đồng điệu. Về là muốn book thêm tour Sapa ngay."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand/20 flex items-center justify-center font-display font-700 text-brand">MH</div>
+            <div>
+              <p class="font-body font-700 text-sm">Minh Hoàng</p>
+              <p class="font-body text-muted text-xs">22 tuổi • TP.HCM</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal p-6 rounded-card border border-hairline bg-canvas card-hover">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+          </div>
+          <p class="font-body text-body mb-6 leading-relaxed">
+            "Tôi thích nhất là giá minh bạch. Không phát sinh gì cả. Homestay đẹp, view biển, đồ ăn ngon. Sẽ giới thiệu cho bạn bè."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center font-display font-700 text-yellow-600">LH</div>
+            <div>
+              <p class="font-body font-700 text-sm">Linh Hương</p>
+              <p class="font-body text-muted text-xs">26 tuổi • Đà Nẵng</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-16 md:py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+        <span class="inline-block px-4 py-1 rounded-pill bg-bamboo/10 text-bamboo font-body font-600 text-sm mb-4">Bảng giá</span>
+        <h2 class="font-display font-800 text-3xl md:text-4xl text-ink mb-4">
+          Chọn gói tour phù hợp
+        </h2>
+        <p class="font-body text-body text-lg">
+          Giá trọn gói, không phí ẩn. Gói ngày thường đang có ưu đãi sốc.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
+        <!-- Basic -->
+        <div class="reveal p-8 rounded-card bg-canvas border border-hairline card-hover">
+          <h3 class="font-display font-700 text-xl mb-2">Tour ngày thường</h3>
+          <p class="font-body text-muted text-sm mb-6">Phù hợp cho chuyến đi cuối tuần cùng hội bạn.</p>
+          <div class="mb-6">
+            <p class="original-price font-body text-base mb-1">5.000.000₫</p>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display font-800 text-4xl text-brand">3.000.000₫</span>
+              <span class="font-body text-muted text-sm">/ người</span>
+            </div>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> 3N2Đ Hạ Long / Mộc Châu
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Xe + homestay + ăn uống
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Nhóm 8–16 người
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Hỗ trợ nhóm chat 24/7
+            </li>
+          </ul>
+          <a href="#" class="btn-primary block text-center w-full py-3.5 rounded-btn font-body font-700">
+            Đặt tour ngay
+          </a>
+        </div>
+
+        <!-- Featured -->
+        <div class="reveal pricing-card featured p-8 rounded-card bg-canvas shadow-xl relative transform md:-translate-y-4">
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 rounded-pill bg-brand text-white font-body font-700 text-xs flex items-center gap-1">
+            <i data-lucide="zap" class="w-3 h-3"></i> Được chọn nhiều nhất
+          </div>
+          <h3 class="font-display font-700 text-xl mb-2">Tour cao điểm</h3>
+          <p class="font-body text-muted text-sm mb-6">Trải nghiệm đẳng cấp tại điểm đến hot nhất mùa hè.</p>
+          <div class="mb-6">
+            <div class="flex items-baseline gap-2">
+              <span class="font-display font-800 text-4xl text-brand">7.000.000₫</span>
+              <span class="font-body text-muted text-sm">/ người</span>
+            </div>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> 4N3Đ Đà Nẵng – Hội An
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Vé máy bay khứ hồi
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Khách sạn 4 sao
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Photoshoot + video trip
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Leader + photographer
+            </li>
+          </ul>
+          <a href="#" class="btn-primary block text-center w-full py-3.5 rounded-btn font-body font-700">
+            Đặt tour ngay
+          </a>
+        </div>
+
+        <!-- Premium -->
+        <div class="reveal p-8 rounded-card bg-canvas border border-hairline card-hover">
+          <h3 class="font-display font-700 text-xl mb-2">Tour private</h3>
+          <p class="font-body text-muted text-sm mb-6">Dành cho nhóm bạn, gia đình hoặc teambuilding.</p>
+          <div class="mb-6">
+            <div class="flex items-baseline gap-2">
+              <span class="font-display font-800 text-4xl text-ink">Liên hệ</span>
+            </div>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Lịch trình tùy chỉnh
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Xe/photographer riêng
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Phù hợp 4–20 người
+            </li>
+            <li class="flex items-center gap-3 text-sm font-body text-body">
+              <i data-lucide="check" class="w-4 h-4 text-bamboo"></i> Tư vấn 1-1 miễn phí
+            </li>
+          </ul>
+          <a href="#" class="btn-secondary block text-center w-full py-3.5 rounded-btn font-body font-700">
+            Tư vấn ngay
+          </a>
+        </div>
+      </div>
+
+      <p class="text-center mt-10 font-body text-muted text-sm reveal">
+        <i data-lucide="shield-check" class="w-4 h-4 inline-block align-text-bottom text-bamboo"></i>
+        Cam kết hoàn tiền 100% nếu chuyến đi không đúng mô tả.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 md:py-24 bg-canvas">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block px-4 py-1 rounded-pill bg-brand/10 text-brand font-body font-600 text-sm mb-4">FAQ</span>
+        <h2 class="font-display font-800 text-3xl md:text-4xl text-ink mb-4">
+          Câu hỏi thường gặp
+        </h2>
+        <p class="font-body text-body text-lg">
+          Mọi thắc mắc trước khi đặt tour đều được giải đáp ở đây.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="reveal faq-item border border-hairline rounded-card bg-canvas overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-5 text-left">
+            <span class="font-display font-700 text-ink pr-4">Giá tour đã bao gồm những gì?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-muted faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="font-body text-body pb-5 leading-relaxed">
+              Giá trọn gói bao gồm xe di chuyển, chỗ ở (homestay/khách sạn), các bữa ăn theo lịch trình, vé tham quan và chi phí leader. Không phát sinh thêm ngoài chi tiêu cá nhân.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal faq-item border border-hairline rounded-card bg-canvas overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-5 text-left">
+            <span class="font-display font-700 text-ink pr-4">Tôi có thể hủy hoặc đổi lịch không?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-muted faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="font-body text-body pb-5 leading-relaxed">
+              Được. Bạn có thể đổi lịch trước 7 ngày. Hủy trước 14 ngày sẽ được hoàn 100% tiền cọc. Xem chi tiết chính sách trong email xác nhận đặt tour.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal faq-item border border-hairline rounded-card bg-canvas overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-5 text-left">
+            <span class="font-display font-700 text-ink pr-4">Nhóm tour tối đa bao nhiêu người?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-muted faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="font-body text-body pb-5 leading-relaxed">
+              Tour nhóm chuẩn từ 8–16 người để giữ sự gần gũi và dễ quản lý. Nếu bạn muốn nhóm riêng, hãy chọn gói Private.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal faq-item border border-hairline rounded-card bg-canvas overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-5 text-left">
+            <span class="font-display font-700 text-ink pr-4">Có hỗ trợ trả góp không?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-muted faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="font-body text-body pb-5 leading-relaxed">
+              Có. Bamboo Travel hỗ trợ trả góp qua thẻ tín dụng 0% lãi suất trong 3–6 tháng hoặc đặt cọc 30% trước ngày khởi hành.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal faq-item border border-hairline rounded-card bg-canvas overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-5 text-left">
+            <span class="font-display font-700 text-ink pr-4">Lịch trình có linh hoạt không?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-muted faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="font-body text-body pb-5 leading-relaxed">
+              Có. Mỗi tour có khung giờ chung nhưng luôn dành thời gian tự do để bạn khám phá, nghỉ ngơi hoặc sống ảo. Tour Private thì hoàn toàn tùy chỉnh.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal faq-item border border-hairline rounded-card bg-canvas overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between p-5 text-left">
+            <span class="font-display font-700 text-ink pr-4">Cần mang theo gì khi đi tour?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-muted faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer px-5">
+            <p class="font-body text-body pb-5 leading-relaxed">
+              Chỉ cần mang CMND/CCCD, quần áo phù hợp thời tiết, giày đi b thoải mái và tinh thần vui vẻ. Bamboo sẽ gửi checklist chi tiết trước ngày đi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 bg-brand">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+      <h2 class="font-display font-800 text-3xl md:text-4xl text-white mb-4">
+        Sẵn sàng cho chuyến đi tiếp theo?
+      </h2>
+      <p class="font-body text-white/90 text-lg mb-8">
+        Đặt tour ngay hôm nay — chỉ từ 3 triệu cho trải nghiệm Gen Z đáng nhớ.
+      </p>
+      <a href="#pricing" class="inline-flex items-center gap-2 px-8 py-4 rounded-btn bg-white text-brand font-body font-700 text-lg hover:bg-surface transition-colors">
+        <i data-lucide="calendar-check" class="w-5 h-5"></i>
+        Đặt lịch tư vấn miễn phí
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-14 bg-ink text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-10 mb-10">
+        <div class="md:col-span-1">
+          <a href="#" class="flex items-center gap-2 mb-4">
+            <div class="w-10 h-10 rounded-btn bg-white/10 flex items-center justify-center">
+              <i data-lucide="tree-pine" class="w-6 h-6 text-bamboo"></i>
+            </div>
+            <span class="font-display font-800 text-xl">Bamboo Travel</span>
+          </a>
+          <p class="font-body text-white/70 text-sm leading-relaxed mb-4">
+            Khám phá Việt Nam, theo cách của bạn.
+          </p>
+          <div class="flex gap-4">
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand transition-colors" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand transition-colors" aria-label="Instagram">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand transition-colors" aria-label="Youtube">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-700 text-sm mb-4">Tour</h4>
+          <ul class="space-y-3">
+            <li><a href="#tours" class="font-body text-white/70 text-sm hover:text-white transition-colors">Tour ngày thường</a></li>
+            <li><a href="#tours" class="font-body text-white/70 text-sm hover:text-white transition-colors">Tour cao điểm</a></li>
+            <li><a href="#tours" class="font-body text-white/70 text-sm hover:text-white transition-colors">Tour private</a></li>
+            <li><a href="#" class="font-body text-white/70 text-sm hover:text-white transition-colors">Lịch khởi hành</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-700 text-sm mb-4">Công ty</h4>
+          <ul class="space-y-3">
+            <li><a href="#about" class="font-body text-white/70 text-sm hover:text-white transition-colors">Về chúng tôi</a></li>
+            <li><a href="#" class="font-body text-white/70 text-sm hover:text-white transition-colors">Blog</a></li>
+            <li><a href="#" class="font-body text-white/70 text-sm hover:text-white transition-colors">Tuyển dụng</a></li>
+            <li><a href="#" class="font-body text-white/70 text-sm hover:text-white transition-colors">Chính sách bảo mật</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-700 text-sm mb-4">Liên hệ</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i data-lucide="phone" class="w-4 h-4 text-bamboo mt-0.5"></i>
+              <span class="font-body text-white/70 text-sm">0901 234 567</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="mail" class="w-4 h-4 text-bamboo mt-0.5"></i>
+              <span class="font-body text-white/70 text-sm">hello@bambootravel.vn</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="map-pin" class="w-4 h-4 text-bamboo mt-0.5"></i>
+              <span class="font-body text-white/70 text-sm">Quận 1, TP.HCM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="font-body text-white/50 text-sm">
+          © 2026 Bamboo Travel. Đã đăng ký bản quyền.
+        </p>
+        <div class="flex gap-6">
+          <a href="#" class="font-body text-white/50 text-sm hover:text-white transition-colors">Điều khoản</a>
+          <a href="#" class="font-body text-white/50 text-sm hover:text-white transition-colors">Chính sách</a>
+          <a href="#" class="font-body text-white/50 text-sm hover:text-white transition-colors">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Navbar scroll blur
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('nav-blur', 'border-hairline');
+        navbar.classList.remove('border-transparent');
+      } else {
+        navbar.classList.remove('nav-blur', 'border-hairline');
+        navbar.classList.add('border-transparent');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const iconOpen = document.getElementById('menuIconOpen');
+    const iconClose = document.getElementById('menuIconClose');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+        // Open clicked if wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Scroll reveal with Intersection Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__animated', 'animate__fadeInUp', 'animated');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Stats counter
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseInt(counter.getAttribute('data-target'));
+          const duration = 1800;
+          const start = performance.now();
+
+          const update = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(easeOut * target);
+
+            if (target === 49) {
+              counter.textContent = (current / 10).toFixed(1);
+            } else {
+              counter.textContent = current.toLocaleString('vi-VN');
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              counter.textContent = target === 49 ? '4.9' : target.toLocaleString('vi-VN');
+            }
+          };
+
+          requestAnimationFrame(update);
+          counterObserver.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
+  </script>
+</body>
+</html>
