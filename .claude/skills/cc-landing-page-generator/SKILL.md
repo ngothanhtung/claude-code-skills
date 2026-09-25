@@ -1,6 +1,6 @@
 ---
 name: cc-landing-page-generator
-description: |
+description:
   Tạo landing page chuyên nghiệp theo yêu cầu, giúp khách dễ hiểu sản phẩm và dễ mua hàng, đăng ký hoặc liên hệ. Người dùng không cần biết lập trình.
 
   Dùng khi người dùng muốn tạo trang và nhắc đến các từ như:
