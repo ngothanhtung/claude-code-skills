@@ -1,370 +1,102 @@
 ---
 name: cc-srs-writer
 description: |
-  Viết SRS chuẩn IEEE 830 cho Dev Lead / System Architect. Hỗ trợ 3 chế độ: Chuyển đổi từ PRD, Mở rộng từ Use Case, Viết mới.
-  KÍCH HOẠT khi người dùng yêu cầu viết, tạo, chuyển đổi, mở rộng hoặc review SRS — kể cả khi họ dán PRD, Use Case hoặc feature description để yêu cầu sinh SRS.
-  Không dùng để viết PRD (dùng cc-prd-writer), User Story (dùng cc-user-story-acceptance-criteria-writer), Use Case (dùng cc-use-case-writer), hay Architecture Design Document (dùng tài liệu riêng).
+  SRS: viết đặc tả yêu cầu phần mềm từ PRD/FR, User Story/AC, Use Case hoặc mô tả tính năng;
+  rà soát SRS hiện có; cập nhật đặc tả khi yêu cầu nguồn thay đổi.
+  Dùng khi các skill yêu cầu nghiệp vụ hoặc Test Case cần bàn giao sang đặc tả hệ thống và contract kỹ thuật.
 ---
 
 # Software Requirements Specification Writer
 
-## Lịch sử phiên bản (Version Log)
+## Mục đích và ranh giới
 
-| Phiên bản | Ngày | Thay đổi |
-| :--- | :--- | :--- |
-| 1.0 | 2026-05-01 | Phiên bản đầu tiên: workflow 6 bước, template IEEE 830, guardrails chống over-engineering. |
-| 1.1 | 2026-07-14 | Tóm gọn frontmatter; thêm version log; bảng tóm tắt checklist trong SKILL.md; tham chiếu SRS mẫu thực tế; thêm checklist 1 trang printable. |
+SRS (Software Requirements Specification) xác định hành vi, dữ liệu, giao diện và ràng buộc mà phần mềm phải đáp ứng để đội phát triển và kiểm thử có thể đối chiếu. Giải thích thuật ngữ khi xuất hiện lần đầu; người cung cấp yêu cầu không cần tự chọn công nghệ.
 
-## Mục đích
+**Nguyên tắc: đặc tả có nguồn, kiểm chứng được.** PRD xác định nhu cầu và phạm vi sản phẩm; SRS làm rõ yêu cầu hệ thống, gồm contract kỹ thuật khi cần; tài liệu thiết kế kiến trúc (ADD) giải thích cách tổ chức và xây dựng giải pháp. Giữ ràng buộc kỹ thuật đã xác nhận, nhưng dẫn quyết định thiết kế sang tài liệu riêng. SRS không triển khai tính năng hay chứng nhận kiểm thử.
 
-Hỗ trợ trưởng nhóm phát triển (Development Lead) và kiến trúc sư hệ thống (System Architect) chuyển đổi yêu cầu nghiệp vụ (từ PRD hoặc Use Case) thành tài liệu đặc tả kỹ thuật (SRS) theo tinh thần IEEE 830 / ISO/IEC/IEEE 29148, nơi mỗi mô tả kỹ thuật có thể truy xuất ngược về FR tương ứng trong tài liệu yêu cầu sản phẩm (PRD).
-
-**Nguyên tắc vàng:**
-> SRS mô tả **INTERFACE, CONTRACT, DATA MODEL và HÀNH VI KỸ THUẬT** bắt nguồn từ yêu cầu nghiệp vụ. SRS không thay thế PRD, không tự mở rộng nghiệp vụ, và mỗi phần tử phải truy xuất ngược về FR trong PRD.
-
-## Phân biệt SRS và tài liệu liên quan
-
-| | SRS (Software Requirements Specification) | PRD (Product Requirements Document) | Tài liệu thiết kế kiến trúc (ADD) |
-| :--- | :--- | :--- | :--- |
-| **Trả lời câu hỏi** | Interface nào, contract nào, data model/rule kỹ thuật ra sao? | Sản phẩm giải quyết vấn đề gì cho ai? | KIẾN TRÚC tổng thể như thế nào? |
-| **Người viết** | Dev Lead / System Architect | BA / PO / PM | System Architect / Tech Lead |
-| **Mức độ quyết định** | Quyết định triển khai (implementation decisions) | Quyết định sản phẩm (product decisions) | Quyết định cấu trúc (structural decisions) |
-| **Thời điểm** | Sau PRD, trước khi bắt đầu coding | Đầu dự án | Sau khi có FR rõ ràng |
-| **Ví dụ nội dung** | API endpoint, database schema, data contract, message format | FR mô tả hành vi, User Story, Acceptance Criteria | Service decomposition, deployment architecture, scaling strategy |
+Biểu mẫu tham khảo cấu trúc IEEE 830 và cách tiếp cận yêu cầu của ISO/IEC/IEEE 29148; dùng biểu mẫu không đồng nghĩa đã được chứng nhận tuân thủ một tiêu chuẩn.
 
 ## Quy trình thực hiện (Workflow)
 
-### Bước 1: Xác định chế độ (Mode)
+### Bước 1: Xác định nhánh và phạm vi
 
-Hỏi người dùng hoặc suy luận từ đầu vào:
+| Yêu cầu               | Cách xử lý                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| Viết mới / chuyển đổi | Tạo SRS từ nguồn đã cung cấp; không bắt buộc PRD nếu nguồn khác đủ rõ               |
+| Chỉ rà soát           | Đọc SRS và nguồn, báo phát hiện và đề xuất; giữ nguyên tệp và trạng thái nguồn      |
+| Cập nhật / mở rộng    | Xác định phiên bản và phần được phép sửa, giữ mã cũ, đánh giá tác động của thay đổi |
 
-- **Chế độ A (Chuyển đổi từ PRD):** Người dùng cung cấp PRD hoặc danh sách FR → Chuyển mỗi FR thành đặc tả kỹ thuật tương ứng.
-- **Chế độ B (Mở rộng từ Use Case):** Người dùng cung cấp Use Case (Karl Wiegers 13 trường) → Bổ sung interface, data model, error contract cho mỗi Use Case.
-- **Chế độ C (Viết mới từ đầu):** Người dùng mô tả tính năng chung → Thu thập thông tin kỹ thuật bắt buộc TRƯỚC KHI viết.
+Tiếp tục theo yêu cầu rõ ràng; chỉ hỏi khi chưa phân biệt được phạm vi nhận xét và chỉnh sửa.
 
-### Bước 2: Thu thập thông tin đầu vào bắt buộc
+**Hoàn tất khi:** xác định nhánh, nguồn/phiên bản, phần trong và ngoài phạm vi; thiếu tài liệu nào được ghi rõ.
 
-**Thu thập tối thiểu 5 thông tin sau:**
+### Bước 2: Làm rõ yêu cầu và bằng chứng
 
-1. **PRD / Tài liệu yêu cầu nguồn**: Có PRD, danh sách FR hoặc Use Case nguồn không?
-2. **Phạm vi kỹ thuật (Tech Scope)**: Đã có công nghệ quy định sẵn chưa? (Ngôn ngữ lập trình, framework, database, cloud provider, message broker...)
-3. **Ràng buộc triển khai (Constraints)**: Ngân sách, thời hạn, team size, môi trường triển khai có ảnh hưởng đến thiết kế?
-4. **Interface bắt buộc**: Có hệ thống bên ngoài phải tích hợp không? (Payment gateway, SSO, message queue...)
-5. **Chuẩn nội bộ**: Có coding convention, naming convention, API design standard nội bộ cần tuân thủ?
+Đọc nguồn trước khi hỏi; chỉ hỏi phần thiếu có ảnh hưởng đến yêu cầu, tối đa ba câu mỗi lượt. Làm rõ vai trò, hành vi/kết quả, quy tắc và giới hạn, dữ liệu, hệ thống cần trao đổi, yêu cầu chất lượng và ràng buộc đã xác nhận. Công nghệ chưa được lựa chọn không tự động chặn đặc tả hành vi.
 
-**Khi thiếu thông tin:**
+| Nguồn                                          | Nội dung cần giữ                                                       |
+| ---------------------------------------------- | ---------------------------------------------------------------------- |
+| PRD / FR / NFR                                 | Mã, phạm vi, quy tắc và mục tiêu chất lượng                            |
+| User Story / AC                                | Mã US/AC, vai trò, mục tiêu, mọi kịch bản được yêu cầu                 |
+| Use Case                                       | Mã UC, điều kiện trước/sau, luồng chính, thay thế, ngoại lệ và quy tắc |
+| Mô tả trực tiếp / chính sách / contract có sẵn | Trích dẫn yêu cầu, tài liệu/mục/phiên bản và người xác nhận nếu có     |
 
-- Có 0-1 thông tin: **ĐẶT CÂU HỎI LÀM RÕ** trước, ưu tiên xác nhận PRD/FR/Use Case nguồn. Không tự tạo FR mới.
-- Có 2-4 thông tin: Có thể viết bản nháp nếu người dùng muốn tiếp tục, nhưng mọi tech choice chưa được xác nhận phải ghi `[CHƯA XÁC ĐỊNH: cần xác nhận]`.
-- Có đủ 5 thông tin: Có thể viết SRS hoàn chỉnh.
-- Nếu có PRD nhưng thiếu Tech Scope: HỎI người dùng hoặc ghi `[CHƯA XÁC ĐỊNH: sẽ xác nhận với đội ngũ]`. KHÔNG tự suy diễn tech stack.
-- Nếu không có PRD/FR/Use Case và người dùng chỉ mô tả chung: hỏi tối đa 5 câu làm rõ, sau đó ghi rõ giả định và khuyến nghị tạo PRD/FR trước khi bàn giao SRS chính thức.
+Thiếu nguồn để đối chiếu thì báo giới hạn kiểm tra. Khi hai nguồn mâu thuẫn, nêu cả hai và người cần quyết định, không tự chọn nguồn thắng. Mã nguồn chưa có có thể được gán nhãn tạm, ghi rõ đó không phải FR đã phê duyệt.
 
-### Bước 3: Xây dựng cấu trúc SRS theo mẫu chuẩn
+- **Chỉ rà soát:** thông tin thiếu là phát hiện; tiếp tục đánh giá phần đã có.
+- **Soạn/cập nhật:** nếu thiếu quyết định làm đổi hành vi hoặc contract, hỏi và dừng; nếu người dùng muốn bản nháp, dùng `[CHƯA XÁC ĐỊNH: câu hỏi]` ở vị trí liên quan và ghi vào sổ câu hỏi.
+- Đề xuất hoặc giả định chỉ khi được yêu cầu, tách khỏi yêu cầu đã xác nhận. Số liệu, nhà cung cấp và lựa chọn công nghệ cần nguồn, không lấy từ ví dụ làm mặc định.
 
-Trình bày theo cấu trúc IEEE 830 / ISO/IEC/IEEE 29148 — mỗi phần gắn với FR tương ứng qua ma trận truy xuất.
+**Hoàn tất khi:** có đủ căn cứ cho phần đang xử lý, hoặc đã trả câu hỏi/bản nháp đúng yêu cầu; không đánh giá độ sẵn sàng bằng số lượng trường đã điền.
 
-````markdown
-# TÀI LIỆU ĐẶC TẢ YÊU CẦU PHẦN MỀM (SRS)
-## [Tên hệ thống / Tính năng]
+### Bước 3: Lập bản đồ yêu cầu
 
-**Phiên bản:** X.Y
-**Ngày:** YYYY-MM-DD
-**Tác giả:** [Họ và tên]
-**Tài liệu tham chiếu:** [PRD tên X, phiên bản Y]
-**Trạng thái:** [Bản nháp / Để duyệt / Đã phê duyệt]
+Đọc [biểu mẫu SRS](./references/srs-template.md) khi soạn/cập nhật. Với rà soát, dùng cấu trúc hiện có để kiểm tra độ bao phủ, không ép đổi định dạng.
 
----
+Giữ mã nguồn và mã SRS hiện có. Mã SRS mới dùng quy ước dự án; nếu chưa có, dùng `SRS-[SỐ]` và ghi là mã đề xuất. Các yêu cầu chức năng, dữ liệu, giao diện, chất lượng và ràng buộc cần mã để truy vết; tham chiếu chéo thay vì chép lại cùng một yêu cầu ở nhiều phần.
 
-## 1. Tổng quan
+Lập ma trận truy xuất (RTM): `Nguồn + phiên bản/mục | SRS | Loại | Bao phủ | Câu hỏi`. Kiểm tra hai chiều: mỗi nguồn trong phạm vi có đặc tả hoặc lý do chưa xử lý; mỗi yêu cầu SRS có nguồn hợp lệ. Cho phép nhiều nguồn cho một SRS và một nguồn cho nhiều SRS. Yêu cầu suy ra cần lý do, nguồn gốc và xác nhận, không tự coi là đã được duyệt.
 
-### 1.1 Mục đích tài liệu
-[Mục đích của SRS này là gì. 1-2 đoạn.]
+Khi cập nhật, đối chiếu phiên bản cũ/mới; liệt kê SRS, contract, dữ liệu, NFR và tham chiếu kiểm thử chịu ảnh hưởng. Giữ lịch sử mã tách/gộp/ngừng dùng; phần ngoài phạm vi chỉ báo tác động.
 
-### 1.2 Phạm vi hệ thống
-[Mô tả hệ thống và ranh giới. Nêu rõ những gì THUỘC và KHÔNG THUỘC SRS này.]
+**Hoàn tất khi:** mọi nguồn và yêu cầu SRS trong phạm vi được ánh xạ, hoặc có phát hiện/câu hỏi rõ ràng; không cần sửa nguồn để hoàn tất nhánh rà soát.
 
-### 1.3 Định nghĩa, từ viết tắt, chuẩn tham chiếu
-| Thuật ngữ | Định nghĩa |
-| :--- | :--- |
-| [Thuật ngữ] | [Định nghĩa] |
+### Bước 4: Soạn hoặc đối chiếu đặc tả
 
-**Chuẩn tham chiếu:**
-- [IEEE 830-1998] — Recommended Practice for Software Requirements Specifications (legacy reference)
-- [ISO/IEC/IEEE 29148] — Requirements engineering
-- [ISO/IEC 25010:2011] — Systems and software Quality Requirements and Evaluation (SQuaRE)
+Dùng biểu mẫu làm nguồn cấu trúc; [checklist đầy đủ](./checklists/quality-checklist-srs.md) là nguồn duy nhất quy định chất lượng và trạng thái bàn giao.
 
-### 1.4 Người đọc dự kiến
-- Trưởng nhóm phát triển (Development Lead)
-- Kiến trúc sư hệ thống (System Architect)
-- Lập trình viên (Developer)
-- Kiểm thử viên (QA Engineer)
+- Đặc tả hành vi trước, sau đó contract, dữ liệu và NFR liên quan. Giữ các luồng, quy tắc, quyền hạn và kết quả lỗi từ nguồn.
+- Với API, thông điệp, tệp hoặc giao tiếp thiết bị, mô tả contract đúng loại; tái sử dụng schema đã có. Không mặc định mọi chức năng là HTTP API hay cần bảng dữ liệu vật lý.
+- Ghi dữ liệu và ràng buộc logic; tham chiếu thiết kế lưu trữ khi đã có. Chọn công nghệ, phân chia dịch vụ và cấu hình vận hành thuộc tài liệu thiết kế, không tự phát sinh từ mẫu.
+- Làm NFR kiểm chứng được bằng điều kiện, kết quả và cách đánh giá; ngưỡng định lượng cần nguồn. Yêu cầu như từ chối truy cập trái phép có thể kiểm tra đúng/sai mà không thêm số tùy ý.
+- Phần không áp dụng phải có lý do theo nguồn; phần chưa biết giữ câu hỏi. Yêu cầu vận hành, bảo mật hoặc môi trường có căn cứ vẫn thuộc SRS, khác với hướng dẫn cài đặt/cấu hình.
 
----
+**Hoàn tất khi:** mọi yêu cầu trong phạm vi đã được đặc tả hoặc đánh giá, mọi khoảng trống và xung đột được ghi nhận, không có lựa chọn từ biểu mẫu bị coi là quyết định đã xác nhận.
 
-## 2. Yêu cầu chức năng (Functional Requirements) — Specification by FR
+### Bước 5: Kiểm tra và xác định trạng thái
 
-*[Mỗi yêu cầu chức năng từ PRD được mở rộng thành đặc tả kỹ thuật. Format: FR-[mã] từ PRD → SRS-[mã] tương ứng.]*
+Áp dụng toàn bộ checklist cho mọi yêu cầu và phần trong phạm vi. Ghi mã mục, vị trí/SRS, kết quả, căn cứ và hướng xử lý; dùng trạng thái và quy tắc không áp dụng trong checklist. [Phiếu rà soát nhanh](./checklists/quick-checklist-srs-1page.md) chỉ hỗ trợ ghi nhận, không thay thế kiểm tra đầy đủ.
 
-### 2.1 [Nhóm chức năng / Module]
+Trong nhánh chỉnh sửa, sửa vấn đề giải quyết được từ nguồn rồi kiểm tra lại các phần bị ảnh hưởng. Nếu còn thiếu quyết định/bằng chứng về nội dung yêu cầu, dừng với Draft và câu hỏi; nếu chỉ chờ phê duyệt, dùng trạng thái theo checklist. Rà soát chỉ đề xuất sửa và trạng thái.
 
-**FR-[mã] nguồn:** [Tên FR từ PRD]
+**Hoàn tất khi:** mọi mục checklist đã có kết quả có căn cứ; mỗi vấn đề được xử lý, chuyển thành câu hỏi hoặc ghi ngoài phạm vi; trạng thái không hàm ý đã kiểm thử hay được duyệt.
 
-**SRS-[mã]:** [Tên yêu cầu]
+### Bước 6: Bàn giao theo nhánh
 
-**Mô tả ngắn:** [1-2 câu mô tả interface chính]
+- **Viết mới:** SRS, RTM, kết quả kiểm tra và câu hỏi/người cần xác nhận.
+- **Cập nhật:** các nội dung trên cùng tóm tắt thay đổi, mã giữ/thêm/ngừng dùng và tác động chưa được xử lý ngoài phạm vi.
+- **Chỉ rà soát:** kết luận ngắn, phát hiện theo ảnh hưởng, vị trí/bằng chứng, đề xuất và giới hạn kiểm tra; trạng thái chỉ là khuyến nghị.
 
-**Nguồn:** [FR-[mã] trong PRD / Use Case UC-XX / Yêu cầu từ stakeholder]
+Mặc định Markdown, theo định dạng người dùng đã yêu cầu nếu khác. Chỉ sửa tệp hoặc xuất sang hệ thống khác trong phạm vi cho phép. Nếu chỉ xử lý một phần SRS, nêu rõ phần đã kiểm tra; không kết luận toàn bộ tài liệu đã đạt.
 
-#### 2.1.1 Giao diện (Interface)
+**Hoàn tất khi:** người dùng phân biệt được phần đã xác nhận, phần còn mở, thay đổi thực tế và bước bàn giao tiếp theo.
 
-**API Endpoint (nếu có):**
+## Bàn giao sang tài liệu liên quan
 
-| Phương thức | Đường dẫn | Mô tả |
-| :--- | :--- | :--- |
-| [GET/POST/PUT/DELETE] | [/api/...] | [Mô tả chức năng] |
+Chỉ đề xuất mở rộng khi cần; không tự chạy thêm quy trình:
 
-**Request:**
-
-```json
-{
-  "[field_name]": {
-    "type": "[string/number/boolean/array/object]",
-    "required": [true/false],
-    "description": "[mô tả ý nghĩa]"
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "data": {
-    "[field_name]": { "type": "...", "description": "..." }
-  },
-  "meta": {
-    "status": "[success/error]",
-    "message": "[string]"
-  }
-}
-```
-
-**Mã lỗi (Error Codes):**
-
-| Mã lỗi | HTTP Status | Nội dung | Nguyên nhân |
-| :--- | :--- | :--- | :--- |
-| [ERR-XXX] | [4xx/5xx] | [Mô tả] | [Nguyên nhân] |
-
-#### 2.1.2 Mô hình dữ liệu (Data Model)
-
-**Entity: [Tên]**
-
-| Thuộc tính | Kiểu dữ liệu | Ràng buộc | Mô tả |
-| :--- | :--- | :--- | :--- |
-| [field_name] | [VARCHAR(255)/INTEGER/BOOLEAN/TIMESTAMP...] | [NOT NULL / UNIQUE / FK...] | [Mô tả] |
-
-**Index:**
-
-- Primary Key: [field_name]
-- Foreign Key: [field_name] → [related_table.primary_key]
-- Indexes: [field_name(s)]
-
-#### 2.1.3 Quy tắc xử lý (Processing Rules)
-
-[Các quy tắc nghiệp vụ được triển khai dưới dạng thuật toán hoặc luồng xử lý cụ thể. Đây là bản dịch kỹ thuật của quy tắc nghiệp vụ trong FR.]
-
-#### 2.1.4 Ràng buộc và giả định kỹ thuật
-
-| Loại | Nội dung |
-| :--- | :--- |
-| [Ràng buộc kỹ thuật] | [VD: Input phải sanitize trước khi lưu vào database] |
-| [Giả định kỹ thuật] | [VD: Timestamp dùng UTC, timezone convert ở presentation layer] |
-
----
-
-## 3. Yêu cầu phi chức năng (Non-Functional Requirements)
-
-*[Từ NFR trong PRD, chuyển thành tiêu chí kỹ thuật cụ thể.]*
-
-### 3.1 Hiệu suất
-
-| Tiêu chí | Ngưỡng | Điều kiện đo | Phương pháp đo |
-| :--- | :--- | :--- | :--- |
-| Thời gian phản hồi | [VD: p95 < 200ms] | [API cụ thể] | [Benchmark tool] |
-| Thông lượng | [VD: 1000 req/s] | [Load test với N users] | [k6 / Gatling] |
-
-### 3.2 Bảo mật
-
-| Tiêu chí | Yêu cầu kỹ thuật | Chuẩn tham chiếu |
-| :--- | :--- | :--- |
-| Xác thực | [VD: JWT với RS256, expiry 8h, refresh token 7d] | [OAuth 2.0 / JWT RFC 7519] |
-| Phân quyền | [VD: RBAC với JWT claims] | [NIST RBAC] |
-| Mã hóa | [VD: TLS 1.3, data at rest AES-256] | [FIPS 140-2] |
-| Input validation | [VD: whitelist + sanitize, parameterized queries] | [OWASP Top 10] |
-
-### 3.3 Khả dụng
-
-| Tiêu chí | Yêu cầu |
-| :--- | :--- |
-| Uptime | [VD: 99.5% / tháng] |
-| RPO | [Recovery Point Objective — VD: 1 giờ] |
-| RTO | [Recovery Time Objective — VD: 4 giờ] |
-
-### 3.4 Khả năng mở rộng
-
-[Các chiến lược mở rộng: horizontal scaling, sharding, caching strategy...]
-
-### 3.5 Khả năng tương thích
-
-[Các platform, trình duyệt, phiên bản library tối thiểu được hỗ trợ.]
-
----
-
-## 4. Giao diện hệ thống (System Interface)
-
-### 4.1 Giao diện người dùng (User Interface)
-
-*[Mô tả màn hình chính, không phải chi tiết UX — đó là việc của designer.]*
-
-| Màn hình | Mô tả | FR liên quan |
-| :--- | :--- | :--- |
-| [Tên màn hình] | [Chức năng chính] | FR-[mã] |
-
-### 4.2 Giao diện phần cứng (Hardware Interface)
-
-[Nếu có giao tiếp phần cứng đặc biệt.]
-
-### 4.3 Giao diện phần mềm (Software Interface)
-
-[Tích hợp với hệ thống bên ngoài — ghi rõ contract. Provider chỉ được ghi nếu đã có trong PRD/FR hoặc đã được xác nhận.]
-
-| Hệ thống | Chức năng tích hợp | Contract (API / Message format) | Trạng thái xác nhận |
-| :--- | :--- | :--- | :--- |
-| [VD: MoMo Payment Gateway, nếu đã có trong PRD] | [Tạo yêu cầu thanh toán, nhận webhook] | [Request/response JSON schema] | [Đã xác nhận / CHƯA XÁC ĐỊNH] |
-
-### 4.4 Giao diện truyền thông (Communication Interface)
-
-[Các giao thức truyền thông: HTTP/REST, gRPC, WebSocket, message queue...]
-
----
-
-## 5. Ma trận truy xuất yêu cầu (Requirements Traceability Matrix)
-
-**Quy tắc: Mỗi phần tử trong SRS phải truy xuất về ít nhất 1 FR trong PRD.**
-
-| SRS-[mã] | Tên | Loại | FR nguồn | Độ ưu tiên | Ghi chú |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SRS-001 | [Tên] | [API / Data Model / Processing Rule] | FR-001, FR-003 | [P0/P1/P2] | [Ghi chú] |
-
----
-
-## 6. Nhật ký quyết định kiến trúc (Architecture Decision Records)
-
-*[Ghi lại các quyết định kỹ thuật cục bộ phục vụ FR. Không dùng phần này để thiết kế service decomposition, deployment topology hoặc scaling architecture tổng thể; các nội dung đó thuộc ADD.]*
-
-| ADR-[mã] | Quyết định | Bối cảnh | Lựa chọn | Hệ quả |
-| :--- | :--- | :--- | :--- | :--- |
-| ADR-001 | [VD: Chọn PostgreSQL thay vì MySQL] | [Lý do cần đặt ra] | [Lựa chọn đã chọn] | [Ưu điểm / Nhược điểm] |
-
----
-
-## 7. Phụ lục
-
-### 7.1 Từ điển dữ liệu (Data Dictionary)
-
-[Bảng giải thích chi tiết từng trường dữ liệu nếu cần thiết cho đội phát triển.]
-
-### 7.2 Tài liệu tham khảo
-
-- [Tài liệu 1 — đường dẫn]
-- [Tài liệu 2 — đường dẫn]
-
-````
-
-### Bước 4: Áp dụng các quy tắc giới hạn (Guardrails)
-
-**Tuyệt đối KHÔNG được làm trong SRS:**
-
-| Hành động bị cấm | Lý do | Xử lý thay thế |
-| :--- | :--- | :--- |
-| Tự chọn tech stack (framework, database, cloud) khi chưa được xác nhận | Quyết định này thuộc về kiến trúc sư / đội ngũ | Ghi `[CHƯA XÁC ĐỊNH: cần xác nhận]` |
-| Thêm chức năng không có trong PRD/FR | SRS phục vụ FR, không phải nơi mở rộng phạm vi | Tạo FR mới trong PRD trước |
-| Viết 20+ API endpoints cho 1 tính năng nhỏ | Over-engineering, lãng phí | Chỉ mô tả interface cần thiết cho FR |
-| Thiết kế chi tiết kiến trúc microservices, service decomposition | Đó là Architecture Design Document, không phải SRS | Tạo ADD hoặc ADR ở tài liệu kiến trúc riêng |
-| Đề xuất third-party services không được nêu trong PRD | Mở rộng phạm vi không kiểm soát | Chỉ ghi tích hợp đã có trong PRD |
-| Viết CI/CD pipeline, deployment strategy, monitoring setup | Đó là DevOps/SRE document, không phải SRS | Tạo tài liệu riêng |
-
-### Bước 5: Tự đánh giá theo checklist chất lượng
-
-Trước khi trình bày kết quả, tự kiểm tra theo **SRS Quality Checklist** 20 điểm (xem [quality-checklist-srs.md](./checklists/quality-checklist-srs.md)). Không dùng danh sách rút gọn làm tiêu chí bàn giao.
-
-**Tóm tắt checklist chất lượng SRS:**
-
-| # | Phần | Tiêu chí quan trọng | Điểm |
-| :--- | :--- | :--- | :--- |
-| 1 | Nguồn gốc yêu cầu | Mỗi SRS-[mã] có FR nguồn **[CRITICAL]**, có RTM liên kết SRS ↔ FR **[CRITICAL]**, không có SRS mồ côi **[CRITICAL]** | /3 |
-| 2 | Giao diện kỹ thuật | API có request/response schema + error code; Data model có field + constraint + index | /5 |
-| 3 | Yêu cầu phi chức năng | Mỗi NFR có ngưỡng đo được **[CRITICAL]** + điều kiện đo + phương pháp đo **[CRITICAL]** | /3 |
-| 4 | Giới hạn phạm vi | Không tự chọn tech stack **[CRITICAL]**, không mở rộng ngoài FR **[CRITICAL]**, không có CI/CD **[CRITICAL]**, không có microservices design **[CRITICAL]** | /4 |
-| 5 | Tích hợp hệ thống | Mỗi tích hợp có contract rõ, không thêm third-party ngoài PRD **[CRITICAL]** | /2 |
-| 6 | Quyết định kiến trúc | ADR cho FR cục bộ; quyết định kiến trúc tổng thể chuyển sang ADD | /1 |
-| 7 | Chất lượng tài liệu | Thuật ngữ định nghĩa rõ, mọi `[CHƯA XÁC ĐỊNH]` được ghi nhận **[CRITICAL]** | /2 |
-| **Tổng** | | | **/20** |
-
-**Ngưỡng bàn giao:** 18/20 (90%) và tất cả mục `[CRITICAL]` phải đạt.
-
-Các mục critical bắt buộc đạt:
-
-- [ ] Mỗi SRS-[mã] có FR nguồn được ghi rõ?
-- [ ] Không có tech stack được tự chọn (hoặc đã được đánh dấu CHƯA XÁC ĐỊNH)?
-- [ ] Không có chức năng nào vượt quá phạm vi FR trong PRD?
-- [ ] Ma trận truy xuất đầy đủ — không có SRS phần tử "mồ côi"?
-- [ ] Không có CI/CD, deployment, monitoring trong SRS?
-- [ ] Không có service decomposition, microservices design?
-- [ ] Mỗi NFR có tiêu chí đo lường được (số cụ thể, điều kiện đo, phương pháp đo).
-
-### Bước 6: Trình bày kết quả
-
-1. **SRS hoàn chỉnh** — theo cấu trúc ở Bước 3.
-2. **Ma trận truy xuất** — RTM liên kết SRS ↔ FR.
-3. **Bảng tự kiểm tra chất lượng** — trạng thái Đạt / Cần cải thiện cho các mục critical và điểm tổng theo checklist 20 điểm.
-4. **Nhật ký quyết định kỹ thuật cục bộ** — ADR chỉ cho lựa chọn phục vụ FR cụ thể.
-5. **Xác nhận bàn giao** — nêu rõ các `[CHƯA XÁC ĐỊNH]` còn cần đội ngũ xác nhận.
-
-## Mẫu chống lại thiết kế chuẩn (Anti-patterns)
-
-| Sai | Đúng |
-| :--- | :--- |
-| Tự chọn tech stack: "Dùng Node.js + PostgreSQL + Redis" | Ghi `[CHƯA XÁC ĐỊNH]` hoặc xác nhận với đội ngũ |
-| Tạo 84 endpoints cho 3 FR | Chỉ mô tả interface cần thiết cho FR |
-| FR mô tả "gửi email xác nhận" nhưng SRS tự chọn SendGrid API | Ghi "email service integration"; provider chỉ ghi nếu đã được xác nhận |
-| SRS mà không có PRD/FR nguồn | Hỏi người dùng: có PRD/FR/Use Case làm nguồn không? |
-| Microservices design hoặc deployment topology trong SRS | Chuyển sang ADD hoặc ADR kiến trúc riêng |
-| CI/CD pipeline, deployment strategy, monitoring setup trong SRS | Tạo tài liệu DevOps/SRE riêng |
-| Không có RTM | Mỗi SRS-[mã] liên kết về FR-[mã] |
-
-## Tài liệu tham khảo liên quan
-
-**Templates & Reference:**
-
-- [srs-template.md](./references/srs-template.md) — Biểu mẫu SRS đầy đủ theo cấu trúc IEEE 830 / ISO/IEC/IEEE 29148.
-- [prd-vs-srs.md](../cc-prd-writer/references/prd-vs-srs.md) — Tài liệu phân biệt chi tiết PRD và SRS.
-
-**SRS mẫu thực tế:**
-
-- *Hiện chưa có file example đính kèm. Tham khảo template đầy đủ ở `srs-template.md` và checklist ở `quality-checklist-srs.md`.*
-
-**Checklists:**
-
-- [quality-checklist-srs.md](./checklists/quality-checklist-srs.md) — Danh mục tự kiểm tra 20 điểm chất lượng SRS trước khi bàn giao.
-- [quick-checklist-srs-1page.md](./checklists/quick-checklist-srs-1page.md) — Checklist 1 trang ngắn gọn, dùng khi review nhanh. Có thể in ra paper.
-
-**Skills liên quan:**
-
-- **RELATED SKILL:** `cc-use-case-writer` — Dùng khi cần chuyển Use Case (Karl Wiegers 13 trường) thành SRS.
-  - Tham chiếu: [examples.md](../cc-use-case-writer/references/examples.md) — 2 Use Case mẫu (Create Project, Assign Task) — input cho SRS Mode B.
-  - Tham chiếu: [template-guide.md](../cc-use-case-writer/references/template-guide.md) — Hướng dẫn chi tiết 13 trường Use Case.
-- **RELATED SKILL:** `cc-prd-writer` — Dùng để tạo PRD trước khi chuyển sang SRS.
-  - Tham chiếu: [prd-template.md](../cc-prd-writer/references/prd-template.md) — PRD template — FR trong PRD là input cho SRS Mode A.
-- **RELATED SKILL:** `cc-user-story-acceptance-criteria-writer` — Dùng khi cần bổ sung User Story ở tầng PRD / Sprint planning; SRS chỉ tham chiếu nếu User Story đã có.
+- [PRD](../cc-prd-writer/references/prd-template.md): làm rõ phạm vi/ưu tiên sản phẩm còn thiếu.
+- [User Story + AC](../cc-user-story-acceptance-criteria-writer/SKILL.md): làm rõ mục tiêu người dùng và kịch bản nghiệm thu.
+- [Use Case](../cc-use-case-writer/references/template-guide.md): làm rõ tương tác và các luồng còn thiếu.
+- [Test Case](../cc-test-case-writer/SKILL.md): tạo ca kiểm thử từ mã SRS, contract và kết quả đã xác nhận; không coi việc soạn ca kiểm thử là đã thực thi.
+- ADD / nhật ký quyết định kiến trúc (ADR): nơi phân tích lựa chọn triển khai; trong SRS chỉ dẫn ràng buộc hoặc quyết định đã xác nhận có ảnh hưởng đến yêu cầu.

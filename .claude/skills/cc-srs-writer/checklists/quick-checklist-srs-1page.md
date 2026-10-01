@@ -1,94 +1,45 @@
 # SRS Quick Checklist — 1 trang
 
-> Dùng khi review SRS trước khi bàn giao. In ra hoặc mở trên màn hình thứ hai.
+> Phiếu ghi nhận cho buổi rà soát nhanh, không phải checklist chấm điểm thứ hai. Đọc [checklist đầy đủ](./quality-checklist-srs.md) để áp dụng từng mục và trạng thái; rà soát nhanh chưa đủ để kết luận toàn bộ SRS đạt.
 
 ---
 
-## ✅ CRITICAL (Phải đạt 100%)
+## Phạm vi buổi rà soát
 
-| ✓ | Mục tiêu | Cách kiểm tra |
-| :---: | :--- | :--- |
-| ☐ | **Mỗi SRS-[mã] có FR nguồn** | CTRL+F tìm "FR-" — mỗi SRS phần tử phải ghi rõ FR-[mã] nguồn |
-| ☐ | **RTM đầy đủ** | Section 5: mọi SRS-[mã] đều có trong bảng RTM, không mồ côi |
-| ☐ | **Không tự chọn tech stack** | CTRL+F tìm "Dùng framework", "Sử dụng PostgreSQL/MySQL", "Cloud provider" — nếu có mà chưa confirm → ghi `[CHƯA XÁC ĐỊNH]` |
-| ☐ | **Không mở rộng ngoài FR PRD** | So sánh mỗi SRS-[mã] với FR trong PRD — nếu có SRS không có FR nguồn → SAI |
-| ☐ | **Không có CI/CD, deployment, monitoring** | CTRL+F tìm "pipeline", "deployment", "monitoring", "Prometheus", "Grafana" — nếu tìm thấy → SAI |
-| ☐ | **Không có microservices design** | CTRL+F tìm "microservice", "service decomposition", "service mesh" — nếu tìm thấy → SAI |
-| ☐ | **Mỗi NFR có ngưỡng đo được** | CTRL+F tìm "nhanh", "mạnh", "ổn định" — nếu có mà không đi kèm số cụ thể → SAI |
-| ☐ | **Mọi `[CHƯA XÁC ĐỊNH]` được ghi nhận** | CTRL+F tìm "CHƯA XÁC ĐỊNH" — liệt kê đầy đủ, không được lẫn trong nội dung chính |
+- **SRS / phiên bản:** [Tài liệu]
+- **Nguồn đã đối chiếu:** [PRD/FR, US/AC, UC, chính sách hoặc mô tả trực tiếp]
+- **Phần đã kiểm tra / chưa kiểm tra:** [Phạm vi]
+- **Yêu cầu:** [Chỉ nhận xét / Được chỉnh phần nào]
+- **Người rà soát / ngày:** [Thông tin thực tế]
 
 ---
 
-## 📋 KIỂM TRA NHANH 7 PHẦN
+## Chỉ mục kiểm tra
 
-### 1. Nguồn gốc yêu cầu (3 điểm)
+Dùng mã mục để tra checklist đầy đủ. Đối chiếu nội dung và bằng chứng; tìm từ khóa chỉ giúp xác định vị trí, không thay thế kết luận.
 
-- ☐ Mỗi SRS-[mã] có FR-[mã] nguồn ghi rõ
-- ☐ Có RTM liên kết SRS ↔ FR đầy đủ
-- ☐ Không có SRS phần tử "mồ côi"
-
-### 2. Giao diện kỹ thuật (5 điểm)
-
-- ☐ Mỗi API có request schema đầy đủ (field, type, required)
-- ☐ Mỗi API có response schema (data + meta)
-- ☐ Mỗi API có mã lỗi (error code + HTTP status + nguyên nhân)
-- ☐ Data model có đầy đủ field + kiểu + ràng buộc
-- ☐ Indexes ghi rõ (PK, FK, additional)
-
-### 3. NFR (3 điểm)
-
-- ☐ Mỗi NFR có ngưỡng cụ thể (số đo được)
-- ☐ Mỗi NFR có điều kiện đo + phương pháp đo
-- ☐ NFR phân biệt rõ 5 loại: Performance, Security, Availability, Scalability, Compatibility
-
-### 4. Giới hạn phạm vi (4 điểm)
-
-- ☐ Không có tech stack tự chọn
-- ☐ Không có chức năng vượt FR trong PRD
-- ☐ Không có CI/CD, deployment, monitoring
-- ☐ Không có microservices, service decomposition
-
-### 5. Tích hợp hệ thống (2 điểm)
-
-- ☐ Mỗi tích hợp có contract rõ (API/message format)
-- ☐ Không thêm third-party ngoài PRD
-
-### 6. Quyết định kiến trúc (1 điểm)
-
-- ☐ ADR cho FR cục bộ; quyết định tổng thể chuyển ADD
-
-### 7. Chất lượng tài liệu (2 điểm)
-
-- ☐ Thuật ngữ/từ viết tắt định nghĩa trong Section 1.3
-- ☐ Mọi tech choice chưa confirm có `[CHƯA XÁC ĐỊNH]`
+| Mục trong checklist | Phần cần mở                                  | Kết quả / Tham chiếu phát hiện |
+| ------------------- | -------------------------------------------- | ------------------------------ |
+| 1.1–1.3             | Nguồn, mã yêu cầu, RTM hai chiều             | [Ghi nhận]                     |
+| 2.1–2.5             | Hành vi, contract, dữ liệu và tính nhất quán | [Ghi nhận]                     |
+| 3.1–3.3             | NFR, điều kiện và phương pháp kiểm tra       | [Ghi nhận]                     |
+| 4.1–4.4             | Ràng buộc, phạm vi, vận hành và thiết kế     | [Ghi nhận]                     |
+| 5.1–5.2             | Tích hợp và trách nhiệm các bên              | [Ghi nhận]                     |
+| 6.1                 | Quyết định, phiên bản và tác động thay đổi   | [Ghi nhận]                     |
+| 7.1–7.2             | Thuật ngữ, câu hỏi và trạng thái             | [Ghi nhận]                     |
 
 ---
 
-## 🎯 TÓM TẮT ĐIỂM
+## Phát hiện và hành động
 
-| Phần | Điểm |
-| :--- | :--- |
-| 1. Nguồn gốc yêu cầu | ☐☐☐ /3 |
-| 2. Giao diện kỹ thuật | ☐☐☐☐☐ /5 |
-| 3. NFR | ☐☐☐ /3 |
-| 4. Giới hạn phạm vi | ☐☐☐☐ /4 |
-| 5. Tích hợp hệ thống | ☐☐ /2 |
-| 6. Quyết định kiến trúc | ☐ /1 |
-| 7. Chất lượng tài liệu | ☐☐ /2 |
-| **Tổng** | **☐/20** |
+| Mã mục / SRS | Bằng chứng           | Ảnh hưởng                  | Đề xuất / Người cần xác nhận |
+| ------------ | -------------------- | -------------------------- | ---------------------------- |
+| [Mã]         | [Vị trí và nội dung] | [Rủi ro hoặc khoảng trống] | [Hành động]                  |
 
-**Ngưỡng bàn giao:** ≥ 18/20 (90%) + TẤT CẢ CRITICAL phải đạt.
+**Kết luận:** [Giới hạn kiểm tra; trạng thái đề xuất theo checklist đầy đủ nếu đủ căn cứ].
 
 ---
 
-## ⚡ SAI LẦM THƯỜNG GẶP
+## Bàn giao ghi nhận
 
-| ❌ Sai | ✅ Đúng |
-| :--- | :--- |
-| "Dùng Node.js + PostgreSQL" | Ghi `[CHƯA XÁC ĐỊNH]` hoặc xác nhận |
-| Tạo 84 endpoints cho 3 FR | Chỉ mô tả interface cần thiết cho FR |
-| "Gửi email qua SendGrid API" | Ghi "email service integration" — provider chỉ ghi nếu confirm |
-| Microservices design trong SRS | Chuyển sang ADD hoặc ADR riêng |
-| CI/CD pipeline, deployment trong SRS | Tạo tài liệu DevOps/SRE riêng |
-| SRS không có PRD/FR nguồn | Hỏi: có PRD/FR/Use Case làm nguồn không? |
-| NFR: "Hệ thống phải nhanh" | NFR: "p95 < 200ms, measure bằng k6, load test 50 users" |
+Nêu phần chưa kiểm tra và các câu hỏi còn mở. Chuyển sang checklist đầy đủ trước khi đề xuất trạng thái toàn bộ tài liệu; nếu chỉ được nhận xét, trả phiếu này mà không sửa SRS.

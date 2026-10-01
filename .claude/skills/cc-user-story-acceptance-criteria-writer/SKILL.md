@@ -1,171 +1,97 @@
 ---
 name: cc-user-story-acceptance-criteria-writer
 description: |
-  Sinh câu chuyện người dùng (User Story) chuẩn 06 tiêu chí INVEST và tiêu chí nghiệm thu (Acceptance Criteria) dạng Given-When-Then (Gherkin) cho chuyên viên phân tích nghiệp vụ (Business Analyst) và chủ sở hữu sản phẩm (Product Owner).
-  Hỗ trợ 3 chế độ: Viết mới, Tinh chỉnh (Refine) và Bổ sung tiêu chí nghiệm thu (Acceptance Criteria).
-
-  KÍCH HOẠT khi người dùng yêu cầu: viết, tạo, đánh giá (review), tối ưu hoặc chia nhỏ câu chuyện người dùng (User Story) hoặc tiêu chí nghiệm thu (Acceptance Criteria).
-  Kể cả khi người dùng dán mô tả tính năng hoặc tải tài liệu yêu cầu sản phẩm (Product Requirements Document - PRD) để yêu cầu sinh danh sách câu chuyện người dùng (User Story).
-
-  KHÔNG DÙNG ĐỂ: viết toàn bộ tài liệu yêu cầu sản phẩm (Product Requirements Document - PRD) hay tài liệu đặc tả yêu cầu phần mềm (Software Requirement Specification - SRS) (dùng các công cụ prd-writer, srs-writer), viết kịch bản kiểm thử (test case) kỹ thuật chi tiết, viết trường hợp sử dụng chuẩn tắc (Use Case formal) (dùng po-usecase-refiner), hay thiết kế quy luật nghiệp vụ (Business Rules) (dùng business-rule-generator).
+  User Story và Acceptance Criteria: dùng khi cần viết từ mô tả tính năng hoặc PRD,
+  rà soát story hiện có, tinh chỉnh/chia nhỏ story, hoặc bổ sung kịch bản Given-When-Then.
+  Áp dụng INVEST và giữ liên kết với yêu cầu nguồn; dùng khi skill PRD cần bàn giao sang User Story.
 ---
 
 # User Story & Acceptance Criteria Writer
 
-## Mục đích
+## Mục đích và ranh giới
 
-Hỗ trợ chuyên viên phân tích nghiệp vụ (Business Analyst) và chủ sở hữu sản phẩm (Product Owner) soạn thảo câu chuyện người dùng (User Story) chuẩn 06 tiêu chí INVEST và tiêu chí nghiệm thu (Acceptance Criteria) dạng Gherkin chất lượng cao, sẵn sàng cho lập trình viên (Developer) ước lượng thời gian triển khai (estimate) và kiểm thử viên (Tester) viết kịch bản kiểm thử (test case).
+User Story (US) diễn đạt **ai cần làm gì và vì sao**. Acceptance Criteria (AC, tiêu chí nghiệm thu) mô tả hành vi để xác định yêu cầu đã được đáp ứng hay chưa. Dùng ngôn ngữ nghiệp vụ dễ hiểu cho học viên không biết lập trình; giữ các nhãn As a / I want to / So that và Given / When / Then.
 
-## Quy trình thực hiện (Workflow)
+Skill này soạn hoặc đánh giá yêu cầu, không thực hiện tính năng hay chứng nhận sản phẩm đã được kiểm thử. Giữ quyết định về cách xây dựng bên ngoài US và AC.
 
-### Bước 1: Xác định chế độ (Mode)
+## Quy trình thực hiện
 
-Hỏi người dùng hoặc tự suy luận từ nội dung cung cấp (sau đó xác nhận lại):
+### Bước 1: Chọn nhánh theo yêu cầu
 
-- **Chế độ A (Viết mới)**: Người dùng cung cấp mô tả tính năng -> Sinh mới câu chuyện người dùng (User Story) và tiêu chí nghiệm thu (Acceptance Criteria).
-- **Chế độ B (Tinh chỉnh - Refine)**: Đã có sẵn câu chuyện người dùng (User Story) hoặc tiêu chí nghiệm thu (Acceptance Criteria) -> Đánh giá và đề xuất cải tiến.
-- **Chế độ C (Bổ sung tiêu chí nghiệm thu)**: Đã có sẵn câu chuyện người dùng (User Story) -> Sinh thêm tiêu chí nghiệm thu (Acceptance Criteria) chi tiết.
+| Yêu cầu                        | Cách xử lý                                            |
+| ------------------------------ | ----------------------------------------------------- |
+| Viết mới từ tính năng hoặc PRD | Tạo US + AC theo phạm vi nguồn                        |
+| Chỉ rà soát                    | Nêu phát hiện, căn cứ và đề xuất; giữ nguyên tài liệu |
+| Tinh chỉnh hoặc chia nhỏ       | Sửa phần được yêu cầu; giữ mã và quy tắc đã xác nhận  |
+| Bổ sung AC                     | Giữ US và AC hiện có; thêm các kịch bản còn thiếu     |
 
-### Bước 2: Thu thập thông tin đầu vào
+Khi yêu cầu đã rõ, tiếp tục ngay. Chỉ hỏi lại nếu chưa phân biệt được người dùng muốn nhận xét hay sửa tài liệu.
 
-Đảm bảo thu thập đủ 4 thông tin sau trước khi thực hiện (tuyệt đối không tự suy diễn nếu thiếu):
+**Hoàn tất khi:** xác định nhánh, tài liệu nguồn và các US/tính năng trong phạm vi.
 
-1. **Persona/User type (Đối tượng sử dụng)**: Ai sử dụng tính năng? (Quản lý dự án (Project Manager), Thành viên nhóm (Team Member), Người giám sát (Supervisor), Khách hàng (Client), Quản trị viên (Admin)...)
-2. **Goal (Mục tiêu)**: Người dùng muốn thực hiện hành động gì?
-3. **Business value (Giá trị nghiệp vụ)**: Tại sao cần tính năng này? (Giá trị mang lại cho sản phẩm hoặc doanh nghiệp)
-4. **Context/Scope (Ngữ cảnh/Phạm vi)**: Tính năng nằm trong phân hệ hoặc module nào?
+### Bước 2: Làm rõ đầu vào và nguồn
 
-### Bước 3: Sinh câu chuyện người dùng theo mẫu
+Đọc nội dung đã có; chỉ hỏi phần còn thiếu, tối đa ba câu mỗi lượt:
 
-Áp dụng định dạng 3 thành phần chuẩn:
+- **Đối tượng:** Ai sử dụng và trong hoàn cảnh nào?
+- **Mục tiêu:** Họ muốn thực hiện hành động gì?
+- **Giá trị:** Kết quả đó giúp ích gì?
+- **Phạm vi:** Điều kiện áp dụng, quy tắc nghiệp vụ, phần bao gồm và không bao gồm?
 
-```markdown
-**Câu chuyện người dùng US-[Mã số]**: [Tiêu đề ngắn gọn]
+Ghi mã yêu cầu chức năng (FR) nếu có PRD; nếu không, ghi nguồn là mô tả người dùng hoặc tài liệu đã cung cấp. Giữ nguyên mã nguồn, số liệu và quy tắc đã xác nhận. Với thông tin mâu thuẫn, nêu hai nguồn và câu hỏi cần quyết định.
 
-**As a** [Đối tượng sử dụng cụ thể, không dùng từ chung chung như "user"]
-**I want to** [Hành động cụ thể, có thể đo lường được]
-**So that** [Giá trị thực tế mang lại, không lặp lại phần I want]
-```
+- **Chỉ rà soát:** vẫn đánh giá phần đã có; liệt kê thông tin thiếu như phát hiện, không bắt người dùng bổ sung trước khi được nhận kết quả.
+- **Soạn thảo:** nếu thiếu thông tin làm thay đổi hành vi, hỏi và dừng tại câu hỏi. Khi người dùng yêu cầu bản nháp, dùng `[CẦN XÁC NHẬN: ...]` và trạng thái Draft.
+- Chỉ đề xuất giả định khi được cho phép; đánh dấu rõ. Không biến ví dụ thành quy tắc thật, tự đặt ngưỡng, ước lượng hoặc tên người phê duyệt.
 
-### Bước 4: Kiểm tra theo chuẩn 06 tiêu chí INVEST
+**Hoàn tất khi:** mỗi đầu vào có nguồn hoặc được đánh dấu chưa rõ; kết quả là đủ thông tin để tiếp tục, bản nháp được yêu cầu, hoặc câu hỏi cần trả lời.
 
-Tự đánh giá câu chuyện người dùng (User Story) trước khi phản hồi dựa trên bảng sau:
+### Bước 3: Xác định phạm vi từng story
 
-| Tiêu chí | Câu hỏi tự kiểm tra | Cách xử lý nếu không đạt |
-| :--- | :--- | :--- |
-| **I**ndependent (Độc lập) | Câu chuyện người dùng có phụ thuộc vào câu chuyện khác không? | Tách sự phụ thuộc hoặc gộp các câu chuyện |
-| **N**egotiable (Thương lượng) | Có chỗ cho việc thảo luận và thương lượng không? | Lược bỏ các chi tiết kỹ thuật cứng nhắc |
-| **V**aluable (Giá trị) | Mang lại giá trị thực tế gì cho người dùng hoặc doanh nghiệp? | Viết lại phần **So that** rõ ràng hơn |
-| **E**stimable (Ước lượng) | Đội ngũ phát triển có ước lượng được nỗ lực triển khai không? | Bổ sung ngữ cảnh và các ràng buộc |
-| **S**mall (Nhỏ gọn) | Có thể hoàn thành trong một chu kỳ phát triển (Sprint) không? | Chia nhỏ thành các câu chuyện độc lập khác |
-| **T**estable (Kiểm thử được) | Kiểm thử viên có thể viết kịch bản kiểm thử tương ứng không? | Bổ sung tiêu chí nghiệm thu cụ thể, đo lường được |
+Với bản nháp mới hoặc cần chỉnh, đọc [biểu mẫu trống](./templates/user-story-template-blank.md). Đọc [hướng dẫn INVEST](./references/invest-criteria.md) khi đánh giá sáu tiêu chí hoặc cân nhắc phân rã; phần **S — Small** là nguồn quy tắc phân rã.
 
-*(Chi tiết xem tại [invest-criteria.md](./references/invest-criteria.md))*
+Giữ mã US và AC hiện có. Khi tạo mới, dùng quy ước dự án; nếu chưa có, dùng `US-[MÃ_TÍNH_NĂNG]-[SỐ]`, với AC dạng `US-.../AC-01`. Khi chia nhỏ, ghi ánh xạ US cũ → các US mới; không âm thầm xóa hoặc tái sử dụng mã cũ.
 
-### Bước 5: Sinh tiêu chí nghiệm thu (Acceptance Criteria)
+Với nhiều FR, lập bảng `Nguồn/FR | US | Tình trạng bao phủ | Câu hỏi`. Mọi yêu cầu trong phạm vi phải được ánh xạ hoặc nêu lý do chưa xử lý. Mã mới do AI đề xuất phải phân biệt với mã có sẵn trong nguồn.
 
-Đảm bảo **tối thiểu 3 tiêu chí nghiệm thu** định dạng Gherkin (Given-When-Then) bao quát: Kịch bản thông thường (tiêu chí nghiệm thu 1), Trường hợp biên hoặc xác thực nghiệp vụ (tiêu chí nghiệm thu 2), và Luồng xử lý lỗi (tiêu chí nghiệm thu 3).
+**Hoàn tất khi:** mọi US đã được xác định mục tiêu, mã và nguồn, hoặc ghi rõ phần thiếu/mâu thuẫn để rà soát hay bàn giao Draft; mọi yêu cầu nguồn đều có ánh xạ hoặc lý do chưa xử lý. Với nhánh chỉ rà soát, ghi nhận thiếu sót là đủ để chuyển bước, không sửa nguồn để đạt điều kiện này.
 
-```markdown
-**Tiêu chí nghiệm thu [số thứ tự]: [Tên kịch bản (Scenario)]**
-- **Given** [Tiền điều kiện cụ thể]
-- **When** [Hành động kích hoạt của người dùng]
-- **Then** [Kết quả mong đợi hoặc đầu ra đo lường được]
-- **And** [Kết quả phụ đi kèm (nếu có)]
-```
+### Bước 4: Soạn hoặc đánh giá US + AC
 
-**Nguyên tắc viết tiêu chí nghiệm thu:**
+Bản soạn dùng biểu mẫu ở Bước 3. Bản rà soát đối chiếu nội dung hiện có, không tự viết đè.
 
-- **Đo lường được:** Tránh từ ngữ mơ hồ như "nhanh", "đẹp", "hợp lý", "thân thiện với người dùng" (user-friendly).
-- **Tập trung nghiệp vụ:** Không đưa chi tiết kỹ thuật hoặc giao diện người dùng (User Interface) vào tiêu chí nghiệm thu (đó là việc của lập trình viên).
-- **Đơn nhất:** Mỗi tiêu chí nghiệm thu chỉ giải quyết duy nhất một kịch bản, không gộp nhiều luồng xử lý phức tạp.
+Áp dụng [checklist chất lượng](./checklists/quality-checklist.md) cho từng US; đây là nguồn duy nhất quy định điều kiện đạt, cấu trúc Gherkin và trạng thái bàn giao. Checklist yêu cầu tối thiểu ba kịch bản cùng story: thông thường, biên/xác thực nghiệp vụ và xử lý lỗi.
 
-### Bổ sung: Definition of Done (DoD)
+Khi cần học cách điền, đọc [ví dụ hoàn chỉnh](./templates/user-story-template-example.md). Khi cần tình huống nghiệp vụ khác, chọn mục phù hợp trong [bộ ví dụ](./references/examples.md); các ví dụ chỉ là dữ liệu minh họa.
 
-**DoD vs Tiêu chí nghiệm thu (AC) — khác nhau thế nào?**
+Với nhánh bổ sung AC, đọc cả các AC cũ để tránh trùng hoặc mâu thuẫn; liệt kê phần cũ cần sửa riêng nếu ngoài phạm vi. Với thông tin chưa rõ, giữ dấu cần xác nhận thay vì viết một kịch bản có vẻ hoàn chỉnh nhưng không có căn cứ.
 
-| | Tiêu chí nghiệm thu (AC) | Definition of Done (DoD) |
-| :--- | :--- | :--- |
-| **Mục đích** | Story đạt yêu cầu nghiệp vụ? | Story sẵn sàng bàn giao? |
-| **Viết cho** | BA / PO | Dev / QA |
-| **Nội dung** | Nghiệp vụ, business outcome | Kỹ thuật, code quality, testing |
-| **Ví dụ** | "Then hệ thống hiển thị xác nhận" | "Code passed unit test" |
+**Hoàn tất khi:** mọi US được yêu cầu đã có nội dung hoặc phát hiện tương ứng; từng kịch bản đã được kiểm tra kết quả quan sát được, và mọi kết quả chưa rõ được ghi thành vấn đề/câu hỏi.
 
-DoD là danh sách checklist kỹ thuật mà developer tự đánh dấu khi story hoàn thành. Khác với tiêu chí nghiệm thu (cho BA/PO xác nhận nghiệp vụ), DoD (cho Dev/QA xác nhận chất lượng kỹ thuật).
+### Bước 5: Kiểm tra và chọn trạng thái
 
-**Ví dụ DoD cho story Kéo-thả Kanban:**
+Kiểm tra từng US theo toàn bộ checklist, ghi mã mục chưa đạt cùng bằng chứng và hướng xử lý. Đánh giá INVEST với ba trạng thái **Đạt / Cần cải thiện / Cần xác nhận**, có lý do; ước lượng và phê duyệt cần căn cứ từ người có trách nhiệm.
 
-```text
-**Definition of Done:**
-- [ ] Code passed unit test
-- [ ] Tested trên Chrome, Safari, Firefox
-- [ ] Realtime sync hoạt động với 3+ user đồng thời
-- [ ] Có animation mượt khi kéo-thả
-```
+Trong nhánh cho phép chỉnh sửa, sửa lỗi có thể giải quyết từ nguồn hiện có rồi kiểm tra lại phần bị ảnh hưởng. Nếu còn thiếu quyết định hoặc bằng chứng, bàn giao Draft cùng câu hỏi và dừng; không lặp lại việc viết để ép đạt. Trong nhánh chỉ rà soát, giữ nguyên tài liệu và báo các mục chưa đạt.
 
-### Bước 6: Định dạng kết quả đầu ra (Output)
+**Hoàn tất khi:** toàn bộ US trong phạm vi đã được kiểm tra; mỗi vấn đề được sửa, được ghi nhận ngoài phạm vi, hoặc được chuyển thành câu hỏi có người cần xác nhận.
 
-Trình bày theo thứ tự sau:
+### Bước 6: Bàn giao theo nhánh
 
-1. **Câu chuyện người dùng (User Story)**: Gồm 3 dòng (As a / I want / So that).
-2. **Tự đánh giá theo chuẩn 06 tiêu chí INVEST (INVEST Self-check)**: Bảng tự đánh giá với trạng thái Đạt (✅) hoặc Cần cải thiện (⚠️) cho 6 tiêu chí.
-3. **Tiêu chí nghiệm thu (Acceptance Criteria)**: Danh sách được đánh số thứ tự cụ thể.
-4. **Ghi chú (Notes)**: Các sự phụ thuộc, giả định hoặc câu hỏi làm rõ.
-5. **Xác nhận bàn giao**: Đề xuất người dùng kiểm tra lại toàn bộ nội dung và hỏi định dạng mong muốn trước khi xuất tài liệu.
+- **Chỉ rà soát:** kết luận ngắn, phát hiện theo mức ảnh hưởng, vị trí/US/AC liên quan, đề xuất và giới hạn kiểm tra.
+- **Viết mới/tinh chỉnh:** US + AC theo biểu mẫu, kết quả checklist và câu hỏi còn mở. Với bản chỉnh, thêm tóm tắt thay đổi và ánh xạ mã nếu phân rã.
+- **Bổ sung AC:** nêu mã US, AC mới, độ bao phủ sau bổ sung, kết quả kiểm tra, trạng thái đề xuất và câu hỏi; liệt kê mâu thuẫn của AC cũ nếu có.
+- Với yêu cầu từ PRD, kèm bảng truy vết ở Bước 3 để cập nhật lại tài liệu nguồn khi được yêu cầu.
 
-## Các mẫu chống lại thiết kế chuẩn (Anti-patterns) cần tránh
+Dùng Markdown mặc định; tuân theo định dạng đã được người dùng yêu cầu thay vì hỏi lại. Chỉ sửa tệp hoặc xuất sang hệ thống khác trong phạm vi được cho phép.
 
-- ❌ **Đối tượng sử dụng chung chung**: *"As a user"*
-  👉 ✅ **Chi tiết**: *"As a quản lý dự án đã được phân công quản lý dự án và xác thực địa chỉ thư điện tử (email)"*
-- ❌ **Hành động mơ hồ**: *"I want to manage profile"*
-  👉 ✅ **Cụ thể**: *"I want to update my email address"*
-- ❌ **Giá trị trùng lặp mục tiêu**: *"So that I can manage profile"*
-  👉 ✅ **Ý nghĩa**: *"So that I receive notifications at correct address"*
-- ❌ **Tiêu chí nghiệm thu mô tả giao diện**: *"Then button turns blue"*
-  👉 ✅ **Mô tả hành vi**: *"Then system displays confirmation message"*
-- ❌ **Tiêu chí nghiệm thu chứa logic kỹ thuật**: *"Then call API /v1/users/update"*
-  👉 ✅ **Mô tả nghiệp vụ**: *"Then user data is updated and persisted"*
-- ❌ **Tiêu chí nghiệm thu thiếu sót**: Chỉ có 1 kịch bản thông thường
-  👉 ✅ **Đa dạng**: Tối thiểu 3 tiêu chí nghiệm thu bao quát các nhánh (luồng thông thường, luồng biên, luồng lỗi).
-- ❌ **Câu chuyện người dùng quá lớn**: 1 câu chuyện chứa toàn bộ cụm hành động Tạo, Đọc, Cập nhật, Xóa (CRUD)
-  👉 ✅ **Phân tách**: Tách riêng biệt thành các câu chuyện nhỏ hơn (Tạo mới, Hiển thị, Cập nhật, Xóa).
+**Hoàn tất khi:** người dùng phân biệt được phần đã hoàn thiện, phần chờ xác nhận và thay đổi thực tế; không tuyên bố đã phê duyệt hoặc đã triển khai chỉ vì tài liệu đạt checklist.
 
-### Bảng đối chiếu nhanh
+## Ranh giới bàn giao
 
-| ❌ Sai | ✅ Đúng |
-| :--- | :--- |
-| "Làm trang login" (kỹ thuật) | "Là user, tôi muốn đăng nhập để..." |
-| Story quá lớn (epic) | Chia nhỏ thành nhiều story |
-| Không có "so that" | Luôn nêu rõ giá trị |
-| Viết từ góc nhìn dev | Viết từ góc nhìn end-user |
-| AC mơ hồ ("phải nhanh") | AC đo lường được ("load <2s") |
+Khi cần mở rộng ngoài US + AC, đề xuất tài liệu tương ứng thay vì tự mở rộng phạm vi:
 
-## Tiêu chí và Hướng dẫn Phân rã câu chuyện người dùng (User Story)
-
-**Dấu hiệu cần phân rã:**
-
-- Tiêu đề chứa liên từ kết hợp "AND" (ví dụ: "Đăng nhập VÀ đăng ký").
-- Chứa nhiều hơn 1 đối tượng sử dụng hoặc xử lý nhiều hành động Tạo, Đọc, Cập nhật, Xóa (CRUD) đồng thời.
-- Số lượng kịch bản của tiêu chí nghiệm thu vượt quá 7-8 kịch bản.
-- Ước lượng thời gian triển khai (effort) của lập trình viên vượt quá 5 ngày làm việc.
-
-**Quy tắc phân rã phổ biến:**
-
-- **Theo thao tác cơ bản (CRUD):** Tách biệt các hành vi Tạo mới (Create), Hiển thị (Read), Cập nhật (Update), Xóa (Delete).
-- **Theo đối tượng sử dụng (Persona):** Tách riêng luồng nghiệp vụ của từng nhóm người dùng (Quản lý dự án, Thành viên nhóm, Khách hàng, Quản trị viên...).
-- **Theo quy tắc hoặc luồng nghiệp vụ (Rule/Flow):** Tách luồng thành công (Happy path) khỏi các luồng xác thực điều kiện hoặc kiểm tra quyền truy cập (Permission).
-- **Theo dữ liệu xử lý:** Chia nhỏ theo từng loại dữ liệu cụ thể cần xử lý.
-
----
-
-## Tài liệu tham khảo liên quan
-
-- [user-story-template-example.md](./templates/user-story-template-example.md) - Ví dụ minh họa hoàn chỉnh US "Tạo dự án" với AC Happy + Edge + Negative. Phần 1 là worked example (dữ liệu minh họa đã điền), kèm hướng dẫn viết Given-When-Then chi tiết. Dùng để học cấu trúc và tham khảo.
-- [user-story-template-blank.md](./templates/user-story-template-blank.md) - Biểu mẫu trống để điền US thực tế. Có sẵn bảng mã tính năng, trường Status/Approval, và DoD tách kỹ thuật/nghiệp vụ. Dùng khi cần bàn giao cho Sprint Planning.
-- [invest-criteria.md](./references/invest-criteria.md) - Tài liệu phân tích sâu về 06 tiêu chí INVEST.
-- [examples.md](./references/examples.md) - 4 ví dụ mẫu thực tế thuộc lĩnh vực Quản lý dự án (ProjectOS).
-- [quality-checklist.md](./checklists/quality-checklist.md) - Danh mục tự kiểm tra chất lượng trước khi bàn giao.
-
-**Tham chiếu chéo skills:**
-
-- [prd-template.md](../cc-prd-writer/references/prd-template.md) - PRD template — FR trong PRD là input chính khi viết User Story theo từng FR.
+- [PRD](../cc-prd-writer/references/prd-template.md): phạm vi tính năng và yêu cầu nguồn.
+- [Use Case](../cc-use-case-writer/SKILL.md): tương tác nghiệp vụ chi tiết.
+- [SRS](../cc-srs-writer/SKILL.md): đặc tả yêu cầu hệ thống.
+- [Test Case](../cc-test-case-writer/SKILL.md): các ca kiểm thử dựa trên US/AC đã xác nhận.

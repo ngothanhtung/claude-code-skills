@@ -1,59 +1,15 @@
 # Ví dụ mẫu về Câu chuyện người dùng và Tiêu chí nghiệm thu cho ProjectOS (Quản lý Dự án)
 
-> Tài liệu tổng hợp 4 ví dụ mẫu thực tế thuộc các nghiệp vụ cốt lõi trong sản phẩm quản lý dự án: Tạo dự án, Giao công việc, Cập nhật tiến độ và Báo cáo.
-> Các tên thương hiệu đã được thay đổi thành dạng chung: Project X, Team Y, Client Z...
-> Yêu cầu đầu ra: 100% Tiếng Việt, chỉ giữ lại thuật ngữ chuyên ngành, tránh viết tắt.
+> [!NOTE]
+> Bốn ví dụ dưới đây là bài tập **giả lập** trong bối cảnh ProjectOS. Mã BT, tên, số liệu và quy tắc chỉ là nguồn của bài tập, không phải yêu cầu khách hàng hay bằng chứng kiểm thử.
+
+Ví dụ 1 dẫn đến biểu mẫu đầy đủ. Ví dụ 2–4 là trích đoạn US + AC để luyện viết kịch bản; khi bàn giao tài liệu, điền thêm metadata, sáu tiêu chí INVEST và câu hỏi theo [biểu mẫu trống](../templates/user-story-template-blank.md), rồi áp dụng [checklist chất lượng](../checklists/quality-checklist.md). Các trích đoạn chưa có đánh giá INVEST và thông tin bàn giao đầy đủ nên vẫn là **Draft**.
 
 ---
 
 ## Ví dụ 1: Tạo dự án mới
 
-### Câu chuyện người dùng US-PROJ-001: Tạo dự án mới với thông tin cơ bản
-
-**As a** quản lý dự án đã được phân quyền tạo dự án trên ProjectOS.  
-**I want to** tạo dự án mới với tên, mô tả, ngày bắt đầu, ngày kết thúc và danh sách thành viên ban đầu.  
-**So that** nhóm bắt đầu làm việc ngay trên cùng một không gian dự án có sẵn thông tin nền tảng.
-
-**Tự kiểm tra theo tiêu chí INVEST:**
-
-| Tiêu chí | Đạt? (✅/⚠️) | Ghi chú |
-| :--- | :---: | :--- |
-| **I**ndependent (Độc lập) | ✅ | Không phụ thuộc câu chuyện nào khác nếu đã có module quản lý người dùng. |
-| **N**egotiable (Thương lượng) | ✅ | Chưa cố định công nghệ lưu trữ hay cấu trúc bảng cơ sở dữ liệu. |
-| **V**aluable (Giá trị) | ✅ | Quản lý dự án khởi tạo được không gian làm việc; nhóm có thể bắt đầu ngay. |
-| **E**stimable (Ước lượng) | ✅ | Luồng nghiệp vụ tương đối chuẩn, ước lượng 3 ngày làm việc. |
-| **S**mall (Nhỏ gọn) | ✅ | Thời gian triển khai ước lượng khoảng 3 ngày làm việc của lập trình viên. |
-| **T**estable (Kiểm thử được) | ✅ | Các tiêu chí nghiệm thu được xác định rõ ràng, đo lường được. |
-
-**Tiêu chí nghiệm thu 1: Tạo dự án thành công với thông tin hợp lệ (Happy path)**
-
-- **Given** quản lý dự án đã đăng nhập và có quyền tạo dự án.
-- **And** tên dự án là "Xây dựng hệ thống CRM phiên bản 2.0", ngày bắt đầu là 01/07, ngày kết thúc là 30/09.
-- **When** quản lý dự án điền đầy đủ thông tin bắt buộc và nhấn nút "Tạo dự án".
-- **Then** hệ thống tạo bản ghi dự án mới và hiển thị trang chi tiết dự án trong vòng 3 giây.
-- **And** gửi thông báo mời tham gia dự án qua email đến các thành viên đã được thêm vào danh sách ban đầu.
-
-**Tiêu chí nghiệm thu 2: Ngày kết thúc trước ngày bắt đầu (Edge case)**
-
-- **Given** quản lý dự án đang tạo dự án mới.
-- **When** quản lý dự án nhập ngày bắt đầu là 30/09 và ngày kết thúc là 01/07.
-- **Then** hệ thống hiển thị thông báo lỗi: "Ngày kết thúc dự án phải sau ngày bắt đầu. Vui lòng kiểm tra lại."
-- **And** không tạo bản ghi dự án mới.
-
-**Tiêu chí nghiệm thu 3: Tên dự án trùng lặp (Negative path)**
-
-- **Given** trong hệ thống đã tồn tại dự án có tên "Xây dựng hệ thống CRM phiên bản 2.0".
-- **When** quản lý dự án nhập tên "Xây dựng hệ thống CRM phiên bản 2.0" và nhấn "Tạo dự án".
-- **Then** hệ thống hiển thị cảnh báo: "Dự án với tên này đã tồn tại. Bạn có muốn tiếp tục tạo không?"
-- **And** nếu quản lý dự án xác nhận, hệ thống cho phép tạo dự án trùng tên; nếu hủy, quay lại biểu mẫu.
-
-**Definition of Done:**
-
-- [ ] Code passed unit test
-- [ ] Bản ghi dự án được lưu vào cơ sở dữ liệu với đầy đủ trường bắt buộc
-- [ ] Email mời tham gia gửi thành công qua SMTP đã cấu hình
-- [ ] Thành viên được thêm vào dự án có quyền truy cập ngay lập tức
-- [ ] Dashboard / trang dự án hiển thị dự án mới tạo sau khi tải lại
+Đọc [US-PROJ-001 trong biểu mẫu đã điền](../templates/user-story-template-example.md): nguồn BT-01, bốn AC về tạo thành công, hai ngày trùng nhau, ngày kết thúc không hợp lệ và thiếu quyền. Đây là nguồn duy nhất của ví dụ này, kèm đánh giá INVEST và lý do giữ Draft.
 
 ---
 
@@ -61,124 +17,161 @@
 
 ### Câu chuyện người dùng US-TASK-001: Giao công việc cho thành viên trong dự án
 
-**As a** quản lý dự án đang quản lý dự án đã được tạo trên ProjectOS  
-**I want to** tạo công việc mới, gán cho thành viên cụ thể và đặt deadline  
-**So that** thành viên nhóm biết rõ trách nhiệm, thời hạn và tôi theo dõi được tiến độ phân công
+**Nguồn giả lập BT-02:** Quản lý có quyền phân công được giao một công việc chưa có người phụ trách cho thành viên cùng dự án. Mỗi thành viên nhận tối đa 10 công việc chưa hoàn thành trong dự án đó, tính cả việc sắp giao. Yêu cầu không hợp lệ bị từ chối và giữ nguyên phân công. Tạo công việc, đổi thời hạn và gửi lời nhắc nằm ngoài phạm vi.
 
-**Tiêu chí nghiệm thu 1: Giao công việc thành công (Happy path)**
+**As a** quản lý có quyền phân công trong dự án
 
-- **Given** dự án "CRM phiên bản 2.0" đang hoạt động và có 3 thành viên: Nguyễn Văn A, Trần Thị B, Lê Văn C.
-- **When** quản lý dự án tạo công việc "Thiết kế giao diện trang chủ", gán cho Nguyễn Văn A, đặt deadline ngày 15/07.
-- **Then** hệ thống tạo công việc mới với trạng thái "Chưa bắt đầu" và gán cho Nguyễn Văn A.
-- **And** gửi thông báo nhắc nhở qua email và trong ứng dụng đến Nguyễn Văn A.
-- **And** hiển thị công việc mới trong danh sách công việc của dự án và trang cá nhân của Nguyễn Văn A.
+**I want to** giao công việc đã có cho một thành viên đủ điều kiện
 
-**Tiêu chí nghiệm thu 2: Giao công việc cho người không thuộc dự án (Edge case)**
+**So that** nhóm biết ai chịu trách nhiệm và tránh phân công vượt khả năng tiếp nhận đã quy định
 
-- **Given** dự án "CRM phiên bản 2.0" có 3 thành viên: Nguyễn Văn A, Trần Thị B, Lê Văn C.
-- **When** quản lý dự án cố gắng gán công việc cho Hoàng Văn D — người không phải thành viên của dự án.
-- **Then** hệ thống hiển thị thông báo lỗi: "Hoàng Văn D không phải thành viên của dự án này. Vui lòng thêm thành viên trước khi giao việc."
-- **And** không tạo công việc.
+#### US-TASK-001/AC-01: Giao công việc thành công — Happy path
 
-**Tiêu chí nghiệm thu 3: Thành viên nhận nhiều công việc vượt ngưỡng (Negative path)**
+- **Given** quản lý có quyền phân công, T-01 chưa hoàn thành và chưa có người phụ trách; An là thành viên cùng dự án đang có 8 công việc chưa hoàn thành.
+- **When** quản lý gửi yêu cầu giao T-01 cho An.
+- **Then** An trở thành người phụ trách T-01 và có tổng cộng 9 công việc chưa hoàn thành trong dự án.
 
-- **Given** Nguyễn Văn A đã có 8 công việc đang trong hạn trong dự án "CRM phiên bản 2.0" và ngưỡng tối đa là 10 công việc.
-- **When** quản lý dự án giao thêm công việc thứ 9 cho Nguyễn Văn A.
-- **Then** hệ thống hiển thị cảnh báo: "Nguyễn Văn A đã có 8 công việc đang trong hạn. Bạn có chắc muốn giao thêm không?"
-- **And** nếu quản lý dự án xác nhận, công việc vẫn được giao; nếu hủy, quay lại biểu mẫu.
+#### US-TASK-001/AC-02: Chạm giới hạn tiếp nhận — Edge case
 
-**Definition of Done:**
+- **Given** quản lý có quyền phân công, T-01 chưa hoàn thành và chưa có người phụ trách; An là thành viên cùng dự án đang có 9 công việc chưa hoàn thành.
+- **When** quản lý gửi yêu cầu giao T-01 cho An.
+- **Then** T-01 được giao cho An, nâng tổng số công việc chưa hoàn thành của An trong dự án lên đúng 10.
 
-- [ ] Code passed unit test
-- [ ] Công việc mới được tạo với đầy đủ trường trong cơ sở dữ liệu
-- [ ] Thành viên được gán nhận thông báo qua email và in-app
-- [ ] Danh sách công việc của thành viên được cập nhật ngay lập tức sau khi giao
-- [ ] Công việc mới xuất hiện trong trang cá nhân của thành viên được gán
+#### US-TASK-001/AC-03: Vượt giới hạn tiếp nhận — Error/Negative
+
+- **Given** quản lý có quyền phân công, T-01 chưa hoàn thành và chưa có người phụ trách; An là thành viên cùng dự án đã có 10 công việc chưa hoàn thành.
+- **When** quản lý gửi yêu cầu giao thêm T-01 cho An.
+- **Then** yêu cầu bị từ chối vì sẽ vượt giới hạn 10 công việc chưa hoàn thành.
+- **And** T-01 vẫn chưa có người phụ trách; số công việc của An giữ nguyên.
+
+#### US-TASK-001/AC-04: Người nhận ngoài dự án — Validation/Error
+
+- **Given** quản lý có quyền phân công, T-01 chưa có người phụ trách và Bình không thuộc dự án của T-01.
+- **When** quản lý gửi yêu cầu giao T-01 cho Bình.
+- **Then** yêu cầu bị từ chối vì Bình không phải thành viên dự án.
+- **And** T-01 vẫn chưa có người phụ trách.
+
+#### US-TASK-001/AC-05: Người giao thiếu quyền — Error/Negative
+
+- **Given** người yêu cầu không có quyền phân công, dù T-01 và người nhận đáp ứng các điều kiện còn lại.
+- **When** người đó gửi yêu cầu giao T-01.
+- **Then** yêu cầu bị từ chối vì thiếu quyền phân công và T-01 vẫn chưa có người phụ trách.
+
+#### US-TASK-001/AC-06: Công việc đã có người phụ trách — Validation/Error
+
+- **Given** quản lý có quyền phân công, T-01 đã giao cho Bình và An là thành viên cùng dự án có 8 công việc chưa hoàn thành.
+- **When** quản lý gửi yêu cầu giao T-01 cho An.
+- **Then** yêu cầu bị từ chối vì T-01 đã có người phụ trách.
+- **And** Bình vẫn phụ trách T-01; số công việc của An giữ nguyên.
 
 ---
 
 ## Ví dụ 3: Cập nhật tiến độ công việc
 
-### Câu chuyện người dùng US-PROGRESS-001: Cập nhật trạng thái và tiến độ công việc
+### Câu chuyện người dùng US-PROGRESS-001: Cập nhật phần trăm tiến độ công việc
 
-**As a** thành viên nhóm được giao công việc trong dự án  
-**I want to** cập nhật trạng thái (Chưa bắt đầu / Đang làm / Hoàn thành / Tạm dừng) và phần trăm tiến độ  
-**So that** quản lý dự án và các bên liên quan nắm được thực trạng công việc theo thời gian thực
+**Nguồn giả lập BT-03:** Người phụ trách được cập nhật tiến độ từ 0% đến 100%, kể cả hai đầu mút. Giảm tiến độ cần kèm lý do và lưu lý do cùng lần cập nhật được chấp nhận. Đạt 100% thì công việc hoàn thành và không nhận cập nhật tiếp; mở lại công việc là phạm vi khác. Mọi yêu cầu bị từ chối đều nêu lý do và giữ nguyên tiến độ, trạng thái cũ.
 
-**Tiêu chí nghiệm thu 1: Cập nhật tiến độ thành công (Happy path)**
+**As a** thành viên phụ trách công việc
 
-- **Given** công việc "Thiết kế giao diện trang chủ" có trạng thái "Đang làm" với tiến độ 40%.
-- **When** thành viên nhóm cập nhật tiến độ lên 80% và thay đổi trạng thái thành "Đang làm".
-- **Then** hệ thống lưu trạng thái và tiến độ mới trong vòng 2 giây.
-- **And** biểu đồ Gantt và bảng Kanban của dự án được cập nhật tức thì.
-- **And** quản lý dự án nhận thông báo về việc cập nhật tiến độ.
+**I want to** cập nhật phần trăm tiến độ phản ánh thực trạng
 
-**Tiêu chí nghiệm thu 2: Tiến độ giảm so với lần trước (Edge case)**
+**So that** quản lý có thông tin để xác định việc cần hỗ trợ
 
-- **Given** công việc có tiến độ đã ghi nhận là 60%.
-- **When** thành viên nhóm cập nhật tiến độ xuống còn 30%.
-- **Then** hệ thống yêu cầu thành viên nhập ghi chú giải thích lý do giảm tiến độ.
-- **And** sau khi có ghi chú, hệ thống lưu tiến độ mới và gửi thông báo cảnh báo đến quản lý dự án.
+#### US-PROGRESS-001/AC-01: Tăng tiến độ — Happy path
 
-**Tiêu chí nghiệm thu 3: Cập nhật công việc đã hoàn thành (Negative path)**
+- **Given** An là người phụ trách công việc chưa hoàn thành, hiện có tiến độ 40%.
+- **When** An gửi yêu cầu cập nhật tiến độ lên 80%.
+- **Then** tiến độ được ghi nhận là 80% và công việc vẫn chưa hoàn thành.
 
-- **Given** công việc có trạng thái "Hoàn thành" với tiến độ 100%.
-- **When** thành viên nhóm cố gắng cập nhật tiến độ về 50%.
-- **Then** hệ thống hiển thị thông báo: "Công việc đã được đánh dấu hoàn thành. Vui lòng mở khóa công việc trước khi cập nhật tiến độ."
-- **And** không lưu tiến độ 50%.
+#### US-PROGRESS-001/AC-02: Giảm về mức thấp nhất kèm lý do — Edge case
 
-**Definition of Done:**
+- **Given** An phụ trách công việc chưa hoàn thành, tiến độ 60%, và chuẩn bị lý do "Cần làm lại toàn bộ phần đã thực hiện".
+- **When** An gửi yêu cầu cập nhật về 0% kèm lý do đó.
+- **Then** tiến độ được ghi nhận là 0%, lý do được lưu cùng lần cập nhật và công việc vẫn chưa hoàn thành.
 
-- [ ] Code passed unit test
-- [ ] API endpoint trả về kết quả trong vòng 2 giây
-- [ ] Trạng thái và tiến độ cập nhật realtime cho tất cả người dùng đang xem
-- [ ] Thông báo gửi thành công qua kênh đã cấu hình (email / in-app)
+#### US-PROGRESS-001/AC-03: Giảm tiến độ thiếu lý do — Validation/Error
+
+- **Given** An phụ trách công việc chưa hoàn thành, tiến độ 60%.
+- **When** An gửi yêu cầu cập nhật về 30% mà không kèm lý do.
+- **Then** yêu cầu bị từ chối vì thiếu lý do giảm tiến độ.
+- **And** tiến độ giữ ở 60% và công việc vẫn chưa hoàn thành.
+
+#### US-PROGRESS-001/AC-04: Đạt mức hoàn thành — Edge case
+
+- **Given** An phụ trách công việc chưa hoàn thành, tiến độ 80%.
+- **When** An gửi yêu cầu cập nhật lên 100%.
+- **Then** tiến độ được ghi nhận là 100% và công việc được xác định là đã hoàn thành.
+
+#### US-PROGRESS-001/AC-05: Cập nhật công việc đã hoàn thành — Error/Negative
+
+- **Given** An phụ trách công việc đã hoàn thành với tiến độ 100%.
+- **When** An gửi yêu cầu cập nhật về 50% kèm lý do cần làm lại.
+- **Then** yêu cầu bị từ chối vì công việc đã hoàn thành.
+- **And** tiến độ 100% và trạng thái hoàn thành được giữ nguyên.
+
+#### US-PROGRESS-001/AC-06: Vượt mức tối đa — Validation/Error
+
+- **Given** An phụ trách công việc chưa hoàn thành, tiến độ 80%.
+- **When** An gửi yêu cầu cập nhật lên 101%.
+- **Then** yêu cầu bị từ chối vì tiến độ vượt 100%; tiến độ 80% và trạng thái chưa hoàn thành được giữ nguyên.
+
+#### US-PROGRESS-001/AC-07: Thấp hơn mức tối thiểu — Validation/Error
+
+- **Given** An phụ trách công việc chưa hoàn thành, tiến độ 60%.
+- **When** An gửi yêu cầu cập nhật về -1% kèm lý do cần làm lại.
+- **Then** yêu cầu bị từ chối vì tiến độ thấp hơn 0%; tiến độ 60% và trạng thái chưa hoàn thành được giữ nguyên.
+
+#### US-PROGRESS-001/AC-08: Người cập nhật không phụ trách công việc — Error/Negative
+
+- **Given** Bình không phụ trách công việc chưa hoàn thành có tiến độ 40%.
+- **When** Bình gửi yêu cầu cập nhật lên 80%.
+- **Then** yêu cầu bị từ chối vì Bình không phải người phụ trách; tiến độ 40% và trạng thái chưa hoàn thành được giữ nguyên.
 
 ---
 
 ## Ví dụ 4: Báo cáo tiến độ dự án
 
-### Câu chuyện người dùng US-REPORT-001: Xem báo cáo tổng quan tiến độ dự án
+### Câu chuyện người dùng US-REPORT-001: Xem mức hoàn thành công việc của dự án
 
-**As a** quản lý dự án đang theo dõi nhiều dự án cùng lúc  
-**I want to** xem báo cáo tổng quan về tiến độ, tình trạng công việc và rủi ro của từng dự án  
-**So that** tôi có thể đánh giá nhanh tình trạng toàn bộ danh mục dự án và ưu tiên can thiệp khi cần
+**Nguồn giả lập BT-04:** Người có quyền xem báo cáo dự án nhận tổng số công việc, số đã hoàn thành và tỷ lệ hoàn thành = số đã hoàn thành / tổng số × 100%. Khi tổng bằng 0, báo chưa có công việc thay vì tính tỷ lệ. Khi không lấy được dữ liệu, báo chưa thể cung cấp báo cáo, không thay bằng số 0. Người thiếu quyền bị từ chối và không nhận dữ liệu dự án. Đánh giá rủi ro và xuất báo cáo nằm ngoài phạm vi.
 
-**Tiêu chí nghiệm thu 1: Hiển thị báo cáo đầy đủ thông tin (Happy path)**
+**As a** quản lý có quyền xem báo cáo dự án
 
-- **Given** quản lý dự án đang theo dõi 3 dự án: "CRM phiên bản 2.0" (25 công việc), "Hệ thống ERP" (10 công việc), "Ứng dụng di động" (15 công việc).
-- **When** quản lý dự án truy cập trang Báo cáo.
-- **Then** hệ thống hiển thị bảng tổng quan gồm: tên dự án, tổng số công việc, số hoàn thành, đang làm, quá hạn, tỷ lệ tiến độ trung bình (%).
-- **And** sắp xếp mặc định theo dự án có nhiều công việc quá hạn nhất.
+**I want to** biết số lượng và tỷ lệ công việc đã hoàn thành
 
-**Tiêu chí nghiệm thu 2: Dự án không có công việc nào (Edge case)**
+**So that** tôi xác định mức công việc còn lại để trao đổi kế hoạch với nhóm
 
-- **Given** dự án "Marketing Q3" đã được tạo nhưng chưa có công việc nào được giao.
-- **When** quản lý dự án xem báo cáo của dự án này.
-- **Then** hệ thống hiển thị trạng thái "Chưa có công việc" thay vì tỷ lệ phần trăm.
-- **And** hiển thị nút kêu gọi hành động (CTA) "Tạo công việc đầu tiên".
+#### US-REPORT-001/AC-01: Báo cáo có dữ liệu — Happy path
 
-**Tiêu chí nghiệm thu 3: Hết thời gian phản hồi khi tải báo cáo (Negative path)**
+- **Given** quản lý có quyền xem báo cáo và dự án có 4 công việc, trong đó 1 việc đã hoàn thành.
+- **When** quản lý yêu cầu báo cáo của dự án.
+- **Then** báo cáo cho biết tổng 4 công việc, 1 việc đã hoàn thành và tỷ lệ hoàn thành 25%.
 
-- **Given** quản lý dự án yêu cầu xem báo cáo dự án có hơn 500 công việc.
-- **When** hệ thống đang xử lý dữ liệu báo cáo.
-- **Then** hệ thống hiển thị thanh tiến trình tải với thông báo "Đang tải báo cáo..."
-- **And** nếu thời gian tải vượt quá 10 giây, hệ thống hiển thị tùy chọn "Tải dưới dạng tệp tin (background)".
+#### US-REPORT-001/AC-02: Dự án chưa có công việc — Edge case
 
-**Definition of Done:**
+- **Given** quản lý có quyền xem báo cáo và dự án có 0 công việc.
+- **When** quản lý yêu cầu báo cáo của dự án.
+- **Then** báo cáo nêu tổng 0 công việc, 0 việc đã hoàn thành và dự án chưa có công việc; không đưa ra tỷ lệ hoàn thành.
 
-- [ ] Code passed unit test
-- [ ] Trang Báo cáo tải xong trong vòng 10 giây với tập dữ liệu 500 công việc
-- [ ] Biểu đồ (Gantt / biểu đồ cột) render đúng dữ liệu, không bị lệch
-- [ ] Thanh tiến trình tải hiển thị khi xử lý dữ liệu lớn
-- [ ] Export file (CSV / PDF) chứa đúng dữ liệu như trên giao diện
+#### US-REPORT-001/AC-03: Không lấy được dữ liệu — Error/Negative
+
+- **Given** quản lý có quyền xem báo cáo nhưng dữ liệu công việc của dự án hiện không thể lấy được.
+- **When** quản lý yêu cầu báo cáo của dự án.
+- **Then** quản lý được thông báo chưa thể cung cấp báo cáo vì không lấy được dữ liệu.
+- **And** không cung cấp các số lượng hoặc tỷ lệ giả định bằng 0; dữ liệu công việc của dự án không bị thay đổi.
+
+#### US-REPORT-001/AC-04: Thiếu quyền xem báo cáo — Error/Negative
+
+- **Given** người yêu cầu không có quyền xem báo cáo dự án.
+- **When** người đó yêu cầu báo cáo của dự án.
+- **Then** yêu cầu bị từ chối vì thiếu quyền; dữ liệu báo cáo không được cung cấp và dữ liệu công việc không bị thay đổi.
 
 ---
 
-## Các nguyên tắc rút ra từ các ví dụ mẫu trên
+## Gợi ý luyện tập
 
-1. **Đối tượng sử dụng (Persona) cụ thể**: Luôn xác định rõ vai trò và hoàn cảnh của người dùng (ví dụ: quản lý dự án đang theo dõi nhiều dự án, thành viên nhóm được giao công việc trong dự án) thay vì sử dụng từ "người dùng" chung chung.
-2. **Mục tiêu có thể kiểm tra**: Các mục tiêu luôn hướng tới kết quả nghiệp vụ rõ ràng (phân công rõ trách nhiệm, theo dõi tiến độ thời gian thực, tránh quá tải tài nguyên).
-3. **Đầy đủ 3 luồng tiêu chí nghiệp thu**: Mọi câu chuyện người dùng đều bắt buộc bao quát tối thiểu Luồng thông thường (Happy path), Trường hợp biên (Edge case) và Luồng xử lý lỗi (Negative path).
-4. **Không đưa chi tiết triển khai công nghệ**: Tránh nhắc đến tên giải thuật, cấu trúc mã nguồn, bảng cơ sở dữ liệu hay thư viện lập trình cụ thể để giữ nguyên tính thương lượng (Negotiable) của câu chuyện người dùng.
-5. **Bổ sung Definition of Done (DoD) cho ví dụ phù hợp**: Với các tính năng liên quan đến realtime, notification, hoặc tích hợp bên thứ ba, bổ sung DoD checklist kỹ thuật để hướng dẫn developer và QA về điều kiện bàn giao.
+- Đổi ngưỡng trong BT-02 rồi cập nhật cả kịch bản đạt biên và vượt biên; kiểm tra phép đếm trước và sau.
+- Đối chiếu AC-02 và AC-03 của BT-03: mỗi kịch bản chỉ có một yêu cầu, khác nhau ở dữ liệu lý do đã chuẩn bị.
+- Giải thích vì sao "chưa có công việc" và "không lấy được dữ liệu" trong BT-04 phải có kết quả khác nhau.
+- Để dùng trong dự án thật, thay nguồn giả lập bằng nguồn đã xác nhận và đánh giá toàn bộ checklist; các ví dụ không xác nhận ước lượng, DoD hoặc phê duyệt thay đội.

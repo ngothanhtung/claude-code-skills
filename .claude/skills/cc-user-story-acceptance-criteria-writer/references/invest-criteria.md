@@ -1,23 +1,21 @@
 # Tiêu chí INVEST — Giải thích chi tiết và Hướng dẫn thực hành
 
-> **Vai trò:** Tài liệu **tham khảo chuyên sâu**, giải thích lý thuyết và hướng dẫn thực hành cho 06 tiêu chí INVEST.
->
-> **Vị trí trong bộ tài liệu:** Tài liệu này bổ sung cho [user-story-template.md](../templates/user-story-template.md) — template cung cấp **mẫu điền**, tài liệu này cung cấp **giải thích tại sao** và **cách xử lý khi vi phạm**.
->
-> **Đối tượng đọc:** BA (viết US), PO (review US), Developer (estimate US), QA (xác nhận testable).
+Đọc khi đánh giá INVEST hoặc quyết định có cần chia nhỏ story. Tài liệu này giải thích sáu tiêu chí và cách xử lý; [checklist chất lượng](../checklists/quality-checklist.md) quy định điều kiện bàn giao, còn [biểu mẫu trống](../templates/user-story-template-blank.md) quy định cách trình bày.
+
+INVEST giúp xem story có giá trị, đủ rõ và đủ nhỏ để thảo luận, thực hiện và kiểm tra. Kết luận cần có căn cứ; **Cần xác nhận** là kết quả hợp lệ khi thiếu thông tin.
 
 ---
 
-## INVEST Quick Card — Tra cứu nhanh
+## Tra cứu nhanh
 
-| Tiêu chí | Câu hỏi nhanh | Vi phạm phổ biến nhất | Hành động khi vi phạm |
-| :--- | :--- | :--- | :--- |
-| **I**ndependent | Phát triển/kiểm thử độc lập được không? | Phụ thuộc US khác | Dùng mock data; tách/chia US |
-| **N**egotiable | Còn chỗ thương lượng How không? | Over-specify (UI pixel, API cụ thể) | Bỏ chi tiết kỹ thuật; dùng wireframe |
-| **V**alue | Stakeholder nhận được gì? | So that trùng I want, hoặc bỏ trống | Viết lại So that hướng business outcome |
-| **E**stimable | Dev đủ thông tin để estimate? | Yêu cầu mơ hồ, rủi ro cao | Tạo Spike; bổ sung ngữ cảnh |
-| **S**mall | Hoàn thành trong 1 Sprint được không? | Tiêu đề có "VÀ"; AC > 8 kịch bản | Tách theo CRUD / Persona / Workflow |
-| **T**estable | Viết được test case từ AC? | AC dùng từ mơ hồ, không có số liệu | Bổ sung GWT với dữ liệu cụ thể |
+| Tiêu chí                              | Câu hỏi                                                              |
+| ------------------------------------- | -------------------------------------------------------------------- |
+| **I — Independent (Độc lập)**         | Có thể sắp xếp và kiểm tra riêng với các điều kiện đã nêu không?     |
+| **N — Negotiable (Có thể thảo luận)** | Kết quả cần đạt rõ, còn cách thực hiện để đội cùng quyết định không? |
+| **V — Valuable (Có giá trị)**         | Ai được lợi và được lợi gì?                                          |
+| **E — Estimable (Ước lượng được)**    | Đội thực hiện đã có đủ thông tin để đánh giá công sức chưa?          |
+| **S — Small (Nhỏ gọn)**               | Phạm vi có vừa một đợt làm việc theo đánh giá của đội không?         |
+| **T — Testable (Kiểm tra được)**      | Có thể xác định đúng/sai từ kết quả của từng kịch bản không?         |
 
 ---
 
@@ -25,32 +23,17 @@
 
 ### Định nghĩa
 
-US phải có thể phát triển, kiểm thử và triển khai độc lập. Tránh phụ thuộc cứng nhắc giữa các US.
+Ưu tiên story có thể sắp xếp và kiểm tra riêng. Độc lập không có nghĩa là sản phẩm không được có quan hệ nghiệp vụ hoặc điều kiện có sẵn.
 
-### Tại sao quan trọng?
+### Căn cứ và cách xử lý
 
-- Cho phép sắp xếp **độ ưu tiên linh hoạt** trong Backlog.
-- Tránh **blocker** khi 1 US bị chậm.
-- Dễ dàng **phân chia công việc** cho team.
-
-### Dấu hiệu vi phạm (I)
-
-- US-B chỉ thực hiện được SAU khi US-A hoàn thành.
-- Phải merge nhiều US cùng lúc mới triển khai được.
-- Kiểm thử US bắt buộc phải dùng dữ liệu từ US khác.
-
-### Hướng xử lý (I)
-
-| Tình huống | Hướng xử lý |
-| :--- | :--- |
-| Phụ thuộc nhỏ, cùng team | Gộp thành 1 US lớn hơn (nếu quy mô cho phép) |
-| Phụ thuộc lớn, công nghệ mới | Tách spike story nghiên cứu trước, ưu tiên thực hiện sớm |
-| Kiểm thử bị phụ thuộc | Dùng mock data / stub để test độc lập |
+- Phân biệt điều kiện đã tồn tại với công việc chưa hoàn thành đang chặn story.
+- Ghi phụ thuộc có thật và ảnh hưởng; không ghi "Không có" chỉ vì chưa tìm hiểu.
+- Khi hai story chỉ có giá trị nếu làm cùng nhau, cân nhắc gộp trong giới hạn phù hợp hoặc chia lại theo kết quả sử dụng được.
 
 ### Ví dụ (I)
 
-- ❌ **Vi phạm:** US-1: Tạo tài khoản quản lý dự án. US-2: Tạo dự án mới (chỉ test được sau US-1).
-- ✅ **Đạt chuẩn:** US-1: Tạo tài khoản quản lý dự án (test độc lập với dữ liệu mẫu trong môi trường test). US-2: Tạo dự án mới (test độc lập với tài khoản đã chuẩn bị sẵn).
+"Tạo dự án" có thể được kiểm tra bằng tài khoản quản lý đã tồn tại; không cần kiểm tra lại việc tạo tài khoản trong cùng kịch bản. Nếu chức năng cấp quyền chưa có, ghi rõ phụ thuộc đó, không coi dữ liệu mẫu là cách xóa bỏ phụ thuộc triển khai.
 
 ---
 
@@ -58,32 +41,15 @@ US phải có thể phát triển, kiểm thử và triển khai độc lập. T
 
 ### Định nghĩa
 
-US là **"lời mời thảo luận"**, không phải hợp đồng kỹ thuật. Chi tiết triển khai được làm rõ trong Refinement và quá trình phát triển.
+Story mở ra thảo luận về giải pháp và phạm vi với người có trách nhiệm. Quy tắc đã xác nhận, quyền hạn và nghĩa vụ pháp lý vẫn phải được giữ; thay đổi chúng cần được chấp thuận.
 
-> **Lưu ý thực tế:** BA viết US dựa trên yêu cầu nghiệp vụ, nên US gần như requirement. "Negotiable" ở đây không có nghĩa US có thể bị bỏ — mà là **cách thức triển khai (How) vẫn còn mở**, không bị khóa bởi chi tiết kỹ thuật quá sớm.
+### Căn cứ và cách xử lý
 
-### Tại sao quan trọng?
-
-- Tận dụng chuyên môn **Dev + QA** để tìm phương án tối ưu.
-- Linh hoạt khi xuất hiện ràng buộc mới.
-- Tránh **over-specify** quá sớm.
-
-### Dấu hiệu vi phạm (N)
-
-- Mô tả tọa độ pixel giao diện người dùng trong US.
-- Ràng buộc công nghệ cụ thể (ví dụ: "bắt buộc dùng Redis", "bắt buộc dùng React").
-- Mô tả giải thuật và cấu trúc mã nguồn trong nội dung US.
-
-### Hướng xử lý (N)
-
-- Tập trung **What** (cái gì) + **Why** (tại sao), tránh **How** (làm thế nào).
-- Chi tiết kỹ thuật → chuyển sang tài liệu thiết kế hệ thống.
-- Dùng **wireframe** thay vì mockup chi tiết ở giai đoạn viết US.
+Viết kết quả cần đạt và lý do, để đội chọn cách thực hiện. Chuyển mô tả thiết kế sang tài liệu phù hợp thay vì biến nó thành AC.
 
 ### Ví dụ (N)
 
-- ❌ **Vi phạm:** *"I want to tạo dự án với các trường lưu trong bảng MySQL với chỉ mục index trên cột project_code để tăng tốc độ truy vấn..."*
-- ✅ **Đạt chuẩn:** *"I want to tạo dự án mới so that tôi có thể bắt đầu phân công công việc cho nhóm ngay lập tức."* (Cấu trúc DB, index do Dev quyết định).
+"Quản lý tạo dự án để nhóm có không gian làm việc chung" nêu nhu cầu. "Chỉ người có quyền tạo dự án được thực hiện" là ràng buộc nghiệp vụ hợp lệ, không phải chi tiết cần bỏ để story có thể thương lượng.
 
 ---
 
@@ -91,28 +57,17 @@ US là **"lời mời thảo luận"**, không phải hợp đồng kỹ thuật
 
 ### Định nghĩa
 
-Mỗi US phải mang lại giá trị rõ ràng cho **người dùng cuối**, **doanh nghiệp**, hoặc **cả hai**. Không tạo US vì lý do kỹ thuật thuần túy.
+Mỗi story nêu lợi ích cho người dùng hoặc doanh nghiệp; So that trả lời vì sao hành động đó đáng làm.
 
-### Tại sao quan trọng?
+### Căn cứ và cách xử lý
 
-- Đảm bảo **ROI** — mọi nỗ lực đều có hiệu quả thực tế.
-- Giúp **PO** sắp xếp thứ tự ưu tiên chính xác.
-- Giúp **Stakeholder** hiểu lý do cần tính năng này.
-
-### Dấu hiệu vi phạm (V)
-
-- Phần **So that** bỏ trống hoặc lặp lại phần **I want to**.
-- US chỉ có giá trị với Dev (ví dụ: nâng cấp thư viện) mà không mang lại thay đổi nào cho người dùng.
-
-### Hướng xử lý (V)
-
-- So that viết theo **kết quả kinh doanh đo lường được** (ví dụ: "giảm 30% thời gian chờ của khách hàng").
-- Chuyển nhiệm vụ kỹ thuật thành US mang giá trị nghiệp vụ: thay vì "nâng cấp thư viện", viết "tối ưu tốc độ tải biểu đồ Gantt < 2 giây".
+- Nếu So that chỉ lặp I want to, hỏi kết quả mà người dùng muốn đạt.
+- Giá trị có thể kiểm chứng bằng lợi ích định tính; chỉ thêm tỷ lệ tiết kiệm hoặc thời gian mục tiêu khi nguồn đã xác nhận.
+- Công việc nội bộ có thể cần thiết nhưng không nên được đổi thành một lợi ích người dùng không có căn cứ.
 
 ### Ví dụ (V)
 
-- ❌ **Vi phạm:** *"As a developer, I want to nâng cấp thư viện biểu đồ từ v2 lên v4 so that chúng tôi sử dụng phiên bản mới nhất."*
-- ✅ **Đạt chuẩn:** *"As a quản lý dự án, I want to xem biểu đồ Gantt trong vòng 2 giây so that tôi đánh giá tiến độ mà không phải chờ khi kết nối chậm."*
+"Tôi muốn xem các công việc quá hạn để ưu tiên hỗ trợ những việc đang làm chậm dự án" có giá trị rõ hơn "để tôi xem được công việc".
 
 ---
 
@@ -120,38 +75,17 @@ Mỗi US phải mang lại giá trị rõ ràng cho **người dùng cuối**, *
 
 ### Định nghĩa
 
-Đội ngũ phát triển có đủ thông tin để đưa ra ước lượng tương đối về nỗ lực và thời gian hoàn thành.
+Đội thực hiện có đủ thông tin về phạm vi, quy tắc và phụ thuộc để ước lượng công sức. Người viết làm rõ yêu cầu, không tự ấn định thời gian thay đội.
 
-### Tại sao quan trọng?
+### Căn cứ và cách xử lý
 
-- Hỗ trợ **Sprint Planning** chính xác.
-- Phát hiện sớm US quá lớn hoặc quá mơ hồ.
-
-### Dấu hiệu vi phạm (E)
-
-- Dev phản hồi "không biết bao giờ xong, phải nghiên cứu thêm".
-- Ước lượng chênh lệch quá lớn giữa các thành viên (vượt quá 3 lần).
-- Quá nhiều rủi ro kỹ thuật chưa xác định.
-
-### Phương pháp ước lượng phổ biến
-
-| Phương pháp | Mô tả | Phù hợp khi |
-| :--- | :--- | :--- |
-| **Planning Poker** | Team dùng thẻ Fibonacci để vote số điểm, thảo luận khi chênh lệch lớn | Team đã có velocity ổn định |
-| **T-shirt Sizing** | Phân loại XS / S / M / L / XL | Sprint đầu tiên, chưa có historical data |
-| **Story Points** | Điểm tương đối dựa trên effort, phức tạp, rủi ro | Team có backlog để so sánh tương đối |
-| **Spike Story** | US nghiên cứu độc lập để giảm uncertainty trước khi estimate US chính | Công nghệ mới, yêu cầu mơ hồ, rủi ro cao |
-
-### Hướng xử lý khi không estimate được
-
-1. **Bước 1 — Tạo Spike:** US nghiên cứu độc lập (thời gian cố định: 1-3 ngày) để giảm uncertainty.
-2. **Bước 2 — Bổ sung ngữ cảnh:** Thêm ràng buộc nghiệp vụ, tài liệu tham khảo, wireframe.
-3. **Bước 3 — Đánh dấu ⚠️ trong bảng INVEST:** Không chuyển vào Sprint cho đến khi estimate được.
+- Có đánh giá của đội hoặc căn cứ được cung cấp thì ghi lại nguồn.
+- Nếu chưa rõ cách tính kết quả, điều kiện lỗi hoặc phụ thuộc, nêu câu hỏi cụ thể và đánh dấu Cần xác nhận.
+- Nếu cần tìm hiểu thêm, đề xuất việc cần làm rõ và người phụ trách; thời hạn do đội thống nhất. Không tự tạo một story kỹ thuật để thay thế yêu cầu còn thiếu.
 
 ### Ví dụ (E)
 
-- ❌ **Vi phạm:** *"I want to AI phân tích rủi ro dự án và gợi ý phương án xử lý."* (Không rõ AI nào, dữ liệu đầu vào, độ chính xác mong muốn.)
-- ✅ **Đạt chuẩn (Phân rã):** Spike: *"Nghiên cứu giải pháp phân tích rủi ro tự động cho dự án 50 thành viên, đầu ra là Technical proposal trong 3 ngày."* → US: *"Triển khai hệ thống phân tích rủi ro dựa trên Technical proposal đã phê duyệt."*
+Với "báo cáo rủi ro dự án", cần làm rõ loại rủi ro, thông tin đầu vào và người dùng sẽ quyết định gì từ báo cáo. Khi chưa có các dữ kiện đó, ghi câu hỏi thay vì đoán số ngày thực hiện.
 
 ---
 
@@ -159,43 +93,23 @@ Mỗi US phải mang lại giá trị rõ ràng cho **người dùng cuối**, *
 
 ### Định nghĩa
 
-US phải đủ nhỏ để hoàn thành trong 1 Sprint, thông thường **1-3 ngày công** của 1 lập trình viên.
+Story đủ nhỏ cho một đợt làm việc theo năng lực và đánh giá của đội. Không có số ngày, số AC hoặc từ khóa trong tiêu đề tự động quyết định phải chia nhỏ.
 
-### Tại sao quan trọng?
+### Khi nào cân nhắc phân rã?
 
-- Giảm thiểu **rủi ro khi lập kế hoạch**.
-- Tăng tốc **feedback loop** từ khách hàng/người dùng.
-- Dễ **kiểm thử, tích hợp và rollback** khi có lỗi.
+- Story chứa nhiều kết quả có thể sử dụng riêng.
+- Đội xác nhận phạm vi vượt khả năng hoàn thành trong một đợt.
+- Có nhóm người dùng hoặc tình huống với giá trị và quy tắc khác nhau.
 
-### Dấu hiệu vi phạm (S)
+### Cách phân rã
 
-- Effort ước lượng **vượt quá 5 ngày làm việc**.
-- Số lượng AC **vượt quá 7-8 kịch bản**.
-- Tiêu đề chứa **"VÀ (AND)"** — đang gộp 2+ US.
-- US bao gồm **toàn bộ CRUD**.
+Chia theo mục tiêu nghiệp vụ, nhóm người dùng hoặc loại tình huống có thể bàn giao độc lập. Mỗi phần giữ đủ hành vi hợp lệ, quyền hạn và xử lý lỗi của chính nó theo Q04 và Q12 trong checklist. Không trì hoãn kiểm tra quyền hoặc dữ liệu bắt buộc để có một story chỉ chứa đường thành công.
 
-### Quy tắc phân rã (5 chiến lược)
-
-> ⚠️ **Khi nào cần phân rã?** Khi effort > 5 ngày HOẶC AC > 8 kịch bản.
-
-| Chiến lược | Mô tả | Khi nào dùng |
-| :--- | :--- | :--- |
-| **1. Theo CRUD** | Tách Create / Read / Update / Delete thành US riêng | Khi nghiệp vụ có đủ 4 thao tác |
-| **2. Theo Persona** | Tách theo vai trò: Quản lý dự án / Thành viên / Khách hàng | Khi mỗi Persona có luồng nghiệp vụ khác nhau |
-| **3. Theo cấu trúc dữ liệu** | Xử lý dữ liệu văn bản trước, bổ sung file/biểu đồ sau | Khi có nhiều loại dữ liệu đầu vào |
-| **4. Theo quy tắc nghiệp vụ** | Happy path trước, Validation + Permission sau | Khi Edge case/Error chiếm effort lớn |
-| **5. Theo Workflow** | Tách theo bước: Tạo → Phân công → Cập nhật → Báo cáo | Khi nghiệp vụ là quy trình nhiều bước |
+Giữ ánh xạ nguồn → các story mới và các phụ thuộc thật. Liên từ "và" có thể mô tả một mục tiêu thống nhất; nhiều AC có thể chỉ phản ánh nhiều quy tắc cần kiểm tra, không nhất thiết là story quá lớn.
 
 ### Ví dụ (S)
 
-- ❌ **Vi phạm:** *"I want to quản lý thông tin dự án (xem, sửa tên, thay đổi ngày, phân công thành viên, yêu cầu đóng dự án)."*
-- ✅ **Đạt chuẩn (5 US từ 1 US lớn):**
-
-  - US-1: Xem thông tin dự án.
-  - US-2: Cập nhật tên dự án.
-  - US-3: Thay đổi ngày bắt đầu/kết thúc.
-  - US-4: Phân công thành viên vào dự án.
-  - US-5: Yêu cầu đóng dự án.
+"Quản lý dự án từ lúc tạo đến lúc đóng" có thể chia thành tạo dự án, phân công thành viên và yêu cầu đóng dự án nếu từng phần có giá trị riêng. Mỗi story mới vẫn cần AC về điều kiện hợp lệ và xử lý lỗi; không tạo riêng story "kiểm tra quyền" chỉ để làm story tạo dự án ngắn hơn.
 
 ---
 
@@ -203,53 +117,31 @@ US phải đủ nhỏ để hoàn thành trong 1 Sprint, thông thường **1-3 
 
 ### Định nghĩa
 
-US phải có AC rõ ràng, cụ thể, đo lường được để QA viết test case và nghiệm thu tính năng.
+AC đủ rõ để người đọc xác định kết quả đúng/sai. Kiểm tra được không đồng nghĩa phải thêm con số vào mọi kết quả hoặc đã thực hiện kiểm thử.
 
-### Tại sao quan trọng?
+### Căn cứ và cách xử lý
 
-- Tránh tranh cãi về **Definition of Done** giữa các bộ phận.
-- Tạo điều kiện cho **kiểm thử tự động (Automation test)**.
-
-### Dấu hiệu vi phạm (T)
-
-- AC dùng từ mơ hồ: "nhanh", "đẹp", "thân thiện", "dễ sử dụng".
-- Không có AC, chỉ có mô tả chung chung.
-
-### Hướng xử lý — 3 điều kiện để testable
-
-| Điều kiện | Yêu cầu |
-| :--- | :--- |
-| **AC rõ ràng** | Mỗi AC có Given-When-Then đầy đủ, dữ liệu cụ thể, số liệu đo lường |
-| **Môi trường test sẵn sàng** | Có môi trường test; có quyền truy cập; có test data |
-| **Tiêu chí đo lường được** | Kết quả kiểm thử xác định được pass/fail, không mơ hồ |
-
-> **Lưu ý:** Testability không chỉ phụ thuộc vào chất lượng AC. Nếu môi trường test chưa có, test data chưa sẵn → ghi nhận trong Ghi chú (Notes) của US.
+Đối chiếu Q04–Q10 trong checklist. Nếu không xác định được kết quả mong đợi, hỏi quy tắc còn thiếu. Thông tin cần chuẩn bị để kiểm tra có thể ghi trong ghi chú, tách khỏi việc đánh giá chất lượng câu chữ.
 
 ### Ví dụ (T)
 
-- ❌ **Vi phạm:** *"Tiêu chí nghiệm thu: Hệ thống phải phản hồi nhanh và hiển thị thông báo lỗi thân thiện khi thành viên nhóm vượt deadline."*
-- ✅ **Đạt chuẩn:**
+- **Given** thành viên không có quyền thay đổi ngày kết thúc dự án.
+- **When** thành viên yêu cầu đổi ngày kết thúc.
+- **Then** yêu cầu bị từ chối vì thiếu quyền.
+- **And** ngày kết thúc dự án được giữ nguyên.
 
-  - Given thành viên nhóm có công việc deadline 15/06 và hệ thống phát hiện chưa hoàn thành sau 23:59 ngày 15/06.
-  - When thành viên nhóm nhấn nút "Cập nhật trạng thái".
-  - Then hệ thống gửi thông báo nhắc nhở trong vòng 5 phút.
-  - And ghi nhận trạng thái "Quá hạn" trên biểu đồ Gantt.
+Kịch bản có thể kiểm tra bằng trạng thái nghiệp vụ; không cần tự thêm một giới hạn thời gian. Đây là minh họa một AC, không phải bộ AC đầy đủ của story.
 
 ---
 
-## Vai trò — Mỗi người đọc cần gì?
+## Ai xác nhận điều gì?
 
-| Vai trò | Tiêu chí ưu tiên | Mục đích đọc |
-| :--- | :--- | :--- |
-| **BA (viết US)** | N + V + T | Đảm bảo US đủ Negotiable, Value rõ, Testable |
-| **PO (review US)** | V + S | Đảm bảo giá trị nghiệp vụ đúng, US đủ nhỏ để estimate |
-| **Developer (estimate)** | E + S | Đảm bảo đủ thông tin để estimate, biết khi nào cần Spike |
-| **QA (xác nhận)** | T + I | Đảm bảo test được, không bị phụ thuộc US khác |
+Người phụ trách sản phẩm xác nhận giá trị, ưu tiên và quy tắc; đội thực hiện xác nhận khả năng ước lượng và quy mô; người kiểm tra xác nhận có thể đối chiếu kết quả với AC. AI tổng hợp căn cứ và câu hỏi, không thay các vai trò này phê duyệt hoặc xác nhận đã kiểm thử.
 
 ---
 
 ## Tài liệu tham khảo
 
-- Bill Wake (2003) — *"INVEST in Good Stories, and SMART Tasks"*
-- Mike Cohn — *"User Stories Applied"*
-- Atlassian Agile Coach — *User Story Best Practices*
+- Bill Wake (2003) — _"INVEST in Good Stories, and SMART Tasks"_
+- Mike Cohn — _"User Stories Applied"_
+- Atlassian Agile Coach — _User Story Best Practices_

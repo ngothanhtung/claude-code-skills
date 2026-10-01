@@ -1,165 +1,104 @@
-# Biểu mẫu Câu chuyện người dùng & Tiêu chí Nghiệm thu — ProjectOS
+# Biểu mẫu Câu chuyện người dùng & Tiêu chí Nghiệm thu
 
-> **Mục đích:** Biểu mẫu trống để điền thông tin thực tế cho câu chuyện người dùng mới. Dùng khi cần bàn giao đầy đủ US + AC cho Sprint Planning.
->
-> **Ví dụ minh họa:** Xem [user-story-template-example.md](./user-story-template-example.md) — US "Tạo dự án" với AC Happy + Edge + Negative đã hoàn chỉnh, kèm hướng dẫn viết Given-When-Then chi tiết.
->
-> **Checklist chất lượng tổng quát:** Xem [quality-checklist.md](../checklists/quality-checklist.md) — dùng khi PO review nhiều US cùng lúc.
+Dùng cho một US; lặp lại cho từng story trong phạm vi. Thay phần trong ngoặc bằng thông tin có căn cứ; giữ `[CẦN XÁC NHẬN: ...]` nếu chưa biết. Các chỗ trống không được tính là yêu cầu hoàn chỉnh.
+
+Đọc [checklist chất lượng](../checklists/quality-checklist.md) để áp dụng quy tắc và trạng thái; xem [ví dụ đã điền](./user-story-template-example.md) khi cần minh họa. Biểu mẫu này chỉ quy định cách trình bày, không tạo thêm điều kiện đạt.
 
 ---
 
-## Câu chuyện người dùng US-[MÃ_TÍNH_NĂNG]-[MÃ_SỐ]: [Tiêu đề ngắn gọn, KHÔNG chứa liên từ "VÀ"]
+## Câu chuyện người dùng US-[MÃ_TÍNH_NĂNG]-[MÃ_SỐ]: [Mục tiêu nghiệp vụ]
 
-**As a** [Đối tượng sử dụng cụ thể, vai trò + trạng thái]
-> ✅ *"quản lý dự án đã được phân quyền trên ProjectOS"*
-> ❌ *"người dùng" / "user"*
+**As a** [Vai trò và hoàn cảnh liên quan]
 
-**I want to** [Hành động cụ thể, có thể đo lường được]
-> ✅ *"tạo dự án mới với thông tin đầy đủ và gửi thư mời đến các thành viên"*
-> ❌ *"quản lý công việc"* (quá mơ hồ)
+**I want to** [Hành động hoặc kết quả mong muốn]
 
-**So that** [Giá trị kinh doanh rõ ràng, hướng outcome — không lặp lại I want]
-> ✅ *"các thành viên nhận được thông báo và có thể bắt đầu làm việc ngay"*
-> ❌ *"để tôi giao công việc"* (lặp lại I want to)
+**So that** [Giá trị người dùng hoặc doanh nghiệp nhận được]
 
 ---
 
 ### Siêu dữ liệu (Metadata)
 
-| Trường | Giá trị | Ghi chú |
-| :--- | :--- | :--- |
-| **Epic / Feature** | [Tên tính năng lớn] | |
-| **Độ ưu tiên (MoSCoW)** | [Must / Should / Could / Won't] | **Must** = nghiệp vụ cốt lõi. **Should** = quan trọng nhưng có workaround. **Could** = triển khai nếu thời gian cho phép. **Won't** = loại bỏ trong lần này. |
-| **Ước lượng (Estimate)** | [Story points / T-shirt size] | |
-| **Sự phụ thuộc (Dependencies)** | [US-xxx phải hoàn thành trước / Không có] | Nếu có phụ thuộc → đánh dấu ⚠️ trong bảng INVEST |
-| **Giả định (Assumptions)** | [Điều kiện giả định / Không có] | |
-| **Trạng thái (Status)** | [Draft / Review / Approved] | |
-| **Người phê duyệt (Approved By)** | [Tên PO] | |
-| **Ngày phê duyệt** | [YYYY-MM-DD] | |
+| Trường                            | Giá trị                         | Căn cứ / Ghi chú                                                                                        |
+| --------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Epic / Feature**                | [Tên tính năng]                 |                                                                                                         |
+| **Nguồn / FR**                    | [Mã FR có sẵn hoặc mô tả nguồn] | [Tài liệu, mục hoặc yêu cầu người dùng]                                                                 |
+| **Phạm vi**                       | [Bao gồm / Không bao gồm]       | [Quy tắc liên quan]                                                                                     |
+| **Độ ưu tiên (MoSCoW)**           | [Theo nguồn / Cần xác nhận]     | Must: cần có; Should: quan trọng; Could: có thể thêm; Won't: ngoài đợt này. Ghi lý do và người xác nhận |
+| **Ước lượng (Estimate)**          | [Đội cung cấp / Cần xác nhận]   | [Nguồn đánh giá, không tự đặt số]                                                                       |
+| **Phiên bản**                     | [Mã phiên bản hoặc ngày sửa]    |                                                                                                         |
+| **Trạng thái (Status)**           | Draft                           | [Kết luận theo checklist]                                                                               |
+| **Người phê duyệt (Approved By)** | [Chưa có / Người đã xác nhận]   | [Căn cứ phê duyệt phiên bản này]                                                                        |
+| **Ngày phê duyệt**                | [Chưa có / Ngày thực tế]        |                                                                                                         |
 
 ---
 
-### Bảng mã tính năng (Feature Code Reference)
+### Truy vết khi có nhiều yêu cầu hoặc phân rã
 
-> Dùng mã này khi đặt tên US: `US-[MÃ]-[SỐ]`
+Chỉ thêm bảng này một lần cho cả bộ story khi cần; giữ mã theo quy ước nguồn.
 
-| Mã tính năng | Tên tính năng |
-| :--- | :--- |
-| PROJ | Quản lý dự án |
-| TASK | Quản lý công việc |
-| MEMB | Quản lý thành viên |
-| USER | Quản lý người dùng |
-| AUTH | Xác thực & Phân quyền |
-| NOTI | Thông báo |
-| REPT | Báo cáo |
+| Nguồn / FR / US cũ    | US tương ứng                     | Tình trạng bao phủ                   | Lý do chưa xử lý / Câu hỏi |
+| --------------------- | -------------------------------- | ------------------------------------ | -------------------------- |
+| [Mã hoặc mô tả nguồn] | [US hiện có hoặc mã mới đề xuất] | [Đã bao phủ / Một phần / Chưa xử lý] | [Nếu có]                   |
 
 ---
 
 ### Tự đánh giá theo tiêu chí INVEST
 
-| Tiêu chí | Đạt? | Ghi chú & Hướng xử lý nếu ⚠️ |
-| :--- | :--- | :--- |
-| **I**ndependent (Độc lập) | [✅/⚠️] | ⚠️ → Gộp/chia phụ thuộc; dùng mock data để kiểm thử độc lập |
-| **N**egotiable (Thương lượng) | [✅/⚠️] | ⚠️ → Lược bỏ chi tiết kỹ thuật cứng nhắc; tập trung What, không How |
-| **V**alue (Giá trị) | [✅/⚠️] | ⚠️ → Viết lại So that hướng outcome, không phải feature |
-| **E**stimable (Ước lượng) | [✅/⚠️] | ⚠️ → Bổ sung ngữ cảnh; cân nhắc tạo Spike trước |
-| **S**mall (Nhỏ gọn) | [✅/⚠️] | ⚠️ → Chia nhỏ: tách CRUD, tách theo Persona, hoặc tách Happy path trước |
-| **T**estable (Kiểm thử được) | [✅/⚠️] | ⚠️ → Bổ sung AC định dạng Given-When-Then, có số liệu cụ thể |
+Điền theo [hướng dẫn INVEST](../references/invest-criteria.md); mỗi dòng có căn cứ và việc cần làm rõ nếu có.
 
-> **Quy tắc:** Nếu bất kỳ tiêu chí nào là ⚠️ → **KHÔNG chuyển sang Sprint Planning** cho đến khi giải quyết xong.
-
----
-
-### Tiêu chí nghiệp thu (Acceptance Criteria)
-
-> **Định dạng:** Given-When-Then (Cú pháp Gherkin)
-> **Yêu cầu tối thiểu:** 3 tiêu chí — Happy path + Edge case + Negative path
-> **Phân biệt:** Tiêu chí nghiệp thu (AC) ≠ Kịch bản kiểm thử (Test Case) ≠ Script kiểm thử (Test Script)
-
-#### Tiêu chí nghiệp thu 1: [Tên kịch bản — Happy path]
-
-- **Given** [Tiền điều kiện cụ thể — ai, ở đâu, dữ liệu gì]
-- **When** [Một hành động DUY NHẤT của đối tượng sử dụng]
-- **Then** [Kết quả chính — có số liệu đo lường cụ thể]
-- **And** [Kết quả phụ bổ sung — nếu có, tối đa 2 And]
-- **And** [Kết quả phụ cuối cùng — nếu có]
-
-#### Tiêu chí nghiệp thu 2: [Tên kịch bản — Edge case / Validation]
-
-- **Given** [Bối cảnh biên cụ thể — dữ liệu ở ranh giới]
-- **When** [Hành động kích hoạt trường hợp biên]
-- **Then** [Hệ thống xử lý đúng nghiệp vụ tại ranh giới đó]
-- **And** [Thông báo hoặc hành vi phản hồi cụ thể]
-
-#### Tiêu chí nghiệp thu 3: [Tên kịch bản — Negative path / Error]
-
-- **Given** [Bối cảnh xảy ra lỗi cụ thể — dữ liệu không hợp lệ, mất quyền, timeout...]
-- **When** [Hành động dẫn đến lỗi]
-- **Then** [Hệ thống xử lý lỗi đúng nghiệp vụ — không crash]
-- **And** [Thông báo lỗi cụ thể với nội dung rõ ràng]
-- **But** [Điều ngược lại KHÔNG xảy ra — side effect không mong muốn]
-
-#### Danh mục kiểm tra chất lượng (AC Quality Checklist)
-
-> Tự đánh giá từng mục trước khi xác nhận AC đã sẵn sàng.
-
-**Về cấu trúc Gherkin:**
-
-- [ ] Mỗi AC có đủ **Given + When + Then**.
-- [ ] Phần **When** chỉ có **MỘT** hành động duy nhất.
-- [ ] Phần **Then** có **số liệu đo lường** cụ thể (thời gian, số lượng, tỷ lệ %).
-- [ ] Số lượng **And** trong mỗi AC **≤ 2**. Nếu > 2 → tách AC.
-- [ ] Dùng **But** cho ngoại lệ thay vì And.
-
-**Về dữ liệu trong Given:**
-
-- [ ] Given dùng **dữ liệu cụ thể** (tên người, ngày tháng, số lượng) thay vì generic ("người dùng hợp lệ").
-- [ ] Given không chứa hành động — chỉ mô tả trạng thái ban đầu.
-
-**Về độ bao phủ kịch bản:**
-
-- [ ] Có **1 Happy path** (luồng thành công).
-- [ ] Có **1 Edge case** (ranh giới nghiệp vụ).
-- [ ] Có **1 Negative path** (xử lý lỗi / dữ liệu không hợp lệ).
-- [ ] Tổng số AC cho US này **≤ 7–8**. Nếu vượt → phân rã US.
-
-**Về ngôn ngữ:**
-
-- [ ] **Không** từ mơ hồ: "nhanh", "đẹp", "thân thiện", "phù hợp", "trực quan".
-- [ ] **Không** chi tiết kỹ thuật: tên API, database schema, framework.
-- [ ] **Không** mô tả UI: màu nút, pixel, font chữ.
-- [ ] Thông báo lỗi có **nội dung cụ thể**, không viết chung chung "thông báo lỗi".
-
-**Về khả năng sinh Test Case:**
-
-- [ ] Từ mỗi AC, có thể sinh ra **tối thiểu 3 Test Case**: đầu vào hợp lệ, biên, không hợp lệ.
-- [ ] Tester đọc AC mà **không cần hỏi BA thêm** là đã hiểu kịch bản.
+| Tiêu chí                              | Đạt / Cần cải thiện / Cần xác nhận | Căn cứ / Hướng xử lý |
+| ------------------------------------- | ---------------------------------- | -------------------- |
+| **I — Independent (Độc lập)**         | [Trạng thái]                       | [Căn cứ]             |
+| **N — Negotiable (Có thể thảo luận)** | [Trạng thái]                       | [Căn cứ]             |
+| **V — Valuable (Có giá trị)**         | [Trạng thái]                       | [Căn cứ]             |
+| **E — Estimable (Ước lượng được)**    | [Trạng thái]                       | [Căn cứ]             |
+| **S — Small (Nhỏ gọn)**               | [Trạng thái]                       | [Căn cứ]             |
+| **T — Testable (Kiểm tra được)**      | [Trạng thái]                       | [Căn cứ]             |
 
 ---
 
-### Definition of Done (DoD)
+### Tiêu chí nghiệm thu (Acceptance Criteria)
 
-> **DoD ≠ Tiêu chí nghiệp thu.** AC cho BA/PO xác nhận nghiệp vụ. DoD cho Dev/QA xác nhận chất lượng kỹ thuật bàn giao.
+Dùng các ô dưới đây theo Q04–Q10 trong checklist. Giữ mã AC cũ khi bổ sung; thêm kịch bản nếu nguồn còn trường hợp bắt buộc chưa bao phủ.
 
-#### DoD — Nghiệp vụ (BA/PO đánh giá)
+#### [Mã US]/AC-01: [Kịch bản thông thường — Happy path]
 
-- [ ] Hệ thống phản hồi trong vòng [X] giây — số liệu cụ thể theo AC
-- [ ] Thông báo / email được gửi đúng địa chỉ người nhận
-- [ ] Thông báo lỗi có nội dung cụ thể, không chung chung
+- **Given** [Vai trò, trạng thái và dữ liệu ban đầu]
+- **When** [Sự kiện kích hoạt]
+- **Then** [Kết quả nghiệp vụ quan sát được]
+- **And** [Kết quả cùng kịch bản, nếu cần]
 
-#### DoD — Kỹ thuật (Dev/QA đánh giá)
+#### [Mã US]/AC-02: [Kịch bản biên hoặc xác thực nghiệp vụ — Edge/Validation]
 
-- [ ] Code passed unit test
-- [ ] Đã test trên Chrome, Safari, Firefox
-- [ ] Realtime sync hoạt động với [X]+ user đồng thời
-- [ ] [Yêu cầu kỹ thuật bổ sung]
+- **Given** [Điều kiện biên hoặc quy tắc đang được kiểm tra]
+- **When** [Sự kiện kích hoạt]
+- **Then** [Kết quả theo quy tắc đã xác nhận]
+
+#### [Mã US]/AC-03: [Kịch bản xử lý lỗi — Error/Negative]
+
+- **Given** [Điều kiện lỗi liên quan đến story]
+- **When** [Sự kiện kích hoạt]
+- **Then** [Lý do và kết quả người dùng nhận biết được]
+- **And** [Dữ liệu hoặc trạng thái được giữ hay thay đổi theo quy tắc nguồn]
+
+### Kết quả kiểm tra tài liệu
+
+Sau khi áp dụng toàn bộ [checklist](../checklists/quality-checklist.md), ghi các mục chưa đạt hoặc cần xác nhận. Không sao chép một danh sách được đánh dấu đạt sẵn.
+
+| Mã mục / US / AC      | Kết quả                        | Căn cứ            | Hành động / Người cần xác nhận |
+| --------------------- | ------------------------------ | ----------------- | ------------------------------ |
+| [Qxx và mã liên quan] | [Cần cải thiện / Cần xác nhận] | [Nội dung cụ thể] | [Việc tiếp theo]               |
+
+**Kết luận:** [Draft / Review / Approved theo quy tắc checklist].
 
 ---
 
 ### Ghi chú (Notes)
 
-| Loại | Nội dung |
-| :--- | :--- |
-| **Sự phụ thuộc (Dependencies)** | [Câu chuyện US-xxx phải hoàn thành trước / Không có] |
-| **Giả định (Assumptions)** | [Điều kiện giả định / Không có] |
-| **Câu hỏi mở (Open Questions)** | [Câu hỏi cần làm rõ với PO / Stakeholder] |
+| Loại                            | Nội dung                                                          |
+| ------------------------------- | ----------------------------------------------------------------- |
+| **Sự phụ thuộc (Dependencies)** | [Mã US hoặc điều kiện đã có / Chưa rõ / Không có theo nguồn]      |
+| **Giả định (Assumptions)**      | [Giả định được cho phép, chưa xác nhận / Không có]                |
+| **Câu hỏi mở (Open Questions)** | [Câu hỏi và người cần trả lời]                                    |
+| **Definition of Done (DoD)**    | [Tham chiếu thỏa thuận của đội nếu có / Chưa được cung cấp]       |
+| **Lịch sử thay đổi**            | [Nội dung sửa, mã cũ → mới nếu có; phê duyệt của phiên bản trước] |
